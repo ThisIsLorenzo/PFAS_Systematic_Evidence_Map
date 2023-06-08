@@ -1,0 +1,118 @@
+---
+title: "Screaning_Reviews_alltrypes"
+author: "Lorenzo Ricolfi"
+date: "2023-02-05"
+output: html_document
+---
+
+# PFAS exposure of humans, animals and the environment: a Systematic Evidence Map and Bibliometric Analysis  
+
+*Supplementary Material - screaning all types of reviews*
+
+Scopus document results: 2208 results. Exported from Scopus through two .csv files that are going to be merged here. Then merged with already included reviews and deduplicated. The included reviews are 175 and not 109 because the file includes some of the non-systematic reviews that I removed for mappign and appraisal.
+So I will have all types of reviews, but not reviews already included.
+Then we screen for inclusion. At the end, I merge the included reviews with the already included reviews.
+So I will have all types of reviews available until end of 2022.
+
+Setup and packages loading
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(synthesisr)
+library(tidystringdist)
+library(readr)
+library(dplyr)
+library(purrr)
+library(splitstackshape)
+```
+
+Loading new files
+```{r, include=FALSE}
+dat1 <- read.csv(here("data/update/deduplication_process/scopus1.csv"))
+dim(dat1) #[1] 111   7
+```
+```{r}
+dat2 <- read.csv(here("data/update/deduplication_process/scopus2.csv"))
+dim(dat2) #[1] 1305   7
+```
+
+Loading old file (174 reviews [109 SRs and 65 non-systematic reviews])
+
+```{r}
+dat3 <- read.csv(here("data/update/deduplication_process/articles174.csv"))
+dim(dat3) #[1] 174   7
+```
+
+Merging data tables
+
+```{r}
+dat <- merge(dat1, dat2, all=TRUE)
+
+dat <- merge(dat, dat3, all=TRUE)
+dim(dat) #[1] 2590    7
+```
+
+Tidy up and simplify titles removing all punctuation and extra white spaces
+```{r, include=FALSE}
+dat$title2 <- str_replace_all(dat$Title,"[:punct:]","") %>% str_replace_all(.,"[ ]+", " ") %>% tolower()
+```
+
+Remove extra title matches
+```{r, include=FALSE}
+dat2 <- distinct(dat, title2, .keep_all = TRUE) #select records with unique titles (removes exact duplicates)
+dim(dat2) #[1] 2494   8
+```
+
+Removing partial matches in titles
+```{r, include=FALSE}
+duplicates_string <- find_duplicates(dat2$title2, method = "string_osa", to_lower = TRUE, rm_punctuation = TRUE, threshold = 7)
+dat3 <- extract_unique_references(dat2, duplicates_string)
+dim(dat3) #[1] 2482    9
+```
+
+Manually review those titles to confirm they are duplicates
+```{r, include=FALSE}
+manual_checks <- review_duplicates(dat2$title, duplicates_string)
+view(manual_checks)
+
+# dat2[title != "perand polyfluoroalkyl substances pfas neurotoxicity in sentinel and nontraditional laboratory model systems potential utility in predicting adverse outcomes in human health", ]
+# dat2[title != "perand polyfluoroalkyl substances exposure during pregnancy and adverse pregnancy and birth outcomes a systematic review and metaanalysis", ]
+# dat2[title != "a review on contaminants of emerging concern in european raptors 20022020", ]
+# dat2[title != "interspecies differences in perfluoroalkyl substances pfastoxicokinetics and application to healthbased criteria", ]
+# dat2[title != "a review on contaminants of emerging concern in european raptors 20022020", ]
+
+```
+Drop columns "title2" and "n_duplicates"
+```{r, include=FALSE}
+dat4 <- select(dat3, -c(title2,n_duplicates))
+dim(dat4) #[1] 2482    7
+```
+
+Save as a .bib file to upload on Zotero. Then export from Zotero as .ris file to reimport into Rayyan
+```{r, include=FALSE}
+write_refs(dat4, format = "bib", file = "all_reviews_abstracts_for_screening_deduplicated.bib")
+#save as .csv
+write_csv(dat4, file = "all_reviews_abstracts_for_screening_deduplicated.csv")
+```
+
+Sample 100 random studies to use for pilot screening
+
+```{r}
+articles <- read_csv(here("data/update","all_reviews_abstracts_for_screening_deduplicated.csv"), skip = 0)
+pilot <- articles[sample(2482, 100), ]
+#save as .csv
+write_csv(pilot, file = "pilot_100.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+

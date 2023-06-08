@@ -1,0 +1,64 @@
+---
+title: "gd"
+author: "Lorenzo Ricolfi"
+date: "2023-02-07"
+output: html_document
+---
+
+SRs 2022 update
+Removing duplicates
+
+### Setup and packages loading
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(synthesisr)
+library(tidystringdist)
+library(bibliometrix)
+```
+### Loading file
+```{r, include=FALSE}
+dat <- read.csv(here("data/deduplication_process/update/COMBINED_SRs_2022_update.csv"))
+dim(dat) #[1] 638  21
+```
+
+### Tidy up and simplify titles removing all punctuation and extra white spaces
+```{r, include=FALSE}
+dat$title2 <- str_replace_all(dat$title,"[:punct:]","") %>% str_replace_all(.,"[ ]+", " ") %>% tolower()
+```
+### Remove extra title matches
+```{r, include=FALSE}
+dat2 <- distinct(dat, title2, .keep_all = TRUE) #select records with unique titles (removes exact duplicates)
+dim(dat2) #[1] 457  22
+```
+### Removing partial matches in titles
+```{r, include=FALSE}
+duplicates_string <- find_duplicates(dat2$title2, method = "string_osa", to_lower = TRUE, rm_punctuation = TRUE, threshold = 7)
+dat3 <- extract_unique_references(dat2, duplicates_string)
+dim(dat3) #[1] 446   23
+```
+### Manually review those titles to confirm they are duplicates
+```{r, include=FALSE}
+manual_checks <- review_duplicates(dat2$title, duplicates_string)
+#view(manual_checks)
+```
+### Drop columns "title2" and "n_duplicates"
+```{r, include=FALSE}
+dat4 <- select(dat3, -c(title2,n_duplicates))
+dim(dat4) #[1] 446   21
+```
+### Save as a .bib file to upload on Zotero. Then export from Zotero as .ris file to reimport into Rayyan
+```{r, include=FALSE}
+# write_refs(dat4, format = "bib", file = here("abstracts_for_screening_deduplicated.bib"))
+write_csv(dat4, file = here("data/deduplication_process/update/SRs_2022_update_deduplicated.csv"))
+```
+
+Now we are going to deduplicate the file containing the SRs published in 2022 that are already included in our Map and those that are not. So after deduplication we will have all the reviews published in 2022 that are not already included in our map.
+
+
+
+
+
+
+
