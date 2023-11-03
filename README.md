@@ -1,5 +1,5 @@
 # A research synthesis of humans, animals, and environmental compartments exposed to PFAS: A systematic evidence map and bibliometric analysis
-This repository contains bibliographic files, data and analysis code for this project. The different folders and their content is described below. Feel free to contact Lorenzo Ricolfi (l.ricolfi@unsw.edu.au) if you need assistance navigating these documents.
+This repository contains bibliographic files, data and analysis code for this Systematic Evidence Map. The different folders and their content are described below. Please feel free to contact Lorenzo Ricolfi (l.ricolfi@unsw.edu.au) if you need assistance navigating these documents.
 
 ## data/
 This folder contains the extracted data from the included studies (except for ```/pfas_info.csv```, which contains fixed data). Data are organised in different .csv files.
