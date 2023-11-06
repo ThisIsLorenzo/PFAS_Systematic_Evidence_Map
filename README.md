@@ -41,29 +41,29 @@ In this folder, you will find bibliographic records generated through database s
 - ```/epistemonikos.ris```: bibliographic records from the Epistemonikos database
 - ```/apo.ris```: bibliographic records from the Australian Policy Observatory database
 #### /update_search/
-- ```/scopus.csv```
-- ```/wos.ris```
-- ```/pubmed.nbib```
-- ```/cochrne.ris```
-- ```/prospero_1.ris```
-- ```/prospero_2.ris```
-- ```/epistemonikos_1.ris```
-- ```/epistemonikos_2.ris```
-- ```/epistemonikos_3.ris```
-- ```/biorxiv_1.ris```
-- ```/bioxriv_2.ris```
-- ```/base.ris```
+This folder contains the bibliographic records retrieved during the update search conducted in February 2023.
+- ```/scopus.csv```: bibliographic records from the Scopus database
+- ```/wos.ris```: bibliographic records from the Web of Science database
+- ```/pubmed.nbib```: bibliographic records from the PubMed database
+- ```/cochrne.ris```: bibliographic records from the Cochrane database
+- ```/prospero_1.ris```: bibliographic records from the Prospero database
+- ```/prospero_2.ris```: bibliographic records from the Prospero database
+- ```/epistemonikos_1.ris```: bibliographic records from the Epistemonikos database
+- ```/epistemonikos_2.ris```: bibliographic records from the Epistemonikos database
+- ```/epistemonikos_3.ris```: bibliographic records from the Epistemonikos database
+- ```/biorxiv_1.ris```: bibliographic records from the Biorxiv database
+- ```/bioxriv_2.ris```: bibliographic records from the Biorxiv database
+- ```/base.ris```: bibliographic records from the BASE database
 #### /supplementary_search/
+This folder contains the bibliographic records retrieved during the supplementary search aiming to find all types of review (i.e., systematic and no systematic) on PFAS exposure
 - ```/scopus_1.csv```
 - ```/scopus_2.csv```
 
 ### /deduplication_process/
 Contained within this folder are all bibliographic records both before and following the process of deduplication.
 #### /deduplication_main_search/
-- ```...```:
+- ```bibliographic records before deduplication.ris```: bibliographic records before deduplication
+- ```articles.csv```: bibliographic records after deduplication
 #### /deduplication_update_search/
-- ```...```:
-
-
-
-
+- ```COMBINED_SRs_2022_update.csv```: bibliographic records before deduplication
+- ```SRs_2022_update_deduplicated.csv```:bibliographic records after deduplication
