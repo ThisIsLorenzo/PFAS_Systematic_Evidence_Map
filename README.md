@@ -8,6 +8,10 @@ This folder contains the extracted data from the included studies (except for ``
 - ```/pfas_info.csv```: provides the fixed information on the PFAS types, including their abbreviations, CAS number and length of the carbon chain. It is not a data extraction table.
 - ```/pfas_types.csv```: holds the list of all types of PFAS investigated in the included systematic reviews.
 - ```/species.csv```: contains information on all species (other than Homo sapiens) investigated in the included systematic reviews.
+- ```/scopus.bib```: bibliographic data downloaded from Scopus - bibliometric analysis (systematic-like reviews)
+- ```/bib.csv```: data frame created from bibliographic data downloaded from Scopus (please see "Loading data" in /analysis_code.RMD)- bibliometric analysis (systematic-like reviews)
+- ```/scopus_all_types.csv```: bibliographic data downloaded from Scopus - supplementary bibliometric analysis (all types of review)
+- ```/bib_all_types.csv```: data frame created from bibliographic data downloaded from Scopus (please see "Loading data" in /analysis_code.RMD)- bibliometric analysis (all types of review)
 
 ## R/
 In this folder, we stored files providing deduplication code and analysis code.
