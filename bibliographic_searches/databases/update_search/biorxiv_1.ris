@@ -1,0 +1,1359 @@
+TY  - JOUR
+T1  - Genetically-Encoded Discovery of Perfluoroaryl-Macrocycles that Bind to Albumin and Exhibit Extended Circulation &lt;em&gt;in-vivo&lt;/em&gt;
+JF  - bioRxiv
+DO  - 10.1101/2022.08.22.504611
+SP  - 2022.08.22.504611
+AU  - Wong, Jeffrey Y.K.
+AU  - Kirberger, Steven E.
+AU  - Qiu, Ryan
+AU  - Ekanayake, Arunika I.
+AU  - Kelich, Payam
+AU  - Sarkar, Susmita
+AU  - Alvizo-Paez, Edgar R.
+AU  - Miao, Jiayuan
+AU  - Kalhor-Monfared, Shiva
+AU  - Dwyer, John J.
+AU  - Nuss, John M.
+AU  - Lin, Yu-Shan
+AU  - Macauley, Matthew S.
+AU  - Vukovic, Lela
+AU  - Pomerantz, William C.K.
+AU  - Derda, Ratmir
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/22/2022.08.22.504611.abstract
+N2  - In this paper, we report selection of albumin-binding macrocyclic peptides from genetically encoded libraries of peptides modified by perfluoroaryl-cysteine SNAr chemistry. Modification of phage-displayed libraries SXCXnC-phage, n=3–5, where X is any amino acid except for cysteine by decafluoro-diphenylsulfone (DFS), yields genetically-encoded library of octafluoro-diphen-ylsulfone-crosslinked macrocycles (OFS-SXCXnC-phage). Selection from these libraries using albumin as a bait identified a family of significantly enriched perfluoroaryl-macrocycles. Synthesis of perfluoroaryl-macrocycles predicted by phage display and testing their binding properties by 19F NMR and fluorescent polarization identified OFS-macrocycle with SICRFFC sequence as the most potent albumin binder. We observed that OFS-macrocycles slowly react with biological nucleophiles such as glutathione. Replacing decafluoro-diphenylsulfone by nearly isosteric pentafluorophenyl sulfide yielded perfluorophenylsulfide (PFS)-crosslinked macrocycles devoid of undesired reactivity. The augmented lead PFS-macrocycle with SICRFFC sequence exhibited KD = 4–6 μM towards human serum albumin and similar affinities towards rat and mouse albumins. When injected in mouse, the PFS-SICRFFCGGG compound was significantly retained in circulation in vivo when compared to control PFS-macrocyclic peptide. The perfluoroaryl-macrocycles with SICRFFC motif are the smallest known peptide macrocycle with significant affinity for human albumin and they are a productive starting point for future development of compact macrocycles with predictable circulation half-life in vivo.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Biphasic curvature-dependence of cell migration inside microcylinders: persistent randomness versus directionality
+JF  - bioRxiv
+DO  - 10.1101/2022.12.30.522287
+SP  - 2022.12.30.522287
+AU  - Yu, Xiaoyu
+AU  - Wang, Haiqin
+AU  - Ye, Fangfu
+AU  - Wang, Xiaochen
+AU  - Fan, Qihui
+AU  - Xinpeng, Xu
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/30/2022.12.30.522287.abstract
+N2  - Cell-scale curvature plays important roles in controlling cell and tissue behaviors. However, these roles have not been well quantified, and the underlying mechanisms remain elusive. We combine experiments with theory to study systematically the curvature-dependence of cell migration inside PDMS microcylinders. We find that persistence is positively correlated with speed, following the universal speed-persistence coupling relation, i.e., faster cells turn less. Cell migration inside microcylinders is anisotropic and depends on curvature in a biphasic manner. At small curvatures, as curvature increases, the average speed and anisotropy both increase, but surprisingly, the average persistence decreases. Whereas as the curvature increases over some threshold, cells detach from the surface, the average speed and anisotropy both decrease sharply but the average persistence increases. Moreover, interestingly, cells are found to leave paxillins along their trajectories (on curved but not planar surfaces), facilitating the assembly of focal adhesions of following cells. We propose a minimal model for the biphasic curvotaxis based on three mechanisms: the persistent random “noise”, the bending penalty of stress fibers, and the cell-surface adhesion. The findings provide a novel and general perspective on directed cell migration in the widely existing curved microenvironment of cells in vivo.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Injectable MSC Spheroid and Microgel Granular Composites for Engineering Cartilage Tissue
+JF  - bioRxiv
+DO  - 10.1101/2022.12.28.522141
+SP  - 2022.12.28.522141
+AU  - Di Caprio, Nikolas
+AU  - Davidson, Matthew D.
+AU  - Daly, Andrew C.
+AU  - Burdick, Jason A.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/30/2022.12.28.522141.abstract
+N2  - Articular cartilage is important for joint function, yet it can be damaged due to disease or trauma. Cartilage lacks natural healing processes and current clinical treatments are limited in their ability to form functional cartilage for repair. Here, we reimagine cartilage tissue engineering with an approach that combines aggregates of adult MSCs (spheroids) with hydrogel microparticles (microgels) to form granular composites that are injectable, permit cell-cell contacts for chondrogenesis, allow spheroid fusion and growth, and undergo interparticle crosslinking post-injection via light for stability. We use simulations and experimental analyses to establish the importance of initial MSC spheroid to microgel volume ratios in granular composites that balance mechanical support with tissue growth. Long-term chondrogenic cultures of granular composites produce engineered cartilage tissue within the range of native properties, which can be further enhanced via MSC/chondrocyte co-cultures. Altogether, we have developed a new strategy of injectable granular composites for engineering cartilage tissue.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Towards reliable reconstruction of the mouse brain thalamocortical connectivity using diffusion MRI
+JF  - bioRxiv
+DO  - 10.1101/2022.12.28.522151
+SP  - 2022.12.28.522151
+AU  - Arefin, Tanzil Mahmud
+AU  - Lee, Choong Heon
+AU  - Liang, Zifei
+AU  - Rallapalli, Harikrishna
+AU  - Wadghiri, Youssef Z.
+AU  - Turnbull, Daniel H.
+AU  - Zhang, Jiangyang
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/30/2022.12.28.522151.abstract
+N2  - Diffusion magnetic resonance imaging (dMRI) tractography has yielded intriguing insights into brain circuits and their relationship to behavior in response to gene mutations or neurological diseases across a number of species. Still, existing tractography approaches suffer from limited sensitivity and specificity, leading to uncertain interpretation of the reconstructed connections. Hence, in this study, we aimed to optimize the imaging and computational pipeline for reliable reconstruction of the mouse brain thalamocortical network. We developed a dMRI-based atlas of the mouse forebrain with structural labels imported from the Allen Mouse Brain Atlas (AMBA). Using the atlas and tracer data from the Allen Mouse Brain Connectivity Atlas (AMBCA) as ground truth, we investigated the accuracy of reconstructed node-to-node thalamocortical structural connectivity and effects of imaging and tractography parameters. Our results suggest that these parameters significantly affect tractography outcomes and our atlas can be used to investigate macroscopic structural connectivity in the mouse brain. Furthermore, tractography in mouse brain gray matter still face challenges and need improved imaging and tractography methods.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Decorrelation Time Mapping as an Analysis Tool for Nanobubble-Based Contrast Enhanced Ultrasound Imaging
+JF  - bioRxiv
+DO  - 10.1101/2022.12.21.521428
+SP  - 2022.12.21.521428
+AU  - Wegierak, Dana
+AU  - Cooley, Michaela
+AU  - Perera, Reshani
+AU  - Wulftange, William J.
+AU  - Gurkan, Umut A.
+AU  - Kolios, Michael C.
+AU  - Exner, Agata A.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/22/2022.12.21.521428.abstract
+N2  - Nanobubbles (NBs) are nanoscale (∼100-500 nm diameter) ultrasound (US) contrast agents that enable new robust applications of contrast enhanced US and US-mediated therapy. Due to their sub-micron size, high particle density, and highly deformable shell, NBs exhibit unique properties. In pathological states of heightened vascular permeability, such as in tumours, NBs can extravasate, enabling extravascular applications not currently possible with clinically available microbubbles (∼1000-10,000 nm diameter). This ability can be explored to develop imaging biomarkers to improve tumour detection. There is a need for an imaging method that can rapidly and effectively separate intravascular versus extravascular NB signal when imaged using nonlinear dynamic contrast enhanced US. Herein, we demonstrated the use of decorrelation time (DT) mapping to achieve this goal. Two in vitro models were used to explore the roles of NB velocity and diffusion on DTs. Mice bearing prostate specific membrane antigen (PSMA) expressing flank tumours (n = 7) were injected with bubble agents to evaluate the in vivo potential of this technique. The DT was calculated at each pixel of nonlinear contrast videos to produce DT maps. Across all models, long DT correlated with slowly moving or entrapped NBs while short DT correlated with flowing NBs. DT maps were sensitive to NBs in tumour tissue with high average DT in tumour regions (∼10 s) compared to surrounding normal tissue (∼1 s). Molecular NB targeting to PSMA extended DT (17 s) compared to non-targeted NBs (12 s), demonstrating sensitivity to NB adherence dynamics. Overall, DT mapping of in vivo NB dynamics produced detailed information of tumour tissue and showed potential for quantifying extravascular NB kinetics. This new NB-contrast enhanced US-based biomarker can be useful in molecular ultrasound imaging, with improved sensitivity and specificity of target tissue detection and potential for use as a predictor of vascular permeability and the enhanced permeability and retention (EPR) effect in tumours.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Single-Cell Analysis of 5-ALA Intraoperative Labeling Specificity for Glioblastoma
+JF  - bioRxiv
+DO  - 10.1101/2022.12.17.520870
+SP  - 2022.12.17.520870
+AU  - Liu, Zhouzerui
+AU  - Mela, Angeliki
+AU  - Furnari, Julia
+AU  - Argenziano, Michael G.
+AU  - Kotidis, Corina
+AU  - Sperring, Colin P.
+AU  - Humala, Nelson
+AU  - Bruce, Jeffrey N.
+AU  - Canoll, Peter
+AU  - Sims, Peter A.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/22/2022.12.17.520870.abstract
+N2  - Glioblastoma (GBM) is the most common and aggressive malignant primary brain tumor, and surgical resection is a key part of the standard-of-care. In fluorescence-guided surgery (FGS), fluorophores are used to differentiate tumor tissue from surrounding normal brain. The heme synthesis pathway converts 5-aminolevulinic acid (5-ALA), a fluorogenic substrate used for FGS, to fluorescent protoporphyrin IX (PpIX). The resulting fluorescence is thought to be specific to transformed glioma cells, but this specificity has not been examined at single-cell level. We performed paired single-cell imaging and RNA sequencing of individual cells (SCOPE-seq2) on human GBM surgical specimens with visible PpIX fluorescence from patients who received 5-ALA prior to surgery. SCOPE-seq2 allows us to simultaneously image PpIX fluorescence and unambiguously identify transformed glioma cells from single-cell RNA-seq (scRNA-seq). We observed that 5-ALA treatment results in labeling that is not specific to transformed tumor cells. In cell culture, we further demonstrated that untransformed cells can be labeled by 5-ALA directly or by PpIX secreted from surrounding transformed cells. In acute slice cultures from mouse glioma models, we showed that 5-ALA preferentially labels GBM tumor tissue over non-neoplastic brain tissue, and that this contrast is not due to blood-brain-barrier disruption. Taken together, our findings support the use of 5-ALA as an indicator of GBM tissue, but not as a specific marker of transformed glioma cells.Competing Interest StatementColumbia University has filed patent applications on the SCOPE-seq technology used in these studies. Z.L. and P.A.S. are named as inventors on these patent applications. P.A.S. receives patent royalties from Guardant Health.
+ER  - 
+
+TY  - JOUR
+T1  - Improved humoral immunity and protection against influenza virus infection with a 3D porous biomaterial vaccine
+JF  - bioRxiv
+DO  - 10.1101/2022.12.16.520784
+SP  - 2022.12.16.520784
+AU  - Miwa, Hiromi
+AU  - Antao, Olivia Q
+AU  - Kelly-Scumpia, Kindra M.
+AU  - Baghdasarian, Sevana
+AU  - Mayer, Daniel P.
+AU  - Shang, Lily
+AU  - Sanchez, Gina M.
+AU  - Archang, Maani M
+AU  - Scumpia, Philip O.
+AU  - Weinstein, Jason S
+AU  - Carlo, Dino Di
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/17/2022.12.16.520784.abstract
+N2  - New vaccine platforms that properly activate humoral immunity and generate neutralizing antibodies are required to combat emerging and re-emerging pathogens, including influenza virus. Biomaterial scaffolds with macroscale porosity have demonstrated tremendous promise in regenerative medicine where they have been shown to allow immune cell infiltration and subsequent activation, but whether these types of materials can serve as an immunization platform is unknown. We developed an injectable immunization platform that uses a slurry of antigen-loaded hydrogel microparticles that anneal to form a porous scaffold with high surface area for antigen uptake by infiltrating immune cells as the biomaterial degrades to maximize humoral immunity. Antigen-loaded-microgels elicited a robust cellular humoral immune response, with increased CD4+ T follicular helper (Tfh) cells and prolonged germinal center (GC) B cells comparable to the commonly used adjuvant, aluminum hydroxide (Alum). By simply increasing the weight fraction of polymer material, we enhanced material stiffness and further increased antigen-specific antibody titers superior to Alum. Vaccinating mice with inactivated influenza virus loaded into this more highly crosslinked formulation elicited a strong antibody response and provided better protection against a high dose viral challenge than Alum. Thus, we demonstrate that by tuning physical and chemical properties alone, we can enhance adjuvanticity and promote humoral immunity and protection against a pathogen, leveraging two different types of antigenic material: individual protein antigen and inactivated virus. The flexibility of the platform may enable design of new vaccines to enhance innate and adaptive immune cell programming to generate and tune high affinity antibodies, a promising approach to generate long-lasting immunity against specific pathogens.Competing Interest StatementThe authors have a financial interest in Tempo Therapeutics, which aims to commercialize MAP technology.
+ER  - 
+
+TY  - JOUR
+T1  - Controlled delivery of ultrasound through the head for effective and safe therapies of the brain
+JF  - bioRxiv
+DO  - 10.1101/2022.12.16.520788
+SP  - 2022.12.16.520788
+AU  - Riis, Tom
+AU  - Wilson, Matthew
+AU  - Kubanek, Jan
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/17/2022.12.16.520788.abstract
+N2  - Transcranial focused ultrasound provides noninvasive and reversible approaches for precise and personalized manipulations of brain circuits, with the potential to transform our understanding of brain function and treatments of brain dysfunction. However, the effectiveness and safety of these approaches have been limited by the human head, which attenuates and distorts ultrasound strongly and unpredictably. To address this lingering barrier, we have developed a “Relative Through-Transmit” (RTT) approach that directly measures and compensates for the attenuation and distortion of a given skull and scalp. We have implemented RTT in hardware and demonstrated that it accurately restores the operator’s intended intensities inside ex-vivo human skulls. Moreover, this functionality enabled effective and intensity-dependent transcranial modulation of nerves and effective release of defined doses of propofol inside the skull. RTT was essential for these new applications of transcranial ultrasound; when not applied, there were no significant differences from sham conditions. Moreover, RTT was safely applied in humans and accounted for all intervening obstacles including hair and ultrasound coupling. This method and hardware unlock the potential of ultrasound-based approaches to provide effective, safe, and reproducible precision therapies of the brain.Competing Interest StatementThe method and hardware described herein are subjects of a provisional patent.
+ER  - 
+
+TY  - JOUR
+T1  - Gut bacteria impact host uric acid burden and its association with atherosclerosis
+JF  - bioRxiv
+DO  - 10.1101/2022.12.12.520169
+SP  - 2022.12.12.520169
+AU  - Kasahara, Kazuyuki
+AU  - Kerby, Robert L.
+AU  - Zhang, Qijun
+AU  - Pradhan, Meenakshi
+AU  - Mehrabian, Margarete
+AU  - Lusis, Aldons
+AU  - Bergström, Göran
+AU  - Bäckhed, Fredrik
+AU  - Rey, Federico E.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/13/2022.12.12.520169.abstract
+N2  - Humans with metabolic and inflammatory diseases, including atherosclerosis harbor dysbiotic gut communities. However, the microbes and microbial pathways that influence disease progression remain largely undefined. Here, we show that variation in atherosclerosis burden is in part driven by the gut microbiota and it is associated with circulating levels of the proinflammatory molecule uric acid both in mice and humans. We identify bacterial taxa present in the gut spanning multiple phyla, including Bacillota (Firmicutes), Fusobacteriota and Pseudomonadota (Proteobacteria), that use uric acid and adenine– a key precursor of nucleic acids in intestinal cells, as carbon and energy sources anaerobically, and uncover a gene cluster encoding key steps of purine degradation that is widely distributed among gut dwelling bacteria. Furthermore, we demonstrate that colonization of germ-free mice with purine-degrading bacteria modulates levels of uric acid and other purines in the gut and systemically. Altogether this work demonstrates that gut microbes are important drivers of host global purine homeostasis and uric acid levels, and suggests that gut bacterial catabolism of purines may represent a novel mechanism by which the gut microbiome influences host health.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - &lt;em&gt;In situ&lt;/em&gt; quantification of osmotic pressure within living embryonic tissues
+JF  - bioRxiv
+DO  - 10.1101/2022.12.04.519060
+SP  - 2022.12.04.519060
+AU  - Vian, Antoine
+AU  - Pochitaloff, Marie
+AU  - Yen, Shuo-Ting
+AU  - Kim, Sangwoo
+AU  - Pollock, Jennifer
+AU  - Liu, Yucen
+AU  - Sletten, Ellen
+AU  - Campàs, Otger
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/06/2022.12.04.519060.abstract
+N2  - Mechanics is known to play a fundamental role in many cellular and developmental processes. Beyond active forces and material properties, osmotic pressure is believed to control essential cell and tissue characteristics. However, it remains very challenging to perform in situ and in vivo measurements of osmotic pressure. Here we introduce doubleemulsion droplet sensors that enable local measurements of osmotic pressure intra- and extra-cellularly within 3D multicellular systems, including living tissues. After generating and calibrating the sensors, we measured the osmotic pressure in blastomeres of early zebrafish embryos as well as in the interstitial fluid between the cells of the blastula by monitoring the size of droplets previously inserted in the embryo. Our results show a balance between intracellular and interstitial osmotic pressures, with values of approximately 0.7 MPa, but a large pressure imbalance between the inside and outside of the embryo. The ability to measure osmotic pressure in 3D multicellular systems (developing embryos, organoids, etc.) will help understand its role in fundamental biological processes.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Inducible non-human primate models of retinal degeneration for testing end stage therapies and understanding disease mechanisms
+JF  - bioRxiv
+DO  - 10.1101/2022.12.03.518955
+SP  - 2022.12.03.518955
+AU  - Ail, Divya
+AU  - Nava, Diane
+AU  - Hwang, In Pyo
+AU  - Brazhnikova, Elena
+AU  - Nouvel-Jaillard, Céline
+AU  - Dentel, Alexandre
+AU  - Joffrois, Corentin
+AU  - Rousseau, Lionel
+AU  - Dégardin, Julie
+AU  - Bertin, Stephane
+AU  - Sahel, José-Alain
+AU  - Goureau, Olivier
+AU  - Picaud, Serge
+AU  - Dalkara, Deniz
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/05/2022.12.03.518955.abstract
+N2  - The anatomical differences between the retinas of humans and most animal models pose a challenge for testing novel therapies. Non-human primate (NHP) retina is anatomically closest to the human retina with the presence of a high acuity region called the fovea. However, there is a lack of relevant NHP models for retinal degeneration that can be used for preclinical studies of vision restoration. To address this unmet need we aimed to generate inducible NHP models of photoreceptor degeneration. We generated three cynomolgus macaque models using distinct strategies. We used two genetically targeted strategies using optogenetics and Crispr-Cas9 to ablate specifically rods to mimic rod-cone dystrophy. Additionally, we created an acute model by physical separation of the photoreceptors and retinal pigment epithelium using a polymer patch. Retinal degeneration was evaluated in all three models by in-life exams such as fundus imaging, optical coherence tomography, adaptive optics and electroretinography. In the genetic models we observed punctuate areas of degeneration in the injected area marked by disorganization of outer segments, loss of rod photoreceptors and thinning of the outer nuclear layer. In the acute model, the degeneration was faster and involved both rods and cones. Among the three distinct NHP models, the Crispr-Cas9 based approach was the most advantageous model in view of recapitulating disease specific features and its ease of implementation. The acute model however resulted in the fastest degeneration making it the most relevant model for testing end-stage vision restoration therapies such as stem cell transplantation.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Deficiency in hyaluronan synthase 3 attenuates ruptures in a murine model of abdominal aortic aneurysms by reduced aortic monocyte infiltration
+JF  - bioRxiv
+DO  - 10.1101/2022.12.01.518480
+SP  - 2022.12.01.518480
+AU  - Suvorava, Tatsiana
+AU  - Brack, Fedor
+AU  - Kaczur, Janet
+AU  - Petzsch, Patrick
+AU  - Köhrer, Karl
+AU  - Quast, Christine
+AU  - Gerdes, Nobert
+AU  - Voigt, Katharina
+AU  - Krüger, Martina
+AU  - Fischer, Jens W.
+AU  - Brückner, Alexander
+AU  - Fleischmann, Bernd K.
+AU  - Wenzel, Daniela
+AU  - Zimmermann, Laura-Maria A.
+AU  - Sengle, Gerhard
+AU  - Flögel, Ulrich
+AU  - Grandoch, Maria
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/02/2022.12.01.518480.abstract
+N2  - Abdominal aortic aneurysms (AAA) are a common vascular disorder with a high mortality due to the prevalence of aortic ruptures. The underlying pathomechanisms are complex and involve immune cell infiltration and degradation of the vascular extracellular matrix (ECM). Hyaluronan (HA), synthesized at the plasma membrane by three HA synthase isoenzymes (HAS1-3), is not only a major constituent of the ECM but also known to directly affect the phenotype of vascular smooth muscle cells as well as immunological responses. Specifically, the HAS3 isoenzyme has been reported to play a major role in various inflammatory conditions. Therefore, the aim of the present study was to elucidate the role of HAS3-derived HA in the pathogenesis of abdominal aortic aneurysm. To this end, we used a murine model of Angiotensin II (AngII)-induced abdominal aortic aneurysms and dissections (AAAs/AADs) and could demonstrate that genetic depletion of Has3 improves survival in Apoe/Has3 double deficient (Apoe/Has3-DKO) mice via the reduced occurrence of aortic ruptures. Mechanistically, fewer elastica breaks were observed in Apoe/Has3-DKO mice compared to Apoe-KO littermates. This was associated with a decreased infiltration of myeloid immune cells into the vessel wall of Has3-deficient mice while in parallel elevated numbers of circulating leukocytes were detected. RNA seq analysis from aortic tissue pointed towards a disturbed endothelial-myeloid cell communication as a cause for the diminished recruitment of immune cells to the aortic wall. While endothelial cells were unaffected, upregulation of adhesion receptors as well as the HA receptor CD44, known to mediate leukocyte adhesion to the endothelium, was blunted in monocytes from Apoe/Has3-DKO mice in response to AngII treatment. These findings underline the pivotal detrimental role of monocyte’s HAS3-dependent pericellular HA matrix for an exaggerated immune cell recruitment to inflammatory foci giving here rise for an increased incidence of ruptured aortic aneurysms.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Insights into the Interactions of Peptides with Monolayer-Protected Metal Nanoclusters
+JF  - bioRxiv
+DO  - 10.1101/2022.11.27.518090
+SP  - 2022.11.27.518090
+AU  - Tiwari, Vikas
+AU  - Garg, Sonali
+AU  - Karmakar, Tarak
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/28/2022.11.27.518090.abstract
+N2  - Monolayer-protected atomically precise metal nanoclusters (MPC) are an important class of molecules that have potential applications in catalysis, imaging, and drug delivery. Recent studies have shown that peptide-based drugs can be complexed with MPCs to avoid enzymatic degradation and get delivered to targeted cells. Although the MPCs potential role in imaging and drug delivery processes have been studied, for their impactful use, specific molecular interactions between MPCs and biomolecules, mainly proteins and peptides should be explored in detail. In this work, we have carried out atomistic molecular dynamics simulations to investigate the interactions between Au-based MPCs and an anticancer peptide, melittin. The MEL peptides get attached to the MPCs surface by the formation of multiple hydrogen bonds between the peptide amino acid residues with MPCs ligands. Additionally, the positively charged residues such as Lys and Arg, the Trp, and the N-terminal of the peptide anchor strongly to the MPC core playing a crucial role in the peptide’s overall stabilization on the MPC surface.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Buoyant-Antigen-Magnetic (BAM) ImmunoSeparation, isolation, and detection of Specific Pathogenic Bacterial Cells
+JF  - bioRxiv
+DO  - 10.1101/2022.11.27.517249
+SP  - 2022.11.27.517249
+AU  - McNaughton, Brandon H.
+AU  - Anker, Jeffrey N.
+AU  - Kinnunen, Päivö K.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/27/2022.11.27.517249.abstract
+N2  - Separating, collecting, and detecting specific cells and molecules from complex and heterogeneous samples is key for many biomedical, environmental, and food safety applications. Antibodies are widely used to specifically bind cells and molecules to a solid support such as a column or suspended bead to separate, wash, and concentrate them. However, nonspecific binding of non-target cells and molecules to the support limits the specificity and resulting purity of traditional separation methods. Herein we describe a buoyant-antigen-magnetic (BAM) separation approach to increase specificity using two distinct separation processes with “AND” logic. Buoyant silica microbubbles and magnetic microbeads, each with their own antibody, bind to the target cell forming a BAM sandwich complex which can be separated from non-targeted cells (which are neither magnetic nor buoyant), as well as from cells bound to only single buoyant or magnetic microparticles but not both. Escherichia coli O157:H7, a pathogenic bacteria that can contaminate food products, was used as a model organism to establish a nearly 100-fold reduction in the non-specific carryover of non-target Escherichia coli bacteria in comparison to simple magnetic separation. Beads with no attached analyte were also removed. Furthermore, the BAM complexes could be visualized by eye (or camera) providing a rapid and sensitive method for pathogenic bacterial detection. Bacterial concentrations as low as 5 × 104 CFU/ml were evident by eye and could easily be distinguished from non-target S. aureus bacteria even at much higher concentrations (5x107 cfu/mL). This approach enabled simple user-friendly measurement for on-site detection and isolation without expensive equipment.Competing Interest StatementAuthors B.H.M and P.K.K are all inventors of a related US patent 10,724,930 which discloses the buoyant and magnetic separation protocol. B.H.M co-founded Akadeum Life Sciences, which has commercialized buoyant microbubbles for separation, concentration, enrichment, or depletion of targeted cells or molecules. B.H.M is CEO of Akadeum Life Sciences, and J.N.A. is on the scientific advisory board.
+ER  - 
+
+TY  - JOUR
+T1  - Quantitative assessment of angioplasty induced vascular inflammation with &lt;sup&gt;19&lt;/sup&gt;F cardiovascular magnetic resonance imaging
+JF  - bioRxiv
+DO  - 10.1101/2022.11.25.518014
+SP  - 2022.11.25.518014
+AU  - Nienhaus, Fabian
+AU  - Walz, Moritz
+AU  - Rothe, Maik
+AU  - Jahn, Annika
+AU  - Pfeiler, Susanne
+AU  - Busch, Lucas
+AU  - Stern, Manuel
+AU  - Heiss, Christian
+AU  - Vornholz, Lilian
+AU  - Cames, Sandra
+AU  - Cramer, Mareike
+AU  - Schrauwen-Hinderling, Vera
+AU  - Gerdes, Norbert
+AU  - Temme, Sebastian
+AU  - Roden, Michael
+AU  - Flögel, Ulrich
+AU  - Kelm, Malte
+AU  - Bönner, Florian
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/27/2022.11.25.518014.abstract
+N2  - Early macrophage rich vascular inflammation is a key feature in the pathophysiology of restenosis after angioplasty. 19F MRI with intravenously applied perfluorooctyl bromide-nanoemulsion (PFOB-NE) could offer ideal features for serial imaging of the inflammatory response after angioplasty. We aimed to non-invasively image monocyte/macrophage infiltration in response to angioplasty in pig carotid arteries using Fluorine-19 magnetic resonance imaging (19F MRI) to assess early inflammatory response to mechanical injury. Early macrophage rich vascular inflammation is a key feature in the pathophysiology of restenosis after angioplasty. 19F MRI with intravenously applied perfluorooctyl bromide-nanoemulsion (PFOB-NE) could offer ideal features for serial imaging of the inflammatory response after angioplasty. In eight minipigs, injury of the right carotid artery was induced by either balloon oversize angioplasty only (BA, n=4) or in combination with endothelial denudation (BA + ECDN, n=4). PFOB-NE was administered intravenously three days after injury followed by 1H and 19F MRI to assess vascular inflammatory burden at day six. Vascular response to mechanical injury was validated using immunohistology. Angioplasty was successfully induced in all eight pigs. Response to injury was characterized by positive remodeling with predominantly adventitial wall thickening and adventitial infiltration of monocytes/macrophages. 19F signal could be detected in vivo in four pigs following BA + ECDN with a robust signal-to-noise ratio (SNR) of 14.7 ± 4.8. Ex vivo analysis revealed a linear correlation of 19F SNR to local monocyte/macrophage cell density. Minimum detection limit of infiltrated monocytes/macrophages was as about 400 cells/mm2. Therefore, 19F MRI enables quantification of monocyte/macrophage infiltration after vascular injury with sufficient sensitivity. This might open an avenue to non-invasively monitor inflammatory response to mechanical injury after angioplasty and thus to identify individuals with distinct patterns of vascular inflammation promoting restenosis.One Sentence Summary 19F MRI enables radiation-free quantification of monocyte/macrophage infiltration after vascular injury with sufficient sensitivity.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Transgenerational Effects of Early-Life Stress on Anxiety in Zebrafish (&lt;em&gt;Danio rerio&lt;/em&gt;)
+JF  - bioRxiv
+DO  - 10.1101/2022.11.22.517541
+SP  - 2022.11.22.517541
+AU  - Fontana, Barbara D.
+AU  - Alnassar, Nancy
+AU  - Parker, Matthew O.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/23/2022.11.22.517541.abstract
+N2  - Early-life adversity impacts on anxiety-related behaviors in adulthood. The effects of such adversity not only affects the animal itself, but can be passed on transgenerationally. Pervasive effects of experimentally-induced early-life stress (ELS) have been documented in adult zebrafish but it is not clear if this can be passed on via the germline. Here, we investigated the effects of ELS across three generations, by analyzing the responses of adult animals exposed to ELS in two different anxiety-related tasks, as well as in social behavior, memory, and cognition. Animals exposed to ELS (at 7 days-post-fertilization) showed a marked attenuation of specific anxiety-related behaviors (F0) when adults, and these alterations were maintained across two subsequent generations (F1 and F2). These findings suggest that zebrafish may be a useful model organism to study the transgenerational effects of ELS, and how this pertains to (for example) neuropsychiatric disorders. In addition, our data may naturally provoke questions regarding consideration of the environment of laboratory-housed zebrafish at early developmental stages. In particular, more work may be necessary to determine how different environmental stressors could affect data variability across laboratories.Summary of the ELS effects in zebrafish anxiety-like behavior across multiple generations.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Massively parallel single-cell sequencing of genetic loci in diverse microbial populations
+JF  - bioRxiv
+DO  - 10.1101/2022.11.21.517444
+SP  - 2022.11.21.517444
+AU  - Lan, Freeman
+AU  - Saba, Jason
+AU  - Ross, Tyler D
+AU  - Zhou, Zhichao
+AU  - Krauska, Katie
+AU  - Anantharaman, Karthik
+AU  - Landick, Robert
+AU  - Venturelli, Ophelia
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/22/2022.11.21.517444.abstract
+N2  - Single cell genetic heterogeneity is ubiquitous in microbial populations and an important aspect of microbial biology. However, we lack a broadly applicable and accessible method to study this heterogeneity at the single cell level. Here, we introduce a simple, robust, and generalizable platform for quantitative and massively parallel single cell sequencing of target genetic loci in microbes using ultrahigh-throughput droplet microfluidics (Droplet Targeted Amplicon Sequencing or DoTA-seq). Using DoTA-seq, we elucidate the highly diverse single cell ON/OFF states of the phase-variable capsule synthesis operons in the prevalent human gut species Bacteroides fragilis. In addition, we quantify the shifts in antibiotic resistance gene abundances in different species in a 25 member human gut microbial community in response to antibiotics. By sequencing tens of thousands of single-cells derived from a human fecal sample, we identify links between plasmid replicons and the taxonomic lineages of their associated hosts. In sum, DoTA-seq is an accessible and broadly applicable tool for profiling single-cell genetic variation in microbiomes.Competing Interest StatementF.L. and O.S.V. have filed a provisional patent: Methods for isolating and barcoding nucleic acid. US Provisional Application 63/337468.
+ER  - 
+
+TY  - JOUR
+T1  - Extracting electromyographic signals from multi-channel local-field-potentials using independent component analysis without direct muscular recording
+JF  - bioRxiv
+DO  - 10.1101/2022.11.15.516633
+SP  - 2022.11.15.516633
+AU  - Osanai, Hisayuki
+AU  - Yamamoto, Jun
+AU  - Kitamura, Takashi
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/15/2022.11.15.516633.abstract
+N2  - Electromyography (EMG) signals have been used to identify animal’s behavioral states including sleep/wake states and freezing behavior. However, EMG recording is often not conducted together with in vivo electrophysiology recording because it requires additional surgeries and setups. While independent component analysis (ICA) has been used as a well-established method to reduce noise from field potential data, there has been no attempt to proactively use the removed “noise”, of which EMG signals are considered to be one of the major sources. Here, we demonstrate that EMG signals can be reconstructed from local field potential data using ICA without direct EMG recording. The extracted component is highly correlated with directly measured EMG signals. This component is further demonstrated to be useful for measuring an animal’s sleep/wake states and freezing behaviors consistently with actual EMG. The EMG component can be also separated by four-channel LFP data from multisite brain regions. Our method will reduce the necessary effort to measure EMGs in wide-ranged in vivo electrophysiology experiments including the investigation of neural correlates of animal behavior.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Single cell profiling reveals strain-specific differences in myeloid inflammatory potential in the rat liver
+JF  - bioRxiv
+DO  - 10.1101/2022.11.11.516225
+SP  - 2022.11.11.516225
+AU  - Pouyabahar, Delaram
+AU  - Chung, Sai W.
+AU  - Pezzutti, Olivia I.
+AU  - Perciani, Catia T.
+AU  - Wang, Xinle
+AU  - Ma, Xue-Zhong
+AU  - Jiang, Chao
+AU  - Camat, Damra
+AU  - Chung, Trevor
+AU  - Sekhon, Manmeet
+AU  - Manuel, Justin
+AU  - Chen, Xu-Chun
+AU  - McGilvray, Ian D.
+AU  - MacParland, Sonya A.
+AU  - Bader, Gary D.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/14/2022.11.11.516225.abstract
+N2  - Liver transplantation is currently the only treatment for end-stage liver disease and acute liver failure. Liver transplant rejection is among the most lethal complications of transplantation, and therapeutic development is limited by our lack of a comprehensive understanding of the cellular landscape of the liver. The laboratory rat (Rattus norvegicus), ideal in size as a model for surgical procedures, is a strong platform to study liver biology in the context of liver transplantation. Liver allograft rejection is known to be strain-specific in the rat model, although the transplantation is accepted without rejection in some strains, it leads to acute rejection in others. To shed light on the cellular landscape of the rat liver and build a foundation for strain comparison, we present a comprehensive single-cell transcriptomics map of the healthy rat liver of Lewis and Dark Agouti strains. Using a novel computational pipeline we developed to guide the detailed annotation of our rat liver atlas, we discovered that hepatic myeloid cells have strong Lewis and Dark Agouti strain-specific differences focused on inflammatory signaling pathways. We experimentally validated these strain-specific differences in myeloid inflammatory potential in vitro using intracellular cytokine staining. Our work provides the first examination of the multi-strain healthy rat liver by single cell transcriptomics and uncovers key insights into strain-specific differences in this valuable model animal.Summary The laboratory rat (Rattus norvegicus) is a standard model animal for orthotopic liver transplantation. Transplanting a liver from a Dark agouti (DA) to a Lewis (LEW) strain rat leads to transplant rejection and the reverse procedure leads to tolerance. Understanding this strain difference may help explain the cellular drivers of liver allograft rejection post-transplant. This study uses single-cell transcriptomics to better understand the complex cellular composition of the rat liver and unravels cellular and molecular sources of inter-strain hepatic variation. We generated single-cell transcriptomic maps of the livers of healthy DA and LEW rat strains and developed a novel, factor analysis-based bioinformatics pipeline to study data covariates, such as strain and batch. Using this approach, we discovered variations within hepatocyte and myeloid populations that explain how the states of these cells differ between strains in the healthy rat, which may explain why these strains respond differently to liver transplants.Competing Interest StatementGDB is an advisor for Deep Genomics and is on the Scientific Advisory Board of Adela Bio. No other competing interests are declared.
+ER  - 
+
+TY  - JOUR
+T1  - Selective brain cooling monitored by CT perfusion as adjuvant therapy in a porcine model of severe ischemic stroke
+JF  - bioRxiv
+DO  - 10.1101/2022.11.11.516055
+SP  - 2022.11.11.516055
+AU  - Tong, Olivia L.H.
+AU  - Chung, Kevin J.
+AU  - Hadway, Jennifer
+AU  - Morrison, Laura
+AU  - Desjardins, Lise
+AU  - Tyler, Susan
+AU  - Flamminio, Marcus
+AU  - Keenliside, Lynn
+AU  - Lee, Ting-Yim
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/14/2022.11.11.516055.abstract
+N2  - Despite the advances in ischemic stroke treatment, not all patients are eligible for or fully recovered after recanalization therapies. Therapeutic hypothermia could be adjuvant therapy that optimizes the beneficial effect of reperfusion. While conventional whole-body cooling has severe adverse effects, selective brain cooling has emerged as an attractive alternative. However, clinical application is limited by the lack of optimal delivery methods and unknown treatment parameters. Optimal parameters may depend on injury levels and monitoring cerebral perfusion may provide valuable information. Here, we show that selective brain cooling via our in-house developed Vortex tube IntraNasal Cooling Instrument (VINCI), even with a clinically relevant delay in treatment, can attenuate subacute injuries in animals with severe ischemic stroke. The treatment responses of selective brain cooling were characterized by CT Perfusion (CTP). The predicted lesion volume by CTP matched the true infarct volume by histology when the brain temperature was decreased by 5°C from normothermia. More importantly, we found that global hyperemia (high cerebral blood flow) before rewarming could be an early manifestation of poor treatment outcomes. Altogether, our study shows that VINCI-enabled brain cooling could be guided by CTP imaging as adjuvant therapy for severe ischemic stroke. This work lays the groundwork toward individualized selective brain cooling.Significance Statement Not all patients suffering from ischemic stroke are eligible or fully recovered after recanalization therapies. Therapeutic hypothermia could be an adjuvant therapy, but the clinical application is hindered by the delivery methods. The optimum treatment depth and duration are also unknown, and they may depend on the injury level. We developed a non-invasive selective brain cooling device, Vortex tube IntraNasal Cooling Instrument (VINCI). The treatment responses were characterized by CT Perfusion (CTP). Global hyperemia (high cerebral blood flow) was identified and could be an early manifestation of poor treatment outcomes. Our work shows that VINCI-enabled brain cooling could be guided by CTP imaging as adjuvant therapy for ischemic stroke. This work also lays the groundwork toward individualized selective brain cooling.Competing Interest StatementT.Y.L. licenses the CT Perfusion software to GE Healthcare. VINCI was based on a prior patent US 9987162B2: Mammalian Head Cooling System and Method issued to TYL and LK. All other authors declare no competing interests.
+ER  - 
+
+TY  - JOUR
+T1  - Screening of metabolism-disrupting chemicals on pancreatic α-cells using in vitro methods
+JF  - bioRxiv
+DO  - 10.1101/2022.11.07.515443
+SP  - 2022.11.07.515443
+AU  - Dos Santos, Reinaldo Sousa
+AU  - Babiloni-Chust, Ignacio
+AU  - Marroqui, Laura
+AU  - Nadal, Angel
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/14/2022.11.07.515443.abstract
+N2  - Metabolism-disrupting chemicals (MDCs) are endocrine disruptors with obesogenic and/or diabetogenic action. There is mounting evidence linking exposure to MDCs to increased susceptibility to diabetes. Despite the important role of glucagon in glucose homeostasis, there is little information on the effects of MDCs on α-cells. Furthermore, there are no methods to identify and test MDCs with the potential to alter α-cell viability and function. Here we used the mouse α-cell line αTC1-9 to evaluate the effects of MDCs on cell viability and glucagon secretion. We tested six chemicals at concentrations within human exposure (from 0.1 pM to 1 μM): bisphenol-A (BPA), tributyltin (TBT), perfluorooctanoic acid (PFOA), triphenylphosphate (TPP), triclosan (TCS), and dichlorodiphenyldichloroethylene (DDE). Using two different approaches, MTT assay and DNA-binding dyes, we observed that BPA and TBT decreased α-cell viability via a mechanism that depends on the activation of estrogen receptors and PPARγ, respectively. These two chemicals induced ROS production, but barely altered the expression of endoplasmic reticulum (ER) stress markers. Although PFOA, TPP, TCS, and DDE did not alter cell viability nor induced ROS generation or ER stress, all four compounds negatively affected glucagon secretion. Our findings suggest that αTC1-9 cells seem an appropriate model to test chemicals with metabolism-disrupting activity and that the improvement of the test methods proposed herein could be incorporated into protocols for the screening of diabetogenic MDCs.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - &lt;em&gt;Trachymyrmex septentrionalis&lt;/em&gt; ants promote fungus garden hygiene using &lt;em&gt;Trichoderma&lt;/em&gt;-derived metabolite cues
+JF  - bioRxiv
+DO  - 10.1101/2022.11.12.516288
+SP  - 2022.11.12.516288
+AU  - Kyle, Kathleen E.
+AU  - Puckett, Sara P.
+AU  - Caraballo-Rodríguez, Andrés Mauricio
+AU  - Rivera-Chávez, José
+AU  - Samples, Robert M.
+AU  - Earp, Cody E.
+AU  - Raja, Huzefa A.
+AU  - Pearce, Cedric J.
+AU  - Ernst, Madeleine
+AU  - van der Hooft, Justin J.J.
+AU  - Adams, Madison E.
+AU  - Oberlies, Nicholas H.
+AU  - Dorrestein, Pieter C.
+AU  - Klassen, Jonathan L.
+AU  - Balunas, Marcy J.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/13/2022.11.12.516288.abstract
+N2  - Fungus-growing ants depend on a fungal mutualist that can fall prey to fungal pathogens. This mutualist is cultivated by these ants in structures called fungus gardens. Ants exhibit weeding behaviors that keep their garden healthy by physically removing compromised pieces. However, how ants detect diseases of their fungus gardens is unknown. Here, we applied the logic of Koch’s postulates using environmental fungal community genomic sequencing, fungal isolation, and in vitro infection experiments to establish Trichoderma spp. as pathogens of Trachymyrmex septentrionalis fungus gardens. Our environmental data showed that Trichoderma are the most abundant non-cultivar fungi in wild T. septentrionalis fungus gardens. We further determined that metabolites produced by Trichoderma induce an ant weeding response that mirrors their response to live Trichoderma. Combining ant behavioral experiments with bioactivity-guided fractionation and statistical prioritization of metabolites in Trichoderma extracts demonstrated that T. septentrionalis ants weed in response to peptaibols, a specific class of secondary metabolites known to be produced by Trichoderma fungi. Similar assays conducted using purified peptaibols, including the two new peptaibols trichokindins VIII and IX, suggested that weeding is likely induced by peptaibols as a class rather than by a single peptaibol metabolite. In addition to their presence in laboratory experiments, we detected peptaibols in wild fungus gardens. Our combination of environmental data and in vitro experiments strongly support that peptaibols act as chemical cues of Trichoderma pathogenesis in T. septentrionalis fungus gardens.Significance Statement An extended defense response may exist in any relationship where one partner benefits from defending a mutualistic partner. Such a response is observed in the fungus-growing ant symbiosis, where ants must identify and remove pathogens of their symbiotic fungus gardens. Here we describe the fungal pathogen Trichoderma and its associated metabolites, which induce Trachymyrmex septentrionalis ant weeding behavior. Ants removed fungus garden pieces inoculated with Trichoderma spores or peptaibol-rich Trichoderma extracts, and peptaibols as a class cued ant defensive behavior, allowing T. septentrionalis to differentiate healthy from diseased fungus gardens. Extended defense responses mediated by chemical cues may be underappreciated mechanisms that structure symbiotic interactions.Competing Interest StatementK.E.K., S.P.P., A.M.C.R., J.R.-C., R.M.S., C.E.E., M.E., M.E.A., J.L.K, and M.J.B declare no competing interest. N.H.O., C.J.P. and H.A.R are members of the Scientific Advisory Board of Clue Genetics, Inc. N.H.O. is also a member of the Scientific Advisory Board of Mycosynthetix, Inc. J.J.J.v.d.H. is a member of the Scientific Advisory Board of NAICONS Srl. P.C.D. is a scientific co-founder and advisor to Ometa and Enveda with prior approval by UC-San Diego and an advisor to Cybele.
+ER  - 
+
+TY  - JOUR
+T1  - EXPLORING THE EFFECTS OF METABOLISM-DISRUPTING CHEMICALS ON PANCREATIC α-CELL BIOLOGY: A SCREENING TESTING APPROACH
+JF  - bioRxiv
+DO  - 10.1101/2022.11.07.515444
+SP  - 2022.11.07.515444
+AU  - Al-Abdulla, Ruba
+AU  - Ferrero, Hilda
+AU  - Boronat-Belda, Talía
+AU  - Soriano, Sergi
+AU  - Quesada, Iván
+AU  - Alonso-Magdalena, Paloma
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/08/2022.11.07.515444.abstract
+N2  - Humans are constantly exposed to many environmental pollutants, some of which have been largely acknowledged as key factors in the development of metabolic disorders such as diabetes and obesity. These chemicals have been classified as endocrine-disrupting chemicals (EDCs) and, more recently, since they can interfere with metabolic functions, they have been renamed as metabolism-disrupting chemicals (MDCs). MDCs are present in many consumer products, including food packaging, personal care products, plastic bottles and containers, and detergents. The scientific literature has ever-increasingly focused on insulin-releasing pancreatic β-cells as one of the main targets for MDCs. Evidence highlights that these substances may disrupt glucose homeostasis, altering pancreatic β-cell physiology. However, their potential impact on glucagon-secreting pancreatic α-cells remains poorly known despite the essential role that this cellular type plays in controlling glucose metabolism. In the present study, we have selected seven paradigmatic EDCs representing major toxic classes, including bisphenols, phthalates, perfluorinated compounds, metals, and pesticides. By using an in vitro cell-based model, the pancreatic α-cell line αTC1-9, we have explored the effects of these compounds on pancreatic α-cell viability, gene expression, and secretion. Our results indicated that most of the selected chemicals studied caused functional alterations in pancreatic α-cells. Moreover, we revealed, for the first time, their direct effects on key molecular aspects of pancreatic α-cell biology.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Engineering circuits of human iPSC-derived neurons and rat primary glia
+JF  - bioRxiv
+DO  - 10.1101/2022.11.07.515431
+SP  - 2022.11.07.515431
+AU  - Girardin, Sophie
+AU  - Ihle, Stephan J.
+AU  - Menghini, Arianna
+AU  - Krubner, Magdalena
+AU  - Tognola, Leonardo
+AU  - Duru, Jens
+AU  - Ruff, Tobias
+AU  - Fruh, Isabelle
+AU  - Müller, Matthias
+AU  - Vörös, János
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/07/2022.11.07.515431.abstract
+N2  - Novel in vitro platforms based on human neurons are needed to improve early drug testing and address the stalling drug discovery in neurological disorders. Topologically controlled circuits of human induced pluripotent stem cell (iPSC)-derived neurons have the potential to become such a testing system. In this work, we build in vitro co-cultured circuits of human iPSC-derived neurons and rat primary glial cells using microfabricated polydimethylsiloxane (PDMS) structures on microelectrode arrays (MEAs). Such circuits are created by seeding either dissociated cells or pre-aggregated spheroids at different neuron-to-glia ratios. Furthermore, an antifouling coating is developed to prevent axonal overgrowth in undesired locations of the microstructure. We assess the electrophysiological properties of different types of circuits over more than 50 days, including their stimulation-induced neural activity. Finally, we demonstrate the effect of magnesium chloride on the electrical activity of our iPSC circuits as a proof-of-concept for screening of neuroactive compounds.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - A Type 2 Innate Lymphoid Cell-Interleukin 9 Circuit Induces Paneth Cell Metaplasia and Small Intestinal Remodeling
+JF  - bioRxiv
+DO  - 10.1101/2022.11.02.514603
+SP  - 2022.11.02.514603
+AU  - Yuan, Cheng-Yin
+AU  - Rayasam, Aditya
+AU  - Moe, Alison
+AU  - Xu, Wenwen
+AU  - Szabo, Aniko
+AU  - Hayward, Michael
+AU  - Wells, Clive
+AU  - Salzman, Nita
+AU  - Drobyski, William R.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/03/2022.11.02.514603.abstract
+N2  - Paneth cell metaplasia (PCM) typically arises in the setting of pre-existing gastrointestinal (GI) diseases; however, the mechanistic pathway that induces metaplasia and whether PCM is initiated exclusively by disorders intrinsic to the GI tract has not been delineated. Herein, we describe the development of PCM in a murine model of inducible bcr/abl oncogene-driven chronic myelogenous leukemia (CML) in which metaplasia is causally and temporally linked to the development of leukemia. Mechanistically, CML induced a proinflammatory state within the GI tract that resulted in the production of epithelial-derived IL-33. Binding of IL-33 to ST2 led to the production of IL-9 by type 2 innate lymphoid cells (ILC2s) which was directly responsible for the induction of PCM in the colon and Paneth cell hyperplasia in the ileum. In addition, IL-9 directed remodeling of the small intestines characterized by goblet and tuft cell hyperplasia along with the expansion of mucosal mast cells. Thus, we identify that an extra intestinal disease can trigger an ILC2/IL-9 immune circuit which induces PCM and regulates epithelial cell fate decisions in the GI tract.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Metals and metal isotopes in insect wings: Implications for diet, geolocation and pollution exposure
+JF  - bioRxiv
+DO  - 10.1101/2022.11.02.514901
+SP  - 2022.11.02.514901
+AU  - Reich, Megan S.
+AU  - Kindra, Mira
+AU  - Dargent, Felipe
+AU  - Hu, Lihai
+AU  - Tyler Flockhart, D.T.
+AU  - Norris, D. Ryan
+AU  - Kharouba, Heather
+AU  - Talavera, Gerard
+AU  - Bataille, Clément P.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/03/2022.11.02.514901.abstract
+N2  - Anthropogenic activities are exposing insects to abnormal levels of toxic metals, with unknown implications for migratory insects. Simultaneously, metals and metal isotopes have become promising tools for the geolocation of migratory insects. Furthering our understanding of metal cycling in insect tissues is essential, both for the development of metals and metal isotopes as geolocation tools, and for assessing the toxicity risks of metals to insects. We conducted a diet-switching experiment on monarch butterflies (Danaus plexippus) with controlled larval and adult diets to evaluate the dietary and environmental sources of 23 metals and metalloids, strontium isotopes, and lead isotopes to insect wing tissues over a period of 8 weeks. Concentrations of Ca, Co, and Sb differed between the sexes. Ni and Zn bioaccumulated in the insect wing tissues over time, likely from the adult diet, while increases in Al, Cr, Cd, Cu, Fe, and Pb were likely from external sources (i.e., dust aerosols). Bioaccumulation of Pb in the monarch wings was confirmed by Pb isotopes to be from external anthropogenic sources, revealing the potential of Pb isotopes to become an indicator and tracer of metal pollution exposure along migratory paths. Concentrations of Ba, Cs, Mg, Na, Rb, Sr, Ti, Tl, and U appeared to be unaffected by dietary or environmental contamination and should be further developed for geolocation purposes. Strontium isotope ratios remained indicative of the larval diet, at least in males, supporting its potential as a geolocation tool. However, the difference in strontium isotope ratios between sexes, as well as the possibility of external contamination by wetting, requires further investigation. Our results demonstrate the complexity of metal cycling in insects and the need for further investigations, as well as the value of studying metals to develop new tools to quantify pollution exposure, metal toxicity and insect mobility.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - A microwell platform for high-throughput longitudinal phenotyping and selective retrieval of organoids
+JF  - bioRxiv
+DO  - 10.1101/2022.11.01.514733
+SP  - 2022.11.01.514733
+AU  - Sockell, Alexandra
+AU  - Wong, Wing
+AU  - Longwell, Scott
+AU  - Vu, Thy
+AU  - Karlsson, Kasper
+AU  - Mokhtari, Daniel
+AU  - Schaepe, Julia
+AU  - Lo, Yuan-Hung
+AU  - Cornelius, Vincent
+AU  - Kuo, Calvin
+AU  - Van Valen, David
+AU  - Curtis, Christina
+AU  - Fordyce, Polly M.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/02/2022.11.01.514733.abstract
+N2  - Organoids are powerful experimental models for studying the ontogeny and progression of diseases including cancer. Organoids are conventionally cultured in bulk using an extracellular matrix mimic. However, organoids in bulk culture physically overlap, making it impossible to track the growth of individual organoids over time in high throughput. Moreover, local spatial variations in bulk matrix properties make it difficult to assess whether observed phenotypic heterogeneity between organoids results from intrinsic cell differences or microenvironment variability. Here, we developed a microwell-based method that enables high-throughput quantification of image-based parameters for organoids grown from single cells, which can be retrieved from their microwells for sequencing and molecular profiling. Coupled with a deep-learning image processing pipeline, we characterized phenotypic traits including growth rates, cellular movement, and apical-basal polarity in two CRISPR-engineered human gastric organoid models, identifying genomic changes associated with increased growth rate and changes in accessibility and expression correlated with apical-basal polarity.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Dynamic growth re-orientation orchestrates flatness in the Arabidopsis leaf
+JF  - bioRxiv
+DO  - 10.1101/2022.11.01.514736
+SP  - 2022.11.01.514736
+AU  - Harline, Kate
+AU  - Fruleux, Antoine
+AU  - Lane, Brendan
+AU  - Mosca, Gabriella
+AU  - Strauss, Soeren
+AU  - Tavakolian, Nik
+AU  - Satterlee, James W.
+AU  - Li, Chun-Biu
+AU  - Singh, Abhyudai
+AU  - Smith, Richard S.
+AU  - Boudaoud, Arezki
+AU  - Roeder, Adrienne H.K.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/06/2022.11.01.514736.abstract
+N2  - The growth and division of cells in plant leaves is highly dynamic in time and space, all while the cells cannot move relative to their neighbors. Given these constraints, models predict that long range regulatory systems must exist to maintain flat forms. Juxtaposed microRNA (miR-NA) networks could serve as one of these regulatory systems. One of these miRNAs, miR319 is thought to be expressed from the base of leaves and to promote growth by degrading class II TCP transcription factor mRNAs. A miR319 overexpression mutant, jagged and wavy (jaw-D) exhibits rippling and undulating leaves, consistent with biomechanical predictions that without genetic spatial coordination, tissues will deform. It has been theorized that jaw-D rippling results from overgrowth at the margins, however this does not fully address how miR319 expression from the base of wild-type (WT) leaves allows them to flatten. Here, we track the growth, cell division and cell maturation in live WT and jaw-D leaves to ask how miR319 expression in WT promotes flattening. This data revealed the importance of spatially distinct growth, division and differentiation patterns in WT leaves, which are missing in jaw-D. We propose that WT leaf cells respond to differentiation cues to dynamically re-orient growth in specific tissue locations and regulate flattening.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - “An optimized pipeline for live imaging whole Arabidopsis leaves at cellular resolution”
+JF  - bioRxiv
+DO  - 10.1101/2022.11.01.514724
+SP  - 2022.11.01.514724
+AU  - Harline, Kate
+AU  - Roeder, Adrienne
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/03/2022.11.01.514724.abstract
+N2  - Live imaging is the gold standard for determining how cellular development gives rise to organs. However, tracking all individual cells across whole organs over large developmental time windows is extremely challenging. In this work, we provide a comparably simple method for confocal live imaging of Arabidopsis thaliana first leaves across early development. Our imaging method works for both wild-type leaves and the complex curved leaves of the jaw-1D mutant. We find that dissecting the cotyledons, affixing a coverslip above the samples and mounting samples with perfluorodecalin yields optimal imaging series for robust cellular and organ level analysis. We provide details of our complementary image processing steps in MorphGraphX software for segmenting cells, tracking the cell lineages, and measuring a suite of cellular growth properties. We also provide MorphoGraphX image processing scripts that we developed to automate analysis of segmented images and data presentation. Our imaging techniques and processing steps combine into a robust imaging pipeline. With this pipeline we are able to examine important nuances in the cellular growth and differentiation of jaw-D versus WT leaves that have not been demonstrated before. Our pipeline is a practical starting place for researchers new to live imaging plant leaves, but also to anyone interested in improving the throughput and reliability of their live imaging process.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - High-throughput single-cell sequencing of multiple invertible promoters reveals a strong determinant of bacterial population heterogeneity
+JF  - bioRxiv
+DO  - 10.1101/2022.10.31.514637
+SP  - 2022.10.31.514637
+AU  - Lan, Freeman
+AU  - Saba, Jason
+AU  - Qian, Yili
+AU  - Ross, Tyler
+AU  - Landick, Robert
+AU  - Venturelli, Ophelia S
+Y1  - 2023/01/01
+UR  - http://biorxiv.org/content/early/2023/01/12/2022.10.31.514637.abstract
+N2  - Population heterogeneity can promote bacterial fitness in response to unpredictable environmental conditions. Human gut symbiont Bacteroides spp., displays variability in single cell surface architectures by combinatorial regulation of promoter inversions that drive expression of capsular polysaccharides (CPS). Using high-throughput single-cell sequencing, we reveal population heterogeneity generated through combinatorial promoter inversion and show that B. fragilis populations can access diverse CPS promoter states. Combining our data with stochastic computational modeling, we demonstrate that the rates of promoter inversion regulated by a broadly conserved serine recombinase are a major mechanism shaping population heterogeneity. Exploiting control over the expression of the recombinase, we devise a method for creating phase-locked variants and show that populations with different initial compositions converge to a similar steady-state composition over time. Our approach can be used to interrogate single-cell phase variable states of diverse microbes including bacterial pathogens.Summary sentence High-throughput single cell sequencing of phase variation reveals regulation as a major driver of population diversificationCompeting Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Engineering of Co-Surfactant-Free Bioactive Protein Nanosheets for the Stabilisation of Bioemulsions Enabling Adherent Cell Expansion
+JF  - bioRxiv
+DO  - 10.1101/2022.10.30.514404
+SP  - 2022.10.30.514404
+AU  - Chrysanthou, Alexandra
+AU  - Bosch-Fortea, Minerva
+AU  - Gautrot, Julien E.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/11/01/2022.10.30.514404.abstract
+N2  - Bioemulsions are attractive platforms for the scalable expansion of adherent cells and stem cells. In these systems, cell adhesion is enabled by the assembly of protein nanosheets that display high interfacial shear moduli and elasticity. However, to date, most successful systems reported to support cell adhesion to liquid substrates have been based on co-assemblies of protein and reactive co-surfactants, which limit the translation of bioemulsions. In this report, we describe the design of protein nanosheets based on two globular proteins, bovine serum albumin (BSA) and β-lactoglobulin (BLG), biofunctionalised with RGDSP peptides to enable cell adhesion. The interfacial mechanics of BSA and BLG assemblies at fluorinated liquid-water interfaces is studied by interfacial shear rheology, with and without co-surfactant acyl chloride. Conformational changes associated with globular protein assembly are studied by circular dichroism and protein densities at fluorinated interfaces are evaluated via surface plasmon resonance. Biofunctionalisation mediated by sulfo-succinimidyl 4-(N-maleimidomethyl) cyclohexane-1-carboxylate (sulfo-SMCC) is studied by fluorescence microscopy. On the basis of the relatively high elasticities observed in the case of BLG nanosheets, even in the absence of co-surfactant, the adhesion and proliferation of mesenchymal stem cells and human embryonic kidney (HEK) cells on bioemulsions stabilized by RGD-functionalized protein nanosheets is studied. To account for the high cell spreading and proliferation observed at these interfaces, despite initial moderate interfacial elasticities, the deposition of fibronectin fibers at the surface of corresponding microdroplets is characterized by immunostaining and confocal microscopy. These results demonstrate the feasibility of achieving high cell proliferation on bioemulsions with protein nanosheets assembled without co-surfactants and establish strategies for rational design of scaffolding proteins enabling the stabilization of interfaces with strong shear mechanics and elasticity, as well as bioactive and cell adhesive properties. Such protein nanosheets and bioemulsions are proposed to enable the development of new generations of bioreactors for the scale up of cell manufacturing.Competing Interest StatementJulien Gautrot is the Chief Scientific Officer of Liquibio Limited, a registered limited company developing emulsion technologies for the life sciences.
+ER  - 
+
+TY  - JOUR
+T1  - The functional and structural characterization of &lt;em&gt;Xanthomonas campestris&lt;/em&gt; pv. &lt;em&gt;campestris&lt;/em&gt; core effector XopP revealed a new kinase activity
+JF  - bioRxiv
+DO  - 10.1101/2022.10.27.514000
+SP  - 2022.10.27.514000
+AU  - Kotsaridis, Konstantinos
+AU  - Michalopoulou, Vassiliki A.
+AU  - Tsakiri, Dimitra
+AU  - Kotsifaki, Dina
+AU  - Kefala, Aikaterini
+AU  - Koundourakis, Nikolaos
+AU  - Celie, Patrick H.N.
+AU  - Kokkinidis, Michael
+AU  - Sarris, Panagiotis F.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/27/2022.10.27.514000.abstract
+N2  - The exocyst complex subunit protein Exo70B1 plays a crucial role in a variety of cell mechanisms including immune responses against pathogens. The calcium dependent kinase 5 (CPK5) of Arapidopsis thaliana, phosphorylates AtExo70B1 upon functional disruption. We previously reported that, the Xanthomonas campestris pv. campestis effector XopP, compromises Exo70B1 and bypasses the host’s hypersensitive response (HR), in a way that is still unclear.Herein we designed an experimental approach based on biophysical, biochemical and molecular assays, based on structural and functional predictions, as well as, utilizing Aplhafold and DALI online servers respectively, in order to characterize the in vivo XccXopP function.The interaction between AtExo70B1 and XccXopP is very stable in high temperatures, while the AtExo70B1 appeared to be phosphorylated at XccXopP expressing transgenic Arabidopsis. XccXopP reveals similarities with known mammalian kinases, and phosphorylates AtExo70B1 at Ser107, Ser111, Ser248, Thr309 and Thr364. Furthermore, XccXopP protects AtExo70B1 from AtCPK5 phosphorylation.Together these findings show that, XccXopP is an effector, which not only functions as a novel serine/threonine kinase upon its host’s protein target AtExo70B1, but also protects the latter from the innate AtCPK5 phosphorylation, to bypass the host’s immune responses.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - High Angular Resolution Susceptibility Imaging and Estimation of Fiber Orientation Distribution Functions in Primate Brain
+JF  - bioRxiv
+DO  - 10.1101/2022.10.23.513390
+SP  - 2022.10.23.513390
+AU  - Gkotsoulias, Dimitrios G.
+AU  - Müller, Roland
+AU  - Jäger, Carsten
+AU  - Schlumm, Torsten
+AU  - Mildner, Toralf
+AU  - Eichner, Cornelius
+AU  - Pampel, André
+AU  - Jaffe, Jennifer
+AU  - Gräßle, Tobias
+AU  - Alsleben, Niklas
+AU  - Chen, Jingjia
+AU  - Crockford, Catherine
+AU  - Wittig, Roman
+AU  - Liu, Chunlei
+AU  - Möller, Harald E.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/24/2022.10.23.513390.abstract
+N2  - Uncovering brain-tissue microstructure including axonal characteristics is a major neuroimaging research focus. Within this scope, anisotropic properties of magnetic susceptibility in white matter have been successfully employed to estimate primary axonal trajectories using mono-tensorial models. However, anisotropic susceptibility has not yet been considered for modeling more complex fiber structures within a voxel, such as intersecting bundles, or an estimation of orientation distribution functions (ODFs). This information is routinely obtained by high angular resolution diffusion imaging (HARDI) techniques. In applications to fixed tissue, however, diffusion-weighted imaging suffers from an inherently low signal-to-noise ratio and limited spatial resolution, leading to high demands on the performance of the gradient system in order to mitigate these limitations. In the current work, high angular resolution susceptibility imaging (HARSI) is proposed as a novel, phase-based methodology to estimate ODFs. A multiple gradient-echo dataset was acquired in an entire fixed chimpanzee brain at 61 orientations by reorienting the specimen in the magnetic field. The constant solid angle method was adapted for estimating phase-based ODFs. HARDI data were also acquired for comparison. HARSI yielded information on whole-brain fiber architecture, including identification of peaks of multiple bundles that resembled features of the HARDI results. Distinct differences between both methods suggest that susceptibility properties may offer complementary microstructural information. These proof-of-concept results indicate a potential to study the axonal organization in post-mortem primate and human brain at high resolution.HighlightsIntroduction of High Angular Resolution Susceptibility Imaging (HARSI) for advancing Quantitative Susceptibility Mapping (QSM).HARSI-derived fiber orientation distributions in fixed chimpanzee brain.HARSI-based visualization of complex fiber configurations.Comparisons between HARSI and High Angular Resolution Diffusion Imaging.Potential for high-resolution post-mortem imaging of fiber architecture.Competing Interest StatementThe authors have declared no competing interest.3Dthree-dimensionalCADcomputer aided designCITESConvention on International Trade in Endangered Species of Wild Fauna and FloraCSAconstant solid angleDTIdiffusion tensor imagingDWIdiffusion-weighted imagingEPIecho planar imagingESPIRiTiTerative Eigenvector-based Self-consistent Parallel Imaging ReconstructionFDTFMRIB Diffusion ToolboxFLASHFast Low-Angle SHotFLIRTFMRIB’s Linear Image Registration ToolFSLFMRIB Software LibraryGMgray matterGRAPPAGeneRalized Autocalibrating Partially Parallel AcquisitionsGREgradient-recalled echoHARDIhigh angular resolution diffusion imagingHARSIhigh angular resolution susceptibility imagingiLSQRiterative LSQRMEmulti echoMLEmaximum likelihood estimationMRImagnetic resonance imagingMP2RAGEMagnetization-Prepared 2 RApid Gradient EchoesNMInormalized mutual informationODForientation distribution functionPBSphosphate-buffered salinePEphase-encodingPFAparaformaldehydeQSMquantitative susceptibility mappingRFradiofrequencyROIregion of interestSSIMstructural similarity index measureSTIsusceptibility tensor imagingSTLstereolithographySVDsingular value decompositionV-SHARPVariable-kernel Sophisticated Harmonic Artifact Reduction for Phase dataWMwhite matter.
+ER  - 
+
+TY  - JOUR
+T1  - Double emulsions as a high-throughput enrichment and isolation platform for slower-growing microbes
+JF  - bioRxiv
+DO  - 10.1101/2022.10.23.513397
+SP  - 2022.10.23.513397
+AU  - McCully, Alexandra L.
+AU  - Yao, McKenna Loop
+AU  - Brower, Kara K.
+AU  - Fordyce, Polly M.
+AU  - Spormann, Alfred M.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/23/2022.10.23.513397.abstract
+N2  - Our understanding of in situ microbial physiology is primarily based on physiological characterization of fast-growing and readily-isolatable microbes. Microbial enrichments to obtain novel isolates with slower growth rates or physiologies adapted to low nutrient environments are plagued by intrinsic biases for fastest-growing species when using standard laboratory isolation protocols. New cultivation tools to minimize these biases and enrich for less well-studied taxa are needed. In this study, we developed a high-throughput bacterial enrichment platform based on single cell encapsulation and growth within double emulsions (GrowMiDE). We showed that GrowMiDE can cultivate many different microorganisms and enrich for novel taxa that are never observed in traditional batch enrichments. For example, preventing dominance of the enrichment by fast-growing microbes due to nutrient privatization within the double emulsion droplets allowed cultivation of novel Negativicutes and Methanobacteria from stool samples in rich media enrichment cultures. In competition experiments between growth rate and growth yield specialist strains, GrowMiDE enrichments prevented competition for shared nutrient pools and enriched for slower-growing but more efficient strains. Finally, we demonstrated the compatibility of GrowMiDE with commercial fluorescence-activated cell sorting (FACS) to obtain isolates from GrowMiDE enrichments. Together, GrowMiDE + DE-FACS is a promising new high-throughput enrichment platform that can be easily applied to diverse microbial enrichments or screens.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Time-resolved cryo-EM using a combination of droplet microfluidics with on-demand jetting
+JF  - bioRxiv
+DO  - 10.1101/2022.10.21.513149
+SP  - 2022.10.21.513149
+AU  - Torino, Stefania
+AU  - Dhurandhar, Mugdha
+AU  - Stroobants, Annelore
+AU  - Claessens, Raf
+AU  - Efremov, Rouslan G.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/21/2022.10.21.513149.abstract
+N2  - Using single particle cryogenic electron microscopy (cryo-EM) high-resolution structures of proteins in different conformations can be reconstructed. Protein function often involves transient functional conformations, which can be resolved using time-resolved cryo-EM (trEM). In trEM, reactions are arrested after a defined delay time by rapid vitrification of protein solution on the EM grid. Despite the increasing interest in trEM among the cryo-EM community, making trEM samples with a time resolution below 100 ms remains challenging. Here we report the design and the realization of a time-resolved cryo-plunger that combines a droplet-based microfluidic mixer with a laser-induced generator of microjets that allows rapid initiation of reaction and rapid plunge-freezing of cryo-EM grids. Using this approach, a time resolution of 5 ms was achieved and the protein density map was reconstructed to a spatial resolution of 2.1 Å. We performed trEM experiments on GroEL:GroES chaperonin complex, these resolved the kinetics of the complex formation and visualized putative short-lived conformations of GroEL-ATP complex.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Body temperature rebounds on sea ice and is elevated by mercury contamination in a keystone predator
+JF  - bioRxiv
+DO  - 10.1101/2022.10.18.512690
+SP  - 2022.10.18.512690
+AU  - Grunst, Melissa L.
+AU  - Grunst, Andrea S.
+AU  - Grémillet, David
+AU  - Sato, Akiko
+AU  - Gentès, Sophie
+AU  - Fort, Jérôme
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/21/2022.10.18.512690.abstract
+N2  - Despite overall stability, plasticity in endothermic body temperature (Tb) occurs, which may facilitate maintenance of crucial activities in the face of climate change-related environmental variations. However, this plasticity may be limited by physiological or energetic constraints, which are potentially exacerbated by other environmental stressors. For instance, chemical contamination may elevate energetic costs and have endocrine disrupting effects that undermine thermoregulation. We leveraged advanced biologging techniques to elucidate how Tb varies with different behavioral states and environmental conditions in a keystone Arctic seabird, the little auk (Alle alle). We additionally evaluated whether mercury (Hg) contamination independently affected Tb, or limited or increased state-dependent changes in Tb. Tb was highest and relatively invariable when birds were at the colony, and rebounded when birds were resting on sea ice, following declines while foraging (diving) in polar waters. These results suggest that the colony and sea ice function as thermal refuges for little auks. In addition, Tb increased with ambient temperature and relative humidity across behavioral states, and increased with wind speed when birds were flying. Little auks with higher Hg levels had higher, less variable, Tb across behaviors and environmental contexts, perhaps reflecting increased metabolic rates linked to detoxification costs. Results provide evidence for environment- and contaminant-related effects on Tb, but not interactive effects between the two, and suggest that loss of sea ice and increased environmental contamination under global change may have serious implications for Tb regulation and energy balance.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Patient-derived extracellular matrix demonstrates role of COL3A1 in blood vessel mechanics
+JF  - bioRxiv
+DO  - 10.1101/2022.10.16.512399
+SP  - 2022.10.16.512399
+AU  - Doherty, Elizabeth L.
+AU  - Aw, Wen Yih
+AU  - Warren, Emily C.
+AU  - Hockenberry, Max
+AU  - Krohn, Grace
+AU  - Howell, Stefanie
+AU  - Diekman, Brian O.
+AU  - Legant, Wesley R.
+AU  - Nia, Hadi Tavakoli
+AU  - Hickey, Anthony J.
+AU  - Polacheck, William J.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/19/2022.10.16.512399.abstract
+N2  - Vascular Ehlers-Danlos Syndrome (vEDS) is a rare autosomal dominant disease caused by mutations in the COL3A1 gene, which renders patients susceptible to aneurysm and arterial dissection and rupture. To determine the role of COL3A1 variants in the biochemical and biophysical properties of human arterial ECM, we developed a method for synthesizing ECM directly from vEDS donor fibroblasts. We found that the protein content of the ECM generated from vEDS donor fibroblasts differed significantly from ECM from healthy donors, including upregulation of collagen subtypes and other proteins related to ECM structural integrity. We further found that ECM generated from a donor with a glycine substitution mutation was characterized by increased glycosaminoglycan content and unique viscoelastic mechanical properties, including increased time constant for stress relaxation, resulting in a decrease in migratory speed of human aortic endothelial cells when seeded on the ECM. Collectively, these results demonstrate that causal COL3A1 mutations lead to the synthesis of ECM that differs in composition, structure, and mechanical properties from healthy donors. These results further suggest that ECM mechanical properties could serve as a prognostic indicator for patients with vEDS, and the insights provided by the approach demonstrate the broader utility of cell-derived ECM in disease modeling.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Distinct contact guidance mechanisms in single endothelial cells and in monolayers
+JF  - bioRxiv
+DO  - 10.1101/2022.10.18.512697
+SP  - 2022.10.18.512697
+AU  - Leclech, Claire
+AU  - Krishnamurthy, Apoorvaa
+AU  - Muller, Laurent
+AU  - Barakat, Abdul I.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/19/2022.10.18.512697.abstract
+N2  - In many tissues, cell shape and orientation are controlled by a combination of internal and external biophysical cues. Anisotropic substrate topography is a ubiquitous cue that leads to cellular elongation and alignment, a process termed contact guidance, whose underlying mechanisms remain incompletely understood. Additionally, whether contact guidance responses are similar in single cells and in cellular monolayers is unknown. Here, we address these questions in vascular endothelial cells (ECs) that in vivo form a monolayer that lines blood vessels. Culturing single ECs on microgrooved substrates that constitute an idealized mimic of anisotropic basement membrane topography elicits a strong, groove depth-dependent contact guidance response. Interestingly, this response is greatly attenuated in confluent monolayers. While contact guidance in single cells is principally driven by persistence bias of cell protrusions in the direction of the grooves and is surprisingly insensitive to actin stress fiber disruption, cell shape and alignment in dense EC monolayers are driven by the organization of the basement membrane secreted by the cells, which leads to a loss of interaction with the microgrooves. The findings of distinct contact guidance mechanisms in single ECs and in EC monolayers promise to inform strategies aimed at designing topographically patterned endovascular devices.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Alternating selection for dispersal and multicellularity favors regulated life cycles
+JF  - bioRxiv
+DO  - 10.1101/2022.10.14.512267
+SP  - 2022.10.14.512267
+AU  - Barrere, Julien
+AU  - Nanda, Piyush
+AU  - Murray, Andrew W.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/18/2022.10.14.512267.abstract
+N2  - The evolution of complex multicellularity opened paths to increased morphological diversity and organizational novelty. This transition involved three processes: cells remained attached to one another to form groups, cells within these groups differentiated to perform different tasks, and the groups evolved new reproductive strategies1–5. Recent experiments identified selective pressures and mutations that can drive the emergence of simple multicellularity and cell differentiation6–11 but the evolution of life cycles, in particular, how simple multicellular forms reproduce has been understudied. The selective pressure and mechanisms that produced a regular alternation between single cells and multicellular collectives are still unclear12. To probe the factors regulating simple multicellular life cycles, we examined a collection of wild isolates of the budding yeast, S. cerevisiae12. We found that all these strains can exist as multicellular clusters, a phenotype that is controlled by the mating type locus and strongly influenced by the nutritional environment. Inspired by this variation, we engineered inducible dispersal in a multicellular laboratory strain and demonstrated that a regulated life cycle has an advantage over constitutively single-celled or constitutively multicellular life cycles when the environment alternates between favoring intercellular cooperation (a low sucrose concentration) and dispersal (a patchy environment generated by emulsion). Our results suggest that simple multicellularity in wild isolates could be under selection and is regulated by their genetic composition and the environments they encounter and that alternating patterns of resource availability may have played a role in the evolution of life cycles.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Arabidopsis Nicotianamine Synthases (NAS) comprise a common core-NAS domain fused to a variable auto-inhibitory C-terminus
+JF  - bioRxiv
+DO  - 10.1101/2022.10.13.512114
+SP  - 2022.10.13.512114
+AU  - Seebach, Hiroyuki
+AU  - Radow, Gabriel
+AU  - Brunek, Michael
+AU  - Schulz, Frank
+AU  - Piotrowski, Markus
+AU  - Krämer, Ute
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/17/2022.10.13.512114.abstract
+N2  - Nicotianamine Synthase (NAS) catalyzes the biosynthesis of nicotianamine (NA) from the 2-aminobutyrate moieties of three S-adenosylmethionine molecules. NA has central roles in metal nutrition and metal homeostasis of flowering plants. Despite the availability of crystal structures of archaeal and bacterial NAS-like proteins that carry out simpler aminobutanoyltransferase reactions, the enzymatic function of NAS remains poorly understood. Here we report amino acids essential for the activity of AtNAS1 based on structural modeling and site-directed mutagenesis. An enzyme-coupled continuous activity assay allowed us to compare differing NAS proteins identified through multiple sequence alignments and phylogenetic analyses. In most class Ia and b NAS proteins of dicotyledonous and monocotyledonous angiosperm plants, respectively, the core-NAS domain is fused to a variable C-terminal domain. Compared to fungal and moss NAS (class III) that consist merely of the core-NAS domain, NA biosynthetic activities of the four paralogous Arabidopsis NAS proteins were far lower. Yet their C-terminally trimmed core-NAS variants exhibited strongly elevated activities. Out of 320 amino acids of AtNAS1, twelve, 287-TRGCMFMPCNCS-298, accounted for the auto-inhibitory effect of the C-terminus, with approximately one third contributed by N296 within a CNCS motif that is conserved in Arabidopsis. No detectable NA biosynthesis was mediated by two representatives of groups of plant NAS proteins that naturally lack the C-terminal domain, class Ia Arabidopsis halleri NAS5, and Medicago truncatula NAS2 of class II which is found in dicots and diverged early during the evolution of flowering plants. Our results suggest that NAS activity is under stringent post-translational control in plants.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Iron Inhibits Glioblastoma Cell Migration and Polarization
+JF  - bioRxiv
+DO  - 10.1101/2022.10.13.512175
+SP  - 2022.10.13.512175
+AU  - Shenoy, Ganesh
+AU  - Kheirabadi, Sina
+AU  - Ataie, Zaman
+AU  - Palsa, Kondaiah
+AU  - Wade, Quinn
+AU  - Khunsriraksakul, Chachrit
+AU  - Khristov, Vladimir
+AU  - Slagle-Webb, Becky
+AU  - Lathia, Justin D.
+AU  - Wang, Hong-Gang
+AU  - Sheikhi, Amir
+AU  - Connor, James R.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/14/2022.10.13.512175.abstract
+N2  - Glioblastoma is one of the deadliest malignancies facing modern oncology today. The ability of glioblastoma cells to diffusely spread into neighboring healthy brain makes complete surgical resection nearly impossible and contributes to the recurrent disease faced by most patients. Although research into the impact of iron on glioblastoma has addressed proliferation, there has been little investigation into how cellular iron impacts the ability of glioblastoma cells to migrate - a key question especially in the context of the diffuse spread observed in these tumors. Herein, we show that increasing cellular iron content results in decreased migratory capacity of human glioblastoma cells. The decrease in migratory capacity was accompanied by a decrease in cellular polarization in the direction of movement. Expression of CDC42, a Rho GTPase that is essential for both cellular migration and establishment of polarity in the direction of cell movement, was reduced upon iron treatment. Bioinformatic analysis of CDC42 mRNA revealed a potential iron-responsive element that may contribute to the regulation of CDC42 by iron. We then analyzed a single-cell RNA-seq dataset of human glioblastoma samples and found that cells at the tumor periphery had a gene signature that is consistent with having lower levels of cellular iron. Altogether, our results suggest that cellular iron content is impacting glioblastoma cell migratory capacity and that cells with higher iron levels exhibit reduced motility.Competing Interest StatementJ.R.C is a founder and chairman of the board of Siderobioscience LLC, a company founded on patented technology for management of iron deficiency. The product from this company was not used in the studies reported in this manuscript. All other authors report no conflicts of interest.
+ER  - 
+
+TY  - JOUR
+T1  - 2,4-Di-tert-butylphenol Induces Adipogenesis in Human Mesenchymal Stem Cells by Activating Retinoid X Receptors
+JF  - bioRxiv
+DO  - 10.1101/2022.10.08.511439
+SP  - 2022.10.08.511439
+AU  - Ren, Xiao-Min
+AU  - Chang, Richard C.
+AU  - Huang, Yikai
+AU  - Amato, Angélica Amorim
+AU  - Carivenc, Coralie
+AU  - Grimaldi, Marina
+AU  - Kuo, Angela Y.
+AU  - Balaguer, Patrick
+AU  - Bourguet, William
+AU  - Blumberg, Bruce
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/09/2022.10.08.511439.abstract
+N2  - 2,4-di-tert-butylphenol (2,4-DTBP) is an important commercial antioxidant and a toxic natural secondary metabolite that has been detected in humans. However, there is scant information regarding its toxicological effects. Here we asked whether 2,4-DTBP is a potential obesogen. Using a human mesenchymal stem cell (MSC) adipogenesis assay, we found that exposure to 2,4-DTBP led to increased lipid accumulation and expression of adipogenic marker genes. Antagonist assays revealed that 2,4-DTBP increased lipid accumulation by activating the peroxisome proliferator-activated receptor γ (PPARγ)-retinoid X receptor (RXR) heterodimer. 2,4-DTBP likely activated the PPARγ/RXRα heterodimer by activating RXRα but not directly binding to PPARγ. We confirmed that 2,4-DTBP directly bound to RXRα by solving the crystal structure of this complex, then predicted and demonstrated that related compounds could also activate RXRα. Our study demonstrated that 2,4-DTBP and related chemicals could act as obesogens and endocrine disruptors via RXR. These data showed that 2,4-DTBP belongs to a family of compounds whose endocrine-disrupting and obesogenic effects can be strongly modulated by their chemical composition and that structure-activity studies such as the present one could help guide the rational development of safer antioxidants.SYNOPSIS Little research exists on the effects of commercially valuable antioxidants on biological systems. This study reports that di- and tri-tert-butylphenols can act as endocrine disruptors and potential obesogens by activating nuclear hormone receptors.Competing Interest StatementBruce Blumberg is a named inventor on patents related to PPARgamma and other nuclear hormone receptors.DTBPdi-tert-butyl phenolTTBPtri-tert-butyl-phenolDTBBdi-tert-butylbenzeneTTBBtri-tert-butylbenzeneROSIrosiglitazoneRXRretinoid ‘X’ receptor, aka 9-cis retinoic acid receptorPPARperoxisome proliferator activated receptorRARretinoic acid receptorBMIbody mass indexSPAsynthetic phenolic antioxidantBHT2,6-di-tert-butyl-4-methylphenol, BHA-3-tert-butyl-4-hydroxyanisosleGMgeometric mean, BHTLXRliver ‘X’ receptorTRthyroid hormone receptorEDCendocrine disrupting chemicalMSCmultipotent mesenchymal stromal stem cellFBSfetal bovine serumDMSODimethylsulfoxideQPCRquantitative real time reverse transcriptase polymerase chain reactionFABP4fatty acid binding protein 4FSP27fat-specific protein of 27 kDaPPARγ2peroxisome proliferator activated receptor gamma 2LPLlipoprotein lipaseLBDligand-binding domainLBPligand-binding pocketDBDDNA-binding domainEDTAethylene diaminetetraacetic acidDTTdithiothreitol.
+ER  - 
+
+TY  - JOUR
+T1  - Recycling limits the lifetime of actin turnover
+JF  - bioRxiv
+DO  - 10.1101/2022.09.30.510257
+SP  - 2022.09.30.510257
+AU  - Colin, Alexandra
+AU  - Kotila, Tommi
+AU  - Guérin, Christophe
+AU  - Orhant-Prioux, Magali
+AU  - Vianay, Benoit
+AU  - Mogilner, Alex
+AU  - Lappalainen, Pekka
+AU  - Théry, Manuel
+AU  - Blanchoin, Laurent
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/04/2022.09.30.510257.abstract
+N2  - Intracellular organization is largely mediated by the actin turnover. Cellular actin networks consume matter and energy to sustain their dynamics, while maintaining their appearance. This behavior, called ‘dynamic steady state’, enables cells to sense and adapt to their environment. However, how structural stability can be maintained during the constant turnover of a limited actin monomer pool is poorly understood. To answer this question, we developed an experimental system using actin bead motility in a compartment with a limited amount of monomer. We used the speed and the size of the actin comet tails to evaluate the system’s monomer consumption and its lifetime. We established the relative contribution of actin assembly, disassembly and recycling for a bead movement over tens of hours. Recycling mediated by cyclase-associated proteins is the key step in allowing the reuse of monomers for multiple assembly cycles. Energy supply and protein aging are also factors that limit the lifetime of actin turnover. This work reveals the balancing mechanism for long-term network assembly with a limited amount of building blocks.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Topic modeling for multi-omic integration in the human gut microbiome and implications for Autism
+JF  - bioRxiv
+DO  - 10.1101/2022.09.30.509056
+SP  - 2022.09.30.509056
+AU  - Tataru, Christine
+AU  - Peras, Marie
+AU  - Rutherford, Erica
+AU  - Dunlap, Kaiti
+AU  - Yin, Xiaochen
+AU  - Chrisman, Brianna S.
+AU  - DeSantis, Todd Z.
+AU  - Wall, Dennis P.
+AU  - Iwai, Shoko
+AU  - David, Maude M.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/03/2022.09.30.509056.abstract
+N2  - While healthy gut microbiomes are critical to human health, pertinent microbial processes remain largely undefined, partially due to differential bias among profiling techniques. By simultaneously integrating multiple profiling methods, multi-omic analysis can define generalizable microbial pro-cesses, and is especially useful in understanding complex conditions such as Autism. Challenges with integrating heterogeneous data produced by multiple profiling methods can be overcome using Latent Dirichlet Allocation (LDA), a promising natural language processing technique that identifies topics in heterogeneous documents.In this study, we apply LDA to multi-omic microbial data (16S rRNA amplicon, shotgun metagenomic, shotgun metatranscriptomic, and untargeted metabolomic profiling) from the stool of 81 children with and without Autism. We identify topics, or microbial processes, that summarize complex phenomena occurring within gut microbial communities. We then subset stool samples by topic distribution, and identify metabolites, specifically neurotransmitter precursors and fatty acid derivatives, that differ significantly between children with and without Autism. We identify clusters of topics, deemed “cross-omic topics”, which we hypothesize are representative of generalizable microbial processes observable regardless of profiling method. Interpreting topics, we find each represents a particular diet, and we heuristically label each cross-omic topic as: healthy/general function, age-associated function, transcriptional regulation, and opportunistic pathogenesis.Competing Interest StatementThe authors declare a conflict of interest. The authors affiliated with Second Genome, Inc. have the following competing interests: Second Genome Inc. employs and provides stock options to all authors affiliated with Second Genome Inc. MMD has a financial interest in Second Genome Inc. Second Genome Inc. is an independent therapeutics company with products in development to treat Inflammatory Bowel Diseases and Cancer, and could potentially benefit from the outcomes of this research. MMD is co-owner of Microbiome Engineering Inc., a company specialized in developing biosensors. DPW is cofounder of Cognoa, a company focused on digital methods for healthy child development.
+ER  - 
+
+TY  - JOUR
+T1  - Microphysiological Drug-Testing Platform for Identifying Responses to Prodrug Treatment in Primary Leukemia
+JF  - bioRxiv
+DO  - 10.1101/2022.04.06.483760
+SP  - 2022.04.06.483760
+AU  - Gökçe, Furkan
+AU  - Kaestli, Alicia
+AU  - Lohasz, Christian
+AU  - de Geus, Martina
+AU  - Kaltenbach, Hans-Michael
+AU  - Renggli, Kasper
+AU  - Bornhauser, Beat
+AU  - Hierlemann, Andreas
+AU  - Modena, Mario
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/12/20/2022.04.06.483760.abstract
+N2  - Despite increasing survival rates of pediatric leukemia patients over the past decades, the outcome of some leukemia subtypes has remained dismal. Drug sensitivity and resistance testing on patient-derived leukemia samples provide important information to tailor treatments for high-risk patients. However, currently used well-based drug screening platforms have imitations in predicting the effects of prodrugs, a class of therapeutics that require metabolic activation to become effective. To address this issue, we developed a microphysiological drug-testing platform that enables co-culturing of patient-derived leukemia cells, human bone marrow mesenchymal stromal cells, and human liver microtissues within the same microfluidic platform. This platform also enables to control the physical interaction between the diverse cell types. We were able to recapitulate hepatic prodrug activation of ifosfamide in our platform, which is very difficult in traditional well-based assays. By testing the susceptibility of primary patient-derived leukemia samples to the prodrug ifosfamide, we identified sample-specific sensitivities to ifosfamide in primary leukemia samples. We found that our microfluidic platform enabled the recapitulation of physiologically relevant conditions and the testing of prodrugs including short-lived and unstable metabolites. The platform holds great potential for clinical translation and precision chemotherapy selection.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Biomass generation and heterologous isoprenoid milking from engineered microalgae grown in anaerobic membrane bioreactor effluent
+JF  - bioRxiv
+DO  - 10.1101/2022.09.29.510234
+SP  - 2022.09.29.510234
+AU  - de Freitas, Bárbara Bastos
+AU  - Overmans, Sebastian
+AU  - Medina, Julie Sanchez
+AU  - Hong, Pei-Ying
+AU  - Lauersen, Kyle J.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/09/30/2022.09.29.510234.abstract
+N2  - Wastewater (WW) treatment in anaerobic membrane bioreactors (AnMBR) is considered more sustainable than in their aerobic counterparts. However, outputs from AnMBR are mixed methane and carbon dioxide gas streams as well as ammonium- (N) and phosphate- (P) containing waters. Using AnMBR outputs as inputs for photoautotrophic algal cultivation can strip the CO2 and remove N and P from effluent which feed algal biomass generation. Recent advances in algal engineering have generated strains for concomitant high-value side product generation in addition to biomass, although only shown in heavily domesticated, lab-adapted strains. Here, investigated whether such a strain of Chlamydomonas reinhardtii could be grown directly in AnMBR effluent with CO2 at concentrations found in its off-gas. The domesticated strain was found to proliferate over bacteria in the non-sterile effluent, consume N and P to levels that meet general discharge or reuse limits, and tolerate cultivation in modelled (extreme) outdoor environmental conditions prevalent along the central Red Sea coast. High-value co-product milking was then demonstrated, up to 837 μg L−1 culture in 96 h, in addition to algal biomass production, ∼2.4 g CDW L−1 in 96 h, directly in effluents. This is the first demonstration of a combined bio-process that employs a heavily engineered algal strain to enhance the product generation potentials from AnMBR effluent treatment. This study shows it is possible to convert waste into value through use of engineered algae while also improve wastewater treatment economics through co-product generation.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Discovery of homogentisic acid as a precursor in trimethoprim metabolism and natural product biosynthesis
+JF  - bioRxiv
+DO  - 10.1101/2022.09.22.509022
+SP  - 2022.09.22.509022
+AU  - McAvoy, Andrew C.
+AU  - Threatt, Paxton H.
+AU  - Kapcia, Joseph
+AU  - Garg, Neha
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/09/25/2022.09.22.509022.abstract
+N2  - Opportunistic infections by Burkholderia cenocepacia are life threatening for patients suffering from cystic fibrosis and chronic granulomatous disease. These infections are often associated with variable clinical outcomes, prompting an interest into molecular investigations of phenotypes associated with disease severity. The production of the pyomelanin pigment is one such phenotype, which was recently linked to the ability of clinical strains to carry out biotransformation of the antibiotic trimethoprim. However, this biotransformation product was not identified, and differences in metabolite production associated with pyomelanin pigmentation are poorly understood. Here, we identify several key metabolites produced exclusively by the pyomelanin-producing strains. To provide insight into the structures and biosynthetic origin of these metabolites, we developed a mass spectrometry-based strategy coupling unsupervised in silico substructure prediction with stable isotope labeling referred to as MAS-SILAC (Metabolite Annotation assisted by Substructure discovery and Stable Isotope Labeling by Amino acids in Cell culture). This approach led to discovery of homogentisic acid as a precursor for biosynthesis of several natural products and for biotransformation of trimethoprim, representing a previously unknown mechanism of antibiotic tolerance. This work presents application of computational methods for analysis of untargeted metabolomic data to link the chemotype of pathogenic microorganisms with a specific phenotype. The observations made in this study provide insights into the clinical significance of the melanated phenotype.Competing Interest StatementThe authors have declared no competing interest.AbbreviationsUHPLC-HRMS/MSultra-high performance liquid chromatography high-resolution tandem mass spectrometry3MT-HAtrimethylthiolated homogentisic acid.
+ER  - 
+
+TY  - JOUR
+T1  - Ultrahigh-throughput Absorbance Activated Droplet Sorting (UHT-AADS) for enzyme screening at kilohertz frequencies
+JF  - bioRxiv
+DO  - 10.1101/2022.09.13.507731
+SP  - 2022.09.13.507731
+AU  - Medcalf, Elliot J.
+AU  - Gantz, Maximilian
+AU  - Kaminski, Tomasz S.
+AU  - Hollfelder, Florian
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/09/13/2022.09.13.507731.abstract
+N2  - Droplet microfluidics is a valuable method to ‘beat the odds’ in high throughput screening campaigns such as directed evolution, where valuable hits are infrequent and large library sizes are required. Absorbance-based sorting expands the landscape of range of enzyme families that can be subjected to droplet screening by expanding possible assays beyond fluorescence detection. However, absorbance activated droplet sorting (AADS) is currently ∼10-fold slower than typical fluorescence activated droplet sorting (FADS), meaning that, in comparison, a larger portion of sequence space is inaccessible due to throughput constraints. Here we improve AADS to reach kHz sorting speeds in an order of magnitude increase over previous designs, with close-to-ideal sorting accuracy. This is achieved by a combination of (i) the use of refractive index matching oil that improves signal quality by removal of side scattering (increasing the sensitivity of absorbance measurements); (ii) a sorting algorithm capable of reaching 4 kHz with an Arduino Due; and (iii) a chip design that transmits product detection better into sorting decisions without false positives, namely a single-layered inlet to space droplets further apart and injections of ‘bias oil’ providing a fluidic barrier preventing droplets from entering the incorrect sorting channel. The updated ultrahigh-throughput absorbance activated droplet sorter (UHT-AADS) increases the effective sensitivity of absorbance measurements through better signal quality at a speed that matches the more established fluorescence-activated sorting devices.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Predicting microbial community compositions in wastewater treatment plants using artificial neural networks
+JF  - bioRxiv
+DO  - 10.1101/2022.09.08.507071
+SP  - 2022.09.08.507071
+AU  - Liu, Xiaonan
+AU  - Nie, Yong
+AU  - Wu, Xiao-Lei
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/09/11/2022.09.08.507071.abstract
+N2  - Activated sludge (AS) of wastewater treatment plants (WWTP) is one of the world’s largest artificial microbial ecosystems and the microbial community of the AS system is closely related to WWTP performance. However, how to predict its community structure is still unclear. Here, we used artificial neural networks (ANN) to predict the microbial compositions of AS systems collected from WWTPs located worldwide. We demonstrated that the microbial compositions of AS systems are predictable using our approach. The predictive accuracy R21:1 of Shannon-Wiener index reached 60.42%, and the average R21:1 of ASVs appearing in at least 10% of samples (ASVs&amp;gt;10%) and core taxa were 35.09% and 42.99%, respectively. We also found that the predictability of ASVs&amp;gt;10% was significantly positively correlated with their relative abundance and occurrence frequency, but significantly negatively correlated with potential migration rate. The typical functional groups such as nitrifiers, denitrifiers, polyphosphate-accumulating organisms (PAOs) and glycogen-accumulating organisms (GAOs), and filamentous organisms in AS systems could also be well recovered using an ANN model, with the R21:1 ranging from 32.62% to 56.81%. Furthermore, we found that industry wastewater source (IndConInf) had good predictive abilities, although its correlation with ASVs&amp;gt;10% in the Mantel test analysis was weak, which suggested important factors that cannot be identified using traditional methods may be highlight by the ANN model. Our results provide a better understanding of the factors affecting AS communities through the prediction of the microbial community of AS systems, which could lead to insights for improved operating parameters and control of community structure.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - High-Resolution Magnetization-Transfer Imaging of &lt;em&gt;Post-Mortem&lt;/em&gt; Marmoset Brain: Comparisons with Relaxometry and Histology
+JF  - bioRxiv
+DO  - 10.1101/2022.09.05.506600
+SP  - 2022.09.05.506600
+AU  - Marschner, Henrik
+AU  - Pampel, André
+AU  - Müller, Roland
+AU  - Reimann, Katja
+AU  - Bock, Nicolas
+AU  - Morawski, Markus
+AU  - Geyer, Stefan
+AU  - Möller, Harald E.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/09/06/2022.09.05.506600.abstract
+N2  - Cell membranes and macromolecules or paramagnetic compounds interact with water proton spins, which modulates magnetic resonance imaging (MRI) contrast providing information on tissue composition. For a further investigation, quantitative magnetization transfer (qMT) parameters (at 3T), including the ratio of the macromolecular and water proton pools, ℱ, and the exchange-rate constant as well as the (observed) longitudinal and the effective transverse relaxation rates (at 3T and 7T), and respectively, were measured at high spatial resolution (200 μm) in a slice of fixed marmoset brain and compared to histology results obtained with Gallyas’ myelin stain and Perls’ iron stain. and were linearly correlated with the iron content for the entire slice, whereas distinct differences were obtained between gray and white matter for correlations of relaxometry and qMT parameters with myelin content. The combined results suggest that the macromolecular pool interacting with water consists of myelin and (less efficient) non-myelin contributions. Despite strong correlation of ℱ and none of these parameters was uniquely specific to myelination. Due to additional sensitivity to iron stores, and were more sensitive for depicting microstructural differences between cortical layers than ℱ.HighlightsMRI (200μm) is correlated with myelin and iron histology in fixed marmoset brain.Detailed z-spectra are employed for precise magnetization-transfer (MT) measurements.Longitudinal and effective transverse relaxation rates depend linearly on tissue iron.Longitudinal relaxation and MT are not uniquely specific to myelin.Myelin and non-myelin macromolecules impact water relaxation and MT contrast.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Screening cell-cell communication in spatial transcriptomics via collective optimal transport
+JF  - bioRxiv
+DO  - 10.1101/2022.08.24.505185
+SP  - 2022.08.24.505185
+AU  - Cang, Zixuan
+AU  - Zhao, Yanxiang
+AU  - Almet, Axel A.
+AU  - Stabell, Adam
+AU  - Ramos, Raul
+AU  - Plikus, Maksim
+AU  - Atwood, Scott X.
+AU  - Nie, Qing
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/26/2022.08.24.505185.abstract
+N2  - Spatial transcriptomic technologies and spatially annotated single cell RNA-sequencing (scRNA-seq) datasets provide unprecedented opportunities to dissect cell-cell communication (CCC). How to incorporate the spatial information and complex biochemical processes in reconstructing CCC remains a major challenge. Here we present COMMOT to infer CCC in spatial transcriptomics, which accounts for the competition among different ligand and receptor species as well as spatial distances between cells. A novel collective optimal transport method is developed to handle complex molecular interactions and spatial constraints. We introduce downstream analysis tools on spatial directionality of signalings and genes regulated by such signalings using machine learning models. We apply COMMOT to simulation data and eight spatial datasets acquired with five different technologies, showing its effectiveness and robustness in identifying spatial CCC in data with varying spatial resolutions and gene coverages. Finally, COMMOT reveals new CCCs during skin morphogenesis in a case study of human epidermal development. Both the method and the computational package have broad applications in inferring cell-cell interactions within spatial genomics datasets.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Stereoretentive Post-Translational Protein Editing
+JF  - bioRxiv
+DO  - 10.1101/2022.08.22.504816
+SP  - 2022.08.22.504816
+AU  - Fu, Xia-Ping
+AU  - Yuan, Yizhi
+AU  - Jha, Ajay
+AU  - Levin, Nikita
+AU  - Giltrap, Andrew M.
+AU  - Ren, Jack
+AU  - Mamalis, Dimitrios
+AU  - Mohammed, Shabaz
+AU  - Davis, Benjamin G.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/23/2022.08.22.504816.abstract
+N2  - Chemical post-translational methods now allow convergent side-chain editing of proteins as a form of direct chemical mutagenesis without needing to resort to genetic intervention. Current approaches that allow the creation of constitutionally native side-chains via C–C formation using off-protein carbon-centred C• radicals added to unnatural amino acid radical acceptor SOMOphile ‘tags’ such as dehydroalanine are benign and wide-ranging. However, they also typically create epimeric mixtures of D-/L-residues. Here we describe a light-mediated desulfurative method that, through the creation and reaction of stereoretained on-protein L-alanyl Cβ• radicals, allows Cβ–Hγ, Cβ–Oγ, Cβ–Seγ, Cβ–Bγ and Cβ–Cγ bond formation to flexibly generate site-selectively edited proteins with full retention of native stereochemistry under mild conditions from a natural amino acid. This methodology shows great potential to explore protein side-chain diversity and construct useful bioconjugates.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Development of a multi-sensor integrated midbrain organoid-on-a-chip platform for studying Parkinson’s disease
+JF  - bioRxiv
+DO  - 10.1101/2022.08.19.504522
+SP  - 2022.08.19.504522
+AU  - Spitz, Sarah
+AU  - Bolognin, Silvia
+AU  - Brandauer, Konstanze
+AU  - Füßl, Julia
+AU  - Schuller, Patrick
+AU  - Schobesberger, Silvia
+AU  - Jordan, Christian
+AU  - Schädl, Barbara
+AU  - Grillari, Johannes
+AU  - Wanzenboeck, Heinz D.
+AU  - Mayr, Torsten
+AU  - Harasek, Michael
+AU  - Schwamborn, Jens C.
+AU  - Ertl, Peter
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/22/2022.08.19.504522.abstract
+N2  - Due to its ability to recapitulate key pathological processes in vitro, midbrain organoid technology has significantly advanced the modeling of Parkinson’s disease over the last few years. However, some limitations such as insufficient tissue differentiation and maturation, deficient nutrient supply, and low analytical accessibility persist, altogether restricting the technology from reaching its full potential. To overcome these drawbacks, we have developed a multi-sensor integrated organ-on-a-chip platform capable of monitoring the electrophysiological, respiratory, and dopaminergic activity of human midbrain organoids. Our study showed that microfluidic cultivation resulted in a marked reduction in necrotic core formation, improved tissue differentiation as well as the recapitulation of key pathological hallmarks. Non-invasive monitoring employing an orthogonal sensing strategy revealed a clear time dependency in the onset of Parkinson’s disease-related phenotypes, reflecting the complex progression of the neurodegenerative disorder. Furthermore, drug-mediated rescue effects were observed after treatment with the repurposed compound 2-hydroxypropyl β-cyclodextrin, highlighting the platform’s potential in the context of drug screening applications as well as personalized medicine.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Growth of Mesenchymal Stem Cells at the Surface of Silicone, Mineral and Plant-Based Oils
+JF  - bioRxiv
+DO  - 10.1101/2022.08.17.504254
+SP  - 2022.08.17.504254
+AU  - Peng, Lihui
+AU  - Gautrot, Julien E.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/17/2022.08.17.504254.abstract
+N2  - Bioemulsions are attractive platforms for the expansion of adherent cells in bioreactors. Their design relies on the self-assembly of protein nanosheets at liquid-liquid interfaces, displaying strong interfacial mechanical properties and promoting integrin-mediated cell adhesion. However, most systems developed to date have focused on fluorinated oils, which are unlikely to be accepted for direct implantation of resulting cell products for regenerative medicine, and protein nanosheets self-assembly at other interfaces has not been investigated. In this report, the composition of aliphatic pro-surfactants palmitoyl chloride and sebacoyl chloride, on the assembly kinetics of poly(L-lysine) at silicone oil interfaces and characterisation of ultimate interfacial shear mechanics and viscoelasticity is presented. The impact of the resulting nanosheets on the adhesion of mesenchymal stem cells (MSCs) is investigated via immunostaining and fluorescence microscopy, demonstrating the engagement of the classic focal adhesion-actin cytoskeleton machinery. The ability of MSCs to proliferate at the corresponding interfaces is quantified. In addition, expansion of MSCs at other non-fluorinated oil interfaces, based on mineral and plant-based oils is investigated. Finally, the proof-of-concept of such non-fluorinated oil systems for the formulation of bioemulsions supporting stem cell adhesion and expansion is demonstrated.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Alleviating cell lysate-induced inhibition to enable RT-PCR from single cells in picoliter-volume double emulsion droplets
+JF  - bioRxiv
+DO  - 10.1101/2022.08.16.504154
+SP  - 2022.08.16.504154
+AU  - Khariton, Margarita
+AU  - McClune, Conor J.
+AU  - Brower, Kara K.
+AU  - Klemm, Sandy
+AU  - Sattely, Elizabeth S.
+AU  - Fordyce, Polly M.
+AU  - Wang, Bo
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/17/2022.08.16.504154.abstract
+N2  - Microfluidic droplet assays enable single-cell PCR and sequencing assays at unprecedented scale, with most methods encapsulating cells within nanoliter sized single emulsion droplets (water-in-oil). Encapsulating cells within picoliter double emulsion (DE) (water-in-oil-in-water) droplets allows sorting on commercially available FACS machines, making it possible to isolate single cells based on phenotypes of interest for downstream sequencing and PCR analyses. However, DE droplets must be within the range of large cells (&amp;lt;20 pl) for sorting on standard cytometers, posing challenges for molecular biology as prior reports suggest that reverse transcription (RT) and PCR amplification cannot proceed efficiently at volumes below 1 nL due to cell lysate-induced inhibition. To overcome this limitation, we used a plate-based RT-PCR assay designed to mimic reactions in picoliter droplets to systematically quantify and ameliorate the inhibition. We find that RT-PCR is blocked by lysate-induced cleavage of nucleic acid probes and primers, but that this cleavage can be efficiently alleviated through heat lysis that simultaneously inactivates inhibitory lysate components. We further show that the magnitude of RT-PCR inhibition depends strongly on cell type, but that RT-PCR can proceed in low-picoscale reaction volumes for most cell lines tested. Finally, we demonstrate one-step RT-PCR from single cells in 20 pL double emulsion droplets with fluorescence detectable via FACS. These results open up exciting new avenues for improving picoscale droplet RT-PCR reactions and expanding microfluidic droplet based single-cell analysis technologies.Competing Interest StatementSome of the data in this paper relate to a provisional patent filed by S.K. and P.M.F. (62/693,000).
+ER  - 
+
+TY  - JOUR
+T1  - Synthetic and biological surfactant effects on freshwater biofilm community composition and metabolic activity
+JF  - bioRxiv
+DO  - 10.1101/2021.07.30.454494
+SP  - 2021.07.30.454494
+AU  - Gill, Stephanie P.
+AU  - Hunter, William R.
+AU  - Coulson, Laura E.
+AU  - Banat, Ibrahim M.
+AU  - Schelker, Jakob
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/16/2021.07.30.454494.abstract
+N2  - Surfactants are used to control microbial biofilms in industrial and medical settings. Their known toxicity on aquatic biota and their longevity in the environment has encouraged research on biodegradable alternatives such as rhamnolipids. While previous research has investigated the effects of biological surfactants on single species biofilms, there remains a lack of information regarding the effects of synthetic and biological surfactants in freshwater ecosystems. We conducted a mesocosm experiment to test how the surfactant sodium dodecyl sulphate (SDS) and the biological surfactant rhamnolipid altered community composition and metabolic activity of freshwater biofilms. Biofilms were cultured in the flumes using lake water from Lake Lunz in Austria, under high (300 ppm) and low (150 ppm) concentrations of either surfactant over a four-week period. Our results show that both surfactants significantly affected microbial diversity. Up to 36% of microbial operational taxonomic units were lost after surfactant exposure. Rhamnolipid exposure also increased the production of the extracellular enzymes, leucine aminopeptidase and glucosidase, while SDS exposure reduced leucine aminopeptidase and glucosidase. This study demonstrates that exposure of freshwater biofilms to chemical and biological surfactants caused a reduction of microbial diversity and changes in biofilm metabolism, exemplified by shifts in extracellular enzyme activities.Key PointsMicrobial biofilm diversity decreased significantly after surfactant exposure.Exposure to either surfactant altered extracellular enzyme activity.Overall metabolic activity was not altered, suggesting functional redundancy.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Characterizing nanometric thin films with far-field light
+JF  - bioRxiv
+DO  - 10.1101/2022.08.15.503956
+SP  - 2022.08.15.503956
+AU  - Klimovsky, Hodaya
+AU  - Shavit, Omer
+AU  - Julien, Carine
+AU  - Olevsko, Ilya
+AU  - Hamode, Mohamed
+AU  - Abulafia, Yossi
+AU  - Suaudeau, Hervé
+AU  - Armand, Vincent
+AU  - Oheim, Martin
+AU  - Salomon, Adi
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/15/2022.08.15.503956.abstract
+N2  - Ultra-thin, transparent films are being used as protective layers on semiconductors, solar cells, as well as for nano-composite materials and optical coatings. Nano-sensors, photonic devices and calibration tools for axial super-resolution microscopies, all rely on the controlled fabrication and analysis of ultra-thin layers. Here, we describe a simple, non-invasive, optical technique for simultaneously characterizing the refractive index, thickness, and homogeneity of nanometric transparent films. In our case, these layers are made of the biomimetic polymer, My-133-MC, having a refractive index of 1.33, so as to approach the cytosol for biological applications. Our technique is based on the detection in the far field and the analysis of supercritical angle fluorescence (SAF), i.e., near-field emission from molecular dipoles located very close to the dielectric interface. SAF emanates from a 5-nm J-aggregate emitter layer deposited on and in contact with the inspected polymer film. Our results compare favorably to that obtained through a combination of atomic force and electron microscopy, surface-plasmon resonance spectroscopy and ellipsometry. We illustrate the value of the approach in two applications, (i), the measurement of axial fluorophore distance in a total internal reflection fluorescence geometry; and, (ii), axial super-resolution imaging of organelle dynamics in a living biological sample, cortical astrocytes, an important type of brain cell. In the later case, our approach removes uncertainties in the interpretation of the nanometric axial dynamics of fluorescently labeled vesicles. Our technique is cheap, versatile and it has obvious applications in microscopies, profilometry and optical nano-metrology.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Tensor Image Registration Library: Automated Deformable Registration of Stand-Alone Histology Images to Whole-Brain Post-Mortem MRI Data
+JF  - bioRxiv
+DO  - 10.1101/2022.08.11.503605
+SP  - 2022.08.11.503605
+AU  - Huszar, Istvan N.
+AU  - Pallebage-Gamarallage, Menuka
+AU  - Bangerter-Christensen, Sarah
+AU  - Brooks, Hannah
+AU  - Fitzgibbon, Sean
+AU  - Foxley, Sean
+AU  - Hiemstra, Marlies
+AU  - Howard, Amy F.D.
+AU  - Jbabdi, Saad
+AU  - Kor, Daniel Z. L.
+AU  - Leonte, Anna
+AU  - Mollink, Jeroen
+AU  - Smart, Adele
+AU  - Tendler, Benjamin C.
+AU  - Turner, Martin R.
+AU  - Ansorge, Olaf
+AU  - Miller, Karla L.
+AU  - Jenkinson, Mark
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/15/2022.08.11.503605.abstract
+N2  - Background Accurate registration between microscopy and MRI data is necessary for validating imaging biomarkers against neuropathology, and to disentangle complex signal dependencies in microstructural MRI. Existing registration methods often rely on serial histological sampling or significant manual input, providing limited scope to work with a large number of stand-alone histology sections. Here we present a customisable pipeline to automate the registration of stand-alone histology sections to whole-brain MRI data.Methods Our pipeline registers stained histology sections to whole-brain post-mortem MRI in 4 stages, with the help of two photographic intermediaries: a block face image (to undistort histology sections) and coronal brain slice photographs (to insert them into MRI space). Each registration stage is implemented as a configurable stand-alone Python script using our novel platform, Tensor Image Registration Library (TIRL), which provides flexibility for wider adaptation. We report our experience of registering 87 PLP-stained histology sections from 14 subjects and perform various experiments to assess the accuracy and robustness of each stage of the pipeline.Results All 87 histology sections were successfully registered to MRI. Histology-to-block registration (Stage 1) achieved 0.2-0.4 mm accuracy, better than commonly used existing methods. Block-to-slice matching (Stage 2) showed great robustness in automatically identifying and inserting small tissue blocks into whole brain slices with 0.2 mm accuracy. Simulations demonstrated sub-voxel level accuracy (0.13 mm) of the slice-to-volume registration (Stage 3) algorithm, which was observed in over 200 actual brain slice registrations, compensating 3D slice deformations up to 6.5 mm. Stage 4 combined the previous stages and generated refined pixelwise aligned multi-modal histology-MRI stacks.Conclusions Our open-source pipeline provides robust automation tools for registering stand-alone histology sections to MRI data with sub-voxel level precision, and the underlying framework makes it readily adaptable to a diverse range of microscopy-MRI studies.HighlightsNew software framework for prototyping bespoke image registration pipelinesAutomated pipeline to register stand-alone histology sections to whole-brain MRINovel deformable slice-to-volume registration algorithmNo strict necessity for serial histological sectioning for MRI-histology registrationCompeting Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Combinatorial perturbation sequencing on single cells using microwell-based droplet random pairing
+JF  - bioRxiv
+DO  - 10.1101/2022.08.03.502265
+SP  - 2022.08.03.502265
+AU  - Xie, Run
+AU  - Liu, Yang
+AU  - Wang, Shiyu
+AU  - Shi, Xuyang
+AU  - Zhao, Zhantao
+AU  - Liu, Longqi
+AU  - Liu, Ya
+AU  - Li, Zida
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/05/2022.08.03.502265.abstract
+N2  - Combinatorial drug therapy reduces drug resistance and disease relapse, but informed drug combinations are lacking due to the high scale of possible combinations and the relatively simple phenotyping strategies. Here we report combinatorial perturbation sequencing (CP-seq) on single cells using microwell-base droplet random pairing. CP-seq uses oligonucleotides to barcode drugs, encapsulates drugs and cells in separate droplets, and pairs cell droplets with two drug droplets randomly on a microwell array chip to complete combinatorial drug treatment and barcode-tagging on cells. The subsequent single-cell RNA sequencing simultaneously detects the single-cell transcriptomes and drug barcodes to demultiplex the corresponding drug treatment. The microfluidic droplet operations had robust performance, with overall success rate among the microwells being up to 83%. We then progressively validated the CP-seq by performing single drug treatment and then combinatorial drug treatment. Leveraging the advantage of droplet microfluidics in massive multiplexing, the CP-seq can test thousands of drug combinations in a single experiment and represents a great technology for combinatorial perturbation screening with high throughput and comprehensive profiling.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Necrosis reduction efficacy of subdermal biomaterial mediated oxygen delivery in ischemic skin flaps
+JF  - bioRxiv
+DO  - 10.1101/2022.07.31.502155
+SP  - 2022.07.31.502155
+AU  - Rastinfard, Arghavan
+AU  - Dalisson, Benjamin
+AU  - Gilardino, Mirko
+AU  - Watters, Kevin
+AU  - Job, Dario
+AU  - Merle, Geraldine
+AU  - Lasagabaster, Arturo Vela
+AU  - Ouhaddi, Yassine
+AU  - Barralet, Jake
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/08/02/2022.07.31.502155.abstract
+N2  - Inadequate tissue blood supply (e.g., in a wound or a poorly vascularised graft) can result in tissue ischemia and necrosis. As revascularization is a slow process relative to the proliferation of bacteria and the onset and spread of tissue necrosis, extensive tissue damage and loss can occur. Necrosis can spread rapidly, and treatment options are limited such that loss of tissue in ischemic tissue following necrosis onset is considered unavoidable and irreversible.Oxygen delivery from biomaterials exploiting aqueous decomposition of peroxy-compounds has shown some potential in overcoming the supply limitations caused by quite short oxygen diffusion distances in tissues by creating higher concentration gradients than can be attained by air saturated solutions or by distributing oxygen supply throughout a scaffold or construct by using particulate formulations. These have found application in tissue preservation, bioinks, creation of 3D tissue analogues etc. In preclinical models among the more exciting reports was a single study demonstrating reduction of ischemic skin necrosis albeit only short term using short term sub dermal delivery of oxygen below ischemic skin flaps. To explore this effect further, we developed an implantable solid peroxide-biomaterial based system with reduced hydrogen peroxide release by virtue of incorporation of minerals to catalytically decompose it in a much longer flap than examined previously. Blood flow in this flap reduced from essentially normal to essentially zero, along its 9cm length. Without treatment ∼50% of the total flap was necrotic in 2-4 days. In both groups, complete necrosis in the distal third of the flap with no observable flood flow was observed. But in the middle low blood flow region of the flap, treatment did prevent necrosis. This study indicated that subdermal oxygen delivery alone cannot completely mitigate dermal necrosis if no blood flow is present, but it could improve the survival of partially tissue at least in the short term which could find application to augment conventional treatments or to gain time until surgical intervention.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Stabilization of a Protein by a Single Halogen-Based Aromatic Amplifier
+JF  - bioRxiv
+DO  - 10.1101/2022.07.25.501420
+SP  - 2022.07.25.501420
+AU  - El Hage, Krystel
+AU  - Phillips, Nelson B.
+AU  - Chen, Yen-Shan
+AU  - Dhayalan, Balamurugan
+AU  - Whittaker, Jonathan
+AU  - Carr, Kelley
+AU  - Whittaker, Linda
+AU  - Phillips, Manijeh H.
+AU  - Ismail-Beigi, Faramarz
+AU  - Meuwly, Markus
+AU  - Weiss, Michael A.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/25/2022.07.25.501420.abstract
+N2  - The utility of halogenation in protein design is investigated by a combination of quantitative atomistic simulations and experiment. The approach is applied to insulin, a small, therapeutically relevant domain amenable to simulation and semi-synthesis. In a singly halogenated aromatic ring, the simulations predicted regiospecific inductive effects to modulate multiple surrounding electrostatic (weakly polar) interactions, thereby amplifying changes in thermodynamic stability. In accordance with the simulations, stabilization of insulin is demonstrated by single halogen atoms at the ortho position of an invariant phenylalanine (2-F-PheB24, 2-Cl-PheB24 and 2-Br-PheB24; ΔΔGu = -0.5 to -1.0 kcal/mol) located at the edge of a protein crevice. Corresponding meta and para substitutions have negligible effects. The ortho-modified insulin analogs exhibit enhanced resistance to fibrillation above room temperature and retain biological activity in mammalian cells and in a rat model of diabetes mellitus. Consequently, halogen-based stabilization of insulin and other therapeutic proteins may provide a biophysical strategy to circumvent the requirement for a distribution “cold chain” in the developing world and enhance the shelf life of pharmaceutical formulations.Competing Interest StatementM. A. W. has equity in Thermalin, Inc. (Cleveland, OH) where he serves as Chief Innovation Officer; he has also been consultant to Merck Research Laboratories and DEKA Research &amp;amp; Development Corp. N. B. P. and F. I. -B. are consultants to Thermalin, Inc. and also have options, warrants or equity. L. W and J. W. has equity in Thermalin, Inc. F. I. -B. is a consultant to Sanofi and has received grants from Novo-Nordisk.
+ER  - 
+
+TY  - JOUR
+T1  - &lt;em&gt;Rhizocarpon geographicum&lt;/em&gt; lichen discloses a highly diversified microbiota carrying antibiotic resistance and Persistent Organic Pollutants tolerance
+JF  - bioRxiv
+DO  - 10.1101/2022.07.25.501376
+SP  - 2022.07.25.501376
+AU  - Miral, Alice
+AU  - Kautsky, Adam
+AU  - Alves-Carvalho, Susete
+AU  - Cottret, Ludovic
+AU  - Guillerm-Erckelboudt, Anne-Yvonne
+AU  - Buguet, Manon
+AU  - Rouaud, Isabelle
+AU  - Tranchimand, Sylvain
+AU  - Tomasi, Sophie
+AU  - Bartoli, Claudia
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/25/2022.07.25.501376.abstract
+N2  - As rock-inhabitants, lichens are exposed to extreme and fluctuating abiotic conditions associated with poor sources of nutriments. These extreme conditions confer to lichens the unique ability to develop protective mechanisms. Consequently, lichen-associated microbes disclose highly versatile lifestyles and ecological plasticity, enabling them to withstand extreme environments. Because of their ability to grow on poor and extreme habitats, bacteria associated with lichens can tolerate a wide range of pollutants and on the other hand secrete antimicrobial compounds. In addition, lichen-associated bacteria were described to harbor ecological functions crucial for the evolution of the lichen holobiont. Nevertheless, the ecological features of lichen-associated microbes are still underestimated. To explore the untapped ecological diversity of lichen-associated bacteria, we adopted a novel culturomic approach on the crustose lichen Rhizocarpon geographicum. We sampled R. geographicum in French habitats exposed to oil spill and we combined 9 culturing methods with 16S rRNA sequencing to capture the largest bacterial diversity. A deep functional analysis of the lichen-associated bacterial collection showed the presence of a set of bacterial strains resistant to a wide range of antibiotics and displaying tolerance to Persistent Organic Pollutants (POP). Our study is a starting point to explore the ecological features of the lichen microbiota.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Hydrogel Assisted Double Molding of 3D-Print Enables Prestress Regulation of Micro-Heart Muscle Physiology
+JF  - bioRxiv
+DO  - 10.1101/2022.07.23.501265
+SP  - 2022.07.23.501265
+AU  - Simmons, Daniel W.
+AU  - Schuftan, David R.
+AU  - Guo, Jingxuan
+AU  - Oguntuyo, Kasoorelope
+AU  - Ramahdita, Ghiska
+AU  - Munsell, Mary K.
+AU  - Kandalaft, Brennan
+AU  - Pear, Missy
+AU  - Huebsch, Nathaniel
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/23/2022.07.23.501265.abstract
+N2  - Tissue engineered in-vitro models are an essential tool in biomedical research. Tissue geometry is a key determinant of function, but controlling geometry of micro-scale tissues remains a challenge. We developed a new double molding approach that allows precise replication of high-resolution stereolithographic prints into poly(dimethylsiloxane), facilitating rapid design iterations and highly parallelized sample production. Hydrogels are used as an intermediary mold, and gel mechanical properties including crosslink density predict replication fidelity. We leveraged this approach to study the effects of geometry on the electrophysiology of miniaturized heart muscles engineered from human induced pluripotent stem cells (iPSC). Geometries predicted to increase tissue prestress globally affected cardiomyocyte structure and tissue electrophysiology. Strikingly, pharmacologic studies revealed a prestress threshold is required for sodium channel function. Analysis of RNA and protein levels suggest electrophysiology changes were related to post-transcriptional and potentially post-translational changes of the gap-junction protein Connexin 43 and the sodium channel Nav1.5.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Deleterious Mechanical Deformation Selects Mechanoresilient Cancer Cells with Enhanced Proliferation and Chemoresistance
+JF  - bioRxiv
+DO  - 10.1101/2022.07.22.501206
+SP  - 2022.07.22.501206
+AU  - Jiang, Kuan
+AU  - Lim, Su Bin
+AU  - Xiao, Jingwei
+AU  - Jokhun, Doorgesh Sharma
+AU  - Shang, Menglin
+AU  - Song, Xiao
+AU  - Zhang, Pan
+AU  - Liang, Lanfeng
+AU  - Low, Boon Chuan
+AU  - Shivashankar, G.V.
+AU  - Lim, Chwee Teck
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/23/2022.07.22.501206.abstract
+N2  - Cancer cells derived from secondary tumors can form new distant metastases more efficiently as compared to their primary tumor counterparts. This is partially due to the unfavorable microenvironments encountered by metastasizing cancer cells that result in the survival of a more metastatic phenotype from the original population. However, it is unclear how cancer cells may acquire such metastatic competency after overcoming deleterious mechanical stresses. Here, by forcing cancer cells to flow through small capillary-sized constrictions, we demonstrate that mechanical deformation can select a tumor cell subpopulation that exhibits resilience to mechanical squeezing-induced cell death. Transcriptomic profiling reveals up-regulated proliferation and DNA damage response pathways in this subpopulation, which are further translated into a more proliferative and chemotherapy-resistant phenotype. Our results highlight a potential link between the microenvironmental physical barriers and the enhanced malignancy of metastasizing cancer cells which may potentially be utilized for novel therapeutic strategies in preventing the metastatic spread of cancer cells.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Leveraging the Elastic Deformability of Polydimethylsiloxane Microfluidic Channels for Efficient Intracellular Delivery
+JF  - bioRxiv
+DO  - 10.1101/2022.07.22.501113
+SP  - 2022.07.22.501113
+AU  - Alhmoud, Hashim
+AU  - Alkhaled, Mohammed
+AU  - Kaynak, Batuhan E.
+AU  - Hanay, M. Selim
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/22/2022.07.22.501113.abstract
+N2  - With the rapid development of microfluidic based cell therapeutics systems, the need arises for compact, modular, and microfluidics-compatible intracellular delivery platforms with small footprints and minimal operational requirements. Physical deformation of cells passing through a constriction in a microfluidic channel has been shown to create transient membrane perturbations that allow passive diffusion of materials from the outside to the interior of the cell. This mechanical approach to intracellular delivery is simple to implement and fits the criteria outlined above. However, available microfluidic platforms that operate through this mechanism are traditionally constructed from rigid channels with fixed dimensions that suffer from irreversible clogging and incompatibility with larger size distributions of cells. Here we report a flexible and elastically deformable microfluidic channel, and we leverage this elasticity to dynamically generate temporary constrictions with any given size within the channel width parameters. Additionally, clogging is prevented by increasing the size of the constriction to allow clogs to pass. By tuning the size of the constriction appropriately, we show the successful delivery of GFP-coding plasmids to the interior of three mammalian cell lines and fluorescent gold nanoparticles to HEK293 FT cells all while maintaining a high cell viability rate. This development will no doubt lead to miniaturized intracellular delivery microfluidic components that can be easily integrated into larger lab-on-a-chip systems in future cell modification devices.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Causal feature selection using a knowledge graph combining structured knowledge from the biomedical literature and ontologies: a use case studying depression as a risk factor for Alzheimer’s disease
+JF  - bioRxiv
+DO  - 10.1101/2022.07.18.500549
+SP  - 2022.07.18.500549
+AU  - Malec, Scott A.
+AU  - Taneja, Sanya B.
+AU  - Albert, Steven M.
+AU  - Shaaban, C. Elizabeth
+AU  - Karim, Helmet T.
+AU  - Levine, Arthur S.
+AU  - Munro, Paul
+AU  - Callahan, Tiffany J.
+AU  - Boyce, Richard D.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/20/2022.07.18.500549.1.abstract
+N2  - Introduction Causal feature selection entails identifying confounders that eliminate confounding bias when estimating effects from observational data. Traditionally, researchers employ expertise and literature review to identify confounders. Uncontrolled confounding from unidentified confounders threatens validity while conditioning on intermediate variables (mediators) weakens estimates, and conditioning on common effects (colliders) induces bias. Additionally, erroneously conditioning on variables playing multiple roles introduces bias. In a use case studying depression as a potential independent risk factor for Alzheimer’s disease (AD), we introduce a novel knowledge graph application enabling causal feature selection from computable literature-derived knowledge and biomedical ontologies to address these challenges.Methods Using the output from three machine reading systems, we harmonized the computable knowledge extracted from a scoped literature corpus. Next, we applied logical closure operations to infer missing knowledge and mapped the outputs to target terminologies. We then combined the outputs with ontology-grounded resources using a robust KG framework developed by computational biologists. Next, we translated epidemiological definitions of confounder, collider, and mediator into queries for searching the KG and summarized the roles played by the variables identified. Finally, we analyzed a selection of variables and reasoning paths in the search results.Results Confounder search yielded 128 confounders, including 58 phenotypes, 47 drugs, and 35 genes. Search also identified 23 collider and 16 mediator phenotypes. Only 31 of the 58 confounder phenotypes were found to behave exclusively as confounders. The remaining 27 phenotypes also play other roles, and 7 of the 21 confounders identified by both the KG and the literature were identified as being exclusively confounders. Stroke was an example of a variable playing all three roles.Discussion Our findings suggest that our KG application could augment human expertise while confirming the complexity of selecting potential confounders for depression with AD. Imperfect concept mapping introduced errors, and the small literature corpus limited the scope of search results.Conclusion Our results suggest that our method may widely apply to causal feature selection. However, the search results need to be reviewed by human experts and tested empirically, and further work is required to optimize KG output for human consumption.• Knowledge of causal variables and their roles is essential for causal inference.• We show how to search a knowledge graph (KG) for causal variables and their roles.• The KG combines literature-derived knowledge with ontology-grounded knowledge.• We design queries to search the KG for confounder, collider, and mediator roles.• KG search reveals variables in these roles for depression and Alzheimer’s disease.Graphical abstract Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Mammalian Pumilio Proteins Control Cellular Morphology, Migration, and Adhesion
+JF  - bioRxiv
+DO  - 10.1101/2022.07.19.500580
+SP  - 2022.07.19.500580
+AU  - Sternburg, Erin L.
+AU  - Lillibridge, Jordan J.
+AU  - Phandthong, Rattapol
+AU  - Karginov, Fedor V.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/20/2022.07.19.500580.abstract
+N2  - Pumilio proteins are RNA-binding proteins that control mRNA translation and stability by binding to the 3’ UTR of target mRNAs. Mammals have two canonical Pumilio proteins, PUM1 and PUM2, which are known to act in many biological processes, including embryonic development, neurogenesis, cell cycle regulation and genomic stability. Here, we characterized a new role of both PUM1 and PUM2 in regulating cell morphology, migration, and adhesion in T-REx-293 cells, in addition to previously known defects in growth rate. Gene ontology analysis of differentially expressed genes in PDKO cells for both cellular component and biological process showed enrichment in categories related to adhesion and migration. PDKO cells had a collective cell migration rate significantly lower than that of WT cells and displayed changes in actin morphology. In addition, during growth, PDKO cells aggregated into clusters (clumps) due to an inability to escape cell-cell contacts. Addition of extracellular matrix (Matrigel) alleviated the clumping phenotype. Collagen IV (ColIV), a major component of Matrigel, was shown to be the driving force in allowing PDKO cells to monolayer appropriately, however, ColIV protein levels remained unperturbed in PDKO cells. This study characterizes a novel cellular phenotype associated with cellular morphology, migration, and adhesion which can aid in developing better models for PUM function in both developmental processes and disease.
+ER  - 
+
+TY  - JOUR
+T1  - Multi-omics reveal &lt;em&gt;Salmonella&lt;/em&gt;-liberated dietary L-arabinose promotes expansion in superspreaders
+JF  - bioRxiv
+DO  - 10.1101/2022.07.19.500711
+SP  - 2022.07.19.500711
+AU  - Ruddle, Sarah
+AU  - Massis, Liliana M.
+AU  - Cutter, Alyssa C.
+AU  - Monack, Denise M.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/20/2022.07.19.500711.abstract
+N2  - Our understanding of specific metabolites that drive host-pathogen interactions in the guts of superspreader hosts is incomplete. In a mouse model of chronic, asymptomatic Salmonella enterica serovar Typhimurium (S. Tm) infection, we performed untargeted metabolomics on the feces of mice and found superspreader hosts possess distinct metabolic signatures compared to non-superspreaders, including differential levels of L-arabinose. RNA-seq on S. Tm in superspreader fecal samples showed increased expression of the L-arabinose catabolism pathway in vivo. By combining bacterial genetics and diet manipulation, we demonstrate that diet-derived L-arabinose provides S. Tm a competitive advantage in the gut. We show that expansion of S. Tm in the gut requires a previously uncharacterized alpha-N-arabinofuranosidase that can liberate L-arabinose from dietary polysaccharides. Ultimately, we demonstrate that pathogen-liberated L-arabinose from the diet provides a competitive advantage to S. Tm in vivo. These findings propose L-arabinose as a critical driver of S. Tm expansion in the guts of superspreader hosts.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Enhanced cell viscosity as a marker of premature senescence induced by lamin A/C alterations
+JF  - bioRxiv
+DO  - 10.1101/2022.07.18.500411
+SP  - 2022.07.18.500411
+AU  - Jebane, Cécile
+AU  - Varlet, Alice-Anaïs
+AU  - Karnat, Marc
+AU  - Hernandez-Cedillo, Lucero M.
+AU  - Lecchi, Amélie
+AU  - Bedu, Frédéric
+AU  - Desgrouas, Camille
+AU  - Vigouroux, Corinne
+AU  - Vantyghem, Marie-Christine
+AU  - Viallat, Annie
+AU  - Rupprecht, Jean-François
+AU  - Helfer, Emmanuèle
+AU  - Badens, Catherine
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/19/2022.07.18.500411.abstract
+N2  - Lamin A/C is a crucial player in nuclear properties and its alterations cause different diseases sharing some cellular features such as misshapen nuclei or premature senescence. If the impact of lamin A/C alterations is well described at the molecular and nuclear scales, notably on nuclear mechanics, their effects on cells and tissues need to be clarified. Here, we used a microfluidic device to force cells into constrictions and infer their mechanical properties. We benchmarked the mechanical response of whole cells and isolated nuclei from a healthy individual to that of prematurely senescent cells (i) affected by the lamin A/C R482W mutation associated to type-2 familial partial lipodystrophy (FPLD2), or treated by a protease inhibitor which alters lamin A/C production. We further challenged the cells with cytoskeletal drugs to destabilize the actin and microtubule networks. We found that senescent cells are more viscous than non-senescent ones, and that this change is not explained solely by mechanical changes in nuclei. Rather, we showed a major contribution from the cytoskeleton and uncovered an unexpected role of microtubules in prematurely senescent cells. These results suggest that lamin A/C not only impacts the nucleus but also its interplay with the cytoskeleton. By unveiling the enhanced cell viscosity as a marker of premature senescence, our study on cell mechanical properties paves the way towards a fast method for characterizing laminopathy-affected cells and testing drug therapy response.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Complementary biological and computational approaches identify distinct mechanisms of chlorpyrifos versus chlorpyrifos oxon induced dopaminergic neurotoxicity
+JF  - bioRxiv
+DO  - 10.1101/2022.07.15.500261
+SP  - 2022.07.15.500261
+AU  - Sammi, Shreesh Raj
+AU  - Syeda, Tauqeerunnisa
+AU  - Conrow, Kendra D.
+AU  - Leung, Maxwell C. K.
+AU  - Cannon, Jason R.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/17/2022.07.15.500261.abstract
+N2  - Organophosphate (OP) pesticides are widely used in agriculture. While acute cholinergic toxicity has been extensively studied, chronic effects on other neurons are less understood. Here, we demonstrated that the OP pesticide chlorpyrifos (CPF) and its oxon metabolite are dopaminergic neurotoxicants in Caenorhabditis elegans. CPF treatment led to inhibition of mitochondrial complex II, II + III, and V in rat liver mitochondria, while CPF oxon did not (complex II + III, and IV inhibition observed only at high doses). While the effect on C. elegans cholinergic behavior was mostly reversible with toxicant washout, dopamine-associated deficits persisted, suggesting dopaminergic neurotoxicity was irreversible. CPF reduced the mitochondrial content in a dose-dependent manner and the fat modulatory genes cyp-35A2 and cyp-35A3 were found to have a key role in CPF neurotoxicity. These findings were consistent with in vitro effects of CPF and CPF oxon on nuclear receptor signaling and fatty acid/steroid metabolism observed in ToxCast assays. Two-way hierarchical analysis revealed in vitro effects on estrogen receptor (ER,) pregnane X receptor (PXR), and peroxisome proliferator-activated receptor gamma (PPAR gamma) pathways as well as neurotoxicity of chlorpyrifos, malathion, and diazinon, while these effects were not detected in malaoxon and diazoxon. Taken together, our study suggests that mitochondrial toxicity and metabolic effects of CPF, but not CPF-oxon, have a key role of CPF neurotoxicity in the low-dose, chronic exposure. Further mechanistic studies are needed to examine mitochondria as a common target for all OP pesticide parent compounds, since this has important implications on cumulative pesticide risk assessment.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Wheat cells show positional responses to invasive &lt;em&gt;Zymoseptoria tritici&lt;/em&gt;
+JF  - bioRxiv
+DO  - 10.1101/2022.07.15.499463
+SP  - 2022.07.15.499463
+AU  - Valente, Francesco
+AU  - Mansfield, Jessica
+AU  - Herring, Daniel
+AU  - Romana, Giuseppe
+AU  - Rodrigues, Cecilia
+AU  - Metz, Jeremy
+AU  - Craze, Melanie
+AU  - Bowden, Sarah
+AU  - Greenland, Andy
+AU  - Moger, Julian
+AU  - Haynes, Ken
+AU  - Richards, David M.
+AU  - Wallington, Emma
+AU  - Deeks, Michael J.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/17/2022.07.15.499463.abstract
+N2  - The stomatal complex of grasses consists of two guard cells and two adjacent subsidiary cells that cooperate during stomatal closure. Zymoseptoria tritici, the main causal agent of Septoria tritici blotch in wheat, enters the host via stomata. Here we test the hypothesis that the stomatal complex shows focused sub-cellular responses to invading Z. tritici hyphae.We have combined live-cell transmission light microscopy, immunofluorescence and CRS microscopy to identify cell wall modifications triggered by hyphal invasion. Furthermore, we have used confocal fluorescence microscopy and automated quantitative image analysis to assess whether host cells respond to hyphae through spatial redistribution of organelles.We find that subsidiary cells construct papillae that are accurately aligned with hyphal position even when hyphae are occluded by guard cells. These are distinct from those induced by powdery mildew, with callose restricted to a crust that surrounds content with a high-amplitude Raman signal in the CH-band. Peroxisome populations in subsidiary cells show distributions with modes weakly correlated with hyphal position but do not differ significantly between compatible and incompatible interactions.Our data suggest local changes to cell wall architecture and focal accumulation of organelles in subsidiary cells could play roles in crop defence during host leaf penetration by Z. tritici. Molecular strategies to amplify these responses may provide novel routes for crop protection.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - A broad, exposome-type evaluation of xenobiotic phase II biotransformation in human biofluids by LC-MS/MS
+JF  - bioRxiv
+DO  - 10.1101/2022.07.15.500202
+SP  - 2022.07.15.500202
+AU  - Fareed, Yasmin
+AU  - Braun, Dominik
+AU  - Flasch, Mira
+AU  - Globisch, Daniel
+AU  - Warth, Benedikt
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/16/2022.07.15.500202.abstract
+N2  - Xenobiotics are chemicals foreign to a specific organism that humans are exposed to on a daily basis through their food, drugs and the environment. These molecules are frequently metabolized to increase polarity and subsequent excretion. During sample preparation, deconjugation of phase II metabolites is a critical step to capture the total exposure to chemicals in liquid chromatography mass spectrometry assays (LC-MS). Knowledge on deconjugation efficiencies of different enzymes and the extend of conjugation in human biofluids has primarily been investigated for single compounds or individual chemical classes. In this study, the performance of three β-glucuronidase and arylsulfatase mixtures from H. pomatia, from recombinant sources (BGS™), and from Escherichia coli combined with recombinant arylsulfatase (ASPC™) was compared and the efficiency of phase II deconjugation was monitored in breast milk, urine and plasma. An innovative LC-MS/MS biomonitoring method encompassing more than 80 highly diverse xenobiotics (e.g., plasticizers, industrial chemicals, mycotoxins, phytoestrogens, pesticides) was utilized for the comprehensive investigation of phase II conjugation in experiments investigating levels in breast milk and urine obtained from breastfeeding women. Overall, it was confirmed that H. pomatia is the most efficient enzyme in hydrolyzing different classes of xenobiotics for future exposome-scale biomonitoring studies. The recombinant BGS™ formulation, however, provided better results for breast milk samples, primarily due to lower background contamination, a major issue when employing the typically applied crude H. pomatia extracts. A deeper understanding of the global xenobiotic conjugation patterns will be essential for capturing environmental and food-related exposures within the exposome framework more comprehensively.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - &lt;em&gt;B&lt;/em&gt;&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;+&lt;/sup&gt;-correction of MT saturation maps optimized for 7T &lt;em&gt;postmortem&lt;/em&gt; MRI of the brain
+JF  - bioRxiv
+DO  - 10.1101/2022.07.12.498197
+SP  - 2022.07.12.498197
+AU  - Lipp, I.
+AU  - Kirilina, E.
+AU  - Edwards, L.J.
+AU  - Pine, K.J.
+AU  - Jäger, C.
+AU  - Gräßle, T.
+AU  - ,
+AU  - Weiskopf, N.
+AU  - Helms, G.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/14/2022.07.12.498197.abstract
+N2  - Purpose Magnetization transfer saturation (MTsat) is a useful marker to probe tissue macromolecular content and myelination in the brain. The increased -inhomogeneity at ≥ 7T and significantly larger saturation pulse flip angles which are often used for postmortem studies exceed the limits where previous MTsat correction methods are applicable. Here, we develop a calibration-based correction model and procedure, and validate and evaluate it in postmortem 7T data of whole chimpanzee brains.Theory The dependence of MTsat was investigated by varying the off-resonance saturation pulse flip angle. For the range of saturation pulse flip angles applied in typical experiments on postmortem tissue, the dependence was close to linear. A linear model with a single calibration constant C is proposed to correct bias in MTsat by mapping it to the reference value of the saturation pulse flip angle.Methods C was estimated voxel-wise in five postmortem chimpanzee brains. “Individual-based global parameters” were obtained by calculating the mean C within individual specimen brains and “group-based global parameters” by calculating the means of the individual-based global parameters across the five brains.Results The linear calibration model described the data well, though C was not entirely independent of the underlying tissue and . Individual-based and group-based global correction parameters (C = 1.2) led to visible, quantifiable reductions of -biases in high resolution MTsat maps.Conclusion The presented model and calibration approach effectively corrects for in-homogeneities in postmortem 7T data.Competing Interest StatementWe would like to note as a potential conflict of interest that the Max Planck Institute for Human Cognitive and Brain Sciences has an institutional research agreement with Siemens Healthcare. NW holds a patent on acquisition of MRI data during spoiler gradients (US 10,401,453 B2) and was reimbursed for travel expenses by Siemens Healthcare. However, we do not believe that this has negatively impacted the work and manuscript.
+ER  - 
+
+TY  - JOUR
+T1  - Low-cost platform for multi-animal chronic local field potential video monitoring with graphical user interface (GUI) for seizure detection and behavioral scoring
+JF  - bioRxiv
+DO  - 10.1101/2022.07.14.500102
+SP  - 2022.07.14.500102
+AU  - Tarcsay, Gergely
+AU  - Boublil, Brittney Lee
+AU  - Ewell, Laura A.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/07/16/2022.07.14.500102.abstract
+N2  - Experiments employing chronic monitoring of neurophysiological signals and video are commonly used in studies of epilepsy to characterize behavioral correlates of seizures. Our objective was to design a low-cost platform that enables chronic monitoring of several animals simultaneously, synchronizes bilateral local field potential and video streams in real-time, and parses recorded data into manageable file sizes. We present a hardware solution leveraging Intan and Open Ephys acquisition systems and a software solution implemented in Bonsai. The platform was tested in 48-hour continuous recordings simultaneously from multiple mice (male and female) with chronic epilepsy. To enable seizure detection and scoring, we developed a graphical user interface (GUI) that reads the data produced by our workflow and allows a user with no coding expertise to analyze events. Our Bonsai workflow was designed to maximize flexibility for a wide variety of experimental applications, and our use of the Open Ephys acquisition board would allow for scaling recordings up to 128 channels per animal.SIGNIFICANCE STATEMENT We present a low-cost hardware and software solution intended for multi-animal chronic seizure monitoring, that prioritizes experimental freedom, and requires no coding expertise of the user. We provide details for using an Intan adapter board to enable user freedom regarding the type of electrodes used. Video and local field potential data streams are synchronized and parsed in Bonsai – an open-source visual programming language that has pre-written libraries that allow our workflow to be adapted to other data types or to integrate with open-source toolboxes. Finally, for those intending to use our platform for seizure monitoring, we provide an accessible GUI to aid in seizure detection and behavioral scoring.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 
+
+TY  - JOUR
+T1  - Dysregulation of neural activity and microglia function following exposure to the global environmental contaminant perfluorooctane sulfonate (PFOS)
+JF  - bioRxiv
+DO  - 10.1101/2022.09.30.510316
+SP  - 2022.09.30.510316
+AU  - Paquette, Shannon E.
+AU  - Martin, Nathan R.
+AU  - Rodd, April
+AU  - Manz, Katherine E.
+AU  - Camarillo, Manuel
+AU  - Allen, Eden
+AU  - Pennell, Kurt
+AU  - Plavicki, Jessica S.
+Y1  - 2022/01/01
+UR  - http://biorxiv.org/content/early/2022/10/03/2022.09.30.510316.abstract
+N2  - Pollution is a driving force in climate change and an important modifier of human health. Humans are chronically exposed to complex chemical mixtures and, correspondingly, researchers are disentangling the contribution of different contaminants to human neuropathologies. Per- and polyfluoroalkyl substances (PFAS) are biopersistent pollutants and, due to their diverse applications, have become global contaminants. Perfluorooctane sulfonate (PFOS), a prevalent PFAS congener, impairs humoral immunity; however, its impact on innate immunity is unclear. Given the critical roles of innate immune cells, namely microglia, in brain development and homeostasis, we asked whether exposure adversely affects microglial function. Herein, we demonstrate developmental PFOS exposure produces microglial activation and upregulation of the microglia activation gene p2ry12. PFOS-induced microglial activation heightened microglial responses to brain injury, in the absence of increased cell death or inflammation. Use of the photoconvertible calcium indicator CaMPARI revealed PFOS exposure heightened neural activity, while optogenetic silencing of neurons was sufficient to normalize microglial responses to injury. Exposure to perfluorooctanoic acid, an immunotoxic PFAS, did not alter neuronal activity or microglial behavior, further supporting a role for neural activity as a critical modifier of microglial function. Together, this study reveals how contaminant-induced changes in brain activity can shape brain health.Competing Interest StatementThe authors have declared no competing interest.
+ER  - 

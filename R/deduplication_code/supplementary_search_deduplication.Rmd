@@ -29,18 +29,18 @@ library(splitstackshape)
 
 Loading new files
 ```{r, include=FALSE}
-dat1 <- read.csv(here("data/update/deduplication_process/scopus1.csv"))
+dat1 <- read.csv(here("data/deduplication_process/supplementary_search/scopus1.csv"))
 dim(dat1) #[1] 111   7
 ```
 ```{r}
-dat2 <- read.csv(here("data/update/deduplication_process/scopus2.csv"))
+dat2 <- read.csv(here("data/deduplication_process/supplementary_search/scopus2.csv"))
 dim(dat2) #[1] 1305   7
 ```
 
 Loading old file (174 reviews [109 SRs and 65 non-systematic reviews])
 
 ```{r}
-dat3 <- read.csv(here("data/update/deduplication_process/articles174.csv"))
+dat3 <- read.csv(here("data/eduplication_process/supplementary_search/darticles174.csv"))
 dim(dat3) #[1] 174   7
 ```
 
@@ -99,7 +99,7 @@ write_csv(dat4, file = "all_reviews_abstracts_for_screening_deduplicated.csv")
 Sample 100 random studies to use for pilot screening
 
 ```{r}
-articles <- read_csv(here("data/update","all_reviews_abstracts_for_screening_deduplicated.csv"), skip = 0)
+articles <- read_csv(here("data/deduplication_process/supplementary_search","all_reviews_abstracts_for_screening_deduplicated.csv"), skip = 0)
 pilot <- articles[sample(2482, 100), ]
 #save as .csv
 write_csv(pilot, file = "pilot_100.csv")

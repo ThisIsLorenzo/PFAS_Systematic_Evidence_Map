@@ -1,0 +1,4591 @@
+---
+title: "Analysis_code"
+author: "Lorenzo Ricolfi"
+date: "2023-06-20"
+output: html_document
+---
+
+The following Rmarkdown provides the code workflow for data manipulation and visualization.
+
+Project title: PFAS exposure of humans, animals and environmental compartments: an evidence review map and bibliometric analysis
+
+-   **Objective 1. Mapping the literature. What evidence on PFAS has been synthesized?** We reveal what areas in the realm of PFAS health-related and environmental research have been synthesized the most and where syntheses of evidence are lacking.
+
+-   **Objective 2. Critically appraise the literature. How robust are syntheses of PFAS evidence?** We examine the included syntheses for their reporting quality and potential biases, in order to assess reliability of reviews' conclusions, reveal syntheses that should be re-done, and highlight the aspects of review methodology that need to be improved.
+
+-   **Objective 3. Bibliometric analysis. How is synthesized PFAS evidence connected?** We examine which countries and institutions are mostly involved in secondary PFAS research and what do the networks between these institutions look like.
+
+# Setup
+
+Setting global code chunk parameters, loading packages, and setting color palettes
+
+```{r, include = TRUE}
+
+knitr::opts_chunk$set(echo = TRUE, # Display R code
+                      message = FALSE, # Suppress messages
+                      warning = FALSE) # Suppress warnings
+
+# Load necessary R packages using the 'pacman' package
+
+pacman::p_load(tidyverse, # Includes ggplot2, dplyr, and tidyr. Used for data manipulation, cleaning, and visualization.
+               here, # For loading and saving files
+               stringr, # For working with strings
+               knitr, # For dynamic report generation
+               formatR, # For formatting R code
+               forcats, # For working with categorical data
+               ggplot2, # For data visualization
+               hrbrthemes,# Provides additional themes for ggplot2 visualizations
+               patchwork, # For combining multiple ggplot2 plots into one
+               bibliometrix, # For bibliometric analysis
+               igraph, # For creating and analyzing graph data
+               xtable, # To export tables to LaTeX, HTML, or other formats
+               kableExtra, # For creating tables in knitr and R Markdown documents
+               rotl,# For working with and visualizing data from the "R package Open Tree of Life (rotl)" package
+               ochRe, # Package related to OpenCoEHST
+               RColorBrewer, # For color palettes
+               circlize, # For circular visualization of data
+               bibtex, # For working with BibTeX files and references
+               mapproj,
+               cowplot
+               )
+
+# Setting up personalized palettes.
+
+# Seta a general palette
+cbp1 <- c("#707070",
+          "#999999",
+          "#CCCCCC",
+          "#F5F5F5")
+          
+# Set a palette for Review Subjects (i.e., Humans, Animals, Environmental compartments)
+cbp2 <- c("#A29F15",#G reen is often associated with nature and life, making it fitting for the category of humans
+          "#938274",# Brown is a common color for animals, representing their fur or feathers
+          "#3C7A89",# Blue is commonly associated with the sky and sea, making it fitting for the category of the environment
+          "#B8B8B8")# Grey is a neutral color
+          
+# Set a palette to identify reviews reviewing one or multiple PFAS
+cbp3 <- c("#D2664B",
+          "#E6AF2E",
+          "#B8B8B8")
+          
+# Set a palette for transparency of reviews and the AMSTAR2 assessment
+cbp4 <- c("#588157",
+                   "#E6AF2E",
+          "#DE6449",
+          "#B8B8B8")
+
+# Set a personal palette
+my_palette <- brewer.pal(n = 10, name = "Set3")
+```
+
+# Loading data
+
+Manually extracted pilot data is stored in four separate **.csv** files representing different aspects of the data (extracted via structured predefined Google Forms - one per table). Additional fixed table stores pre-extracted data on PFAS types included in this map.
+
+Bibliographic data records are exported from Scopus (including cited references field) in .bib format and locally saved as **scopus.bib**.
+
+A list of included studies during the supplementary search of all types of reviews for supplementary bibliometric analyses is included in **main_all_types_reviews.csv**
+
+```{r, eval=FALSE}
+# Converting the bibliometric data in .bib format to a dataframe
+bib_data <- convert2df(here("data","scopus.bib"), dbsource = "scopus", format = "bibtex")
+dim(bib_data) # Display the dimensions of 'bib_data' (169 rows 35 columns)
+
+# Extracting information from the "AU1_CO" and "AU_CO" fields of the bibliographic database and to create new variables from these fields, separated by ";". The new columns are added to the dataframe bib_data.
+bib_data <- metaTagExtraction(bib_data, Field = "AU1_CO", sep = ";")
+bib_data <- metaTagExtraction(bib_data, Field = "AU_CO", sep = ";")
+dim(bib_data)
+
+# Saving the combined bibliometric data
+write.csv(bib_data, file = "data/bib.csv")
+```
+
+The next chunk uses the same code of the previous one to create supplementary bibliometric data on all types of reviews (supplementary bibliometric analysis).
+
+```{r, eval=FALSE}
+bib_data_all <- convert2df(here("data","scopus_all_types.csv"), dbsource = "scopus", format = "csv")
+dim(bib_data_all) #517 rows 52 columns
+
+bib_data_all <- metaTagExtraction(bib_data_all, Field = "AU1_CO", sep = ";")
+bib_data_all <- metaTagExtraction(bib_data_all, Field = "AU_CO", sep = ";")
+dim(bib_data_all)
+
+write.csv(bib_data_all, file = "data/bib_all_types.csv")
+```
+
+The next chunk loads all .csv files innto the R environment
+
+```{r}
+# Data from .csv file - main data sheet
+mdata <- read_csv(here("data","main.csv"), skip = 0)
+dim(mdata) #175 rows 38 columns
+
+# Data from .csv file - PFAS_types sheet:
+ptdata <- read_csv(here("data","pfas_types.csv"), skip = 0) 
+dim(ptdata) #175 rows 5 columns
+
+# Changing to long format (one type per row - one or multiple rows per study):
+ptdata <- ptdata %>% separate_rows(PFAS_type, sep=', ')
+dim(ptdata) #1032 rows 5 columns
+
+# Critical apprisal(AMSTAR2) from .csv file:
+qdata <- read_csv(here("data", "amstar2.csv"), skip = 0)
+dim(qdata) #175 rows 36 columns
+
+# Data from .csv file - PFAS_info sheet:
+pidata <- read_csv(here("data","pfas_info.csv"), skip = 0) 
+dim(pidata) #35 rows 7 columns
+
+# Data from .csv file - Species_info sheet
+spdata <- read_csv(here("data","species.csv"), skip = 0) 
+dim(spdata) #541 rows 5 columns
+
+mdata_all_types <- read_csv(here("data","main_all_types_review.csv"), skip = 0) 
+dim(mdata_all_types) #530 rows 21 columns
+
+bib_data <- read.csv(here("data", "bib.csv"))
+dim(bib_data) #169 rows 36 columns
+
+bib_data_all_types <- read.csv(here("data", "bib_all_types.csv"))
+dim(bib_data_all_types) #517 rows 36 columns
+```
+
+# Data Cleaning and Tiding
+
+```{r}
+# Modify the 'mdata' dataframe
+mdata <- 
+  mdata %>%
+  select(-ends_with("checked")) %>% # Remove columns ending with "checked" 
+  select(-("Timestamp")) %>% # Remove "Timestamp" columns
+  select(-starts_with("Initials")) %>%  # Remove columns starting with "Initials"
+  select(-ends_with("comment")) %>% # Remove columns ending with "comment"
+  drop_na(Author_year) %>% # Remove last two rows because empty
+  mutate(Journal = tolower(Journal))  # Remove capital letters
+dim(mdata) #183 rows 30 columns
+
+# Modify the 'spdata' dataframe
+spdata <- 
+  spdata %>%
+  select(-ends_with("checked")) %>% # Remove columns ending with "checked"
+  select(-ends_with("comment")) # Remove columns ending with "comment"
+dim(spdata) #541 rows 4 columns
+
+# Modify the 'ptdata' dataframe
+ptdata <- 
+  ptdata %>%
+  select(-ends_with("checked")) %>% # Remove columns ending with "checked"
+  select(-ends_with("comment")) %>% # Remove columns ending with "comment"
+  select(-("Timestamp")) %>% # Remove the "Timestamp" column
+  select(-starts_with("Initials")) %>%# Remove columns starting with "Initials"
+  mutate(PFAS_type = case_when( # Create a new column 'PFAS_type' with modified values
+    PFAS_type == "6:2 Cl-PFESA/F-53B" ~ "6:2 Cl-PFESA",
+    PFAS_type == "HFPO-DA/GenX" ~ "GenX",
+    PFAS_type == "All PFAS" ~ "PFAS",
+    TRUE ~ PFAS_type
+  ))
+dim(ptdata) #1090 rows 2 columns
+
+# Modify the 'pidata' dataframe
+pidata <- 
+  pidata %>% 
+  select(-ends_with("comment")) # Remove columns ending with "comment"
+
+#Merge main dataframe with species info dataframe
+mspdata <- left_join(mdata, spdata, by = "Study_ID")
+dim(mspdata) #692 rows 33 columns
+#names(mspdata)
+#str(mspdata)
+#View(mspdata)
+
+# Merge PFAS types dataframe with PFAS info dataframe and then with main dataframe
+ptidata <- left_join(ptdata, pidata, by = "PFAS_type")
+dim(ptidata) #1090 rows 7 columns
+#names(ptidata)
+#str(ptidata)
+#View(ptidata)
+
+mpidata <- left_join(mdata, ptidata, by = "Study_ID")
+dim(mpidata) #1090 rows 36 columns
+#names(mpidata)
+#str(mpidata)
+#View(mpidata)
+
+# Merge main dataframe with quality dataframe
+mqdata <- left_join(mdata, qdata, by = "Study_ID")
+```
+
+# DOIs strings
+
+The following chunk creates a search string based on documents DOIs (Digital Object Identifiers). We used the search string to find the documents on the Scopus database and perform the main bibliometric analysis.
+
+```{r}
+# Get all the unique DOIs in the mdata table
+dois <- unique(mdata$DOI)
+# Create a search string for each DOI
+doi_strings <- paste("DOI(", dois, ")", sep = "")
+# Combine all the search strings with "OR"
+search_string <- paste(doi_strings, collapse = " OR ")
+# Print the final search string
+cat(search_string)
+```
+
+The following chunk creates a search string based on documents DOIs. Documents are all types of review. We used this search string to find the documents on the Scopus database and perform the supplementary bibliometric analysis.
+
+```{r}
+# Get all the unique DOIs in the mdata table
+dois2 <- unique(mdata_all_types$doi)
+# Create a search string for each DOI
+doi_strings2 <- paste("DOI(", dois2, ")", sep = "")
+# Combine all the search strings with "OR"
+search_string2 <- paste(doi_strings2, collapse = " OR ")
+# Print the final search string
+cat(search_string2)
+```
+
+# Summary table
+
+The following chunk creates a summary tables of all included systematic reviews in the map.
+
+```{r}
+
+mdata <- mdata[order(mdata$Study_ID),] #Order the table by Study_ID
+
+
+mdata2 <- mdata %>% 
+  separate(Author_year, c("First_author", "Publication_year"), sep = "_") %>% 
+  filter(First_author != "NA") #Create two new columns (i.e., 'First_author' and 'Publication_year') containing the first and second elements of the 'Author_year' column, respectively.
+
+#Make the table
+knitr::kable(select(mdata2,
+                    First_author,
+                    Publication_year,
+                    Paper_title,
+                    DOI), caption = "Table of included SRs") %>%
+  kable_paper(bootstrap_options = "striped", full_width = F) #%>% 
+ #save_kable(here("R_data", "table1.html"), self_contained = T)
+
+```
+
+The following chunk creates a summary tables of all types of reviews included in the supplementary bibliometric analysis.
+
+```{r}
+mdata_all_types <- mdata_all_types[order(mdata_all_types$key),] # Oder the table by Rayyan key
+
+
+mdata_all_types2 <- mdata_all_types %>% 
+  separate(authors, c("First_author", "Co_authors"), sep = ",") # Create two new columns (i.e., 'First_author' and 'Publication_year') containing the first and second elements of the 'Author_year' column, respectively.
+
+# Make a table using the 'kable' function from the 'knitr' package
+# Select specific columns from the 'mdata_all_types2' dataframe
+# Columns selected: First_author, year, title, doi
+# Provide a caption for the table: "Table of included SRs"
+knitr::kable(select(mdata_all_types2,
+                    First_author,
+                    year,
+                    title,
+                    doi), caption = "Table of included SRs") %>%
+  kable_paper(bootstrap_options = "striped", full_width = F) # Apply styling with kable_paper()
+```
+
+# OBJECTIVE 1
+
+Here we aim to reveal what areas in the realm of PFAS health-related and environmental research have been synthesized the most and where syntheses of evidence are lacking.
+
+## Figure 3 panel a
+
+The following plot shows the number of reviews published each year from 2008 to 2022 and the type of review.
+
+```{r}
+review_trend <- mdata %>% 
+  group_by(Review_type_claimed) %>% 
+  count(Publication_year)
+
+# review_trend <- review_trend %>%
+#   mutate(Review_type_claimed = case_when(
+#     Review_type_claimed == "meta-analysis" ~ "MA",
+#     Review_type_claimed == "systematic review" ~ "SR",
+#     Review_type_claimed == "systematic evidence map" ~ "SEM",
+#     Review_type_claimed == "systematic review and meta-analysis" ~ "SR and MA",
+#     Review_type_claimed == "comprehensive review" ~ "CoR",
+#     Review_type_claimed == "scoping review" ~ "ScR",
+#     Review_type_claimed == "critical review" ~ "CrR",
+#     TRUE ~ Review_type_claimed
+#   ))
+
+tt2.1 <- review_trend %>%
+  ggplot(aes(x = Publication_year,
+             y = n
+             )) +
+  labs(title = expression(bold("a)"))) +
+  geom_col(aes(
+           fill = Review_type_claimed,
+           color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           linewidth = 0.2) +
+  geom_text(aes(fill = Review_type_claimed,
+                label = n, 
+                x = Publication_year,
+                y = n), 
+            size = 1.7,
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_fill_manual(values = my_palette,
+                    breaks = c("comprehensive review",
+                               "critical review",
+                               "meta-analysis",
+                               "review",
+                               "scoping review",
+                               "systematic evidence map",
+                               "systematic review",
+                               "systematic review and meta-analysis")) +
+  scale_color_manual(values = my_palette,
+                     breaks = c("comprehensive review",
+                               "critical review",
+                               "meta-analysis",
+                               "review",
+                               "scoping review",
+                               "systematic evidence map",
+                               "systematic review",
+                               "systematic review and meta-analysis")) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 190, by = 10),
+                    expand = c(0,1),
+                    minor_breaks = NULL) +
+  theme_light() +
+  theme(plot.title = element_text(size = 10),
+      legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 8,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_blank(),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Review type claimed:")
+
+tt2.1
+```
+
+## Figure 3 panel b
+
+```{r}
+srma_trend <- mdata %>% 
+  group_by(Meta_analysis) %>%
+  count(Publication_year)
+
+tt2 <- srma_trend %>%
+  ggplot(aes(x = Publication_year,
+             y = n
+             )) +
+  labs(title = expression(bold("b)"))) +
+  geom_col(aes(fill = fct_relevel(Meta_analysis, c("Yes","No")),
+               color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  geom_text(aes(fill = fct_relevel(Meta_analysis, c("Yes","No")),
+                label = n,
+                x = Publication_year, 
+                y = n), 
+            size = 1.7,
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 190, by = 10),
+                    expand = c(0,1),
+                    minor_breaks = NULL) +
+  scale_fill_manual(values = c("#DE6449", "#588157"),
+                    breaks = c("No","Yes")) +
+  scale_color_manual(values = cbp1,
+                     breaks = c("No","Yes")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 10),
+        legend.justification = c(-0.1, 1.1),
+        legend.position = c(0, 1),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 8,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_blank(),
+       axis.title.y = element_text(size = 9,
+                                   hjust = 0.5),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Quantitative synthesis:")
+
+tt2
+```
+
+## Figure 3 panel c
+
+```{r}
+trend_subjects <- mdata %>% 
+  filter(Human_animal_environment != "Plants") %>% 
+  group_by(Human_animal_environment) %>% 
+  count(Publication_year)
+
+#Set palette for Review Subjects
+cbp2.1 <- c("#A29F15",
+            "#B8B8B8",
+            "#3C7A89",
+            "#938274")
+
+tt3 <-  trend_subjects %>%
+  ggplot(aes(x = Publication_year,
+             y = n)) +
+  labs(title = expression(bold("c)"))) +
+  geom_col(aes(
+           fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                              "Environment",
+                                                              "Animals",
+                                                              "Humans")),
+           color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                              "Environment",
+                                                              "Animals",
+                                                              "Humans")),
+                label = n, x = Publication_year, y = n), 
+            size = 1.7, 
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 80, by = 10),
+                    minor_breaks = NULL,
+                    expand = c(0,1)
+                    ) +
+  scale_color_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_fill_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  theme_light() + 
+  theme(plot.title = element_text(size = 10),
+        legend.justification = c(-0.1, 1.1),
+        legend.position = c(0, 1),
+        legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 8,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_blank(),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Review subject:")
+
+tt3
+```
+
+## Figure 3 panel d
+
+```{r}
+legacy_novel_trend <- mpidata[!duplicated(mpidata[, c("Study_ID", "Legacy_novel")]), ]
+
+legacy_novel_trend <- legacy_novel_trend %>%
+  drop_na(Legacy_novel) %>% 
+  group_by(Study_ID) %>%
+  summarise(Legacy_novel = ifelse(n_distinct(Legacy_novel) > 1, "legacy and novel", Legacy_novel[1]),
+            Publication_year = first(Publication_year))
+  
+
+legacy_novel_trend <- legacy_novel_trend %>% 
+  group_by(Legacy_novel) %>%
+  count(Publication_year)
+
+tt4 <- legacy_novel_trend %>%
+  ggplot(aes(x = Publication_year,
+             y = n
+             )) +
+  labs(title = expression(bold("d)"))) +
+  geom_col(aes(fill = fct_relevel(Legacy_novel, c("NS",
+                                                   "novel",
+                                                    "legacy and novel",
+                               "legacy")),
+               color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  geom_text(aes(fill = fct_relevel(Legacy_novel, c("NS",
+                                                   "novel",
+                                                    "legacy and novel",
+                               "legacy")),
+                label = n,
+                x = Publication_year, 
+                y = n), 
+            size = 1.7,
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 190, by = 10),
+                    expand = c(0,1),
+                    minor_breaks = NULL) +
+  scale_fill_manual(values = c("#335C67", "#FFF3B0", "#E09F3E", "grey"),
+                    breaks = c("legacy",
+                                                   "legacy and novel",
+                                                    "novel",
+                                                   "NS")) +
+  scale_color_manual(values = cbp1,
+                     breaks = c("legacy",
+                                                   "legacy and novel",
+                                                    "novel",
+                                                   "NS")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 10),
+        legend.justification = c(-0.1, 1.1),
+        legend.position = c(0, 1),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 8,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "PFAS reviewed:")
+
+tt4
+```
+
+## Figure 3 combined
+
+```{r}
+tt2.1/tt2/tt3/tt4
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs", "Fig.3.png"),
+#        width = 18,
+#        height = 28,
+#        units = "cm")
+```
+
+
+
+## Figure 4 panel a
+
+```{r}
+# Filter and modify the 'mdata' dataframe
+t_subject2 <- mdata %>%
+  filter(Human_animal_environment != "NA") %>% # Filter out rows with "NA" in 'Human_animal_environment'
+  count(Human_animal_environment, Review_type_claimed) %>% # Count occurrences based on 'Human_animal_environment' and 'Review_type_claimed'
+  mutate(percentage = round(n / sum(n) * 100)) %>% # Calculate percentage of each count
+  mutate(percentage = round( n / sum(n) * 100)) %>% # Calculate percentage of each count
+  group_by(Human_animal_environment) %>% # Group by 'Human_animal_environment'
+  mutate(n_tot = sum(n)) %>% # Calculate total count per 'Human_animal_environment'
+  mutate(tot_percentage = sum(percentage)) # Calculate total percentage for each 'Human_animal_environment'
+
+# Order the levels of 'Human_animal_environment' based on total count
+t_subject2$Human_animal_environment <-
+  factor(t_subject2$Human_animal_environment, levels = unique(t_subject2$Human_animal_environment[order(t_subject2$n_tot, decreasing = FALSE)]))
+
+# Code to modify 'Review_type_claimed' values (currently commented out)
+# t_subject2 <- t_subject2 %>%
+#   mutate(Review_type_claimed = case_when(
+#     Review_type_claimed == "meta-analysis" ~ "MA",
+#     Review_type_claimed == "systematic review" ~ "SR",
+#     Review_type_claimed == "systematic evidence map" ~ "SEM",
+#     Review_type_claimed == "systematic review and meta-analysis" ~ "SR and MA",
+#     Review_type_claimed == "comprehensive review" ~ "CoR",
+#     Review_type_claimed == "scoping review" ~ "ScR",
+#     Review_type_claimed == "critical review" ~ "CrR",
+#     TRUE ~ Review_type_claimed
+#   ))
+
+# Create a ggplot visualization
+p_subj2 <- ggplot(t_subject2, aes(x = Human_animal_environment,
+                                y = percentage)) +
+  geom_col(aes(fill = Review_type_claimed,
+               color = "black"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  theme_light() +
+  labs(title = expression(bold("a)"))) + #~bold(A.)~' Type and subject'
+  coord_flip()+
+  scale_x_discrete(name = "Review subject") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 80, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  scale_fill_manual(values = my_palette,
+                    breaks = c("comprehensive review",
+                               "critical review",
+                               "meta-analysis",
+                               "review",
+                               "scoping review",
+                               "systematic evidence map",
+                               "systematic review",
+                               "systematic review and meta-analysis")) +
+  scale_color_manual(values = my_palette,
+                     breaks = c("comprehensive review",
+                                "critical review",
+                               "critical review",
+                               "meta-analysis",
+                               "review",
+                               "scoping review",
+                               "systematic evidence map",
+                               "systematic review",
+                               "systematic review and meta-analysis")) +
+  geom_text(aes(fill = Review_type_claimed,
+                label = paste0(n), x = Human_animal_environment), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  geom_text(aes(label = paste("n =", sprintf("%.0f",n_tot)),
+                x = Human_animal_environment,
+                y =  max(tot_percentage)), 
+            position = position_stack(vjust = 1.1), 
+            size = 2.5,
+            color = "black") +
+  theme(title = element_text(size = 10),
+        legend.position = c(0.5, 0.4),
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text.y =  element_text(size = 8),
+        axis.text.x =  element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Review type claimed:")
+
+# Display the ggplot visualization
+p_subj2
+```
+
+
+
+## Figure 4 panel c
+
+```{r}
+t_reviewtypes2 <- mdata %>%
+  filter(Review_type_claimed != "NA") %>% #filter out NA
+  count(Review_type_claimed, Human_animal_environment) %>%
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Review_type_claimed) %>% 
+  mutate(n_tot = sum(n)) %>% 
+  mutate(tot_percentage = sum(percentage))
+
+t_reviewtypes2 <- t_reviewtypes2 %>%
+  mutate(Review_type_claimed = case_when(
+    Review_type_claimed == "meta-analysis" ~ "MA",
+    Review_type_claimed == "systematic review" ~ "SR",
+    Review_type_claimed == "systematic evidence map" ~ "SEM",
+    Review_type_claimed == "systematic review and meta-analysis" ~ "SR and MA",
+    Review_type_claimed == "comprehensive review" ~ "CoR",
+    Review_type_claimed == "scoping review" ~ "ScR",
+    Review_type_claimed == "critical review" ~ "CrR",
+    TRUE ~ Review_type_claimed
+  ))
+
+t_reviewtypes2$Review_type_claimed <-
+  factor(t_reviewtypes2$Review_type_claimed, levels = unique(t_reviewtypes2$Review_type_claimed[order(t_reviewtypes2$n_tot, decreasing = FALSE)]))
+
+p_rt2 <- ggplot(t_reviewtypes2, aes(x = Review_type_claimed,
+                                y = percentage)) +
+  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+               color = "black"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  theme_light() +
+  labs(title = expression(bold("c)"))) + #~bold(A.)~' Type and subject'
+  coord_flip()+
+  scale_x_discrete(name = "Review type claimed") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 40, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,40)) +
+  scale_fill_manual(values=cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_color_manual(values=cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+                label = paste0(n), x = Review_type_claimed), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  geom_text(aes(label = paste("n =", sprintf("%.0f",n_tot)),
+                x = Review_type_claimed,
+                y =  max(tot_percentage)), 
+            position = position_stack(vjust = 1.1), 
+            size = 2.5,
+            color = "black") +
+  theme(title = element_text(size = 10),
+        legend.position = c(0.6, 0.4),
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Review subject:")
+
+p_rt2
+```
+
+## Figure 4 panel b
+
+```{r}
+t_sys_appr2 <-
+  mdata %>%
+  filter(Systematic_approach != "NA") %>% 
+  count(Human_animal_environment, Systematic_approach) %>%
+  arrange(desc(n)) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Human_animal_environment) %>% 
+  mutate(n_tot = sum(n))
+
+t_sys_appr2$Human_animal_environment <-
+  factor(t_sys_appr2$Human_animal_environment, levels = unique(t_sys_appr2$Human_animal_environment[order(t_sys_appr2$n_tot, decreasing = FALSE)]))
+          
+p_sys_appr2 <- 
+  ggplot(t_sys_appr2, aes(x = Human_animal_environment,
+                          y = percentage)) +
+  ggtitle(expression(bold("b)"))) +
+  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  scale_fill_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+    scale_color_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+  theme_light() +
+  coord_flip() +
+  scale_x_discrete(name = "Systematic approach") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+                label = paste0(n), x = Human_animal_environment), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  theme(title = element_text(size = 10),
+        legend.position = c(0.6, 0.4),
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Systematic method:")
+
+p_sys_appr2
+```
+
+## Figure 4 panel d
+
+```{r}
+t_sys_appr3 <-
+  mdata %>%
+  filter(Systematic_approach != "NA") %>% 
+  count(Review_type_claimed, Systematic_approach) %>%
+  arrange(desc(n)) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Review_type_claimed) %>% 
+  mutate(n_tot = sum(n))
+          
+t_sys_appr3$Review_type_claimed <-
+  factor(t_sys_appr3$Review_type_claimed, levels = unique(t_sys_appr3$Review_type_claimed[order(t_sys_appr3$n_tot, decreasing = FALSE)]))
+
+p_sys_appr3 <- 
+  ggplot(t_sys_appr3, aes(x = Review_type_claimed,
+                          y = percentage)) +
+  ggtitle(expression(bold("d)"))) +
+  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  scale_fill_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+    scale_color_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+  theme_light() +
+  coord_flip() +
+  scale_x_discrete(name = "Systematic approach") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 35, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,35)) +
+  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+                label = paste0(n), x = Review_type_claimed), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  theme(title = element_text(size = 10),
+        legend.position = c(0.6, 0.4),
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Systematic method:")
+
+p_sys_appr3
+```
+
+## Figure 4 combined
+
+```{r}
+(p_subj2 / p_rt2)-(p_sys_appr2 / p_sys_appr3)
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs", "Fig.4.png"),
+#        width = 24,
+#        height = 16,
+#        units = "cm")
+```
+
+## Figure 5 panel a
+
+```{r}
+#str(mdata)
+t2_PFASfocus <-
+  mdata %>%
+  count(PFAS_focus, PFAS_one_many) %>%
+  arrange(desc(n)) %>% 
+  filter(PFAS_focus != "NA") %>%  #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+t2_PFASfocus$PFAS_one_many <- ifelse(t2_PFASfocus$PFAS_one_many == 'Not specified', 'NS', t2_PFASfocus$PFAS_one_many) #changing 'not specified' values into 'NS'
+
+t2_PFASfocus <- t2_PFASfocus %>%
+  mutate(PFAS_focus = case_when(
+    PFAS_focus == "Yes" ~ "PFAS",
+    PFAS_focus == "No" ~ "POPs"
+  ))
+
+p2_PFAS_focus <- 
+  ggplot(t2_PFASfocus, aes(x = PFAS_focus,
+                          y = percentage)) +
+  geom_col(aes(fill = fct_relevel(PFAS_one_many, c("NS",
+                                                   "Multiple",
+                                                   "One")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) + 
+  scale_fill_manual(values = cbp3, 
+                    breaks=c('One', 
+                             'Multiple',
+                             'NS')) +
+    scale_color_manual(values = cbp3,
+                     breaks=c('One', 
+                             'Multiple',
+                             'NS')) +
+  scale_x_discrete(name = "Review focus") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  theme_light() +
+  coord_flip() +
+  geom_text(aes(fill = fct_relevel(PFAS_one_many, c("NS",
+                                                    "Multiple", 
+                                                    "One")),
+                label = paste0(n), x = PFAS_focus),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  ggtitle(expression(bold("a)"))) +
+  theme(
+       title = element_text(size = 10),
+       legend.position = c(0.8, 0.8),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8), 
+       legend.key.size = unit(0.2, "cm"),
+       axis.title.x = element_text(size = 9),
+       axis.title.y = element_text(size = 9),
+       axis.text = element_text(size = 8),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")
+       ) +
+  labs(fill = "PFAS reviewed:")
+
+p2_PFAS_focus
+```
+
+## Figure 5 panel b
+
+```{r}
+# PFAS_one_many vs. Human_animal_environment contingency table
+t1 <-
+  mdata %>%
+  count(Human_animal_environment, PFAS_one_many) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  mutate(PFAS_one_many = case_when(
+    PFAS_one_many == "Not specified" ~ "NS",
+    TRUE ~ PFAS_one_many
+  ))
+
+
+pp1 <- ggplot(t1, aes(x = PFAS_one_many,
+                      y = percentage)) +
+ coord_flip()  +
+ labs(title = expression(bold("b)"))) +
+ geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                             "Environment",
+                                                             "Animals", 
+                                                             "Humans")),
+              color = "black"),
+          alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  #geom_text(aes(label = n), position = position_stack(vjust = 0.2)) +
+  scale_fill_manual(values=cbp2,
+                    breaks=c("Humans", 
+                             "Animals",
+                             "Environment",
+                             "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+ theme_light() +  
+ theme(title = element_text(size = 10),
+       legend.position = c(0.8, 0.7),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.title.x = element_text(size = 9),
+       axis.title.y = element_text(size = 9),
+       axis.text = element_text(size = 8),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+ ylab("Article count") +
+  scale_x_discrete(name = "PFAS reviewed") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                    "Environment",
+                                                    "Animals",
+                                                    "Humans")),
+                label = paste0(n), x = PFAS_one_many),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  labs(fill = "Review subject:")
+
+pp1
+```
+
+
+
+## Figure 5 panel c
+
+```{r}
+#str(ptidata)
+t_PFAStype <- ptidata %>%
+  filter(PFAS_type != "NA") %>% #filter out NA
+  count(PFAS_type) %>%
+  mutate(percent = (n / 175 * 100)) #109 is the number of SRs included in this review
+
+t_PFAStype$PFAS_type <-
+  factor(t_PFAStype$PFAS_type, levels = t_PFAStype$PFAS_type[order(t_PFAStype$percent, decreasing = FALSE)])
+
+PFAS_levels_order <-
+  t_PFAStype$PFAS_type[order(t_PFAStype$percent, decreasing = FALSE)] #save for another plot
+
+#str(mpidata)
+t_PFAStype2 <-
+  mpidata %>%
+  count(PFAS_type, Human_animal_environment) %>%
+  arrange(desc(n)) %>%
+  filter(PFAS_type != "NA") %>%  #filter out NA
+  mutate(percentage = ( n / 175 * 100))
+  
+#t_PFAStype$PFAS_type <- factor(t_PFAStype$PFAS_type, levels = unique(t_PFAStype$PFAS_type[order(t_PFAStype$n, decreasing = FALSE)]))
+t_PFAStype2$PFAS_type <-
+  factor(t_PFAStype2$PFAS_type, levels = PFAS_levels_order) #use order from the previous graph
+
+
+p_PFAStype <-
+  ggplot(t_PFAStype2,
+         aes(x = PFAS_type,
+             y = percentage)) +
+  labs(title = expression(bold("c)"))) +
+  coord_flip()  +
+  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                              "Environment",
+                                                              "Animals",
+                                                              "Humans")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  theme_light() +
+  scale_fill_manual(values = cbp2,
+                    breaks = c("Humans",
+                             "Animals",
+                             "Environment",
+                             "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks = c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_x_discrete(name = "PFAS types") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 80, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                    "Environment",
+                                                    "Animals",
+                                                    "Humans")),
+                label = paste0(n), x = PFAS_type),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  theme(
+       title = element_text(size = 10),
+       legend.position = c(0.7, 0.6),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.2, "cm"),
+       axis.title.x = element_text(size = 9),
+       axis.title.y = element_text(size = 9),
+       axis.text.y = element_text(size = 7),
+       axis.text.x = element_text(size = 8),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+         labs(fill = "Review subject:")
+
+p_PFAStype
+```
+
+## Figure 5 combined
+
+```{r}
+(p2_PFAS_focus/pp1)-p_PFAStype
+
+# Optional: Save the plot as an image file
+ggsave(here("Figs", "Fig.5.png"),
+       width = 24,
+       height = 16,
+       units = "cm")
+```
+
+# OBJECTIVE 2
+
+Here we will examine the included syntheses for their reporting quality and potential biases, in order to assess reliability of reviews' conclusions, reveal syntheses that should be re-done, and highlight the aspects of review methodology that need to be improved.
+
+Table AMSTAR2 questions: the questions were stored separately in the first row of the file, and were loaded separately. We display them in a table, alongside the short labels that can be used in the plots. Full description of the questions and coding rules (from an adapted AMSTAR2 checklist; Shea et al. 2017; Samarasinghe et al. 2019), are provided in the protocol.
+
+## Figure 6
+
+```{r plot AMSTAR2 summary}
+## prepare data 
+dim(qdata) #some empty rows to be removed
+
+#studies <- qdata$Author_year #normally would use this
+
+#only select columns with assessment codes (drop comments and empty rows)
+qtable <- 
+  qdata %>%
+  select(starts_with("Q") & !ends_with("_Comment"))  
+
+#simiplify column names to Q+number format
+names(qtable) <- 
+  gsub("\\..*", "", names(qtable)) 
+
+#simplify all the answers to short strings (version for a single column: gsub(" =.*", "", qtable$Q1)):
+qtable <- 
+  apply(qtable, 2, function(y) as.character(gsub(" =.*", "", y)))
+
+#save studies in a new vector
+studies <- 
+  qdata$Study_ID[!is.na(qdata$Study_ID)]
+
+#convert to long format data frame with Study_ID
+qtable_long <-
+  data.frame(study = studies,
+             question = rep(colnames(qtable),each = length(studies)),
+             score = as.vector(qtable), stringsAsFactors = TRUE) #make long format table
+
+rownames(qtable_long) <- NULL
+qtable_long$question <- 
+  factor(qtable_long$question, levels(qtable_long$question)[rev(c(1,9:16,2:8))]) #setting the order of levels - by Q-number
+
+#add a column with verbal expression of scores:   
+qtable_long <- qtable_long %>% 
+  mutate(score_word = case_when(
+    score == "1" ~ "High",
+    score == "0.5" ~ "Medium",
+    score == "0" ~ "Low",
+    score == "N/A" ~ "NA",
+    TRUE ~ as.character(score)
+  ))
+
+levels(qtable_long$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+qtable_long <- qtable_long %>% 
+  mutate(label = case_when(
+    question == "Q1" ~ "Q1: research question and criteria",
+    question == "Q2" ~ "Q2: a priori protocol",
+    question == "Q3" ~ "Q3: included studies design",
+    question == "Q4" ~ "Q4: comprehensive search",
+    question == "Q5" ~ "Q5: selection duplicated",
+    question == "Q6" ~ "Q6: extraction duplicated",
+    question == "Q7" ~ "Q7: list of excluded studies",
+    question == "Q8" ~ "Q8: summary of included studies",
+    question == "Q9" ~ "Q9: critical appraisal",
+    question == "Q10" ~ "Q10: included studies' funding",
+    question == "Q11" ~ "Q11: appropriate meta-analysis",
+    question == "Q12" ~ "Q12: evaluation of the RoB impacts",
+    question == "Q13" ~ "Q13: RoB in individual studies",
+    question == "Q14" ~ "Q14: variability investigation",
+    question == "Q15" ~ "Q15: publication bias",
+    question == "Q16" ~ "Q16: conflict of interest"
+  ))
+
+qtable_long$label <-
+  factor(qtable_long$label, levels = unique(qtable_long$label[order(qtable_long$question, decreasing = FALSE)]))
+
+summaryplot <-
+  ggplot(data = qtable_long) +
+  labs(title = expression(bold(""))) +
+  geom_bar(mapping = aes(x = label, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           alpha = 1,
+           width = 0.8,
+           size = 0.2, 
+           position = "fill",
+           color = "black") + 
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Methodological quality:",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Percentage of reviews",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0,0)) +
+  theme(axis.title.x = element_text(size = 11),
+            axis.title.y = element_text(size = 11),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 9, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 9, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "bottom",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_text(size = 10),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 9))
+
+# display plot
+summaryplot
+
+# Save the plot
+# ggsave(here("Figs","Fig.6.png"),
+#        width = 7,
+#        height = 5)
+```
+
+## Figure 7
+
+Panel a
+
+```{r}
+rep_guideline <- mdata %>% 
+  group_by(Reporting_guideline) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+t_guideline <-  rep_guideline %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(Reporting_guideline, -cumulative))) +
+  labs(title = expression(bold("a)"))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = Reporting_guideline),
+             size = 1.5, 
+             shape = 19, 
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                   breaks = seq(0, 150, by = 15),
+                    limits = c(0,150),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() + 
+  theme(plot.title = element_text(size = 9),
+        legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+       legend.text = element_text(size = 7),
+       legend.key.size = unit(0.2, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 8,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(color = "Reporting guideline")
+
+t_guideline
+```
+
+Panel b
+
+```{r}
+coi_statement <- mdata %>% 
+  group_by(COI_statement) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+t_coi <-  coi_statement %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(COI_statement, -cumulative))) +
+  labs(title = expression(bold("b)"))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = COI_statement),
+             size = 1.8,
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 150, by = 15),
+                    limits = c(0,150),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() + 
+  theme(plot.title = element_text(size = 9),
+         legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+       legend.text = element_text(size = 7),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 7,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(color = "COI statement")
+
+t_coi
+```
+
+Panel c
+
+```{r}
+coi_present <- mdata %>% 
+  group_by(COI_present) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+  
+coi_present$COI_present[is.na(coi_present$COI_present)] <- "NP"
+
+t_coi2 <-  coi_present %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(COI_present, -cumulative))) +
+  labs(title = expression(bold("c)"))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = COI_present), 
+             size = 1.8, 
+             shape = 19, 
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 150, by = 15),
+                    limits = c(0,150),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449",
+                                "NP" = "#B8B8B8")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+         legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+       legend.text = element_text(size = 7),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 7,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_blank(),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(color = "COI present")
+
+t_coi2
+```
+
+Panel d
+
+```{r}
+funding_statement <- mdata %>% 
+  group_by(Funding_statement) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+t_funding <-  funding_statement %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(Funding_statement, -cumulative))) +
+  labs(title = expression(bold("d)"))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = Funding_statement),
+             size = 1.8, 
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 150, by = 15),
+                    limits = c(0,150),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+         legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+       legend.text = element_text(size = 7),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 7,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_text(size = 9),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(color = "Funding statement")
+
+t_funding
+```
+
+Panel e
+
+```{r}
+funding1 <- mdata %>% 
+  filter(No_profit_funding == "Yes") %>% 
+  group_by(No_profit_funding) %>%
+  count(Publication_year) %>% 
+  mutate(cumulative1 = cumsum(n))
+
+funding2 <- mdata %>% 
+  filter(Industry_funding == "Yes") %>% 
+  group_by(Industry_funding) %>%
+  mutate(For_profit_funding = Industry_funding) %>% 
+  select(-Industry_funding) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative2 = cumsum(n))
+
+df <- rbind(funding1, funding2)
+
+df$type <- ifelse(is.na(df$No_profit_funding), "For_profit_funding", "No_profit_funding")
+
+df$cumulative <- ifelse(is.na(df$cumulative1), df$cumulative2, df$cumulative1)
+  
+df <- 
+  df %>% 
+  mutate(type = case_when(
+    type == "No_profit_funding" ~ "Nonprofit organization",
+    type == "For_profit_funding" ~ "For-profit organization",
+    TRUE ~ type
+  ))
+
+t_funding2 <-  df %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(type, -cumulative))) +
+  labs(title = expression(bold("e)"))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = type),
+             size = 1.8, 
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 150, by = 15),
+                    limits = c(0,150),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = c("Nonprofit organization" = "#028090",
+                                "For-profit organization" = "#D17A22")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+         legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+       legend.text = element_text(size = 7),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 7,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 8,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 9,
+                                   hjust = 0.5),
+       axis.title.y = element_blank(),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(color = "Funding source:")
+
+t_funding2
+```
+
+Combined
+
+```{r, eval=FALSE}
+# Optional: save the plot
+png("Figs/Fig.7.png", width = 18, height = 22, units = "cm", res = 300)
+t_guideline/(t_coi+t_coi2)/(t_funding+t_funding2)
+dev.off()
+```
+
+# OBJECTIVE 3
+
+## Figure 8
+
+Making the plot without getting rid of collabs with the same country
+```{r, echo = FALSE, results = 'hide'}
+NetMatrix2 <- biblioNetwork(bib_data, 
+                            analysis = "collaboration",
+                            network = "countries", 
+                            sep = ";")
+
+net_matrix2 <- as.matrix(NetMatrix2)
+
+#net_matrix2 <- net_matrix2[rownames(NetMatrix2), countries]
+#diag(net_matrix2) <- 0 #get rid of collaboration with same country
+
+#net_matrix2
+
+# getting rid of lower triangle (as this is duplication of info)
+net_matrix2[lower.tri(net_matrix2)] <- 0 
+#colnames(net_matrix2) - change to title case:
+colnames(net_matrix2) <- str_to_title(colnames(net_matrix2))
+#rownames(net_matrix2) - change to title case:
+rownames(net_matrix2) <- str_to_title(rownames(net_matrix2))
+#Fix "Usa" to "USA" :
+colnames(net_matrix2)[colnames(net_matrix2) == "Usa"] <- "USA"
+rownames(net_matrix2)[rownames(net_matrix2) == "Usa"] <- "USA"
+#change "UNITED KINGDOM" to "UK" for easier plotting:
+colnames(net_matrix2)[colnames(net_matrix2) == "United Kingdom"] <- "UK"
+rownames(net_matrix2)[rownames(net_matrix2) == "United Kingdom"] <- "UK"
+
+circos.clear()
+
+my.cols2 <- c(USA = "#00FFFF",
+              China = "#89CFF0",
+              Spain = "#7393B3", 
+              Denmark = "#088F8F", 
+              Italy = "#9FE2BF",
+              France = "#EADDCA",
+              Sweden = "#E1C16E",
+              Canada = "#CD7F32", 
+              Norway = "#E30B5C",
+              UK = "#DAA06D", 
+              Korea = "#800020", 
+              Greece = "#E97451", 
+              Germany = "#F0E68C",
+              Australia = "#808000", 
+              Brazil = "#FFAC1C", 
+              Finland = "#E3963E",
+              Austria = "#FBCEB1", 
+              Belgium = "#FFC000", 
+              Malaysia = "#F4BB44",
+              Netherlands = "#FFE5B4", 
+              Poland = "#FF4433",
+              Switzerland = "#FA8072",
+              Romania = "#BCF4EE",
+              Slovenia = "#9F2B68",
+              Uganda = "#DE3163",
+              Cyprus = "#811331",
+              Hong_Kong = "#DC143C",
+              Japan = "#AA336A", 
+              Czech_Republic = "#C9A9A6", 
+              Ghana = "#FF69B4",
+              Hungary = "#673147", 
+              India = "#A52A2A" , 
+              Israel = "#D8BFD8", 
+              Kenya = "#DA70D6",
+              Luxembourg = "#770737",
+              Mexico = "#E0B0FF",
+              Monaco = "#CCCCFF", 
+              Portugal = "#A95C68", 
+              Saudi_Arabia = "#51414F", 
+              Singapore = "#BDB5D5", 
+              Slovakia = "#FAD9D1",
+              South_Africa = "#EEDC82", 
+              Tanzania = "#DAA520", 
+              Zimbabwe = "#F0E68C")
+
+colnames(net_matrix2)[colnames(net_matrix2) == "Hong Kong"] <- "Hong_Kong"
+rownames(net_matrix2)[rownames(net_matrix2) == "Hong Kong"] <- "Hong_Kong"
+colnames(net_matrix2)[colnames(net_matrix2) == "Czech Republic"] <- "Czech_Republic"
+rownames(net_matrix2)[rownames(net_matrix2) == "Czech Republic"] <- "Czech_Republic"
+colnames(net_matrix2)[colnames(net_matrix2) == "Saudi Arabia"] <- "Saudi_Arabia"
+rownames(net_matrix2)[rownames(net_matrix2) == "Saudi Arabia"] <- "Saudi_Arabia"
+colnames(net_matrix2)[colnames(net_matrix2) == "South Africa"] <- "South_Africa"
+rownames(net_matrix2)[rownames(net_matrix2) == "South Africa"] <- "South_Africa"
+
+
+
+fig1 <- chordDiagram(net_matrix2,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+               )
+
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 0.8)
+  #circos.axis(h = FALSE, 
+              #major.at = NULL, 
+              #labels.cex = 0.6,
+              #minor.ticks = FALSE,
+             # major.tick.length = NULL, 
+              #sector.index = sector.name,
+              #track.index = 2,
+              #labels.pos.adjust = TRUE)
+  },
+  bg.border = NA)
+
+fig1
+```
+
+Making the same plot but with less countries (countries wth only one collaboration were dropped)
+
+```{r, echo = FALSE, results = 'hide'}
+# net_matrix2 <- net_matrix2[-c(44 : 32), -c(44 : 32)]
+# net_matrix2 <- net_matrix2[-c(30, 29, 25, 23), -c(30, 29, 25, 23)]
+# net_matrix2 <- net_matrix2[-c(27), -c(27)]
+# Calculate row-wise totals
+row_totals <- rowSums(net_matrix2)
+# Find rows to be dropped
+rows_to_drop <- row_totals <= 1
+# Drop rows and paired columns
+net_matrix2_filtered <- net_matrix2[!rows_to_drop, !rows_to_drop]
+
+#pdf(here("R", "Country collabs_1.pdf"), width = 10, height = 10)
+fig2 <- chordDiagram(net_matrix2_filtered,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 1.2)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+  },
+  bg.border = NA)
+#title("Country collaborations", font.main = 1, cex.main = 1.8)
+
+#dev.off()
+
+fig2
+```
+
+Making the plot getting rid of collabs with the same country
+
+```{r}
+net_matrix3_filtered <- net_matrix2_filtered
+diag(net_matrix3_filtered) <- 0 #get rid of collaboration with same country
+
+# pdf(here("R_data", "inter_countries_collab.pdf"), width = 21, height = 21)
+
+fig3 <- chordDiagram(net_matrix3_filtered,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2)
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 3)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+#title("Country collaborations", font.main = 1, cex.main = 3, adj = 0.5, line = -1)
+# dev.off()
+fig3
+```
+
+Saving the panel as a PDF
+
+```{r, eval = FALSE}
+# Optional: save the plot
+# pdf(here("Figs", "Fig.8.pdf"), width = 8, height = 12)
+# 
+# layout(matrix(1:2, 1, 2))
+# par(mfrow = c(2, 1),
+#     mar = c(1, 1, 3, 1), 
+#     bg = rgb(1, 1, 1, 0.1),
+#     adj = 0, 
+#     cex = 0.8)
+
+fig1 <- chordDiagram(net_matrix2_filtered,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(-0.1, 0.5),
+              cex = 1)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+title("A",font.main = 1, cex.main = 2.5)
+
+
+fig3 <- chordDiagram(net_matrix3_filtered,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(-0.1, 0.3),
+              cex = 1)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+title("B", font.main = 1, cex.main = 2.5)
+
+# dev.off()
+```
+
+# Supplementary Figures
+
+## Supplementary Figure 2
+
+The following plot shows the number of reviews published each year from 2008 to 2022.
+
+```{r}
+trend_overall <- mdata %>% 
+  count(Publication_year) %>% #counting the number of rows for each unique value of the "Publication_year"
+  mutate(cumulative = cumsum(n)) #add a new column to the output of the previous step, named "cumulative", which contains the cumulative sum of the "n" column
+
+# Create a barplot using ggplot2
+tt1 <- trend_overall %>% 
+  ggplot(aes(x = Publication_year,
+             y = n)) +
+  geom_col(aes(y = n),
+           color = "black", 
+           fill = "#999999",
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.3) + # add columns
+  # geom_line(size = 0.3) + #add a line chart
+  # geom_point(size = 1.5,
+  #            shape = 19,
+  #            fill = "white") + #add a scatter plot
+  geom_text(aes(label = n,
+                x = Publication_year, 
+            y = n),
+            size = 3,
+            position = position_stack(vjust = 0.5)) + #add text labels to the ggplot object
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 60, by = 10),
+                    expand = c(0,1),
+                    minor_breaks = NULL) +
+  theme_light() +
+  theme(axis.text.x = element_text(size = 10,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 10,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_text(size = 11), #add theme elements
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+# Display the plot
+tt1
+
+#Optional: Save the plot as an image file
+ggsave(here("Figs/Suppl_Figs", "SFig.2.png"),
+       width = 8,
+       height = 6)
+```
+
+## Supplementary Figure 3
+
+The following plot shows the cumulative time trend in the number of reviews published from 2008 to 2022.
+
+```{r}
+tt1.1 <- trend_overall %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative)) +
+  geom_line(size = 0.3) +
+  geom_point(size = 1, 
+             shape = 19,
+             fill = "white") +
+  geom_area(fill = "grey", alpha = 0.2) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 190, by = 10),
+                    minor_breaks = NULL,
+                    expand = c(0.01,0.1)) +
+  theme_light() +
+  theme(plot.title = element_text(size = 10), 
+       axis.text.x = element_text(size = 10,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 10,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_text(size = 11), #add theme elements
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+tt1.1
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs/Suppl_Figs", "SFig.3.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplemenatry Figure 4
+
+```{r, height = 2, width = 8}
+# Filter and prepare data for a barplot
+t_subject <- mdata %>%
+  filter(Human_animal_environment != "NA") %>% #filter out NA
+  count(Human_animal_environment) %>% # Count occurrences of each category
+  mutate(percentage = round( n / sum(n) * 100)) # Calculate percentage
+
+# Order levels of 'Human_animal_environment' for plotting
+t_subject$Human_animal_environment <-
+  factor(t_subject$Human_animal_environment, levels = unique(t_subject$Human_animal_environment[order(t_subject$n, decreasing = FALSE)]))
+
+subjects_levels_order <- 
+  t_subject$Human_animal_environment[order(t_subject$n, decreasing = FALSE)] #save for another plot
+
+# Create a barplot using ggplot2
+p_subj <- ggplot(t_subject, aes(x = Human_animal_environment,
+                                y = percentage)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  theme_light() +
+  coord_flip()+
+  scale_x_discrete(name = "Review subject") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 80, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  geom_text(aes(label = paste0(n), x = Human_animal_environment), 
+            position = position_stack(vjust = 0.5), 
+            size = 3) + 
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 11),
+        axis.text = element_text(size = 10),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+# Display the plot
+p_subj
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs/Suppl_Figs", "SFig.4.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 5
+
+```{r}
+t_reviewtypes <- mdata %>%
+  filter(Review_type_claimed != "NA") %>% #filter out NA
+  count(Review_type_claimed) %>%
+  mutate(percentage = round( n / sum(n) * 100))
+
+t_reviewtypes$Review_type_claimed <-
+  factor(t_reviewtypes$Review_type_claimed, levels = unique(t_reviewtypes$Review_type_claimed[order(t_reviewtypes$n, decreasing = FALSE)]))
+
+p_rt <- ggplot(t_reviewtypes, aes(x = Review_type_claimed,
+                                y = percentage)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  theme_light() +
+  coord_flip()+
+  scale_x_discrete(name = "Review type claimed") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 40, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,40)) +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  geom_text(aes(label = paste0(n), x = Review_type_claimed), 
+            position = position_stack(vjust = 0.5), 
+            size = 3) + 
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 11),
+        axis.text = element_text(size = 9),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+p_rt
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs/Suppl_Figs", "SFig.5.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 6
+
+```{r}
+#str(ptidata)
+t_PFAStype <- ptidata %>%
+  filter(PFAS_type != "NA") %>% #filter out NA
+  count(PFAS_type) %>%
+  mutate(percent = (n/183 * 100)) #109 is the number of SRs included in this review
+
+t_PFAStype$PFAS_type <-
+  factor(t_PFAStype$PFAS_type, levels = t_PFAStype$PFAS_type[order(t_PFAStype$n, decreasing = FALSE)])
+
+PFAS_levels_order <-
+  t_PFAStype$PFAS_type[order(t_PFAStype$n, decreasing = FALSE)] #save for another plot
+
+# simple barplot with PFAS types
+PFAS_types <- ggplot(t_PFAStype, aes(x = PFAS_type,
+                       y = n)) +
+  geom_col(aes(fill = ""), width = 0.7) +
+  theme_light() +
+  coord_flip()+
+  scale_y_continuous(name = "Number of reviews",
+                     expand = c(0,1)) +
+  scale_fill_manual(values = c("#999999")) +
+  # geom_text(aes(label = paste0(round((n/109)*100)), x = PFAS_type), 
+  #           position = position_stack(vjust = 0.5), 
+  #           size = 3) + 
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_blank(),
+        axis.text.y = element_text(size = 10))
+PFAS_types
+
+# Optional: Save the plot as an image file
+# ggsave(here("Figs/Suppl_Figs", "SFig.6.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 7
+
+Panel a
+
+```{r}
+# change to long format:
+t_MESH <-
+  mdata %>%
+  select(Study_ID, MeSH_terms, Human_animal_environment) %>%
+  separate_rows(MeSH_terms, sep = ";\\\n") %>%
+  separate_rows(MeSH_terms, sep = "; ")
+#bring to lower case and remove ending and trailing whitespace from character strings, single character vector:
+tmesh <- 
+  str_to_lower(trimws(t_MESH$MeSH_terms)) 
+#remove star character:
+tmesh <- 
+  sub("[\\*]", "", tmesh) 
+
+#separate terms before and after "/" into separate columns (headings and quantifiers, respectively)
+tmesh2 <- 
+  str_split_fixed(tmesh, " / ", n = 2)
+
+Human_animal_environment <- t_MESH$Human_animal_environment
+Study_ID <- t_MESH$Study_ID
+#create a MeSH dataframe with three columns: terms, headings, qualifiers
+t_MESH2 <- 
+  bind_cols(tmesh, 
+            tmesh2[,1],
+            tmesh2[,2],
+            Human_animal_environment,
+            Study_ID)
+
+colnames(t_MESH2) <- c("MeSH_terms",
+                       "MeSH_headings",
+                       "MeSH_qualifiers",
+                       "Subject",
+                       "Study_ID")
+
+MeSH_headings_counts <- t_MESH2[!duplicated(t_MESH2[, c("Study_ID", "MeSH_headings")]), ]
+
+#count frequencies of headings
+MeSH_headings_counts <- MeSH_headings_counts %>%
+  filter(MeSH_headings != "NA") %>%
+  count(MeSH_headings) %>% 
+  mutate(percentage = round( n / 175 * 100))
+  
+MeSH_headings_counts$MeSH_headings <- factor(MeSH_headings_counts$MeSH_headings, levels = MeSH_headings_counts$MeSH_headings[order(MeSH_headings_counts$n, decreasing = FALSE)])
+
+MeSH_headings_counts <- MeSH_headings_counts %>% 
+  top_n(10, n)
+
+MESH_headings_order <- 
+  MeSH_headings_counts$MeSH_headings[order(MeSH_headings_counts$n, decreasing = FALSE)] #save for the next plot
+
+t_topic_subject <- t_MESH2[!duplicated(t_MESH2[, c("Study_ID", "MeSH_headings")]), ]
+
+t_topic_subject <-
+  t_topic_subject %>%
+  filter(MeSH_headings != "NA") %>%
+  count(MeSH_headings, Subject) %>% 
+  mutate(percentage = round( n / 175 * 100)) %>% 
+  group_by(MeSH_headings) %>%
+  mutate(n_tot = sum(n)) %>%
+  ungroup() %>% 
+  mutate(percentage_tot = round( n_tot / 175 * 100)) %>% 
+  filter(n_tot >= 20)
+
+t_topic_subject$MeSH_headings <- fct_reorder(t_topic_subject$MeSH_headings, t_topic_subject$n, .fun = sum, .desc = FALSE)
+
+p_mesh_subject <- ggplot(t_topic_subject, aes(x = MeSH_headings, 
+                            y = percentage)) +
+ theme_light() +
+ labs(title = expression(bold("a)"))) +
+ coord_flip()  +
+ geom_col(aes(fill = fct_relevel(Subject, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+              color = "black"), 
+          alpha = 0.5,
+          width = 0.8,
+          size = 0.2) + 
+  scale_fill_manual(values=cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_x_discrete(name = "MeSH headings") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  geom_text(aes(fill = fct_relevel(Subject, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+                label = paste0(n[Subject == Subject])
+, x = MeSH_headings), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.5) + 
+  theme_light() +
+  theme(title = element_text(size = 9),
+        legend.position = c(0.7, 0.3),
+       legend.box.background = element_rect(size = 0.1,
+                                            colour = "black"),
+       legend.title = element_blank(),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.3, "cm"),
+       axis.title.x = element_blank(),
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       legend.background = element_blank(),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+p_mesh_subject
+```
+
+Panel b
+
+```{r}
+MeSH_qualifiers_counts <- t_MESH2[!duplicated(t_MESH2[, c("Study_ID", "MeSH_qualifiers")]), ]
+
+#count frequencies of qualifiers
+MeSH_qualifiers_counts <- MeSH_qualifiers_counts %>%
+  filter(!is.na(MeSH_qualifiers) & MeSH_qualifiers != "") %>%
+  count(MeSH_qualifiers) %>% 
+  mutate(percentage = round( n / 175 * 100))
+
+MeSH_qualifiers_counts$MeSH_qualifiers <- 
+  factor(MeSH_qualifiers_counts$MeSH_qualifiers, levels = MeSH_qualifiers_counts$MeSH_qualifiers[order(MeSH_qualifiers_counts$n, decreasing = FALSE)])
+
+MeSH_qualifiers_counts <- MeSH_qualifiers_counts %>% 
+  top_n(10, n)
+
+MESH_qualifiers_order <- 
+  MeSH_qualifiers_counts$MeSH_qualifiers[order(MeSH_qualifiers_counts$n, decreasing = FALSE)] #save for the next plot
+
+t_topic_subject2 <- t_MESH2[!duplicated(t_MESH2[, c("Study_ID", "MeSH_qualifiers")]), ]
+
+t_topic_subject2 <-
+  t_topic_subject2 %>%
+  filter(MeSH_qualifiers != "NA") %>% 
+  filter(MeSH_qualifiers != "") %>% 
+  count(MeSH_qualifiers, Subject) %>% 
+  mutate(percentage = round( n / 175 * 100)) %>% 
+  group_by(MeSH_qualifiers) %>%
+  mutate(n_tot = sum(n)) %>%
+  ungroup() %>% 
+  mutate(percentage_tot = round( n_tot / 175 * 100)) %>% 
+  filter(n_tot >= 7)
+
+t_topic_subject2$MeSH_qualifiers <- fct_reorder(t_topic_subject2$MeSH_qualifiers, t_topic_subject2$n, .fun = sum, .desc = FALSE)
+
+p_mesh_subject2 <- ggplot(t_topic_subject2, aes(x = MeSH_qualifiers, 
+                            y = percentage)) +
+ theme_light() +
+ labs(title = expression(bold("b)"))) +
+ coord_flip()  +
+ geom_col(aes(fill = fct_relevel(Subject, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+              color = "black"), 
+          alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  scale_fill_manual(values=cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  scale_x_discrete(name = "MeSH qualifiers") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  geom_text(aes(fill = fct_relevel(Subject, c("Mixed",
+                                            "Environment", 
+                                            "Animals", 
+                                            "Humans")),
+                label = paste0(n[Subject == Subject])
+, x = MeSH_qualifiers), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.5) + 
+  theme_light() +
+  theme(title = element_text(size = 9),
+        legend.position = c(0.7, 0.3),
+       legend.box.background = element_rect(size = 0.1,
+                                            colour = "black"),
+       legend.title = element_blank(),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.3, "cm"),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       legend.background = element_blank(),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+p_mesh_subject2
+```
+
+Combined plot
+
+```{r}
+p_mesh_subject/p_mesh_subject2
+# ggsave(here("Figs/Suppl_Figs", "SFig.7.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 8
+
+Panel a
+
+```{r}
+mdata_n_studies <- mdata %>% 
+  filter(PFAS_focus == "Yes")
+
+mdata_n_studies$Human_animal_environment <- fct_relevel(mdata_n_studies$Human_animal_environment, c("Humans",
+                                                                                "Animals",
+                                                                                "Environment", 
+                                                                                "Mixed"))
+
+n_studies_1 <- ggplot(mdata_n_studies, aes(x = Human_animal_environment, 
+                  y = log10(N_studies),
+                  fill = Human_animal_environment)) +
+  labs(title = expression(bold("a)"))) +
+  geom_violin(alpha = 0.5) +
+  geom_boxplot(width=0.1, 
+               outlier.shape = NA) +
+  scale_fill_manual(values = cbp2,
+                    guide = guide_legend(override.aes = list(size=5, linetype=0))) +
+  scale_y_continuous(breaks = seq(0, 3.5, by = 0.2),
+                     expand = c(0,0.1),
+                     limits = c(0,3.5)) +
+  labs(x = "Review subject",
+       y = "log10(n)") +
+  theme_classic() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 9),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(size = 11),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 10),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  guides(fill = guide_legend(ncol = 1))
+
+n_studies_1
+```
+
+Panel b
+
+```{r}
+# create a factor with the desired order of levels
+order_levels <- c("systematic review",
+                  "meta-analysis", 
+                  "systematic review and meta-analysis", 
+                  "comprehensive review",
+                  "scoping review",
+                  "critical review",
+                  "review",
+                  "systematic evidence map")
+
+mdata_n_studies$Review_type_claimed <- factor(mdata_n_studies$Review_type_claimed, levels=order_levels)
+
+n_studies_3 <- ggplot(mdata_n_studies, aes(x = Review_type_claimed, 
+                  y = log10(N_studies),
+                  fill = Review_type_claimed)) +
+  labs(title = expression(bold("b)"))) +
+  geom_violin(alpha = 0.5) +
+  geom_boxplot(width=0.1, 
+               outlier.shape = NA) +
+  scale_fill_manual(values = my_palette) +
+  scale_y_continuous(breaks = seq(0, 3.5, by = 0.2),
+                     expand = c(0,0.1),
+                     limits = c(0,3.5)) +
+  labs(x = "Review type",
+       y = "log10(n)") +
+  theme_classic() +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 9),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(size = 11),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 10),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  guides(fill = guide_legend(ncol = 2))
+
+n_studies_3
+```
+
+Combined
+
+```{r}
+n_studies_1-n_studies_3
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.8.png"),
+#        width = 11,
+#        height = 6)
+```
+
+## Supplementary Figure 9
+
+panel a
+
+```{r}
+tt_pfas_focus <- mdata %>% 
+  group_by(PFAS_focus) %>% 
+  count(Publication_year)
+
+tt_pfas_focus <- tt_pfas_focus %>%
+  mutate(PFAS_focus = case_when(
+    PFAS_focus == "Yes" ~ "PFAS",
+    PFAS_focus == "No" ~ "POPs"
+  ))
+
+tt4 <-  tt_pfas_focus %>%
+  ggplot(aes(x = Publication_year,
+             y = n)) +
+  labs(title = expression(bold("a)"))) +
+  geom_col(aes(
+           fill = PFAS_focus,
+           color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  # geom_line(size = 0.5) + 
+  # geom_point(aes(color = PFAS_focus), 
+  #            size = 1, 
+  #            shape = 19, 
+  #            fill = "white") +
+  geom_text(aes(fill = fct_relevel(PFAS_focus, c("PFAS",
+                                                 "POPs")),
+                label = n, 
+                x = Publication_year,
+                y = n), 
+            size = 2.5, 
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = c(seq(2008, 2022, by = 1)),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 50, by = 10),
+                    minor_breaks = NULL
+                    ) +
+  scale_fill_manual(values = c("#DE6449", "#588157"),
+                    breaks = c("PFAS","POPs")) +
+  scale_color_manual(values = cbp1,
+                     breaks = c("PFAS","POPs")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 12),
+        legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 9),
+       legend.text = element_text(size = 9),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 10,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 10,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_text(size = 11),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "Focus:")
+
+tt4
+```
+
+panel b
+
+```{r}
+tt_pfas_focus2 <- mdata %>% 
+  group_by(PFAS_one_many) %>% 
+  count(Publication_year) 
+
+tt_pfas_focus2 <- tt_pfas_focus2 %>% 
+  mutate(PFAS_one_many = ifelse(PFAS_one_many == "Not specified", "NS", PFAS_one_many))
+
+tt5 <-  tt_pfas_focus2 %>%
+  ggplot(aes(x = Publication_year,
+             y = n)) +
+  labs(title = expression(bold("b)"))) +
+  geom_col(aes(
+           fill = PFAS_one_many,
+           color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  # geom_line(size = 0.5) + 
+  # geom_point(aes(color = PFAS_one_many), 
+  #            size = 1,
+  #            shape = 19,
+  #            fill = "white") +
+  geom_text(aes(fill = fct_relevel(PFAS_one_many, c("Multiple",
+                                                 "NS",
+                                                 "One")),
+                label = n, x = Publication_year, y = n), 
+            size = 2.5, 
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = c(seq(2008, 2022, by = 1)),
+                     minor_breaks = NULL) +
+  scale_y_continuous(#name = "Number of reviews",
+                    breaks = seq(0, 80, by = 10),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = cbp1,
+                     breaks = c("Multiple",
+                                "NS",
+                                "One")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 12),
+        legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 10,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 45),
+       axis.text.y = element_text(size = 10,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_blank(),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "PFAS reviewed:")
+
+tt5
+```
+
+panel c
+
+```{r}
+mpidata$PFAS_group2 <- ifelse(mpidata$PFAS_group == "Perfluoroalkane sulfonic acids (PFSA)" |
+                              mpidata$PFAS_group == "Perfluoroalkyl carboxylic acids (PFCA)" ,
+                              mpidata$PFAS_group, "Other")
+
+mpidata$PFAS_group2 <- gsub("Perfluoroalkane sulfonic acids \\(PFSA\\)", "PFSA", mpidata$PFAS_group2)
+mpidata$PFAS_group2 <- gsub("Perfluoroalkyl carboxylic acids \\(PFCA\\)", "PFCA", mpidata$PFAS_group2)
+
+tt_pfas_groups2 <- mpidata[!duplicated(mpidata[, c("Study_ID", "PFAS_group2")]), ]
+
+tt_pfas_groups2 <- tt_pfas_groups2 %>% 
+  drop_na(PFAS_group2) %>%
+  group_by(PFAS_group2) %>% 
+  count(Publication_year)
+  
+tt7 <-  tt_pfas_groups2 %>%
+  ggplot(aes(x = Publication_year,
+             y = n)) +
+  labs(title = expression(bold("c)"))) +
+  geom_col(aes(
+           fill = PFAS_group2,
+           color = "black"), 
+           alpha = 0.3,
+           width = 0.8,
+           size = 0.2) +
+  # geom_line(size = 0.5) + 
+  # geom_point(aes(color = reorder(PFAS_group2, -cumulative)), 
+  #            size = 1, 
+  #            shape = 19,
+  #            fill = "white") +
+  geom_text(aes(fill = fct_relevel(PFAS_group2, c("Other",
+                                                 "PFCA",
+                                                 "PFSA")),
+                label = n, 
+                x = Publication_year, 
+                y = n), 
+            size = 2.5, 
+            position = position_stack(vjust = 0.5),
+            color = "black") +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 100, by = 10),
+                    minor_breaks = NULL
+                    ) +
+  scale_color_manual(values = cbp1,
+                     breaks = c("PFSA","PFCA", "Other")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 12),
+        legend.position = c(0, 1),
+      legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 9),
+       legend.text = element_text(size = 8),
+       legend.key.size = unit(0.3, "cm"),
+       legend.background = element_rect(fill = alpha("white", 0.7)),
+       axis.text.x = element_text(size = 10,
+                                  margin = margin(t = 5, 
+                                                  r = 0,
+                                                  l = 0),
+                                  angle = 0),
+       axis.text.y = element_text(size = 10,
+                                  margin = margin(t = 0, 
+                                                  r = 5, 
+                                                  l = 5)),
+       axis.title.x = element_text(size = 11),
+       axis.title.y = element_text(size = 11),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted")) +
+  labs(fill = "PFAS group:")
+
+tt7
+```
+
+Combined plot
+
+```{r}
+(tt4-tt5)/tt7
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.9.png"),
+#        width = 10,
+#        height = 8)
+```
+
+## Supplementary Figure 10
+
+```{r}
+species_lab_wildlife <- mspdata[!duplicated(mspdata[, c("Study_ID", "Lab_domestic_wildlife_mixed")]), ] %>% 
+  filter(Lab_domestic_wildlife_mixed != "NA") %>%
+  count(Lab_domestic_wildlife_mixed)
+
+species_lab_wildlife$Lab_domestic_wildlife_mixed <-
+  factor(species_lab_wildlife$Lab_domestic_wildlife_mixed, levels = species_lab_wildlife$Lab_domestic_wildlife_mixed[order(species_lab_wildlife$n, decreasing = FALSE)])
+
+ggplot(species_lab_wildlife, aes(x = Lab_domestic_wildlife_mixed, 
+                      y = n)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  labs(title = expression(bold(""))) +
+  theme_light() +
+  coord_flip()  +
+  scale_fill_brewer() +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+ scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 24, by = 2)) +
+  scale_x_discrete(name = "Species subject of review") +
+ theme_light() +
+ theme(legend.position = "none",
+       #legend.box.background = element_rect(colour = "black"), 
+       #legend.title = element_text(size = 8),  
+       #legend.text = element_text(size = 8), 
+       axis.title.x = element_text(size = 12), 
+       axis.title.y = element_text(size = 12),
+       axis.text = element_text(size = 11),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth = 0.2, 
+                                      linetype = "dotted"),
+       plot.title = element_text(size = 10))
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.10.png"),
+#        width = 10,
+#        height = 7)
+
+```
+
+## Supplementary Figure 11
+
+Panel a
+
+```{r}
+t_tx <- mspdata[!duplicated(mspdata[, c("Study_ID", "Class_scientific_name")]), ] %>% 
+  mutate(Class_scientific_name = case_when(
+    Class_scientific_name == 'Mammal'~ 'Mammalia',
+    Class_scientific_name == 'Branchiopods'~ 'Branchiopoda',
+    Class_scientific_name == 'Brachiopoda'~ 'Branchiopoda',
+    Class_scientific_name == 'Fish'~ 'Actinopterygii',
+    Class_scientific_name == 'Amphibian'~ 'Amphibia',
+    TRUE ~ Class_scientific_name)) %>% 
+  filter(Class_scientific_name != "NA" & Class_scientific_name != "na") %>% 
+  count(Class_scientific_name) %>%
+  arrange(desc(n))
+
+t_tx$Class_scientific_name <-
+  factor(t_tx$Class_scientific_name, levels = t_tx$Class_scientific_name[order(t_tx$n, decreasing = FALSE)])
+
+
+sp2 <- ggplot(t_tx, aes(x = Class_scientific_name, 
+                      y = n)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  labs(title = expression(bold("a)"))) +
+  theme_light() +
+  coord_flip()  +
+  scale_fill_brewer() +
+  scale_fill_manual(values = c("#999999")) +
+   scale_color_manual(values = c("#999999")) +
+ scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 24, by = 2)) +
+  scale_x_discrete(name = "Class scientific name") +
+ theme_light() +
+ theme(legend.position = "none",
+       legend.box.background = element_rect(colour = "black"), 
+       legend.title = element_text(size = 10),  
+       legend.text = element_text(size = 8), 
+       axis.title.x = element_text(size = 11), 
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth = 0.2, 
+                                      linetype = "dotted"),
+       plot.title = element_text(size = 12))
+
+sp2
+```
+
+Panel b
+
+```{r}
+t_sp <- mspdata[!duplicated(mspdata[, c("Study_ID", "Species_scientific_name")]), ] %>% 
+  filter(Species_scientific_name != "NA" & Species_scientific_name != "na") %>%
+  count(Species_scientific_name) %>%
+  arrange(desc(n))
+
+t_sp$Species_scientific_name <-
+  factor(t_sp$Species_scientific_name, levels = t_sp$Species_scientific_name[order(t_sp$n, decreasing = FALSE)])
+
+species_levels_order <-
+  t_sp$Species_scientific_name[order(t_sp$n, decreasing = FALSE)] #save for another plot
+
+t_sp <- head(t_sp, n = 20)
+
+sp1 <- ggplot(t_sp, aes(x = Species_scientific_name, 
+                      y = n)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  labs(title = expression(bold("b)"))) +
+  theme_light() +
+  coord_flip()  +
+  scale_fill_brewer() +
+  scale_fill_manual(values = c("#999999")) +
+   scale_color_manual(values = c("#999999")) +
+ scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 20, by = 2)) +
+  scale_x_discrete(name = "Species scientific name") +
+ theme_light() +
+ theme(legend.position = "none",
+       legend.box.background = element_rect(colour = "black"), 
+       legend.title = element_text(size = 8),  
+       legend.text=element_text(size = 8), 
+       axis.title.x = element_text(size = 11), 
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"),
+       plot.title = element_text(size = 12))
+sp1
+```
+
+Combined
+
+```{r}
+sp2-sp1
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.11.png"),
+#        width = 8,
+#        height = 9)
+```
+
+## Supplementary Figure 12
+
+panel a
+
+```{r}
+t_tx2 <- mspdata[!duplicated(mspdata[, c("Study_ID", "Class_scientific_name")]), ] %>% 
+  mutate(Class_scientific_name = case_when(
+    Class_scientific_name == 'Mammal'~ 'Mammalia',
+    Class_scientific_name == 'Branchiopods'~ 'Branchiopoda',
+    Class_scientific_name == 'Brachiopoda'~ 'Branchiopoda',
+    Class_scientific_name == 'Fish'~ 'Actinopterygii',
+    Class_scientific_name == 'Amphibian'~ 'Amphibia',
+    TRUE ~ Class_scientific_name)) %>% 
+  filter(Class_scientific_name != "NA" & Class_scientific_name != "na") %>% 
+  filter(Lab_domestic_wildlife_mixed != "Lab") %>% 
+  count(Class_scientific_name) %>%
+  arrange(desc(n))
+
+t_tx2$Class_scientific_name <-
+  factor(t_tx2$Class_scientific_name, levels = t_tx2$Class_scientific_name[order(t_tx2$n, decreasing = FALSE)])
+
+sp2.1 <- ggplot(t_tx2, aes(x = Class_scientific_name, 
+                      y = n)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  labs(title = expression(bold("a)"))) +
+  theme_light() +
+  coord_flip()  +
+  scale_fill_brewer() +
+  scale_fill_manual(values = c("#999999")) +
+   scale_color_manual(values = c("#999999")) +
+ scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 24, by = 2)) +
+  scale_x_discrete(name = "Class scientific name") +
+ theme_light() +
+ theme(legend.position = "none",
+       legend.box.background = element_rect(colour = "black"), 
+       legend.title = element_text(size = 8),  
+       legend.text = element_text(size = 8), 
+       axis.title.x = element_text(size = 11), 
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth = 0.2, 
+                                      linetype = "dotted"),
+       plot.title = element_text(size = 12))
+sp2.1
+```
+
+panel b
+
+```{r}
+t_sp2 <- mspdata[!duplicated(mspdata[, c("Study_ID", "Species_scientific_name")]), ] %>% 
+  filter(Species_scientific_name != "NA" & Species_scientific_name != "na") %>%
+  filter(Lab_domestic_wildlife_mixed != "Lab") %>% 
+  count(Species_scientific_name) %>%
+  arrange(desc(n))
+
+t_sp2$Species_scientific_name <-
+  factor(t_sp2$Species_scientific_name, levels = t_sp2$Species_scientific_name[order(t_sp2$n, decreasing = FALSE)])
+
+t_sp2 <- head(t_sp2, n = 20)
+
+sp1.1 <- ggplot(t_sp2, aes(x = Species_scientific_name, 
+                      y = n)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  labs(title = expression(bold("b)"))) +
+  theme_light() +
+  coord_flip()  +
+  scale_fill_brewer() +
+  scale_fill_manual(values = c("#999999")) +
+   scale_color_manual(values = c("#999999")) +
+ scale_y_continuous(name = "Number of reviews",
+                    breaks = seq(0, 20, by = 2)) +
+  scale_x_discrete(name = "Species scientific name") +
+ theme_light() +
+ theme(legend.position = "none",
+       legend.box.background = element_rect(colour = "black"), 
+       legend.title = element_text(size = 8),  
+       legend.text=element_text(size = 8), 
+       axis.title.x = element_text(size = 11), 
+       axis.title.y = element_text(size = 11),
+       axis.text = element_text(size = 10),
+       panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"),
+       plot.title = element_text(size = 12))
+sp1.1
+```
+
+combined
+
+```{r}
+sp2.1-sp1.1
+# ggsave(here("Figs/Suppl_Figs", "SFig.12.png"),
+#        width = 8,
+#        height = 9)
+```
+
+
+## Supplementary Figure 13
+
+```{r}
+t_enviro <- mdata %>%
+  filter(Environment_type != "NA") %>% #filter out NA
+  count(Environment_type) %>%
+  mutate(percentage = round( n / sum(is.na(mdata$Environment_type) == FALSE) * 100))
+
+t_enviro$Environment_type <-
+  factor(t_enviro$Environment_type, levels = unique(t_enviro$Environment_type[order(t_enviro$n, decreasing = FALSE)]))
+
+p_enviro <- ggplot(t_enviro, aes(x = Environment_type,
+                                y = percentage)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"), 
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  theme_light() +
+  labs(title = expression(bold(""))) + 
+  coord_flip()+
+  scale_x_discrete(name = "Type of environment") +
+  scale_y_continuous(name = "Percentage of reviews on the environment (%)",
+                     breaks = seq(0, 80, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,60)) +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  geom_text(aes(label = paste0(n), x = Environment_type), 
+            position = position_stack(vjust = 0.5), 
+            size = 3) + 
+  theme(title = element_text(size = 12),
+        legend.position = "none",
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 11),
+        axis.text = element_text(size = 10),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+p_enviro
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.13.png"),
+#        width = 9,
+#        height = 6)
+```
+
+## Supplementary Figure 14
+
+Panel a
+
+```{r COI_statement barplot, height = 2, width = 8}
+
+t_COI_statement <-
+  mdata %>%
+  count(COI_statement) %>%
+  arrange(desc(n)) %>%
+  filter(COI_statement != "NA") %>%  #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p1 <-
+  ggplot(t_COI_statement, aes(x = COI_statement,
+                              y = percentage)) +
+  geom_col(aes(fill = fct_relevel(COI_statement,
+                                  c("Yes", "No")),
+                                  width = 0.7)) +
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "COI statement provided") +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = COI_statement), 
+            position = position_stack(vjust = 0.5), 
+            size = 3) + 
+  ggtitle(expression(bold("a)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+  
+p1
+```
+
+Panel b
+
+```{r COI_present barplot, height = 2, width = 8}
+
+t_COI_present <- 
+  mdata %>% 
+  count(COI_present) %>% 
+  arrange(desc(n)) %>% 
+  filter(COI_present != "NA") %>% #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p2 <- 
+  ggplot(t_COI_present, aes(x = COI_present,
+                            y = percentage)) +
+  geom_col(aes(fill = fct_relevel(COI_present,
+                                  c("No", "Yes")),
+               width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "COI present") +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = COI_present), 
+            position = position_stack(vjust = 0.5),
+            size = 3) +
+  ggtitle(expression(bold("b)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+p2
+```
+
+Panel c
+
+```{r Funding_statement barplot, height = 2, width = 8}
+
+t_Funding_statement <- mdata %>% 
+  count(Funding_statement) %>% 
+  arrange(desc(n)) %>% 
+  filter(Funding_statement != "NA") %>% #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p3 <- 
+  ggplot(t_Funding_statement, aes(x = Funding_statement, 
+                                  y = percentage)) +
+  geom_col(aes(fill = fct_relevel(Funding_statement,
+                                  c("Yes", "No")), width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "Funding statement provided") +
+  theme(legend.position = "none", 
+        axis.title.y = element_blank()) +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = Funding_statement), 
+            position = position_stack(vjust = 0.5), 
+            size = 3) +
+  ggtitle(expression(bold("c)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+p3
+```
+
+Panel d
+
+```{r t_Nonprofit_funding barplot, height = 2, width = 8}
+
+t_no_profit <- 
+  mdata %>% 
+  count(No_profit_funding) %>% 
+  arrange(desc(n)) %>% 
+  filter(No_profit_funding != "NA") %>% #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p4 <- 
+  ggplot(t_no_profit, aes(x = No_profit_funding,
+                                  y = percentage)) +
+  theme(legend.position = "none",
+        axis.title.y = element_blank()) +
+  geom_col(aes(fill = fct_relevel(No_profit_funding,
+                                  c("Yes", "No")), width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) + 
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "No-profit fundings") +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = No_profit_funding), 
+            position = position_stack(vjust = 0.5),
+            size = 3) +
+  ggtitle(expression(bold("d)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+p4
+
+```
+
+Panel e
+
+```{r Industry_funding barplot, height = 2, width = 8}
+
+t_Funding_industry <- mdata %>% 
+  count(Industry_funding) %>% 
+  arrange(desc(n)) %>% 
+  filter(Industry_funding != "NA") %>%  #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p5 <- 
+  ggplot(t_Funding_industry, aes(x = Industry_funding,
+                                 y = percentage)) +
+  theme(legend.position = "none",
+        axis.title.y = element_blank()) +
+  geom_col(aes(fill = fct_relevel(Industry_funding,
+                                  c("Yes", "No")), width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) + 
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "For-profit fundings") +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = Industry_funding),
+            position = position_stack(vjust = 0.5),
+            size = 3) +
+  ggtitle(expression(bold("e)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+p5
+```
+
+Panel f
+
+```{r Raw_data barplot, height = 2, width = 8}
+#str(mdata)
+t_Raw_data <- 
+  mdata %>% 
+  count(Raw_data) %>% 
+  arrange(desc(n)) %>% 
+  filter(Raw_data != "NA") %>% #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p6 <- ggplot(t_Raw_data, aes(x = Raw_data, 
+                             y = percentage)) +
+  theme(legend.position = "none",
+       axis.title.y = element_blank()) +
+  geom_col(aes(fill = fct_relevel(Raw_data,
+                                  c("Yes", "No")), width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "Raw data available") +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = Raw_data),
+            position = position_stack(vjust = 0.5),
+            size = 3) +
+  ggtitle(expression(bold("f)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+p6
+```
+
+Panel g
+
+```{r Analysis_code barplot, height = 2, width = 8}
+
+t_Analysis_code <- 
+  mdata %>% 
+  count(Analysis_code) %>% 
+  arrange(desc(n)) %>% 
+  filter(Analysis_code != "NA") %>% #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+p7 <- ggplot(t_Analysis_code, aes(x = Analysis_code, 
+                                  y = percentage)) +
+  theme(legend.position = "none",
+       axis.title.y = element_blank()) +
+  geom_col(aes(fill = fct_relevel(Analysis_code,
+                                  c("Yes", "No")), width = 0.7)) + 
+  scale_fill_manual(values = c("#588157", "#DE6449"),
+                    breaks = c("Yes", "No")) +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 90, by = 20)) +
+  scale_x_discrete(name = "Analysis code available") +
+  theme_light() +
+  coord_flip() +
+  geom_text(aes(label = paste0(n), x = Analysis_code),
+            position = position_stack(vjust = 0.5), 
+            size = 3) +
+  ggtitle(expression(bold("g)"))) +
+  theme_light() +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+  
+p7
+```
+
+Combined
+
+```{r, plots combined 1}
+pp1 <- (p1+p2)
+pp2 <- (p3)/(p4+p5)
+pp3 <- (p6+p7)
+pp1+pp2+pp3
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.14.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 15
+
+Set up
+
+```{r}
+## prepare data 
+dim(qdata) #some empty rows to be removed
+
+#studies <- qdata$Author_year #normally would use this
+
+#only select columns with assessment codes (drop comments and empty rows)
+qtable <- 
+  qdata %>%
+  select(starts_with("Q") & !ends_with("_Comment"))  
+
+#simiplify column names to Q+number format
+names(qtable) <- 
+  gsub("\\..*", "", names(qtable)) 
+
+#simplify all the answers to short strings (version for a single column: gsub(" =.*", "", qtable$Q1)):
+qtable <- 
+  apply(qtable, 2, function(y) as.character(gsub(" =.*", "", y)))
+
+#save studies in a new vector
+studies <- 
+  qdata$Study_ID[!is.na(qdata$Study_ID)]
+
+#convert to long format data frame with Study_ID
+qtable_long <-
+  data.frame(study = studies,
+             question = rep(colnames(qtable),each = length(studies)),
+             score = as.vector(qtable), stringsAsFactors = TRUE) #make long format table
+
+rownames(qtable_long) <- NULL
+qtable_long$question <- 
+  factor(qtable_long$question, levels(qtable_long$question)[rev(c(1,9:16,2:8))]) #setting the order of levels - by Q-number
+
+#add a column with verbal expression of scores:   
+qtable_long <- qtable_long %>% 
+  mutate(score_word = case_when(
+    score == "1" ~ "High",
+    score == "0.5" ~ "Medium",
+    score == "0" ~ "Low",
+    score == "N/A" ~ "NA",
+    TRUE ~ as.character(score)
+  ))
+
+levels(qtable_long$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+```
+
+
+Panel a
+
+```{r}
+#save studies in a new vector
+subject <- 
+  mqdata$Human_animal_environment[!is.na(mqdata$Human_animal_environment)]
+
+#convert to long format data frame with Study_ID
+qtable_long_sub <-
+  data.frame(study = studies,
+             subject = subject,
+             question = rep(colnames(qtable),each = length(studies)),
+             score = as.vector(qtable), stringsAsFactors = TRUE) #make long format table
+
+rownames(qtable_long_sub) <- NULL
+qtable_long_sub$question <- 
+  factor(qtable_long_sub$question, levels(qtable_long_sub$question)[rev(c(1,9:16,2:8))]) #setting the order of levels - by Q-number
+
+#add a column with verbal expression of scores:   
+qtable_long_sub <- qtable_long_sub %>% 
+  mutate(score_word = case_when(
+    score == "1" ~ "High",
+    score == "0.5" ~ "Medium",
+    score == "0" ~ "Low",
+    score == "N/A" ~ "NA",
+    TRUE ~ as.character(score)
+  ))
+
+qtable_long_sub_hum <- qtable_long_sub %>% 
+  filter(subject == "Humans") 
+
+levels(qtable_long_sub_hum$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_hum <-
+  ggplot(data = qtable_long_sub_hum) +
+  labs(title = expression(bold("a) Review subject: Humans"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_blank(),
+            axis.title.y = element_text(size = 11),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 10, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 10, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_hum
+```
+
+Panel b
+
+```{r}
+qtable_long_sub_anim <- qtable_long_sub %>% 
+  filter(subject == "Animals") 
+
+levels(qtable_long_sub_anim$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_anim <-
+  ggplot(data = qtable_long_sub_anim) +
+  labs(title = expression(bold("b) Review subject: Animals"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_blank(),
+            axis.title.y = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 10, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 10, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_anim
+```
+
+Panel c
+
+```{r}
+qtable_long_sub_env <- qtable_long_sub %>% 
+  filter(subject == "Environment") 
+
+levels(qtable_long_sub_env$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_env <-
+  ggplot(data = qtable_long_sub_env) +
+  labs(title = expression(bold("c) Review Subject: Environment"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_text(size = 11),
+            axis.title.y = element_text(size = 11),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 10, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 10, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_env
+```
+
+Panel d
+
+```{r}
+qtable_long_sub_mix <- qtable_long_sub %>% 
+  filter(subject == "Mixed") 
+
+levels(qtable_long_sub_mix$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_mix <-
+  ggplot(data = qtable_long_sub_mix) +
+  labs(title = expression(bold("d) Review subject: Multiple subjects"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_text(size = 11),
+            axis.title.y = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 10, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 10, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_mix
+```
+
+Combined
+
+```{r}
+(summaryplot_hum - summaryplot_anim)/(summaryplot_env - summaryplot_mix)
+
+# save plot
+# ggsave(here("Figs/Suppl_Figs","SFig.15.png"),
+#        width = 9,
+#        height = 9)
+```
+
+## Supplementary Figure 16
+
+Panel a
+
+```{r}
+#save studies in a new vector
+system_approach <- 
+  mqdata$Systematic_approach[!is.na(mqdata$Systematic_approach)]
+
+#convert to long format data frame with Study_ID
+qtable_long_syst <-
+  data.frame(study = studies,
+             systematic_approach = system_approach,
+             question = rep(colnames(qtable),
+                            each = length(studies)),
+             score = as.vector(qtable),
+             stringsAsFactors = TRUE) #make long format table
+
+rownames(qtable_long_syst) <- NULL
+qtable_long_syst$question <- 
+  factor(qtable_long_syst$question, levels(qtable_long_syst$question)[rev(c(1,9:16,2:8))]) #setting the order of levels - by Q-number
+
+#add a column with verbal expression of scores:   
+qtable_long_syst <- qtable_long_syst %>% 
+  mutate(score_word = case_when(
+    score == "1" ~ "High",
+    score == "0.5" ~ "Medium",
+    score == "0" ~ "Low",
+    score == "N/A" ~ "NA",
+    TRUE ~ as.character(score)
+  ))
+
+qtable_long_syst_yes <- qtable_long_syst %>% 
+  filter(systematic_approach == "Yes") 
+
+levels(qtable_long_syst_yes$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_systematic <-
+  ggplot(data = qtable_long_syst_yes) +
+  labs(title = expression(bold("a) Systematic method"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_blank(),
+            axis.title.y = element_text(size = 9),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 8, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 8, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_systematic
+```
+
+Panel b
+
+```{r}
+qtable_long_syst_no <- qtable_long_syst %>% 
+  filter(systematic_approach == "No") 
+
+levels(qtable_long_syst_no$score_word) <- c("Low",
+                               "Medium",
+                               "High", 
+                               "NA")
+
+summaryplot_non_systematic <-
+  ggplot(data = qtable_long_syst_no) +
+  labs(title = expression(bold("b) Non-systematic method"))) +
+  geom_bar(mapping = aes(x = question, 
+                         fill = fct_relevel(score_word, c("NA", "Low",
+                               "Medium",
+                               "High"))),
+           width = 0.7, 
+           position = "fill",
+           color = "black") +
+  coord_flip(ylim = c(0, 1)) +
+  guides(fill = guide_legend(reverse = F)) +
+  scale_fill_manual("Risk of Bias",
+                    values = cbp4,
+                    breaks = c("High",
+                               "Medium",
+                               "Low",
+                               "NA")) +
+  scale_y_continuous(name = "Proportion",
+                     labels = scales::percent, 
+                     expand = c(0.02,0)) +
+  scale_x_discrete(name = "AMSTAR2 Question",
+                   expand = c(0.02,0)) +
+  theme(axis.title.x = element_blank(),
+            axis.title.y = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.x = element_text(size = 8, 
+                                       color = "black",
+                                       hjust = 0.5),
+            axis.text.y = element_text(size = 8, 
+                                       color = "black",
+                                       vjust = 0.5 ),
+            axis.line.x = element_line(linewidth = 0.5,
+                                       colour = "black", 
+                                       linetype = "solid"),
+            legend.position = "none",
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            legend.background = element_rect(linetype = "solid", 
+                                             colour = "black",
+                                             size = 0.2),
+            legend.title = element_blank(),
+            legend.key.size = unit(0.5, "cm"),
+            legend.text = element_text(size = 10))
+
+summaryplot_non_systematic
+```
+
+Combined
+
+```{r}
+(summaryplot_systematic - summaryplot_non_systematic)
+
+# save plot
+# ggsave(here("Figs/Suppl_Figs","SFig.16.png"),
+#        width = 8,
+#        height = 4)
+```
+
+## Supplementary Figure 17
+
+```{r}
+results1 <- biblioAnalysis(bib_data) #run basic standard descriptive analysis of the dataset (data frame)
+summary(results1, k = 10, pause = F, width = 130) #produces a sequence of standard summary tables displayed in the console
+#plot(x = results1, k = 10, pause = F) #produces a sequence of standard summary plots displayed in the plots window
+#for individual plots assign the above to an object (p <- ) and then call individual plots (1-5, e.g. p[5])
+p <- plot(x = results1, k = 10, pause = F)
+p[2]
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.17.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 18
+
+```{r}
+top_ten_cited_papers <- as.data.frame(head(results1[["MostCitedPapers"]], n = 10)) 
+
+colnames(top_ten_cited_papers)[colnames(top_ten_cited_papers) == "Paper         "] <- "Paper"
+
+top_ten_cited_papers$Paper <-
+  factor(top_ten_cited_papers$Paper, levels = top_ten_cited_papers$Paper[order(top_ten_cited_papers$TC, decreasing = FALSE)])
+
+ggplot(top_ten_cited_papers, aes(x = Paper,
+                                y = TC)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"),
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  coord_flip() +
+  theme_light() +
+  scale_x_discrete(name = "Paper") +
+  scale_y_continuous(name = "Total citations") +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  theme(legend.position = "none",
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.18.png"),
+#        width = 10,
+#        height = 6)
+```
+
+## Supplementary Figure 19
+
+```{r}
+top_journals <- mdata %>% 
+  group_by(Journal) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  head(10)
+
+top_journals$Journal <- reorder(top_journals$Journal, top_journals$count)
+
+top10_journals <- ggplot(top_journals, aes(x = Journal)) +
+  geom_col(aes(fill = "", y = count), width = 0.7) +
+  theme_light() +
+  labs(title = expression("")) + 
+  coord_flip()+
+  scale_y_continuous(name = "Article count",
+                     breaks = seq(0, max(top_journals$count), by = 2)) +
+  scale_fill_manual(values = c("#919191")) +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_blank(),
+        axis.text.y = element_text(size = 12))
+top10_journals
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.19.png"),
+#        width = 8,
+#        height = 6)
+```
+
+
+## Supplementary Figure 20
+
+```{r}
+#save counts in a data frame
+firstcountrycounts <- 
+  bib_data %>%
+  group_by(AU1_CO) %>%
+  count() %>% 
+  filter(!is.na(AU1_CO))
+
+#load map data
+world_map <-
+  map_data("world") %>% 
+  filter(! long > 180) #remove countries with longitude >180 to make equal projection-like map without artifacts
+
+table(world_map$region) #note that United Kingdom is UK here
+
+# Format country names to match regions on the world map
+firstcountrycounts$region <- str_to_title(firstcountrycounts$AU1_CO)
+
+firstcountrycounts$region[firstcountrycounts$region == "United Kingdom"] <- "UK" #fix to "UK"
+firstcountrycounts$region[firstcountrycounts$region == "Usa"] <- "USA" #Fix "Usa" to "USA" 
+firstcountrycounts$region[firstcountrycounts$region == "Korea"] <- "South Korea" #Fix "Korea" to "North Korea" 
+
+#(firstcountrycounts$region) %in% world_map$region #check matching
+
+## colour all regions on the map:
+emptymap <- 
+  tibble(region = unique(world_map$region),
+         n = rep(0,length(unique(world_map$region)))) #create table with all counts as 0
+
+fullmap <- 
+  left_join(emptymap,
+            firstcountrycounts,
+            by = "region") #join with actual counts table
+
+fullmap$n <- 
+  fullmap$n.x + fullmap$n.y # make new column for fixed counts
+
+fullmap$n[is.na(fullmap$n)] <- 0 #change NA to 0 for regions with no counts
+
+# Optioal: save the plot as pdf
+# pdf(file="~/PhD/GitHub/PFAS_Systematic_Evidence_Map/Figs/Suppl_Figs/SFig.20.pdf",width = 6, height = 4, pointsize = 15, family = "Helvetica", fonts = c("Helvetica"))
+# par(mfrow=c(1,1), mar=c(0,2,0,2))
+
+fullmap %>% 
+  ggplot(aes(fill = n,
+             map_id = region)) +
+  geom_map(map = world_map) +
+  expand_limits(x = world_map$long,
+                y = world_map$lat) +
+  coord_map("moll") +
+  theme_light() +
+  theme_map(line_size = 0.5) + 
+  theme(legend.position="right",
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 8)) +
+  scale_fill_gradient(low = "#FEE08B",
+                      high = "#D53E4F",
+                      limits = c(1, 60),
+                      guide = guide_colorbar(direction = "vertical.")) +
+  guides(fill = guide_colourbar(barwidth = unit(8, units = "mm"),
+                                barheight = unit(30, units = "mm"))) +
+  labs(fill = "Number of reviews")
+
+# dev.off()
+```
+
+## Supplementary Figure 21
+
+```{r}
+
+# pdf(file="Figs/Suppl_Figs/SFig.21.pdf",width = 7, height = 5, pointsize = 10, family = "Helvetica", fonts = c("Helvetica"))
+#par(mfrow=c(1,1), mar=c(2,3,2,3))
+
+NetMatrix_country <- 
+  biblioNetwork(bib_data, analysis = "collaboration", network = "countries", sep = ";")
+
+NetMatrix_country_plot <- 
+  networkPlot(NetMatrix_country,
+              n = 50, 
+              cluster = "optimal",
+              Title = "Country collaborations",
+              type = "mds", 
+              size.cex = TRUE,
+              size = 10,
+              remove.multiple=FALSE, 
+              label.cex = TRUE,
+              label.color = "black",
+              labelsize = 3.5,
+              edgesize = 2,
+              halo = FALSE,
+              remove.isolates = TRUE)
+
+# dev.off()
+```
+
+## Supplementary Figure 22
+
+```{r}
+
+# pdf(file="./Figs/Suppl_Figs/SFig.22.pdf",
+#     width = 6, 
+#     height = 5, 
+#     pointsize = 10,
+#     family = "Helvetica",
+#     fonts = c("Helvetica"))
+# par(mfrow=c(1,1), mar=c(2,4,2,4))
+NetMatrix_keywords <- 
+  biblioNetwork(bib_data, 
+                analysis = "co-occurrences", 
+                network = "keywords", 
+                sep = ";")
+
+NetMatrix_keywords_plot <- 
+  networkPlot(NetMatrix_keywords,
+              normalize = "association", n = 20,
+              Title = "Keyword co-occurrences", type = "fruchterman",
+              size.cex = TRUE, size = 10,
+              remove.multiple = F,
+              edgesize = 3, 
+              labelsize = 2, 
+              label.cex = TRUE,
+              edges.min = 1,
+              label.n = 30, 
+              alpha = 0.3) #adjust number and size of labels, as needed, etc.
+# dev.off()
+
+#str(NetMatrix_keywords_plot)
+#res <- thematicMap(net, NetMatrix_keywords, S)
+#plot(res$map)
+```
+
+## Supplementary Figure 23
+
+```{r}
+results1_all <- biblioAnalysis(bib_data_all_types) #run basic standard descriptive analysis of the dataset (data frame)
+summary(results1_all, k = 10, pause = F, width = 130) #produces a sequence of standard summary tables displayed in the console
+#plot(x = results1, k = 10, pause = F) #produces a sequence of standard summary plots displayed in the plots window
+#for individual plots assign the above to an object (p <- ) and then call individual plots (1-5, e.g. p[5])
+p_all <- plot(x = results1_all, k = 10, pause = F)
+
+p_all[2]
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.23.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 24
+
+```{r}
+results1_all <- biblioAnalysis(bib_data_all_types) #run basic standard descriptive analysis of the dataset (data frame)
+summary(results1_all, k = 10, pause = F, width = 130) #produces a sequence of standard summary tables displayed in the console
+#plot(x = results1, k = 10, pause = F) #produces a sequence of standard summary plots displayed in the plots window
+#for individual plots assign the above to an object (p <- ) and then call individual plots (1-5, e.g. p[5])
+p_all <- plot(x = results1_all, k = 10, pause = F)
+
+p_all[1]
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.24.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 24
+
+```{r}
+top_ten_cited_papers_all <- as.data.frame(head(results1_all[["MostCitedPapers"]], n = 10)) 
+
+colnames(top_ten_cited_papers_all)[colnames(top_ten_cited_papers_all) == "Paper         "] <- "Paper"
+
+top_ten_cited_papers_all$Paper <-
+  factor(top_ten_cited_papers_all$Paper, levels = top_ten_cited_papers_all$Paper[order(top_ten_cited_papers_all$TC, decreasing = FALSE)])
+
+ggplot(top_ten_cited_papers_all, aes(x = Paper,
+                                y = TC)) +
+  geom_col(aes(color = "black",
+               fill = "#999999"),
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  coord_flip() +
+  theme_light() +
+  scale_x_discrete(name = "Paper") +
+  scale_y_continuous(name = "Total citations") +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  theme(legend.position = "none",
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.24.png"),
+#        width = 8,
+#        height = 6)
+```
+
+## Supplementary Figure 25
+
+```{r}
+#save counts in a data frame
+firstcountrycounts2 <- 
+  bib_data_all_types %>%
+  group_by(AU1_CO) %>%
+  count() %>% 
+  filter(!is.na(AU1_CO))
+
+#load map data
+world_map2 <-
+  map_data("world") %>% 
+  filter(! long > 180) #remove countries with longitude >180 to make equal projection-like map without artifacts
+
+table(world_map2$region) #note that United Kingdom is UK here
+
+# Format country names to match regions on the world map
+firstcountrycounts2$region <- str_to_title(firstcountrycounts2$AU1_CO)
+
+firstcountrycounts2$region[firstcountrycounts2$region == "United Kingdom"] <- "UK" #fix to "UK"
+firstcountrycounts2$region[firstcountrycounts2$region == "Usa"] <- "USA" #Fix "Usa" to "USA" 
+firstcountrycounts2$region[firstcountrycounts2$region == "Korea"] <- "South Korea" #Fix "Korea" to "North Korea" 
+
+#(firstcountrycounts$region) %in% world_map2$region #check matching
+
+## colour all regions on the map:
+emptymap2 <- 
+  tibble(region = unique(world_map2$region),
+         n = rep(0,length(unique(world_map2$region)))) #create table with all counts as 0
+
+fullmap2 <- 
+  left_join(emptymap2,
+            firstcountrycounts2,
+            by = "region") #join with actual counts table
+
+fullmap2$n <- 
+  fullmap2$n.x + fullmap2$n.y # make new column for fixed counts
+
+fullmap2$n[is.na(fullmap2$n)] <- 0 #change NA to 0 for regions with no counts
+
+# Optioal: save the plot as pdf
+# pdf(file="~/PhD/GitHub/PFAS_Systematic_Evidence_Map/Figs/Suppl_Figs/SFig.25.pdf",width = 6, height = 4, pointsize = 15, family = "Helvetica", fonts = c("Helvetica"))
+# par(mfrow=c(1,1), mar=c(0,2,0,2))
+
+fullmap2 %>% 
+  ggplot(aes(fill = n,
+             map_id = region)) +
+  geom_map(map = world_map2) +
+  expand_limits(x = world_map2$long,
+                y = world_map2$lat) +
+  coord_map("moll") +
+  theme_light() +
+  theme_map(line_size = 0.5) + 
+  theme(legend.position="right",
+        legend.text = element_text(size = 5),
+        legend.title = element_text(size = 7)) +
+  scale_fill_gradient(low = "#FEE08B",
+                      high = "#D53E4F",
+                      limits = c(1, (max(fullmap2$n) + 2)),
+                      breaks = seq(1, max(fullmap2$n) + 2, length.out = 10),
+                      labels = scales::label_number(scale = 1, accuracy = 1),
+                      guide = guide_colorbar(direction = "vertical.")) +
+  guides(fill = guide_colourbar(barwidth = unit(6, units = "mm"),
+                                barheight = unit(30, units = "mm"))) +
+  labs(fill = "Number of reviews")
+
+# dev.off()
+```
+
+## Supplementary Figure 26
+
+Making the plot without getting rid of collabs with the same country
+```{r, echo = FALSE, results = 'hide'}
+NetMatrix2.1 <- biblioNetwork(bib_data_all_types, 
+                            analysis = "collaboration",
+                            network = "countries", 
+                            sep = ";")
+
+net_matrix2.1 <- as.matrix(NetMatrix2.1)
+
+#net_matrix2.1 <- net_matrix2.1[rownames(NetMatrix2), countries]
+#diag(net_matrix2.1) <- 0 #get rid of collaboration with same country
+
+#net_matrix2.1
+
+# getting rid of lower triangle (as this is duplication of info)
+net_matrix2.1[lower.tri(net_matrix2.1)] <- 0 
+#colnames(net_matrix2.1) - change to title case:
+colnames(net_matrix2.1) <- str_to_title(colnames(net_matrix2.1))
+#rownames(net_matrix2) - change to title case:
+rownames(net_matrix2.1) <- str_to_title(rownames(net_matrix2.1))
+#Fix "Usa" to "USA" :
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "Usa"] <- "USA"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "Usa"] <- "USA"
+#change "UNITED KINGDOM" to "UK" for easier plotting:
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "United Kingdom"] <- "UK"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "United Kingdom"] <- "UK"
+
+circos.clear()
+
+my.cols2 <- c(USA = "#00FFFF",
+              China = "#89CFF0",
+              Spain = "#7393B3", 
+              Denmark = "#088F8F", 
+              Italy = "#9FE2BF",
+              France = "#EADDCA",
+              Sweden = "#E1C16E",
+              Canada = "#CD7F32", 
+              Norway = "#E30B5C",
+              UK = "#DAA06D", 
+              Korea = "#800020", 
+              Greece = "#E97451", 
+              Germany = "#F0E68C",
+              Australia = "#808000", 
+              Brazil = "#FFAC1C", 
+              Finland = "#E3963E",
+              Austria = "#FBCEB1", 
+              Belgium = "#FFC000", 
+              Malaysia = "#F4BB44",
+              Netherlands = "#FFE5B4", 
+              Poland = "#FF4433",
+              Switzerland = "#FA8072",
+              Romania = "#BCF4EE",
+              Slovenia = "#9F2B68",
+              Uganda = "#DE3163",
+              Cyprus = "#811331",
+              Hong_Kong = "#DC143C",
+              Japan = "#AA336A", 
+              Czech_Republic = "#C9A9A6", 
+              Ghana = "#FF69B4",
+              Hungary = "#673147", 
+              India = "#A52A2A" , 
+              Israel = "#D8BFD8", 
+              Kenya = "#DA70D6",
+              Luxembourg = "#770737",
+              Mexico = "#E0B0FF",
+              Monaco = "#CCCCFF", 
+              Portugal = "#A95C68", 
+              Saudi_Arabia = "#51414F", 
+              Singapore = "#BDB5D5", 
+              Slovakia = "#FAD9D1",
+              South_Africa = "#EEDC82", 
+              Tanzania = "#DAA520", 
+              Zimbabwe = "#F0E68C")
+
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "Hong Kong"] <- "Hong_Kong"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "Hong Kong"] <- "Hong_Kong"
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "Czech Republic"] <- "Czech_Republic"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "Czech Republic"] <- "Czech_Republic"
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "Saudi Arabia"] <- "Saudi_Arabia"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "Saudi Arabia"] <- "Saudi_Arabia"
+colnames(net_matrix2.1)[colnames(net_matrix2.1) == "South Africa"] <- "South_Africa"
+rownames(net_matrix2.1)[rownames(net_matrix2.1) == "South Africa"] <- "South_Africa"
+
+
+
+fig1.1 <- chordDiagram(net_matrix2.1,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 0.8)
+  #circos.axis(h = FALSE, 
+              #major.at = NULL, 
+              #labels.cex = 0.6,
+              #minor.ticks = FALSE,
+             # major.tick.length = NULL, 
+              #sector.index = sector.name,
+              #track.index = 2,
+              #labels.pos.adjust = TRUE)
+},
+bg.border = NA)
+
+fig1.1
+```
+
+Making the same plot but with less countries
+```{r, echo = FALSE, results = 'hide'}
+# net_matrix2 <- net_matrix2[-c(44 : 32), -c(44 : 32)]
+# net_matrix2 <- net_matrix2[-c(30, 29, 25, 23), -c(30, 29, 25, 23)]
+# net_matrix2 <- net_matrix2[-c(27), -c(27)]
+# Calculate row-wise totals
+row_totals2 <- rowSums(net_matrix2.1)
+# Find rows to be dropped
+rows_to_drop2 <- row_totals2 <= 1
+# Drop rows and paired columns
+net_matrix2_filtered2 <- net_matrix2.1[!rows_to_drop2, !rows_to_drop2]
+
+#pdf(here("R", "Country collabs_1.pdf"), width = 10, height = 10)
+fig2.1 <- chordDiagram(net_matrix2_filtered2,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 1.2)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+  },
+  bg.border = NA)
+#title("Country collaborations", font.main = 1, cex.main = 1.8)
+
+#dev.off()
+
+fig2.1
+```
+
+Making the plot getting rid of collabs with the same country
+
+```{r}
+net_matrix3_filtered2 <- net_matrix2_filtered2
+diag(net_matrix3_filtered2) <- 0 #get rid of collaboration with same country
+
+# pdf(here("R_data", "inter_countries_collab.pdf"), width = 21, height = 21)
+
+fig3.1 <- chordDiagram(net_matrix3_filtered2,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2)
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(0, 0.5),
+              cex = 3)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+#title("Country collaborations", font.main = 1, cex.main = 3, adj = 0.5, line = -1)
+# dev.off()
+fig3.1
+```
+
+Panel 
+Saving panel as a PDF
+```{r, eval = FALSE}
+#pdf(here("Figs/Suppl_Figs", "SFig.26.pdf"), width = 8, height = 12)
+
+layout(matrix(1:2, 1, 2))
+par(mfrow = c(2, 1),
+    mar = c(1, 1, 3, 1), 
+    bg = rgb(1, 1, 1, 0.1),
+    adj = 0, 
+    cex = 0.8)
+
+fig1.1 <- chordDiagram(net_matrix2_filtered2,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(-0.1, 0.5),
+              cex = 1)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+title("A",font.main = 1, cex.main = 2.5)
+
+
+fig3.1 <- chordDiagram(net_matrix3_filtered2,
+               annotationTrack = "grid",
+               preAllocateTracks = 1, 
+               grid.col = my.cols2
+  )
+
+circos.trackPlotRegion(track.index = 1, 
+                       panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim),
+              ylim[1] + 0.1, 
+              sector.name, 
+              facing = "clockwise", 
+              niceFacing = TRUE,
+              adj = c(-0.1, 0.3),
+              cex = 1)
+  circos.axis(h = "top",
+              labels.cex = 0.5,
+              major.tick.length = 0.2, 
+              sector.index = sector.name,
+              track.index = 2)
+},
+bg.border = NA)
+title("B", font.main = 1, cex.main = 2.5)
+
+#dev.off()
+```
+
+##Supplementary Figure 27
+
+```{r}
+# pdf(file="./Figs/Suppl_Figs/SFig.27.pdf",
+#     width = 6,
+#     height = 5,
+#     pointsize = 10,
+#     family = "Helvetica",
+#     fonts = c("Helvetica"))
+# par(mfrow=c(1,1), mar=c(2,4,2,4))
+NetMatrix_keywords2 <- 
+  biblioNetwork(bib_data_all_types, 
+                analysis = "co-occurrences", 
+                network = "keywords", 
+                sep = ";")
+
+NetMatrix_keywords_plot2 <- 
+  networkPlot(NetMatrix_keywords,
+              normalize = "association",
+              n = 20,
+              Title = "Keyword co-occurrences",
+              type = "fruchterman",
+              size.cex = TRUE,
+              size = 10,
+              remove.multiple = F,
+              edgesize = 3, 
+              labelsize = 2, 
+              label.cex = TRUE,
+              edges.min = 1,
+              label.n = 30, 
+              alpha = 0.3) #adjust number and size of labels, as needed, etc.
+# dev.off()
+
+#str(NetMatrix_keywords_plot)
+#res <- thematicMap(net, NetMatrix_keywords, S)
+#plot(res$map)
+```
+
