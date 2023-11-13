@@ -11,7 +11,7 @@ This folder contains the extracted data from the included studies (except for ``
 - ```/species.csv```: contains information on all species (other than Homo sapiens) investigated in the included systematic reviews.
 - ```/scopus.bib```: bibliographic data downloaded from Scopus - bibliometric analysis (systematic-like reviews)
 - ```/bib.csv```: data frame created from bibliographic data downloaded from Scopus (please see "Loading data" in /analysis_code.RMD)- bibliometric analysis (systematic-like reviews)
-- - ```/main_all_types_review```: all types of reviews file downloaded from Rayyan at the end of the screening process.
+- ```/main_all_types_review```: all types of reviews file downloaded from Rayyan at the end of the screening process.
 - ```/scopus_all_types.csv```: bibliographic data downloaded from Scopus - supplementary bibliometric analysis (all types of review)
 - ```/bib_all_types.csv```: data frame created from bibliographic data downloaded from Scopus (please see "Loading data" in /analysis_code.RMD)- bibliometric analysis (all types of review)
 
