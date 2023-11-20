@@ -84,7 +84,7 @@ Manually extracted pilot data is stored in four separate **.csv** files represen
 
 Bibliographic data records are exported from Scopus (including cited references field) in .bib format and locally saved as **scopus.bib**.
 
-A list of included studies during the supplementary search of all types of reviews for supplementary bibliometric analyses is included in **main_all_types_reviews.csv**
+Bibliographic data records on all types of review (supplementary bibliometric analysis) are exported from Scopus (including cited references field) in .bib format and locally saved as **scopus_all_types.csv**.
 
 ```{r, eval=FALSE}
 # Converting the bibliometric data in .bib format to a dataframe
@@ -104,7 +104,6 @@ The next chunk uses the same code of the previous one to create supplementary bi
 
 ```{r, eval=FALSE}
 bib_data_all <- convert2df(here("data","scopus_all_types.csv"), dbsource = "scopus", format = "csv")
-dim(bib_data_all) #517 rows 52 columns
 
 bib_data_all <- metaTagExtraction(bib_data_all, Field = "AU1_CO", sep = ";")
 bib_data_all <- metaTagExtraction(bib_data_all, Field = "AU_CO", sep = ";")
@@ -134,7 +133,7 @@ dim(qdata) #175 rows 36 columns
 
 # Data from .csv file - PFAS_info sheet:
 pidata <- read_csv(here("data","pfas_info.csv"), skip = 0) 
-dim(pidata) #35 rows 7 columns
+dim(pidata) #39 rows 7 columns
 
 # Data from .csv file - Species_info sheet
 spdata <- read_csv(here("data","species.csv"), skip = 0) 
@@ -284,7 +283,7 @@ knitr::kable(select(mdata_all_types2,
                     First_author,
                     year,
                     title,
-                    doi), caption = "Table of included SRs") %>%
+                    doi), caption = "Table of reviews (all types)") %>%
   kable_paper(bootstrap_options = "striped", full_width = F) # Apply styling with kable_paper()
 ```
 
