@@ -1,0 +1,542 @@
+Study_ID,Species_scientific_name,Species_common_name,Comment,Class_scientific_name
+S_010,Macaca fascicularis,Cynomolgus monkey,The authors did not report the scientific name,Mammalia
+S_010,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_010,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_010,Mus musculus,C57Bl/6 mice,The authors did not report the scientific name,Mammalia
+S_017,Pygoscelis papua,Gentoo penguin,na,Aves
+S_017,Pygoscelis adeliae,Adelie penguin,na,Aves
+S_017,Pygoscelis antarctica,Chinstrap penguin,na,Aves
+S_017,Eudyptula minor,Little penguin,na,Aves
+S_017,Diomedea exulans,Wandering albatross,na,Aves
+S_017,Thalassarche chlororhynchos,Atlantic yellow-nosed albatross,na,Aves
+S_017,Macronectes giganteus,Southern giant petrel,na,Aves
+S_017,Macronectes halli,Northern giant petrel,na,Aves
+S_017,Fulmarus glacialis,Northern fulmar,na,Aves
+S_017,Pagodroma nivea,Snow petrel,na,Aves
+S_017,Pelecanus erythrorhynchos,American white pelican,na,Aves
+S_017,Phalacrocorax auritus,Double-crested cormorant,na,Aves
+S_017,Phalacrocorax carbo,Great cormorant,na,Aves
+S_017,Stercorarius maccormicki,South polar skua,na,Aves
+S_017,Stercorarius lonnbergi,Brown skua,na,Aves
+S_017,Larus audouinii,Audouin’s gull,na,Aves
+S_017,Larus marinus,Great black-backed gull,na,Aves
+S_017,Larus michahellis,Yellow-legged gull,na,Aves
+S_017,Larus hyperboreus,Glaucous gull,na,Aves
+S_017,Larus argentatus,Herring gull,na,Aves
+S_017,Larus fuscus,Lesser black-backed gull,na,Aves
+S_017,Rissa tridactyla,Black-legged kittiwake,na,Aves
+S_017,Hydroprogne caspia,Caspian tern,na,Aves
+S_017,Sterna forsteri,Forster’s tern,na,Aves
+S_017,Alle alle,Little auk,na,Aves
+S_017,Uria lomvia,Brünnich’s guillemot,na,Aves
+S_017,Fratercula arctica,Atlantic puffin,na,Aves
+S_036,Pusa hispida,Ringed seal,The authors did not report the scientific name,Mammalia
+S_036,Leptonychotes weddellii,Weddell Seals,The authors did not report the scientific name,Mammalia
+S_036,Phoca vitulina,Harbor Seals,The authors did not report the scientific name,Mammalia
+S_036,Halichoerus grypus,Grey Seals,The authors did not report the scientific name,Mammalia
+S_036,Phocoena phocoena,Harbor Propoise,The authors did not report the scientific name,Mammalia
+S_036,Phocoenoides dalli,Dall's Porpoise,The authors did not report the scientific name,Mammalia
+S_036,Delphinus truncatus,Common Bottlenose Dolphins,The authors did not report the scientific name,Mammalia
+S_036,Lagenorhynchus acutus,Atlantic white-sided Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Steno bredanensis,Rough-toothed Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Sousa chinensis,Indo-Pacific hump-backed Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Neophocaena phocaenoides,Indo-Pacific finless porpoise,The authors did not report the scientific name,Mammalia
+S_036,Delphinapterus leucas,Beluga whale,The authors did not report the scientific name,Mammalia
+S_036,Monodon monoceros,Narwhal,The authors did not report the scientific name,Mammalia
+S_036,Globicephala,Pilot whale,The authors did not report the scientific name,Mammalia
+S_036,Lagenorhynchus obliquidens,Pacific white-sided dolphin,The authors did not report the scientific name,Mammalia
+S_036,Cystophora cristata,Hooded seal,The authors did not report the scientific name,Mammalia
+S_036,Balaenoptera,Minke whale,The authors did not report the scientific name,Mammalia
+S_036,Balaenoptera physalus,Fin whale,The authors did not report the scientific name,Mammalia
+S_036,Delphinus capensis,Long-beaked Common Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Stenella coeruleoalba,Striped Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Globicephala melas,Long-finned Pilot Whale,The authors did not report the scientific name,Mammalia
+S_036,Peponocephala electra,Melon-headed Whale,The authors did not report the scientific name,Mammalia
+S_036,Orcinus orca,Killer Whale,The authors did not report the scientific name,Mammalia
+S_036,Pusa sibirica,Baikal Seal,The authors did not report the scientific name,Mammalia
+S_036,Phocidae,Elephant Seal,The authors did not report the scientific name,Mammalia
+S_036,Sotalia fluviatilis,Tucuxi Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Kogia breviceps,Pygmy Sperm Whale,The authors did not report the scientific name,Mammalia
+S_036,Stenella clymene,Short-snouted Spinner Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Steno bredanensis,Rough-toothed Dolphin,The authors did not report the scientific name,Mammalia
+S_036,Lagenorhynchus albirostris,White-beaked dolphin,The authors did not report the scientific name,Mammalia
+S_036,Grampus griseus,Risso's dolphin,The authors did not report the scientific name,Mammalia
+S_036,Physeter macrocephalus,Sperm whale,The authors did not report the scientific name,Mammalia
+S_036,Pagophilus groenlandicus,Harp seal,The authors did not report the scientific name,Mammalia
+S_036,Ursus maritimus,Polar bear,The authors did not report the scientific name,Mammalia
+S_036,Vulpes lagopus,Arctic fox,The authors did not report the scientific name,Mammalia
+S_036,Larus argentatus,Herring Gull,The authors did not report the scientific name,Aves
+S_036,Larus crassirostri,Black-tailed Gull,The authors did not report the scientific name,Aves
+S_036,Phoebastria immutabilis,Laysan albatross,The authors did not report the scientific name,Aves
+S_036,Phoebastria nigripes,Black-footed albatross,The authors did not report the scientific name,Aves
+S_036,Haliaeetus leucocephalus,Bald Eagle,The authors did not report the scientific name,Aves
+S_036,Phoebastria immutabilis,Laysan Albatrosses,The authors did not report the scientific name,Aves
+S_036,Haliaeetus albicilla,White-tailed eagle,The authors did not report the scientific name,Aves
+S_036,Pelecanus occidentalis,Brown pelican,The authors did not report the scientific name,Aves
+S_036,Thalasseus maximus,Royal tern,The authors did not report the scientific name,Aves
+S_036,Puffinus gravis,Great shearwater,The authors did not report the scientific name,Aves
+S_036,Panthera tigris tigris,Bengal tiger,The authors did not report the scientific name,Mammalia
+S_036,Panthera leo,African Lion,The authors did not report the scientific name,Mammalia
+S_036,Panthera tigris altaica,Amur tiger,The authors did not report the scientific name,Mammalia
+S_036,Ardea cinerea,Grey Heron,The authors did not report the scientific name,Aves
+S_036,Accipiter nisus,Eurasian Sparrowhawk,The authors did not report the scientific name,Aves
+S_036,Pica pica,Eurasian magpie,The authors did not report the scientific name,Aves
+S_036,Streptopelia decaocto,Eurasian Collard Dove,The authors did not report the scientific name,Aves
+S_036,Accipiter gentilis,Northern goshawk,The authors did not report the scientific name,Aves
+S_036,Strigiformes,Rural owl,The authors did not report the scientific name,Aves
+S_036,Falco tinnunculus,Common kestrel,The authors did not report the scientific name,Aves
+S_036,Accipiter gularis,Japanese sparrowhawk,The authors did not report the scientific name,Aves
+S_036,Ninox scutulata,Brown hawk-owl,The authors did not report the scientific name,Aves
+S_036,Bubo bubo,Eurasian eagle-owl,The authors did not report the scientific name,Aves
+S_036,Otus lettia,Collared scops-owl,The authors did not report the scientific name,Aves
+S_036,Larus crassirostris,Black-tailed gull,The authors did not report the scientific name,Aves
+S_036,Ninox scutulata,Brown hawk-owl,The authors did not report the scientific name,Aves
+S_036,Aegypius monachus,Cinereous vulture,The authors did not report the scientific name,Aves
+S_036,Buteo buteo,Common buzzard,The authors did not report the scientific name,Aves
+S_036,Canis lupus,Wolf,The authors did not report the scientific name,Mammalia
+S_036,Panthera tigris altaica,Siberian tiger,The authors did not report the scientific name,Mammalia
+S_046,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_046,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_046,Rattus norvegicus,Albino Wistar rat,The authors did not report the scientific name,Mammalia
+S_046,Mus musculus,Kumming mice,The authors did not report the scientific name,Mammalia
+S_046,Danio rerio,Zebrafish,The authors did not report the scientific name,Actinopterygii
+S_046,Dugesia japonica,Planarian,The authors did not report the scientific name,Turbellaria
+S_046,Glyptocidaris crenularis,Sea urchin,The authors did not report the scientific name,Echinoidea
+S_050,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_050,Mus musculus,C57Bl/6 mice,The authors did not report the scientific name,Mammalia
+S_050,Mus musculus,Kumming mice,The authors did not report the scientific name,Mammalia
+S_050,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_050,Mus musculus,BALB/c mice,The authors did not report the scientific name,Mammalia
+S_052,Accipiter gentilis,Northern goshawk,na,Aves
+S_052,Haliaeetus albicilla,White-tailed eagle,na,Aves
+S_052,Neophron percnopterus,Egyptian vulture,na,Aves
+S_052,Peregrine falcon,Peregrine falcon,na,Aves
+S_052,Pandion haliaetus,Osprey,na,Aves
+S_052,Strix aluco,Tawny owl,na,Aves
+S_052,Falco tinnunculus,Common kestrel,na,Aves
+S_052,Tyto alba,Barn owl,na,Aves
+S_052,Aquila chrysaetos,Golden eagle,na,Aves
+S_052,Accipiter nisus,Eurasian sparrowhawk,na,Aves
+S_059,Rattus norvegicus,Rat,na,Mammalia
+S_059,Mus musculus,Mice,na,Mammalia
+S_059,Leporidae,Rabbit,na,Mammalia
+S_067,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_067,Danio rerio,Zebrafish,The authors did not report the scientific name,Actinopterygii
+S_067,Mus musculus,BALB/c mice,The authors did not report the scientific name,Mammalia
+S_067,Mus musculus,BALB/cAnN mice,The authors did not report the scientific name,Mammalia
+S_067,Mus musculus,NSG mice,The authors did not report the scientific name,Mammalia
+S_079,Caenorhabditis elegans,Roundworm,The authors did not report the common name,Chromadorea
+S_079,Dugesia japonica,Flatworm,The authors did not report the common name,Turbellaria
+S_079,Rana pipiens,Northern leopard frog,The authors did not report the common name,Amphibia
+S_079,Danio rerio,Zebrafish,The authors did not report the common name,Actinopterygii
+S_079,Oryzias melastigma,Ricefishe,The authors did not report the common name,Actinopterygii
+S_079,Ursus maritimus,Polar bear,The authors did not report the common name,Mammalia
+S_079,Oreochromis mossambicus,Mozambique tilapia,The authors did not report the common name,Actinopterygii
+S_079,Tursiops truncatus,Bottlenose dolphin,The authors did not report the common name,Mammalia
+S_079,Pusa hispida,Ringed seal,The authors did not report the common name,Mammalia
+S_079,Tachycineta bicolor,Tree swallow,The authors did not report the common name,Aves
+S_079,Sus scrofa,Wild boar,The authors did not report the common name,Mammalia
+S_088,Salvelinus namaycush,Lake trout,na,Actinopterygii
+S_088,Larus argentatus,Herring Gull,na,Aves
+S_089,Haliaeetus leucocephalus,Bald Eagle,The authors did not report the scientific name,Aves
+S_089,Salvelinus namaycush,Lake trout,The authors did not report the scientific name,Actinopterygii
+S_090,Macaca fascicularis,Cynomolgus monkey,The authors did not report the scientific name,Mammalia
+S_090,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_090,Mus musculus,Mice,The authors did not report the scientific name,Mammalia
+S_092,Aetobatus narinari,Spotted eagle ray,The authors did not report the common name,Chondrichthyes
+S_092,Dasyatis americana,Southern stingray,The authors did not report the common name,Chondrichthyes
+S_092,Dasyatis fluviorum,Estuary stingray,The authors did not report the common name,Chondrichthyes
+S_092,Himantura astra,Black-spotted whipray,The authors did not report the common name,Chondrichthyes
+S_092,Himantura toshi,Brown whipray,The authors did not report the common name,Chondrichthyes
+S_092,Himantura uarnak,Reticulate whipray,The authors did not report the common name,Chondrichthyes
+S_092,Neotrygon kuhlii,Bluespotted stingray,The authors did not report the common name,Chondrichthyes
+S_093,Danio rerio,Zebrafish,The authors did not report the scientific name,Actinopterygii
+S_093,Caenorhabditis elegans,Roundworm,The authors did not report the common name,Chromadorea
+S_093,Oryzias melastigma,Ricefish,The authors did not report the common name,Actinopterygii
+S_093,Daphnia magna,Water flea,The authors did not report the common name,Branchiopods
+S_093,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_093,Mus musculus,Mice,The authors did not report the scientific name,Mammalia
+S_094,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_094,Rattus norvegicus,Wistar rat,The authors did not report the scientific name,Mammalia
+S_094,Leporidae,Rabbit,The authors did not report the scientific name,Mammalia
+S_094,Macaca fascicularis,Cynomolgus monkey,The authors did not report the scientific name,Mammalia
+S_094,Sus domesticus,Pig,The authors did not report the scientific name,Mammalia
+S_103,Strix aluco,Tawny Owl,na,Aves
+S_103,Falco peregrinus,Peregrine falco,na,Aves
+S_103,Fulmarus glacialis,Northern fulmar,na,Aves
+S_103,Uria lomvia,Thick-billed murre,na,Aves
+S_103,Enhydra lutris kenyoni,Northern Sea Otters,na,Mammalia
+S_103,Phoca vitulina,Harbor Seal,na,Mammalia
+S_103,Phoca hispida,Ringed seal,na,Mammalia
+S_103,Ursus maritimus,Polar Bear,na,Mammalia
+S_103,Ardea herodias,Great blue heron,na,Aves
+S_103,Tursiops truncatus,Bottlenose Dolphin,na,Mammalia
+S_103,Capreolus capreolus,Roe Deer,na,Mammalia
+S_103,Larus argentatus,Herring gull,na,Aves
+S_103,Phocoena phocoena,Harbor porpoise,na,Mammalia
+S_103,Salvelinus namaycush,Lake trout,na,Actinopterygii
+S_103,Peponocephala electra,Melon-headed Whale,na,Mammalia
+S_103,Uria aalge,Guillemot,na,Aves
+S_103,Pusa sibirica,Baikal seal,na,Mammalia
+S_103,Gallus domesticus,Hen,na,Aves
+S_103,Bos taurus,Cow,na,Mammalia
+S_103,Oncorhynchus mykiss,Rainbow trout,na,Actinopterygii
+S_103,Haliaeetus albicilla,White-tailed sea eagle,na,Aves
+S_103,Enhydra lutris nereis,Sea otter,na,Mammalia
+S_103,Halichoerus grypus,Grey seal,na,Mammalia
+S_103,Anguilla anguilla,Eel,na,Actinopterygii
+S_103,Cerorhinca monocerata,Rhinoceros auklet,na,Aves
+S_103,Oceanodroma leucorhoa,Leach’s storm petrel,na,Aves
+S_103,Phalacrocorax auritus,Double-crested cormorant,na,Aves
+S_103,Mytilus edulis,Mussel,na,Bivalvia
+S_103,Cyprinus carpio,Carp,na,Actinopterygii
+S_103,Caretta caretta,Loggerhead sea turtle,na,Reptilia
+S_103,Delphinapterus leucas,Beluga Whale,na,Mammalia
+S_103,Phoca hisida,Ringed seal,na,Mammalia
+S_103,Lutra lutra,Otter,na,Mammalia
+S_103,Globicephala melas,Pilot Whale,na,Mammalia
+S_103,Lagenorhynchus acutus,Atlantic white-sided dolphin,na,Mammalia
+S_103,Cystophora cristata,Hooded Seal,na,Mammalia
+S_103,Balaenoptera physalus,Fin whale,na,Mammalia
+S_103,Haliaeetus leucocephalus,Bald Eagle,na,Aves
+S_103,Mytilus edulis,Blue mussel,na,Bivalvia
+S_103,Zoarces viviparus,Eelpout,na,Actinopterygii
+S_103,Clupea Harengus,Herring ,na,Actinopterygii
+S_114,Mus musculus,C57BL/6J-Apc mice,The authors did not report the scientific name,Mammalia
+S_114,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_120,Mus musculus,Mice,The authors did not report the scientific name,Mammalia
+S_120,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_123,na,na,The authors did not report the name of the included species,na
+S_136,Mus musculus,C57Bl/6 mice,The authors did not report the scientific name,Mammalia
+S_136,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_136,Mus musculus,129S1/SvlmJ mice,The authors did not report the scientific name,Mammalia
+S_136,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_136,Rattus norvegicus,Wistar rat,The authors did not report the scientific name,Mammalia
+S_136,Danio rerio,Zebrafish,na,Actinopterygii
+S_136,Drosophila melanogaster,Fruit fly,na,Insecta
+S_136,Gallus domesticus,Chicken,na,Aves
+S_136,Salmo salar,Atlantic salmon,na,Actinopterygii
+S_137,Mus musculus,C57Bl/6 mice,The authors did not report the scientific name,Mammalia
+S_137,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_137,Mus musculus,129S1/SvlmJ mice,The authors did not report the scientific name,Mammalia
+S_137,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_137,Rattus norvegicus,Wistar rat,The authors did not report the scientific name,Mammalia
+S_137,Danio rerio,Zebrafish,na,Actinopterygii
+S_137,Drosophila melanogaster,Fruit fly,na,Insecta
+S_137,Gallus domesticus,Chicken,na,Aves
+S_137,Salmo salar,Atlantic salmon,na,Actinopterygii
+S_150,Arenicola marina,Lugworm,The authors did not report the scientific name,Polychaeta
+S_150,Boleophthalmus pectinirostris,Mudskipper (herbivorous) ,na,Actinopterygii
+S_150,Periophthalmus modestus,Mudskipper (omnivorous),na,Actinopterygii
+S_150,Moina rectirostris,zooplankton,na,Branchiopoda 
+S_150,Moina micrura,zooplankton,na,Branchiopoda 
+S_150,Moina micrura,zooplankton,na,Branchiopoda 
+S_150,Callinectes sapidus,Blue crab,The authors did not report the scientific name,Malacostraca
+S_150,Spisula solidissima,Surf clam,The authors did not report the scientific name,Bivalvia
+S_150,Littorina brevicula,Asian periwinkle,na,Gastropoda
+S_150,Gastropoda,Neritid gastropod,The authors did not report the scientific name,Gastropoda
+S_150,Loligo vulgaris,Squid,na,Cephalopoda
+S_150,Tringa totanus,Redshank,na,Aves
+S_150,Mytilus edulis,Blue mussel,na,Bivalvia
+S_150,Venus,Clam,na,Bivalvia
+S_150,Hydropsyche exocellata,Trichoptera larvae,na,Insecta
+S_150,Crassostrea gigas,Oyster,na,Bivalvia
+S_150,Dreissena polymorpha,Zebra mussel ,na,Bivalvia
+S_150,Procambarus clarkii,Crab,na,Malacostraca
+S_150,Atrina serrata,Sawtooth pen clam ,na,Bivalvia
+S_150,Penaeus setiferus,White shrimp,na,Malacostraca
+S_150,Perna perna,Brown mussel ,na,Bivalvia
+S_150,Monacanthidae,Filefish,The authors did not report the scientific name,Actinopterygii
+S_150,Cyprinidae,Sea bream,The authors did not report the scientific name,Actinopterygii
+S_150,Pagrus major,Red sea bream,The authors did not report the scientific name,Actinopterygii
+S_150,Pleuronectidae,Right eye flounder,The authors did not report the scientific name,Actinopterygii
+S_150,Sphyrnidae,Hammerhead shark,The authors did not report the scientific name,Chondrichthyes
+S_150,Katsuwonus pelamis,Skipjack tuna,na,Actinopterygii
+S_150,Hemiculter leucisculus,White semiknife carp ,na,Actinopterygii
+S_150,Oreochromis niloticus,Tilapia,na,Actinopterygii
+S_150,Clarias lazera,Leather catfish,na,Actinopterygii
+S_150,Cyprinus carpio,Common carp,na,Actinopterygii
+S_150,Carassius auratus,Crucian carp,na,Actinopterygii
+S_150,Scorpaenidae,Rockfish,The authors did not report the scientific name,Actinopterygii
+S_150,Alosa sapidissima,Shad,The authors did not report the scientific name,Actinopterygii
+S_150,Mugil,Mullet,The authors did not report the scientific name,Actinopterygii
+S_150,Mugil,Striped mullet,The authors did not report the scientific name,Actinopterygii
+S_150,Sebastes sclegeli,Rockfish,na,Actinopterygii
+S_150,Acipenser sinensis,Chinese sturgeon,na,Actinopterygii
+S_150,Gymnocypris przewalskii,Cyprinid ,The authors did not report the common name,Actinopterygii
+S_150,Racoma tibetanus,na,The authors did not report the common name,Actinopterygii
+S_150,Gymoncypris namensis,Cyprinid ,The authors did not report the common name,Actinopterygii
+S_150,Gymoncypris waddellii,Cyprinid ,The authors did not report the common name,Actinopterygii
+S_150,Racoma biddulphi Gunther ,na,The authors did not report the common name,Actinopterygii
+S_150,Schizopygopsis malacanthus,na,The authors did not report the common name,Actinopterygii
+S_150,Gadus morhua,Cod,na,Actinopterygii
+S_150,Pleuronectes platessa,Plaice,na,Actinopterygii
+S_150,Platichthys flesus,Flounder,na,Actinopterygii
+S_150,Anguilla anguilla,Eel,na,Actinopterygii
+S_150,Xiphias gladius,Swordfish,na,Actinopterygii
+S_150,Perca fluviatilis,Perch,na,Actinopterygii
+S_150,Lota lota,Burbot,na,Actinopterygii
+S_150,Coregonus lavaretus,Whitefish,na,Actinopterygii
+S_150,Salmo salar,Salmon,na,Actinopterygii
+S_150,Salmo trutta,Brown trout,na,Actinopterygii
+S_150,Mugil cephalus,Pelagic fish,na,Actinopterygii
+S_150,Dentex dentex,Pelagic fish,na,Actinopterygii
+S_150,Trachurus mediterraneus,Pelagic fish,na,Actinopterygii
+S_150,Lamna nasus,Pelagic fish,na,Actinopterygii
+S_150,Mustelus mustelus,Pelagic fish,na,Actinopterygii
+S_150,Xiphias gladius,Pelagic fish,na,Actinopterygii
+S_150,Thunnus thynnus,Pelagic fish,na,Actinopterygii
+S_150,Conger conger,Benthonic fish,na,Actinopterygii
+S_150,Scyliorhinus canicula,Benthonic fish,na,Actinopterygii
+S_150,Mullus surmuletus,Benthonic fish,na,Actinopterygii
+S_150,Pagellus erythrinus,Benthonic fish,na,Actinopterygii
+S_150,Scorpaena scrofa,Benthonic fish,na,Actinopterygii
+S_150,Salmo trutta fario,Trout,na,Actinopterygii
+S_150,Rutilus rutilus,Roach,na,Actinopterygii
+S_150,Limanda limanda,Dab,na,Actinopterygii
+S_150,Salvelinus namaycush,Lake trout,na,Actinopterygii
+S_150,Salvelinus alpinus,Arctic char,na,Actinopterygii
+S_150,Salmo trutta fario,Brown trout,na,Actinopterygii
+S_150,Oncorhynchus mykiss,Rainbow trout,na,Actinopterygii
+S_150,Leuciscus cephalus,Chub,na,Actinopterygii
+S_150,Gobio gobio,River goby,na,Actinopterygii
+S_150,Sardina pilchardus,Sardine,na,Actinopterygii
+S_150,Engraulis encrasicholus,Anchovie,na,Actinopterygii
+S_150,Anguilla anguilla,Eel,na,Actinopterygii
+S_150,Micropterus dolomieu,Smallmouth bass,na,Actinopterygii
+S_150,Micropterus salmoides,Largemouth bass,na,Actinopterygii
+S_150,Salvelinus namaycush,Lake trout,na,Actinopterygii
+S_150,Cyprinus carpio,Common carp,na,Actinopterygii
+S_150,Lepomis macrochirus,Bluegill sunfish,na,Actinopterygii
+S_150,Anguilla anguilla,Eel,The authors did not report the scientific name,Actinopterygii
+S_150,Lutjanus campechanus,Snapper,The authors did not report the scientific name,Actinopterygii
+S_150,Ictaluridae,Catfish,The authors did not report the scientific name,Actinopterygii
+S_150,Opsanus tau,Oyster toadfish,na,Actinopterygii
+S_150,Micropogonias undulatus,Atlantic croaker ,na,Actinopterygii
+S_150,Mentichrrhus americanus,Southern kingfish,na,Actinopterygii
+S_150,Dasyatis americana,Southern stingray,na,Chondrichthyes
+S_150,Bairdiells chrysoura,Silver perch,na,Actinopterygii
+S_150,Leistomus xanthurus,Spot,na,Actinopterygii
+S_150,Synodus foetens,Inshore lizardfish,na,Actinopterygii
+S_150,Haemulton aurolineatum,Tomtate,na,Actinopterygii
+S_150,Prionotus sp.,Sea robin,na,Actinopterygii
+S_150,Centroprinstis striata,Black sea bass,na,Actinopterygii
+S_150,Micropterus salmoides,Large mouth bass,na,Actinopterygii
+S_150,Rhizoprionodon terranovae,Atlantic sharp-nose shark,na,Chondrichthyes
+S_150,Sphyrna tiburo,Bonnethead shark,na,Chondrichthyes
+S_150,Lepomis macrochirus,Bluegill,na,Actinopterygii
+S_150,Pomoxis nigromaculatus,Black crappie,na,Actinopterygii
+S_150,Lepomis gibbosus,Pumpkinseed,na,Actinopterygii
+S_150,Mugil incilis,Mullet,na,Actinopterygii
+S_150,Lepidopus caudatus,Silver scabbardfish,na,Actinopterygii
+S_150,Micropogonias furnier,Whitemouth croaker ,na,Actinopterygii
+S_150,Mugil liza,Mullet,na,Actinopterygii
+S_150,Caretta caretta,Loggerhead sea turtle,na,Reptilia
+S_150,Pygoscelis adeliae,Adelie penguin,na,Aves
+S_150,Stercorarius maccormicki,South polar skua,na,Aves
+S_150,Thalassarche mélanophrys,Black-browed albatross,na,Aves
+S_150,Thalassarche chrysostoma,Gray-headed albatross ,na,Aves
+S_150,Phoebetria palpebrata,Light-mantled sooty albatross,na,Aves
+S_150,Diomedea epomophora,Royal albatross,na,Aves
+S_150,Thalassarche cauta,Shy albatross,na,Aves
+S_150,Diomedea exulans,Wandering albatross,na,Aves
+S_150,Thalassarche mélanophrys,Black-browed albatross,na,Aves
+S_150,Pygoscelis adéliae,Adélie penguin,na,Aves
+S_150,Pygoscelis papua,Gentoo penguin,na,Aves
+S_150,Anas platyrhynchos,Mallard,The authors did not report the scientific name,Aves
+S_150,Chroicocephalus ridibundus,Blackheaded gull,The authors did not report the scientific name,Aves
+S_150,Thalassarche mélanophrys,Black-browed albatross,na,Aves
+S_150,Thalassarche chrysostoma,Gray-headed albatross,na,Aves
+S_150,Diomedea immutabilis,Laysan albatross,na,Aves
+S_150,Phoebetria palpebrata,Light-mantled sooty albatross,na,Aves
+S_150,Diomedea epomophora,Royal albatross,na,Aves
+S_150,Thalassarche cauta,Shy albatross,na,Aves
+S_150,Diomedea exulans,Wandering albatross,na,Aves
+S_150,Thalassarche chlororhynchos,Yellow-nosed albatross ,na,Aves
+S_150,Phalacrocorax carbo,Common cormorant,na,Aves
+S_150,Egretta garzetta,Little egret,na,Aves
+S_150,Nycticorax nycticorax,Night heron,na,Aves
+S_150,Ardea alba,Great egret,na,Aves
+S_150,Charadrius dubius,Little ringed plover,na,Aves
+S_150,Paradoxornis webbiana,Parrot bill,na,Aves
+S_150,Melanitta fusca,Velvet scoter,na,Aves
+S_150,Sommateria mollisima,Eider,na,Aves
+S_150,Clangula hyemalis,Long-tailed duck,na,Aves
+S_150,Alca torda,Razorbill,na,Aves
+S_150,Gavia stellata,Red-throated diver,na,Aves
+S_150,Larus fuscus,Black-backed gull,na,Aves
+S_150,Uria aalge,Guillemot,na,Aves
+S_150,Somateria mollisima,Common eider,na,Aves
+S_150,Phalacrocorax aristotelis,European shag,na,Aves
+S_150,Mergus merganser,Common merganser,na,Aves
+S_150,Lophodytes cucullatus,Hooded merganser,na,Aves
+S_150,Bucephala albeola,Bufflehead,na,Aves
+S_150,Anas platyrhynchos,Mallard,na,Aves
+S_150,Melanitta perpicillata,Surf scoter,na,Aves
+S_150,Anas rubripes,Black duck,na,Aves
+S_150,Bucephala clangula,Common goldeneye,na,Aves
+S_150,Aythya marlia,Greater scaup,na,Aves
+S_150,Aythya affinis,Lesser scaup ,na,Aves
+S_150,Aythya collaris,Ring-neck duck,na,Aves
+S_150,Diomedea immutabilis,Laysan albatross,na,Aves
+S_150,Diomedea nigripes,Black-fotted albatross,na,Aves
+S_150,Ardea herodias,Great blue heron ,na,Aves
+S_150,Fulmarus glacialis,Northern fulmar,na,Aves
+S_150,Ardea herodias,Great blue heron,na,Aves
+S_150,Larus argentatus,Herring gull,na,Aves
+S_150,Pelecanus occidentalis,Brown pelican,na,Aves
+S_150,Mirounga leonine,Elephant seal ,na,Mammal
+S_150,Arctocephalus gazella,Antarctic fur sea,na,Mammal
+S_150,Neophocaena phocaenoides,Finless porpoise,The authors did not report the scientific name,Mammal
+S_150,Phocoena phocoena,Harbor porpoise,na,Mammal
+S_150,Peponocephala electra,Melon-headed whale,na,Mammal
+S_150,Pusa sibirica,Baikal seal,na,Mammal
+S_150,Platanista gangetica,Ganges river dolphin,na,Mammal
+S_150,Sousa chinensis,Indo-Pacific humpback dolphin,na,Mammal
+S_150,Neophocaena phocaenoides,Finless porpoise,na,Mammal
+S_150,Balaenoptera acutorostrata,Minke whale,na,Mammal
+S_150,Delphinus capensis,Long-beaked common dolphin,,Mammal
+S_150,Phocoena phocoena,Harbor porpoise,na,Mammal
+S_150,Phoca vitulina,Harbor seal,na,Mammal
+S_150,Enhydra lutris,Southern sea otter ,The authors did not report the scientific name,Mammal
+S_150,Enhydra lutris kenyoni,Northern sea otter,na,Mammal
+S_150,Phoca vitulina concolor,Harbor seal,na,Mammal
+S_150,Phoca hispida,Ringed seal,na,Mammal
+S_150,Erignathus barbatus,Bearded seal,na,Mammal
+S_150,Phoca largha,Spotted seal,na,Mammal
+S_150,Phoca fasciata,Ribbon seal,na,Mammal
+S_150,Pontoporia blainvillei,Franciscana dolphin,na,Mammal
+S_150,Arctocephalus trophicalis,Subantarctic fur seal,na,Mammal
+S_150,Sotalia guianensis,Tucuxi dolphin,na,Mammal
+S_174,Mus musculus,CD1 mice,The authors did not report the scientific name,Mammalia
+S_174,Rattus norvegicus,Sprague Dawley rat,The authors did not report the scientific name,Mammalia
+S_174,Leporidae,Rabbit,The authors did not report the scientific name,Mammalia
+S_174,Danio rerio,Zebrafish,The authors did not report the scientific name,Actinopterygii
+S_174,Gallus domesticus,Chicken,The authors did not report the scientific name,Aves
+S_174,Xenopus,Clawed frogs,The authors did not report the common name,Amphibian
+S_174,Salmo salar,Atlantic salmon,The authors did not report the scientific name,Actinopterygii
+S_174,Drosophila melanogaster,Fruit fly,The authors did not report the scientific name,Insecta
+S_175,Aetobatus narinari,Spotted eagle ray,na,Chondrichthyes 
+S_182,Sprague Dawley rat,Rattus norvegicus,na,Mammalia
+S_182,CD1 mice,Mus musculus,na,Mammalia
+S_182,C57Bl/6 mice,Mus musculus,na,Mammalia
+S_182,Sprague Dawley rat,Rattus norvegicus,na,Mammalia
+S_185,Micropogonias undulatus,Atlantic croaker,na,Fish
+S_185,Sciaenops ocellatus,Red drum,na,Fish
+S_185,Leiostomus xanthurus,Spot,na,Fish
+S_185,Cynoscion nebulosus,Spotted seatrout,na,Fish
+S_185,Paralichthys lethostigma,Southern founder,na,Fish
+S_185,Mugil cephalus,Striped mullet,na,Fish
+S_185,Scomberoides lysan,Queenfsh,na,Fish
+S_185,Siganus rivulatus,Marbled spinefoot,na,Fish
+S_185,Selar crumenophthalmus,Bigeye scad,na,Fish
+S_185,Gerres longirostris,Strongspine silverbiddy,na,Fish
+S_185,Caranx melampygus,Bluefn Trevally,na,Fish
+S_185,Albuna glossodonta,BonefIsh,na,Fish
+S_185,na,Abalone,The authors did not report the scientific name,Bivalvia
+S_185,na,Mussels,The authors did not report the scientific name,Bivalvia
+S_185,Saccostrea glomerata,Oyster,The authors did not report the scientific name,Bivalvia
+S_185,na,Lobster,The authors did not report the scientific name,Crustacea
+S_185,Scomberoides lysan,Doublespotted Queenfsh,na,Fish
+S_185,Siganus rivulatus,Marbled Spinefoot,na,Fish
+S_185,Selar crumenophthalmus,Bigeye Scad,na,Fish
+S_185,Gerres longirostris,Strongspine silverbiddy,na,Fish
+S_185,Caranx melampygus,Bluefin Trevally,na,Fish
+S_185,Albula glossodonta,BonefIsh,na,Fish
+S_185,Hippoglossus hippoglossus,Halibut,na,Fish
+S_185,Pandalus borealis,Shrimps,na,Malacostraca
+S_185,Gadus morhua,Cod,na,Fish
+S_185,Salmo salar,Salmon,na,Fish
+S_185,Paralithodes camtschaticus,King crabs,na,Crustacea
+S_185,Chanos chanos,Milkfsh,na,Fish
+S_185,Mugil cephalus,Mullet,na,Fish
+S_185,Platycephalus fuscus,Dusky fathead,na,Fish
+S_185,Acanthopagrus australis,Yellowfn bream,na,Fish
+S_185,Sillago ciliata,Sand whiting,na,Fish
+S_185,Scylla serrata,Mud crab,na,Crustacea
+S_185,Metapenaeus macleayi,School prawn,na,Malacostraca
+S_185,Lates niloticus,Nile perch,na,Fish
+S_185,Oreochromis niloticus,Nile tilapia,na,Fish
+S_185,Rutilus rutilus,Roach,na,Fish
+S_185,Abramis brama,Common bream,na,Fish
+S_185,Cyprinus carpio,Common carp,na,Fish
+S_185,Squalius cephalus,European chub,na,Fish
+S_185,Carassius carassius,Crucian carp,na,Fish
+S_185,Lepomis gibbosus,Pumpkinseed,na,Fish
+S_185,Oncorhynchus mykiss,Rainbow trout,na,Fish
+S_185,Gobio gobio,Gudgeon,na,Fish
+S_185,Thymallus thymallus,Grayling,na,Fish
+S_185,Scardinius erythrophthalmus,Rudd,na,Fish
+S_185,Alosa agone,na,The authors did not report the common name,Fish
+S_185,Labeobarbus megastoma,na,The authors did not report the common name,Fish
+S_185,Labeobarbus intermedius,na,The authors did not report the common name,Fish
+S_185,Labeobarbus gorguari,na,The authors did not report the common name,Fish
+S_185,Clarias gariepinus,African catfsh,na,Fish
+S_185,Salvelinus namaycush,Lake trout,na,Fish
+S_185,Percopsis omiscomaycus,Trout perch,na,Fish
+S_185,Micropterus salmoides,Largemouth bass,na,Fish
+S_185,Esox niger,Chain pickerel,na,Fish
+S_185,Morone americana,White perch,na,Fish
+S_185,Lepomis macrochirus,Bluegill sunfsh,na,Fish
+S_185,Lepomis gibbosus,Pumpkinseed sunfsh,na,Fish
+S_185,Ictalurus punctatus,Channel catfsh,na,Fish
+S_185,Esox lucius,Pike,na,Fish
+S_185,Salvelinus alpinus,Arctic char,na,Fish
+S_185,Astacus astacus,Crayfsh,na,Fish
+S_185,na,Bluegill,The authors did not report the scientific name,Fish
+S_185,na,Freshwater drum,The authors did not report the scientific name,Fish
+S_185,na,Smallmouth bass,The authors did not report the scientific name,Fish
+S_185,na,White bass,The authors did not report the scientific name,Fish
+S_185,Dreissena bugensis,Quagga mussel,na,Bivalvia
+S_185,Anguilla anguilla,European eel,na,Fish
+S_185,Maccullochella peelii,Murray cod,na,Fish
+S_185,Macquaria ambigua,Golden perch,na,Fish
+S_185,Cherax destructor,Common yabby,na,Fish
+S_185,Clupea harengus membras,Herring,na,Fish
+S_185,Squalius cephalus,Chub,na,Fish
+S_185,Coregonus renke,Whitefsh,na,Fish
+S_186,Daphnia magna,Water flea,na,Branchiopods
+S_186,Lampsilis siliquoidea,Fatmucket,na,Bivalvia
+S_186,Carassius auratus,Goldfish,na,Fish
+S_186,Luxilus cornutus,Common shiner,na,Actinopterygii
+S_186,Anguilla anguilla,European eel,na,Actinopterygii
+S_186,Cyprinus carpio,Common carp,na,Actinopterygii
+S_186,Danio rerio,Zebrafish,na,Actinopterygii
+S_186,Etheostoma nigrum,Johnny darter,na,Fish
+S_186,Lepomis gibbosus,Pumpkinseed,na,Fish
+S_186,Melanotaenia fluviatilis,Murray River rainbowfish,na,Fish
+S_186,Orizia melastigma,Marine medaka,na,Fish
+S_186,Perca flavescens,American yellow Perch,na,Fish
+S_186,Rhinichthys atratulus,Blacknose dace,na,Fish
+S_186,Xenopus laevis,African clawed frog,na,Amphibia
+S_186,Semotilus atromaculatus,Creek chub,na,Fish
+S_186,Esox Lucius,Northern pike,na,Fish
+S_188,Mus musculus,B6C3F1 mice,na,Mammalia
+S_188,Mus musculus,C57BL/6 mice,na,Mammalia
+S_188,Rattus norvegicus,Sprague Dawley rat,na,Mammalia
+S_192,Rattus norvegicus,Sprague Dawley rat,na,Mammalia
+S_192,Mus musculus,C57BL/6 mice,na,Mammalia
+S_192,Oryctolagus cuniculus,New Zealand White rabbits,na,Mammalia
+S_200,Mus musculus,BALB/c mice,na,Mammalia
+S_200,Rattus norvegicus,Sprague Dawley rat,na,Mammalia
+S_200,Mus musculus,C57BL/6 mice,na,Mammalia
+S_200,Mus musculus,Kunming mouse,na,Mammalia
+S_200,Danio rerio,Zebrafish,na,Actinopterygii
+S_213,Mus musculus,Mice,The authors did not report the scientific name,Mammalia
+S_213,Mus musculus,Rats,The authors did not report the scientific name,Mammalia
+S_213,Danio rerio,Zebrafish,The authors did not report the scientific name,Actinopterygii
+S_213,na,Bird,The authors did not report the scientific name,Aves
+S_213,na,Dolphins,The authors did not report the scientific name,Mammalia
+S_213,na,Frog larvae,The authors did not report the scientific name,Amphibia
+S_213,na,Fish,The authors did not report the scientific name,Fish
+S_213,Gallus domesticus,Chicken,The authors did not report the scientific name,Aves
+S_215,Cetorhinus maximus,na,The authors did not report the common name,Chondrichthyes
+S_215,Megachasma pelagios,na,The authors did not report the common name,Chondrichthyes
+S_215,Rhincodon typus,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula birostris,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula mobular,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula munkiana,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula thurstoni,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula alfredi,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula kuhlii/eregoodoo,na,The authors did not report the common name,Chondrichthyes
+S_215,Mobula thurstoni,na,The authors did not report the common name,Chondrichthyes
