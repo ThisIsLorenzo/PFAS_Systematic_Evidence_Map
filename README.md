@@ -23,7 +23,7 @@ Folder containing .RMD files on deduplication of documents exported from searche
 - ```/main_search_deduplication.RMD```: R Markdown for deduplication of bibliographic records
 - ```/update_deduplication.RMD```: R Markdown for deduplication of bibliographic records (update search conducted in 2023)
 
-### PFAS_SEM_Shiny_App
+### /PFAS_SEM_Shiny_App/
 - ```/```:
 - ```/```:
 
