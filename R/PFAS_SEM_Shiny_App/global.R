@@ -1,4 +1,5 @@
 library(dplyr)
+library(plotly)
 # load data and construct final database ----
 mdata <- read_csv(here("data","main.csv"), skip = 0)
 dim(mdata) #175 rows 38 columns
@@ -102,7 +103,11 @@ for(set in my_data) {
 }
 vars_sets$Study_ID <- "review"
 
+# Creating histograms
 
+p1 = mdata %>% 
+  plot_ly() %>% 
+  add_histogram(~Publication_year)
 
 
 

@@ -23,6 +23,7 @@ fluidPage(
       id = "sidebar",
       menuItem(text = "Dataset", tabName = "data", icon = icon("database")),
       menuItem(text = "Visualization", tabName = "viz", icon = icon("chart-line")),
+      selectInput(inputId = "var1", label = "Select the variable", choices = mdata, selected = "Paper_title"),
       menuItem(text = "World Map", tabName = "map", icon = icon("map"))
     )
   ),
@@ -30,7 +31,13 @@ fluidPage(
     tabItems(
       tabItem(tabName = "data",
               tabBox(id = "t1", width = 12,
-                     tabPanel(title = "About", icon = icon("address-card"), h2("tabPanel")),
+                     tabPanel(title = "About", icon = icon("address-card"),
+                              fluidRow(
+                                column(width = 8, tags$img(src="Fig.1.png", widht = 300, height = 600),
+                                       tags$a("Workflow"), align = "center"),
+                                column(width = 4, tags$br(),
+                                       tags$p("ADD INFORMATION ABOUT THE MAP HERE")
+                                       ))),
                      tabPanel(title = "Data", icon = icon("address-card"), sidebarPanel("Data selection",
                                                                                         selectInput("dataSelector1",
                                                                                                     label = "Select first variable of interest",
