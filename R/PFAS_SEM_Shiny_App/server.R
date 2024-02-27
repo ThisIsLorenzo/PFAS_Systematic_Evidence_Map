@@ -24,7 +24,7 @@ function(input, output, session) {
   })
   
   re_database <- reactive({
-    current_dataframes <- all_dataframes[re_relevant_sets()]
+    current_dataframes <- my_data[re_relevant_sets()]
     database <- Reduce(dplyr::left_join, current_dataframes) %>%
       select(re_selected_vars()[re_selected_vars() != "NULL"])
     as.data.frame(database)
