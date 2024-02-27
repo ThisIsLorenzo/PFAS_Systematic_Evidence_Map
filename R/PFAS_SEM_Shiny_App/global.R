@@ -1,5 +1,9 @@
 library(dplyr)
 library(plotly)
+library(here)
+library(tidyverse)
+library(data.table)
+library(DT)
 # load data and construct final database ----
 mdata <- read_csv(here("data","main.csv"), skip = 0)
 dim(mdata) #175 rows 38 columns
