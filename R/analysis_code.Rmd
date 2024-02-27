@@ -2103,17 +2103,18 @@ p_subj <- ggplot(t_subject, aes(x = Human_animal_environment,
   coord_flip()+
   scale_x_discrete(name = "Review subject") +
   scale_y_continuous(name = "Percentage of reviews (%)",
-                     breaks = seq(0, 80, by = 10),
+                     breaks = seq(0, 70, by = 10),
                      expand = c(0,1),
-                     limits = c(0,80)) +
+                     limits = c(0,70)) +
   scale_fill_manual(values = c("#999999")) +
   scale_color_manual(values = c("#999999")) +
   geom_text(aes(label = paste0(n), x = Human_animal_environment), 
             position = position_stack(vjust = 0.5), 
             size = 3) + 
+  ggtitle(expression(bold("a)"))) +
   theme(legend.position = "none",
-        axis.title.x = element_text(size = 11),
-        axis.title.y = element_text(size = 11),
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
         axis.text = element_text(size = 10),
         panel.grid.major = element_line(color = "grey", 
                                        linewidth  = 0.2, 
@@ -2124,10 +2125,61 @@ p_subj <- ggplot(t_subject, aes(x = Human_animal_environment,
 # Display the plot
 p_subj
 
+# Create a dataframe with the outcome counts and percentages
+outcome <- mdata %>% 
+  filter(!is.na(Outcome_category)) %>% 
+  count(Outcome_category) %>% 
+  mutate(perc = (n / sum(n))*100)
+
+outcome <- outcome %>% 
+  mutate(Outcome_category = recode(Outcome_category, 
+                                   "Toxicological Studies and Biological Responses" = "Toxicological and Biological Responses"))
+
+# Reorder the levels of Outcome_category
+outcome$Outcome_category <- factor(outcome$Outcome_category, levels = c("Human Health Outcomes", "Animal Health Outcomes", "Reproductive and Developmental Health", "Toxicological and Biological Responses", "Metabolic and Endocrine Health", "Contaminants Occurrence and Exposure"))
+
+outcome <- outcome %>%
+  mutate(Outcome_category = fct_reorder(Outcome_category, n))
+
+p_outcome <- ggplot(outcome, aes(x = perc,
+                                 y = Outcome_category)) +
+  geom_col(aes(color = "black", fill = "#999999"),
+           alpha = 0.5,
+          width = 0.8,
+          size = 0.2) +
+  scale_fill_manual(values = c("#999999")) +
+  scale_color_manual(values = c("#999999")) +
+  geom_text(aes(label = n,
+                y = Outcome_category),
+                color = "black",
+                position = position_stack(vjust = 0.5),
+                vjust = 0.5,
+                hjust = 0.5, 
+                size = 3) +  # Adding labels inside bars
+  #scale_fill_ochre(palette = "olsen_qual") +
+  labs(x = "Percentage of reviews (%)", y = "Outcome Category") +  # Labels for axes
+  theme_light() +
+  scale_x_continuous(breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  ggtitle(expression(bold("b)"))) +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10),
+        panel.grid.major = element_line(color = "grey", 
+                                       linewidth  = 0.2, 
+                                       linetype = "dashed"),
+       panel.grid.minor = element_line(color = "grey", 
+                                      linewidth  = 0.2, 
+                                      linetype = "dotted"))  # Remove legend
+
+p_subj / p_outcome
 # Optional: Save the plot as an image file
-# ggsave(here("Figs/Suppl_Figs", "SFig.4.png"),
-#        width = 8,
-#        height = 6)
+ggsave(here("Figs/Suppl_Figs", "SFig.4.png"),
+       width = 9,
+       height = 6)
 ```
 
 ## Supplementary Figure 5
@@ -4171,7 +4223,7 @@ p_all[1]
 #        height = 6)
 ```
 
-## Supplementary Figure 24
+## Supplementary Figure 25
 
 ```{r}
 top_ten_cited_papers_all <- as.data.frame(head(results1_all[["MostCitedPapers"]], n = 10)) 
@@ -4207,7 +4259,7 @@ ggplot(top_ten_cited_papers_all, aes(x = Paper,
 #        height = 6)
 ```
 
-## Supplementary Figure 25
+## Supplementary Figure 26
 
 ```{r}
 #save counts in a data frame
@@ -4277,7 +4329,7 @@ fullmap2 %>%
 # dev.off()
 ```
 
-## Supplementary Figure 26
+## Supplementary Figure 27
 
 Making the plot without getting rid of collabs with the same country
 ```{r, echo = FALSE, results = 'hide'}
@@ -4550,7 +4602,7 @@ title("B", font.main = 1, cex.main = 2.5)
 #dev.off()
 ```
 
-##Supplementary Figure 27
+##Supplementary Figure 28
 
 ```{r}
 # pdf(file="./Figs/Suppl_Figs/SFig.27.pdf",
@@ -4586,5 +4638,44 @@ NetMatrix_keywords_plot2 <-
 #str(NetMatrix_keywords_plot)
 #res <- thematicMap(net, NetMatrix_keywords, S)
 #plot(res$map)
+```
+
+##Supplementary Figure 29
+
+```{r}
+# Create a dataframe with the outcome counts and percentages
+outcome <- mdata %>% 
+  filter(!is.na(Outcome_category)) %>% 
+  count(Outcome_category) %>% 
+  mutate(perc = n / sum(n),
+         labels = scales::percent(perc))
+
+outcome <- outcome %>% 
+  mutate(Outcome_category = recode(Outcome_category, 
+                                   "Toxicological Studies and Biological Responses" = "Toxicological and Biological Responses"))
+
+# Reorder the levels of Outcome_category
+outcome$Outcome_category <- factor(outcome$Outcome_category, levels = c("Human Health Outcomes", "Animal Health Outcomes", "Reproductive and Developmental Health", "Toxicological and Biological Responses", "Metabolic and Endocrine Health", "Contaminants Occurrence and Exposure"))
+
+outcome <- outcome %>%
+  mutate(Outcome_category = fct_reorder(Outcome_category, n))
+
+outcome$midpoint <- outcome$n / 2
+
+ ggplot(outcome, aes(x = n, y = Outcome_category, fill = Outcome_category)) +
+  geom_col(color = "black") +
+  geom_text(aes(label = labels), color = "black", x = outcome$midpoint, vjust = 0.5, hjust = 0.5, size = 4.5) +  # Adding labels inside bars
+  scale_fill_ochre(palette = "olsen_qual") +
+  labs(x = "Number of reviews", y = "Outcome Category") +  # Labels for axes
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10))  # Remove legend
+# ggsave(here("Figs/Suppl_Figs", "SFig.29.png"),
+#        width = 10,
+#        height = 7,
+#        bg = "white")
 ```
 

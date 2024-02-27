@@ -4,9 +4,8 @@ library(here)
 library(tidyverse)
 library(here)
 library(readr)
-library(tidyverse)
 library(curl)
-
+setwd("~/PhD/GitHub/PFAS_Systematic_Evidence_Map/R/PFAS_SEM_Shiny_App")
 
 is.notwholenumber <-
   function(x, tol = .Machine$double.eps^0.5)  {
