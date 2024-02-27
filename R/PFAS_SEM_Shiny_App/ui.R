@@ -13,17 +13,20 @@ fluidPage(
       '))
   ),
   dashboardPage(
-  dashboardHeader(title = "A research synthesis of humans, animals, and environmental compartments exposed to PFAS: A systematic evidence map and bibliometric analysis of secondary literature",
-                  titleWidth = 1500,
-                  tags$li(class="dropdown", tags$a(href="https://github.com/ThisIsLorenzo/PFAS_Systematic_Evidence_Map", icon("github"), "GitHub Repo", target="_blank")),
-                  tags$li(class="dropdown", tags$a(href="https://www.i-deel.org/", "I-Deel Lab", target="_blank"))
+  dashboardHeader(title = "Ricolfi et al., 2024",
+                  titleWidth = 200,
+                  tags$li(class="dropdown", tags$a(href="https://github.com/ThisIsLorenzo/PFAS_Systematic_Evidence_Map", tags$img(src = "github.png", height = "20px", width = "20px"), "GitHub Repo", target="_blank")),
+                  tags$li(class="dropdown", tags$a(href="https://www.livingpfas.org/", tags$img(src = "LivingPFAS.png", height = "20px", width = "20px"), "Living PFAS", target = "_blank")),
+                  tags$li(class="dropdown", tags$a(href="https://www.i-deel.org/", tags$img(src = "ideel.png", height = "20px", width = "20px"), "I-Deel Lab", target = "_blank"))
                   ),
   dashboardSidebar(
     sidebarMenu(
       id = "sidebar",
       menuItem(text = "Dataset", tabName = "data", icon = icon("database")),
       menuItem(text = "Visualization", tabName = "viz", icon = icon("chart-line")),
-      selectInput(inputId = "var1", label = "Select the variable", choices = mdata, selected = "Paper_title"),
+      conditionalPanel(
+        condition = "input.sidebar === 'viz'",
+      selectInput(inputId = "table", label = "Select Table", choices = c("Mapping"="mdata", "Appraisal"="qdata"), selected = "mdata")),
       menuItem(text = "World Map", tabName = "map", icon = icon("map"))
     )
   ),
@@ -33,11 +36,53 @@ fluidPage(
               tabBox(id = "t1", width = 12,
                      tabPanel(title = "About", icon = icon("address-card"),
                               fluidRow(
-                                column(width = 8, tags$img(src="Fig.1.png", widht = 300, height = 600),
-                                       tags$a("Workflow"), align = "center"),
-                                column(width = 4, tags$br(),
-                                       tags$p("ADD INFORMATION ABOUT THE MAP HERE")
-                                       ))),
+                                column(width = 12,align = "center",
+                                       tags$img(src="title.png")
+                                       ),
+                                column(width = 12, align = "center", 
+                                       tags$p(style = "font-size: 28px; margin-bottom: 20px;",
+                                              "Welcome to our Shiny App!")
+                                       ),
+                                column(width = 12, align = "center",
+                                       tags$img(src="shiny-logo.png", height = "90px", width = "140px")
+                                       ),
+                                column(width = 12, align = "center", 
+                                       tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                              "your gateway to exploring our comprehensive systematic evidence map with ease and interactivity!")
+                                       ),
+                                column(width = 12,  
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "Dive into our database effortlessly, empowering you to browse, filter, and extract insights tailored to your interests.")
+                                       ),
+                                column(width = 12, 
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "Navigate through our repository with intuitive controls, enabling you to pinpoint specific categories, such as reviews focusing on human studies, with just a few clicks. Whether you're seeking broad overviews or detailed analyses, our app streamlines your search process.")
+                                       ),
+                                column(width = 12, 
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "Beyond exploration, leverage our app's functionality to download the entirety of our database or selectively extract subsets that align with your research objectives. Unleash the power of visualization by generating dynamic graphs that illuminate patterns and trends within the data.")
+                                       ),
+                                column(width = 12, 
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "Experience the fusion of accessibility and depth in our Shiny App, designed to empower users in their exploration and utilization of our systematic evidence map.")
+                                       )
+                                )
+                              ),
+                     tabPanel(title = "Structure", icon = icon("address-card"),
+                              fluidRow(
+                                column(width = 12, 
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "The Structure section of this Shiny App mirrors the organization of our systematic evidence map, ensuring an intuitive and straightforward user experience. In the adjacent tab, you'll discover a concise summary of key statistics, while in the subsequent tab, you'll have access to an extensive datatable containing all the data encompassed within our systematic evidence map. To maintain navigational ease, we've structured our database according to the three primary objectives outlined in our map. To refresh your memory on the map's structure, refer to the accompanying figure.")
+                                       ),
+                                column(width = 12, align = "center",
+                                       tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
+                                ),
+                                column(width = 12,align = "center",
+                                       tags$img(src="Fig.1.png")
+                                       )
+                                )
+                              ),
+                     tabPanel(title = "Summary Stats", icon = icon("address-card"), h2("tabPanel-4 placeholder UI")),
                      tabPanel(title = "Data", icon = icon("address-card"), sidebarPanel("Data selection",
                                                                                         selectInput("dataSelector1",
                                                                                                     label = "Select first variable of interest",
@@ -178,9 +223,8 @@ fluidPage(
                      ),
                      mainPanel(# textOutput("selected_var")
                                dataTableOutput("gapminder_table")
-                     )),
-                     tabPanel(title = "Structure", icon = icon("address-card"), h2("tabPanel-3 placeholder UI")),
-                     tabPanel(title = "Summary Stats", icon = icon("address-card"), h2("tabPanel-4 placeholder UI"))
+                               )
+                     )
                      )
               ),
       tabItem(tabName = "viz",

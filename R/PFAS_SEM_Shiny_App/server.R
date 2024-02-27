@@ -40,12 +40,19 @@ function(input, output, session) {
                 filter = 'top',
                 rownames = FALSE,
                 extensions = "Buttons",
-                options = list(pageLength = 50,
-                               dom = "Blfrtip",
+                options = list(pageLength = 200,
+                               dom = "Bfrtip",
                                autoWidth = TRUE,
                                bAutoWidth = FALSE,
-                               buttons = c('copy', 'csv', 'excel', 'pdf'),
-                               columnDefs = list(list(className = 'dt-left', targets = '_all'))))
+                               buttons = list(
+                                 list(extend = 'copy', text = 'Copy'),
+                                 list(extend = 'csv', text = 'CSV'),
+                                 list(extend = 'excel', text = 'Excel'),
+                                 list(extend = 'pdf', text = 'PDF'),
+                                 list(extend = 'pageLength', text = 'Entries')
+                               ),
+                               columnDefs = list(list(className = 'dt-left', targets = '_all'))),
+                callback = JS('table.page.len(-1).draw();'))
     )
     
     # output$selected_var <- renderText({
