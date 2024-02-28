@@ -212,6 +212,9 @@ dim(mpidata) #1090 rows 36 columns
 
 # Merge main dataframe with quality dataframe
 mqdata <- left_join(mdata, qdata, by = "Study_ID")
+
+alldata <- left_join(mspdata, ptidata, by = "Study_ID")
+dim(alldata)
 ```
 
 # DOIs strings

@@ -1,7 +1,7 @@
 function(input, output, session) {
   
   # variables always present
-  always_vars <- c("Study_ID", "Publication_year")
+  always_vars <- c("Author_year", "Paper_title", "Publication_year")
   
   re_selected_vars <- reactive({
     # collect all selected variables
@@ -10,7 +10,9 @@ function(input, output, session) {
         input$dataSelector1,
         input$dataSelector2,
         input$dataSelector3,
-        input$dataSelector4)
+        input$dataSelector4,
+        input$dataSelector5,
+        input$dataSelector6)
   })
   
   
@@ -55,10 +57,31 @@ function(input, output, session) {
                 callback = JS('table.page.len(-1).draw();'))
     )
     
-    # output$selected_var <- renderText({
-    #   paste("You selected", names(re_database()))
-    # })
+    # For Summary Output
+    output$summary <- renderUI({
+      mdata2 <- mdata %>%
+        separate(Author_year, c("First_author", "Publication_year"), sep = "_") %>%
+        mutate(First_author = str_replace_all(First_author, "First_author", "First author"),
+               Publication_year = str_replace_all(Publication_year, "Publication_year", "Publication year")) %>%
+        filter(First_author != "NA")
+      
+      summary_table <- knitr::kable(select(mdata2,
+                                           First_author,
+                                           Publication_year,
+                                           Paper_title,
+                                           DOI), caption = "Table of included SRs") %>%
+        kableExtra::kable_paper(bootstrap_options = "striped", full_width = FALSE)
+      
+      HTML(summary_table)
+    })
     
+    
+    
+    # For Structure output
+    output$structure <- renderPrint({
+      my_data %>% 
+        str()
+    })
     
   }, ignoreNULL = FALSE)
 }

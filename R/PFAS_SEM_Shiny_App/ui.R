@@ -23,10 +23,13 @@ fluidPage(
     sidebarMenu(
       id = "sidebar",
       menuItem(text = "Dataset", tabName = "data", icon = icon("database")),
+      # conditionalPanel(
+      #   condition = "input.sidebar === 'data'",
+      # selectInput(inputId = "table", label = "Select Table", choices = c("All"="my_data", "Mapping"="mdata", "Appraisal"="qdata", "Bibliometrics"="bib_data"), selected = "mdata")),
       menuItem(text = "Visualization", tabName = "viz", icon = icon("chart-line")),
-      conditionalPanel(
-        condition = "input.sidebar === 'viz'",
-      selectInput(inputId = "table", label = "Select Table", choices = c("Mapping"="mdata", "Appraisal"="qdata"), selected = "mdata")),
+      # conditionalPanel(
+      #   condition = "input.sidebar === 'viz'",
+      # selectInput(inputId = "table", label = "Select Table", choices = c("Mapping"="mdata", "Appraisal"="qdata", "Bibliometrics"="bib_data"), selected = "mdata")),
       menuItem(text = "World Map", tabName = "map", icon = icon("map"))
     )
   ),
@@ -36,15 +39,15 @@ fluidPage(
               tabBox(id = "t1", width = 12,
                      tabPanel(title = "About", icon = icon("address-card"),
                               fluidRow(
-                                column(width = 12,align = "center",
+                                column(width = 12, align = "center",
                                        tags$img(src="title.png")
                                        ),
                                 column(width = 12, align = "center", 
-                                       tags$p(style = "font-size: 28px; margin-bottom: 20px;",
+                                       tags$p(style = "font-size: 32px; margin-bottom: 20px;",
                                               "Welcome to our Shiny App!")
                                        ),
                                 column(width = 12, align = "center",
-                                       tags$img(src="shiny-logo.png", height = "90px", width = "140px")
+                                       tags$img(src="shiny-logo.png", height = "90px", width = "160px")
                                        ),
                                 column(width = 12, align = "center", 
                                        tags$p(style = "font-size: 24px; margin-bottom: 20px;",
@@ -68,11 +71,11 @@ fluidPage(
                                        )
                                 )
                               ),
-                     tabPanel(title = "Structure", icon = icon("address-card"),
+                     tabPanel(title = "Structure", verbatimTextOutput("structure"), icon = icon("uncharted"),
                               fluidRow(
                                 column(width = 12, 
                                        tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                              "The Structure section of this Shiny App mirrors the organization of our systematic evidence map, ensuring an intuitive and straightforward user experience. In the adjacent tab, you'll discover a concise summary of key statistics, while in the subsequent tab, you'll have access to an extensive datatable containing all the data encompassed within our systematic evidence map. To maintain navigational ease, we've structured our database according to the three primary objectives outlined in our map. To refresh your memory on the map's structure, refer to the accompanying figure.")
+                                              "The Structure of this Shiny App mirrors the organization of our systematic evidence map, ensuring an intuitive and straightforward user experience. In the adjacent tab, you'll discover a concise summary of key statistics, while in the subsequent tab, you'll have access to an extensive datatable containing all the data encompassed within our systematic evidence map. To maintain navigational ease, we've structured our database according to the three primary objectives outlined in our map. To refresh your memory on the map's structure, refer to the accompanying figure.")
                                        ),
                                 column(width = 12, align = "center",
                                        tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
@@ -80,12 +83,11 @@ fluidPage(
                                 column(width = 12,align = "center",
                                        tags$img(src="Fig.1.png")
                                        )
-                                )
-                              ),
-                     tabPanel(title = "Summary Stats", icon = icon("address-card"), h2("tabPanel-4 placeholder UI")),
-                     tabPanel(title = "Data", icon = icon("address-card"), sidebarPanel("Data selection",
+                                )),
+                     tabPanel(title = "Summary Stats", verbatimTextOutput("summary"), icon = icon("chart-pie")),
+                     tabPanel(title = "Data", icon = icon("table"), sidebarPanel("Data selection",
                                                                                         selectInput("dataSelector1",
-                                                                                                    label = "Select first variable of interest",
+                                                                                                    label = "Select 1st variable of interest",
                                                                                                     choices = list("*No variable selected*" = "NULL",
                                                                                                                    "Review title" = "Paper_title",
                                                                                                                    "Journal name" = "Journal",
@@ -109,17 +111,16 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   
                                                                                                                    "Species scientific name" = "species_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
                                                                                                                    "Animal study type" = "Lab_domestic_wildlife_mixed"
                                                                                                     ),
-                                                                                                    selected = "Paper_title"),
+                                                                                                    selected = "*No variable selected*"),
                                                                                         
                                                                                         selectInput("dataSelector2",
-                                                                                                    label = "Select second variable of interest",
+                                                                                                    label = "Select 2nd variable of interest",
                                                                                                     choices = list("*No variable selected*" = "NULL",
                                                                                                                    "Review title" = "Paper_title",
                                                                                                                    "Journal name" = "Journal",
@@ -150,10 +151,9 @@ fluidPage(
                                                                                                                    "How many species?" = "Species_one_many",
                                                                                                                    "Animal study type" = "Lab_domestic_wildlife_mixed"
                                                                                                     ),
-                                                                                                    selected = "Journal"),
-                                                                                        
+                                                                                                    selected = "*No variable selected*"),
                                                                                         selectInput("dataSelector3",
-                                                                                                    label = "Select third variable of interest",
+                                                                                                    label = "Select 3rd variable of interest",
                                                                                                     choices = list("*No variable selected*" = "NULL",
                                                                                                                    "Review title" = "Paper_title",
                                                                                                                    "Journal name" = "Journal",
@@ -184,10 +184,9 @@ fluidPage(
                                                                                                                    "How many species?" = "Species_one_many",
                                                                                                                    "Animal study type" = "Lab_domestic_wildlife_mixed"
                                                                                                     ),
-                                                                                                    selected = "Meta_analysis"),
-                                                                                        
+                                                                                                    selected = "*No variable selected*"),
                                                                                         selectInput("dataSelector4",
-                                                                                                    label = "Select fourth variable of interest",
+                                                                                                    label = "Select 4th variable of interest",
                                                                                                     choices = list("*No variable selected*" = "NULL",
                                                                                                                    "Review title" = "Paper_title",
                                                                                                                    "Journal name" = "Journal",
@@ -218,21 +217,134 @@ fluidPage(
                                                                                                                    "How many species?" = "Species_one_many",
                                                                                                                    "Animal study type" = "Lab_domestic_wildlife_mixed"
                                                                                                     ),
-                                                                                                    selected = "Human_animal_environment"),
+                                                                                                    selected = "*No variable selected*"),
+                                                                                 selectInput("dataSelector5",
+                                                                                                    label = "Select 5th variable of interest",
+                                                                                                    choices = list("*No variable selected*" = "NULL",
+                                                                                                                   "Review title" = "Paper_title",
+                                                                                                                   "Journal name" = "Journal",
+                                                                                                                   "Country of first author" = "Country_firstAuthor",
+                                                                                                                   "Type of review" = "Review_type_claimed",
+                                                                                                                   "Systematic approach" = "Systematic_approach",
+                                                                                                                   "Protocol" = "Protocol",
+                                                                                                                   "Meta-analysis" = "Meta_analysis",
+                                                                                                                   "Review subject" = "Human_animal_environment",
+                                                                                                                   "Type of environment" = "Environment_type",
+                                                                                                                   "Reporting guidelines" = "Reporting_guideline",
+                                                                                                                   "Conflict of interest statement" = "COI_statement",
+                                                                                                                   "potential Conflict of interest" = "COI_present",
+                                                                                                                   "Funding statement" = "Funding_statement",
+                                                                                                                   "No-profit funding" = "No_profit_funding",
+                                                                                                                   "For-profit funding" = "Industry_funding",
+                                                                                                                   "Raw data availability" = "Raw_data",
+                                                                                                                   "Analysis code availability" = "Analysis_code",
+                                                                                                                   "DOI" = "DOI",
+                                                                                                                   "PFAS type" = "PFAS_type",
+                                                                                                                   "PFAS full name" = "PFAS_full_namee",
+                                                                                                                   "Focus on PFAS?" = "PFAS_focus",
+                                                                                                                   "How many PFAS?" = "PFAS_one_many",
+                                                                                                                   
+                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species common name" = "Species_common_name",
+                                                                                                                   "Classes scientific name" = "Class_scientific_name",
+                                                                                                                   "How many species?" = "Species_one_many",
+                                                                                                                   "Animal study type" = "Lab_domestic_wildlife_mixed"
+                                                                                                    ),
+                                                                                                    selected = "*No variable selected*"),
+                                                                                 selectInput("dataSelector6",
+                                                                                             label = "Select 6th variable of interest",
+                                                                                             choices = list("*No variable selected*" = "NULL",
+                                                                                                            "Review title" = "Paper_title",
+                                                                                                            "Journal name" = "Journal",
+                                                                                                            "Country of first author" = "Country_firstAuthor",
+                                                                                                            "Type of review" = "Review_type_claimed",
+                                                                                                            "Systematic approach" = "Systematic_approach",
+                                                                                                            "Protocol" = "Protocol",
+                                                                                                            "Meta-analysis" = "Meta_analysis",
+                                                                                                            "Review subject" = "Human_animal_environment",
+                                                                                                            "Type of environment" = "Environment_type",
+                                                                                                            "Reporting guidelines" = "Reporting_guideline",
+                                                                                                            "Conflict of interest statement" = "COI_statement",
+                                                                                                            "potential Conflict of interest" = "COI_present",
+                                                                                                            "Funding statement" = "Funding_statement",
+                                                                                                            "No-profit funding" = "No_profit_funding",
+                                                                                                            "For-profit funding" = "Industry_funding",
+                                                                                                            "Raw data availability" = "Raw_data",
+                                                                                                            "Analysis code availability" = "Analysis_code",
+                                                                                                            "DOI" = "DOI",
+                                                                                                            "PFAS type" = "PFAS_type",
+                                                                                                            "PFAS full name" = "PFAS_full_namee",
+                                                                                                            "Focus on PFAS?" = "PFAS_focus",
+                                                                                                            "How many PFAS?" = "PFAS_one_many",
+                                                                                                            
+                                                                                                            "Species scientific name" = "species_name",
+                                                                                                            "Species common name" = "Species_common_name",
+                                                                                                            "Classes scientific name" = "Class_scientific_name",
+                                                                                                            "How many species?" = "Species_one_many",
+                                                                                                            "Animal study type" = "Lab_domestic_wildlife_mixed"
+                                                                                             ),
+                                                                                             selected = "*No variable selected*"),
+                                                                                 selectInput("dataSelector7",
+                                                                                             label = "Select 7th variable of interest",
+                                                                                             choices = list("*No variable selected*" = "NULL",
+                                                                                                            "Review title" = "Paper_title",
+                                                                                                            "Journal name" = "Journal",
+                                                                                                            "Country of first author" = "Country_firstAuthor",
+                                                                                                            "Type of review" = "Review_type_claimed",
+                                                                                                            "Systematic approach" = "Systematic_approach",
+                                                                                                            "Protocol" = "Protocol",
+                                                                                                            "Meta-analysis" = "Meta_analysis",
+                                                                                                            "Review subject" = "Human_animal_environment",
+                                                                                                            "Type of environment" = "Environment_type",
+                                                                                                            "Reporting guidelines" = "Reporting_guideline",
+                                                                                                            "Conflict of interest statement" = "COI_statement",
+                                                                                                            "potential Conflict of interest" = "COI_present",
+                                                                                                            "Funding statement" = "Funding_statement",
+                                                                                                            "No-profit funding" = "No_profit_funding",
+                                                                                                            "For-profit funding" = "Industry_funding",
+                                                                                                            "Raw data availability" = "Raw_data",
+                                                                                                            "Analysis code availability" = "Analysis_code",
+                                                                                                            "DOI" = "DOI",
+                                                                                                            "PFAS type" = "PFAS_type",
+                                                                                                            "PFAS full name" = "PFAS_full_namee",
+                                                                                                            "Focus on PFAS?" = "PFAS_focus",
+                                                                                                            "How many PFAS?" = "PFAS_one_many",
+                                                                                                            
+                                                                                                            "Species scientific name" = "species_name",
+                                                                                                            "Species common name" = "Species_common_name",
+                                                                                                            "Classes scientific name" = "Class_scientific_name",
+                                                                                                            "How many species?" = "Species_one_many",
+                                                                                                            "Animal study type" = "Lab_domestic_wildlife_mixed"
+                                                                                             ),
+                                                                                             selected = "*No variable selected*"),
                                                                                         width = 3
                      ),
                      mainPanel(# textOutput("selected_var")
                                dataTableOutput("gapminder_table")
                                )
                      )
-                     )
-              ),
+              )),
       tabItem(tabName = "viz",
               tabBox(id="t2", width = 12,
-                     tabPanel(title = "", value = "trends", h4("tabPanel placeholder")),
-                     tabPanel(title = "", value = "distribution", h4("tabPanel placeholder")),
-                     tabPanel(title = "", value = "blabla", h4("tabPanel placeholder")),
-                     tabPanel(title = "", value = "blabla", h4("tabPanel placeholder")))
+                     tabPanel(title = "Mapping",
+                              tabsetPanel(
+                                tabPanel(title = "Time Trends", h4("graph")),
+                                tabPanel(title = "Subject", h4("graph")),
+                                tabPanel(title = "PFAS", h4("graph"))
+                                )
+                              ),
+                     tabPanel(title = "Appraisal",
+                              tabsetPanel(
+                                tabPanel(title = "AMSTAR2", h4("graph")),
+                                tabPanel(title = "Time Trends", h4("graph"))
+                                )
+                              ),
+                     tabPanel(title = "Bibliometrics", 
+                              tabsetPanel(
+                                tabPanel(title = "Country collaborations", h4("graph"))
+                                )
+                              )
+                     )
               ),
       tabItem(tabName = "map",
               box(h4("placeholder UI")))
