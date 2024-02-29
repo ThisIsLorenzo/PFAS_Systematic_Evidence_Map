@@ -148,6 +148,9 @@ for(set in my_data) {
 }
 vars_sets$Study_ID <- "review"
 
+# SUMMARY
+
+
 # Creating histograms
 
 # histplot1
@@ -156,14 +159,14 @@ review_trend <- mdata %>%
   group_by(Review_type_claimed) %>% 
   count(Publication_year)
 
-p1 <- review_trend %>%
+p1.1 <- review_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
   geom_col(aes(
     fill = Review_type_claimed,
     color = "black"), 
-    alpha = 0.5,
+    alpha = 0.8,
     width = 0.8,
     linewidth = 0.2) +
   scale_fill_manual(values = my_palette,
@@ -224,13 +227,13 @@ srma_trend <- mdata %>%
   group_by(Meta_analysis) %>%
   count(Publication_year)
 
-p2 <- srma_trend %>%
+p1.2 <- srma_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
   geom_col(aes(fill = fct_relevel(Meta_analysis, c("Yes","No")),
                color = "black"), 
-           alpha = 0.3,
+           alpha = 0.8,
            width = 0.8,
            size = 0.2) +
   scale_x_continuous(name = "Year",
@@ -280,7 +283,7 @@ trend_subjects <- mdata %>%
   group_by(Human_animal_environment) %>% 
   count(Publication_year)
 
-p3 <-  trend_subjects %>%
+p1.3 <-  trend_subjects %>%
   ggplot(aes(x = Publication_year,
              y = n)) +
   geom_col(aes(
@@ -289,7 +292,7 @@ p3 <-  trend_subjects %>%
                                                    "Animals",
                                                    "Humans")),
     color = "black"), 
-    alpha = 0.3,
+    alpha = 0.8,
     width = 0.8,
     size = 0.2) +
   scale_x_continuous(name = "Year",
@@ -351,7 +354,7 @@ legacy_novel_trend <- legacy_novel_trend %>%
   group_by(Legacy_novel) %>%
   count(Publication_year)
 
-p4 <- legacy_novel_trend %>%
+p1.4 <- legacy_novel_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
@@ -360,7 +363,7 @@ p4 <- legacy_novel_trend %>%
                                                   "legacy and novel",
                                                   "legacy")),
                color = "black"), 
-           alpha = 0.3,
+           alpha = 0.8,
            width = 0.8,
            size = 0.2) +
   scale_x_continuous(name = "Year",
@@ -423,11 +426,11 @@ t_subject2 <- mdata %>%
 t_subject2$Human_animal_environment <-
   factor(t_subject2$Human_animal_environment, levels = unique(t_subject2$Human_animal_environment[order(t_subject2$n_tot, decreasing = FALSE)]))
 
-p5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
+p1.5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
                        y = percentage)) +
   geom_col(aes(fill = Review_type_claimed,
                color = "black"), 
-           alpha = 0.5,
+           alpha = 0.8,
            width = 0.8,
            size = 0.2) +
   theme_light() +
@@ -478,7 +481,7 @@ p5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
                                         linetype = "dotted")) +
   labs(fill = "Review type claimed:")
 
-## histplot6
+## CRITICAL APPRAISAL - histplot6
 
 #only select columns with assessment codes (drop comments and empty rows)
 qtable <- 
@@ -551,7 +554,7 @@ q1 <-
                          fill = fct_relevel(score_word, c("NA", "Low",
                                                           "Medium",
                                                           "High"))),
-           alpha = 1,
+           alpha = 0.8,
            width = 0.8,
            size = 0.2, 
            position = "fill",
@@ -591,3 +594,311 @@ q1 <-
         legend.title = element_text(size = 10),
         legend.key.size = unit(0.5, "cm"),
         legend.text = element_text(size = 9))
+
+# GEOMLINE 1
+
+rep_guideline <- mdata %>% 
+  group_by(Reporting_guideline) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+q2.1 <-  rep_guideline %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(Reporting_guideline, -cumulative))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = Reporting_guideline),
+             size = 1.5, 
+             shape = 19, 
+             fill = "white") +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                     breaks = seq(0, 150, by = 15),
+                     limits = c(0,150),
+                     minor_breaks = NULL
+  ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() + 
+  theme(plot.title = element_text(size = 9),
+        legend.position = "none",
+        legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 7),
+        legend.key.size = unit(0.2, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.text.x = element_text(size = 8,
+                                   margin = margin(t = 5, 
+                                                   r = 0,
+                                                   l = 0),
+                                   angle = 45),
+        axis.text.y = element_text(size = 8,
+                                   margin = margin(t = 0, 
+                                                   r = 5, 
+                                                   l = 5)),
+        axis.title.x = element_text(size = 9,
+                                    hjust = 0.5),
+        axis.title.y = element_text(size = 9),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(color = "Reporting guideline")
+
+# GEOMLINE 2
+coi_statement <- mdata %>% 
+  group_by(COI_statement) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+q2.2 <-  coi_statement %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(COI_statement, -cumulative))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = COI_statement),
+             size = 1.8,
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                     breaks = seq(0, 150, by = 15),
+                     limits = c(0,150),
+                     minor_breaks = NULL
+  ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() + 
+  theme(plot.title = element_text(size = 9),
+        legend.position = "none",
+        legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 7),
+        legend.key.size = unit(0.3, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.text.x = element_text(size = 7,
+                                   margin = margin(t = 5, 
+                                                   r = 0,
+                                                   l = 0),
+                                   angle = 45),
+        axis.text.y = element_text(size = 8,
+                                   margin = margin(t = 0, 
+                                                   r = 5, 
+                                                   l = 5)),
+        axis.title.x = element_text(size = 9,
+                                    hjust = 0.5),
+        axis.title.y = element_text(size = 9),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(color = "COI statement")
+
+# GEOMLINE 3
+coi_present <- mdata %>% 
+  group_by(COI_present) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+coi_present$COI_present[is.na(coi_present$COI_present)] <- "NP"
+
+q2.3 <-  coi_present %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(COI_present, -cumulative))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = COI_present), 
+             size = 1.8, 
+             shape = 19, 
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                     breaks = seq(0, 150, by = 15),
+                     limits = c(0,150),
+                     minor_breaks = NULL
+  ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449",
+                                "NP" = "#B8B8B8")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+        legend.position = "none",
+        legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 7),
+        legend.key.size = unit(0.3, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.text.x = element_text(size = 7,
+                                   margin = margin(t = 5, 
+                                                   r = 0,
+                                                   l = 0),
+                                   angle = 45),
+        axis.text.y = element_text(size = 8,
+                                   margin = margin(t = 0, 
+                                                   r = 5, 
+                                                   l = 5)),
+        axis.title.x = element_text(size = 9,
+                                    hjust = 0.5),
+        axis.title.y = element_blank(),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(color = "COI present")
+
+# GEOMLINE 4
+funding_statement <- mdata %>% 
+  group_by(Funding_statement) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative = cumsum(n))
+
+q2.4 <-  funding_statement %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(Funding_statement, -cumulative))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = Funding_statement),
+             size = 1.8, 
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                     breaks = seq(0, 150, by = 15),
+                     limits = c(0,150),
+                     minor_breaks = NULL
+  ) +
+  scale_color_manual(values = c("Yes" = "#588157",
+                                "No" = "#DE6449")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+        legend.position = "none",
+        legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 7),
+        legend.key.size = unit(0.3, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.text.x = element_text(size = 7,
+                                   margin = margin(t = 5, 
+                                                   r = 0,
+                                                   l = 0),
+                                   angle = 45),
+        axis.text.y = element_text(size = 8,
+                                   margin = margin(t = 0, 
+                                                   r = 5, 
+                                                   l = 5)),
+        axis.title.x = element_text(size = 9,
+                                    hjust = 0.5),
+        axis.title.y = element_text(size = 9),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(color = "Funding statement")
+
+# GEOMLINE 5
+funding1 <- mdata %>% 
+  filter(No_profit_funding == "Yes") %>% 
+  group_by(No_profit_funding) %>%
+  count(Publication_year) %>% 
+  mutate(cumulative1 = cumsum(n))
+
+funding2 <- mdata %>% 
+  filter(Industry_funding == "Yes") %>% 
+  group_by(Industry_funding) %>%
+  mutate(For_profit_funding = Industry_funding) %>% 
+  select(-Industry_funding) %>% 
+  count(Publication_year) %>% 
+  mutate(cumulative2 = cumsum(n))
+
+df <- rbind(funding1, funding2)
+
+df$type <- ifelse(is.na(df$No_profit_funding), "For_profit_funding", "No_profit_funding")
+
+df$cumulative <- ifelse(is.na(df$cumulative1), df$cumulative2, df$cumulative1)
+
+df <- 
+  df %>% 
+  mutate(type = case_when(
+    type == "No_profit_funding" ~ "Nonprofit organization",
+    type == "For_profit_funding" ~ "For-profit organization",
+    TRUE ~ type
+  ))
+
+q2.5 <-  df %>%
+  ggplot(aes(x = Publication_year,
+             y = cumulative,
+             color = reorder(type, -cumulative))) +
+  geom_line(size = 0.3) + 
+  geom_point(aes(color = type),
+             size = 1.8, 
+             shape = 19,
+             fill = "white") +
+  geom_text(aes(label = n, x = Publication_year, y = cumulative), 
+            size = 2, 
+            hjust = 1.2,
+            vjust = -0.5) +
+  scale_x_continuous(name = "Year",
+                     breaks = seq(2008, 2022, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(name = "Number of reviews",
+                     breaks = seq(0, 150, by = 15),
+                     limits = c(0,150),
+                     minor_breaks = NULL
+  ) +
+  scale_color_manual(values = c("Nonprofit organization" = "#028090",
+                                "For-profit organization" = "#D17A22")) +
+  theme_light() +
+  theme(plot.title = element_text(size = 9),
+        legend.position = "none",
+        legend.justification = c(-0.1, 1.1),
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 7),
+        legend.key.size = unit(0.3, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.text.x = element_text(size = 7,
+                                   margin = margin(t = 5, 
+                                                   r = 0,
+                                                   l = 0),
+                                   angle = 45),
+        axis.text.y = element_text(size = 8,
+                                   margin = margin(t = 0, 
+                                                   r = 5, 
+                                                   l = 5)),
+        axis.title.x = element_text(size = 9,
+                                    hjust = 0.5),
+        axis.title.y = element_blank(),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(color = "Funding source:")

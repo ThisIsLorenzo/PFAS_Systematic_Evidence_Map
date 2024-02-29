@@ -27,10 +27,26 @@ function(input, output, session) {
   
   re_database <- reactive({
     current_dataframes <- my_data[re_relevant_sets()]
-    database <- Reduce(dplyr::left_join, current_dataframes) %>%
-      select(re_selected_vars()[re_selected_vars() != "NULL"])
+    database <- Reduce(dplyr::left_join, current_dataframes)
+    
+    # Select all columns dynamically
+    selected_columns <- colnames(database)
+    
+    # Render only selected columns except NULL values
+    selected_columns <- selected_columns[selected_columns != "NULL"]
+    
+    # Filter out columns selected from variables always present
+    selected_columns <- selected_columns[!selected_columns %in% always_vars]
+    
+    # Reorder columns so that 'always_vars' appear first
+    selected_columns <- c(always_vars, selected_columns)
+    
+    # Select data with selected columns
+    database <- database[, selected_columns]
+    
     as.data.frame(database)
   })
+  
   
   observeEvent(input$pltChange, {
     
@@ -46,6 +62,7 @@ function(input, output, session) {
                                dom = "Bfrtip",
                                autoWidth = TRUE,
                                bAutoWidth = FALSE,
+                               scrollX = TRUE,
                                buttons = list(
                                  list(extend = 'copy', text = 'Copy'),
                                  list(extend = 'csv', text = 'CSV'),
@@ -57,23 +74,32 @@ function(input, output, session) {
                 callback = JS('table.page.len(-1).draw();'))
     )
     
-    # For Summary Output
-    output$summary <- renderUI({
-      mdata2 <- mdata %>%
-        separate(Author_year, c("First_author", "Publication_year"), sep = "_") %>%
-        mutate(First_author = str_replace_all(First_author, "First_author", "First author"),
-               Publication_year = str_replace_all(Publication_year, "Publication_year", "Publication year")) %>%
-        filter(First_author != "NA")
-      
-      summary_table <- knitr::kable(select(mdata2,
-                                           First_author,
-                                           Publication_year,
-                                           Paper_title,
-                                           DOI), caption = "Table of included SRs") %>%
-        kableExtra::kable_paper(bootstrap_options = "striped", full_width = FALSE)
-      
-      HTML(summary_table)
+    
+    
+    # For Summary Output - Mapping
+    output$summary1 <- renderPrint({
+      mdata %>% 
+        summary()
     })
+    
+    output$summary1.1 <- renderPrint({
+      spdata %>% 
+        summary()
+    })
+    
+    # For Summary Output - Appraisal
+    output$summary2 <- renderPrint({
+      qdata %>% 
+        summary()
+    })
+    
+    # For Summary Output - Bibliometrics
+    output$summary3 <- renderPrint({
+      bib_data %>% 
+        summary()
+    })
+    
+    
     
     # For Structure output
     output$structure <- renderPrint({
@@ -81,30 +107,51 @@ function(input, output, session) {
         str()
     })
     
-    # stacked histogram
+    # PLOTS
     output$histplot1 <- renderPlotly({
-      p1
+      p1.1
     })
     
     output$histplot2 <- renderPlotly({
-      p2
+      p1.2
     })
     
     output$histplot3 <- renderPlotly({
-      p3
+      p1.3
     })
     
     output$histplot4 <- renderPlotly({
-      p4
+      p1.4
     })
     
     output$histplot5 <- renderPlotly({
-      p5
+      p1.5
     })
     
     output$histplot6 <- renderPlotly({
       q1
     })
+    
+    output$geomline1 <- renderPlotly({
+      q2.1
+    })
+    
+    output$geomline2 <- renderPlotly({
+      q2.2
+    })
+    
+    output$geomline3 <- renderPlotly({
+      q2.3
+    })
+    
+    output$geomline4 <- renderPlotly({
+      q2.4
+    })
+    
+    output$geomline5 <- renderPlotly({
+      q2.5
+    })
+    
     
     
   }, ignoreNULL = FALSE)
