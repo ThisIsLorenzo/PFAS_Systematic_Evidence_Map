@@ -75,13 +75,37 @@ function(input, output, session) {
       HTML(summary_table)
     })
     
-    
-    
     # For Structure output
     output$structure <- renderPrint({
       my_data %>% 
         str()
     })
+    
+    # stacked histogram
+    output$histplot1 <- renderPlotly({
+      p1
+    })
+    
+    output$histplot2 <- renderPlotly({
+      p2
+    })
+    
+    output$histplot3 <- renderPlotly({
+      p3
+    })
+    
+    output$histplot4 <- renderPlotly({
+      p4
+    })
+    
+    output$histplot5 <- renderPlotly({
+      p5
+    })
+    
+    output$histplot6 <- renderPlotly({
+      q1
+    })
+    
     
   }, ignoreNULL = FALSE)
 }

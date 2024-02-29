@@ -8,9 +8,16 @@ fluidPage(
           var w = $(this).width();
           var h = $(this).height();
           var obj = {width: w, height: h};
-          Shiny.onInputChange("pltChange", obj);
-        });
-      '))
+          Shiny.onInputChange("pltChange", obj)
+          });
+      ')),
+    tags$style(HTML('
+      /* Adjusting the background color of the tabPanel to cover the entire page */
+      .tab-content {
+        background-color: #f2f2f2;
+        min-height: calc(900vh - 80px);
+      }
+    '))
   ),
   dashboardPage(
   dashboardHeader(title = "Ricolfi et al., 2024",
@@ -26,11 +33,10 @@ fluidPage(
       # conditionalPanel(
       #   condition = "input.sidebar === 'data'",
       # selectInput(inputId = "table", label = "Select Table", choices = c("All"="my_data", "Mapping"="mdata", "Appraisal"="qdata", "Bibliometrics"="bib_data"), selected = "mdata")),
-      menuItem(text = "Visualization", tabName = "viz", icon = icon("chart-line")),
+      menuItem(text = "Visualization", tabName = "viz", icon = icon("chart-line"))
       # conditionalPanel(
       #   condition = "input.sidebar === 'viz'",
-      # selectInput(inputId = "table", label = "Select Table", choices = c("Mapping"="mdata", "Appraisal"="qdata", "Bibliometrics"="bib_data"), selected = "mdata")),
-      menuItem(text = "World Map", tabName = "map", icon = icon("map"))
+      # selectInput(inputId = "table", label = "Select Table", choices = c("Mapping"="mdata", "Appraisal"="qdata", "Bibliometrics"="bib_data"), selected = "mdata"))
     )
   ),
   dashboardBody(
@@ -73,10 +79,6 @@ fluidPage(
                               ),
                      tabPanel(title = "Structure", verbatimTextOutput("structure"), icon = icon("uncharted"),
                               fluidRow(
-                                column(width = 12, 
-                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                              "The Structure of this Shiny App mirrors the organization of our systematic evidence map, ensuring an intuitive and straightforward user experience. In the adjacent tab, you'll discover a concise summary of key statistics, while in the subsequent tab, you'll have access to an extensive datatable containing all the data encompassed within our systematic evidence map. To maintain navigational ease, we've structured our database according to the three primary objectives outlined in our map. To refresh your memory on the map's structure, refer to the accompanying figure.")
-                                       ),
                                 column(width = 12, align = "center",
                                        tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
                                 ),
@@ -111,7 +113,7 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species scientific name" = "Species_scientific_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
@@ -144,8 +146,7 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   
-                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species scientific name" = "Species_scientific_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
@@ -177,8 +178,7 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   
-                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species scientific name" = "Species_scientific_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
@@ -210,8 +210,7 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   
-                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species scientific name" = "Species_scientific_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
@@ -243,8 +242,7 @@ fluidPage(
                                                                                                                    "PFAS full name" = "PFAS_full_namee",
                                                                                                                    "Focus on PFAS?" = "PFAS_focus",
                                                                                                                    "How many PFAS?" = "PFAS_one_many",
-                                                                                                                   
-                                                                                                                   "Species scientific name" = "species_name",
+                                                                                                                   "Species scientific name" = "Species_scientific_name",
                                                                                                                    "Species common name" = "Species_common_name",
                                                                                                                    "Classes scientific name" = "Class_scientific_name",
                                                                                                                    "How many species?" = "Species_one_many",
@@ -276,8 +274,7 @@ fluidPage(
                                                                                                             "PFAS full name" = "PFAS_full_namee",
                                                                                                             "Focus on PFAS?" = "PFAS_focus",
                                                                                                             "How many PFAS?" = "PFAS_one_many",
-                                                                                                            
-                                                                                                            "Species scientific name" = "species_name",
+                                                                                                            "Species scientific name" = "Species_scientific_name",
                                                                                                             "Species common name" = "Species_common_name",
                                                                                                             "Classes scientific name" = "Class_scientific_name",
                                                                                                             "How many species?" = "Species_one_many",
@@ -309,8 +306,7 @@ fluidPage(
                                                                                                             "PFAS full name" = "PFAS_full_namee",
                                                                                                             "Focus on PFAS?" = "PFAS_focus",
                                                                                                             "How many PFAS?" = "PFAS_one_many",
-                                                                                                            
-                                                                                                            "Species scientific name" = "species_name",
+                                                                                                            "Species scientific name" = "Species_scientific_name",
                                                                                                             "Species common name" = "Species_common_name",
                                                                                                             "Classes scientific name" = "Class_scientific_name",
                                                                                                             "How many species?" = "Species_one_many",
@@ -326,28 +322,26 @@ fluidPage(
               )),
       tabItem(tabName = "viz",
               tabBox(id="t2", width = 12,
-                     tabPanel(title = "Mapping",
+                     tabPanel(title = "Mapping",icon = icon("map"),
                               tabsetPanel(
-                                tabPanel(title = "Time Trends", h4("graph")),
-                                tabPanel(title = "Subject", h4("graph")),
+                                tabPanel(title = "Time Trends", plotlyOutput("histplot1"), plotlyOutput("histplot2"), plotlyOutput("histplot3"), plotlyOutput("histplot4")),
+                                tabPanel(title = "Subject", plotlyOutput("histplot5")),
                                 tabPanel(title = "PFAS", h4("graph"))
                                 )
                               ),
-                     tabPanel(title = "Appraisal",
+                     tabPanel(title = "Appraisal", icon = icon("clipboard-question"),
                               tabsetPanel(
-                                tabPanel(title = "AMSTAR2", h4("graph")),
+                                tabPanel(title = "AMSTAR2", plotlyOutput("histplot6")),
                                 tabPanel(title = "Time Trends", h4("graph"))
                                 )
                               ),
-                     tabPanel(title = "Bibliometrics", 
+                     tabPanel(title = "Bibliometrics", icon = icon("connectdevelop"),
                               tabsetPanel(
-                                tabPanel(title = "Country collaborations", h4("graph"))
+                                tabPanel(title = "Country collaborations", tags$img(src="Fig.8.pdf"))
                                 )
                               )
                      )
-              ),
-      tabItem(tabName = "map",
-              box(h4("placeholder UI")))
+              )
       )
     )
   )
