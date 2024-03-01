@@ -79,24 +79,24 @@ function(input, output, session) {
     # For Summary Output - Mapping
     output$summary1 <- renderPrint({
       mdata %>% 
-        summary()
+        skim()
     })
     
     output$summary1.1 <- renderPrint({
       spdata %>% 
-        summary()
+        skim()
     })
     
     # For Summary Output - Appraisal
     output$summary2 <- renderPrint({
       qdata %>% 
-        summary()
+        skim()
     })
     
     # For Summary Output - Bibliometrics
     output$summary3 <- renderPrint({
       bib_data %>% 
-        summary()
+        skim()
     })
     
     

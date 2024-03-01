@@ -49,7 +49,7 @@ fluidPage(
                                        tags$img(src="title.png")
                                        ),
                                 column(width = 12, align = "center", 
-                                       tags$p(style = "font-size: 32px; margin-bottom: 20px;",
+                                       tags$p(style = "font-size: 40px; margin-bottom: 20px;",
                                               "Welcome to our Shiny App!")
                                        ),
                                 column(width = 12, align = "center",
@@ -57,7 +57,7 @@ fluidPage(
                                        ),
                                 column(width = 12, align = "center", 
                                        tags$p(style = "font-size: 24px; margin-bottom: 20px;",
-                                              "your gateway to exploring our comprehensive systematic evidence map with ease and interactivity!")
+                                              "Your gateway to exploring our comprehensive systematic evidence map with ease and interactivity!")
                                        ),
                                 column(width = 12,  
                                        tags$p(style = "font-size: 20px; margin-bottom: 20px;",
@@ -95,7 +95,7 @@ fluidPage(
                               ),
                      tabPanel(title = "Data", icon = icon("table"),
                               tabsetPanel(
-                                tabPanel("Study info",
+                                tabPanel("Mapping",
                                          sidebarPanel("Data selection",
                                                       selectInput("dataSelector1",
                                                                   label = "Select 1st variable of interest",
@@ -328,8 +328,8 @@ fluidPage(
                                   dataTableOutput("gapminder_table")
                                   )
                                 ),
-                                tabPanel("Species", h4("table")),
-                                tabPanel("PFAS", h4("table"))
+                                tabPanel("Appraisal", h4("table")),
+                                tabPanel("Bibliometrics", h4("table"))
                               ),
                      )
               )),
