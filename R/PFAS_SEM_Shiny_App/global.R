@@ -150,8 +150,8 @@ for(set in my_data) {
   
   j <- j+1
 }
-vars_sets$Study_ID <- "review"
 
+vars_sets$Study_ID <- "review"
 
 # Make a list of variable available for MAPPING
 choices_mapping <- function() {
@@ -328,16 +328,20 @@ trend_subjects <- mdata %>%
   group_by(Human_animal_environment) %>% 
   count(Publication_year)
 
+# Convert Human_animal_environment to factor with specified levels
+trend_subjects$Human_animal_environment <- factor(trend_subjects$Human_animal_environment, 
+                                   levels = c("Mixed",
+                                              "Environment",
+                                              "Animals",
+                                              "Humans"))
+# Rename the column
+trend_subjects <- trend_subjects %>% rename(Subject = Human_animal_environment)
+
 p1.3 <-  trend_subjects %>%
   ggplot(aes(x = Publication_year,
              y = n)) +
   geom_col(aes(
-    fill = fct_relevel(Human_animal_environment, c("Mixed",
-                                                   "Environment",
-                                                   "Animals",
-                                                   "Humans")),
-    color = "black"), 
-    alpha = 0.8,
+    fill = Subject),
     width = 0.8,
     size = 0.2) +
   scale_x_continuous(name = "Year",
@@ -399,15 +403,20 @@ legacy_novel_trend <- legacy_novel_trend %>%
   group_by(Legacy_novel) %>%
   count(Publication_year)
 
+# Convert Human_animal_environment to factor with specified levels
+legacy_novel_trend$Legacy_novel <- factor(legacy_novel_trend$Legacy_novel, 
+                                                  levels = c("NS",
+                                                             "novel",
+                                                             "legacy and novel",
+                                                             "legacy"))
+# Rename the column
+legacy_novel_trend <- legacy_novel_trend %>% rename(PFAS = Legacy_novel)
+
 p1.4 <- legacy_novel_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
-  geom_col(aes(fill = fct_relevel(Legacy_novel, c("NS",
-                                                  "novel",
-                                                  "legacy and novel",
-                                                  "legacy")),
-               color = "black"), 
+  geom_col(aes(fill = PFAS), 
            alpha = 0.8,
            width = 0.8,
            size = 0.2) +
@@ -456,7 +465,7 @@ p1.4 <- legacy_novel_trend %>%
                                         linetype = "dotted")) +
   labs(fill = "PFAS reviewed:")
 
-#Subjects
+# Subjects
 # histplot5
 
 t_subject2 <- mdata %>%
@@ -472,11 +481,14 @@ t_subject2 <- mdata %>%
 t_subject2$Human_animal_environment <-
   factor(t_subject2$Human_animal_environment, levels = unique(t_subject2$Human_animal_environment[order(t_subject2$n_tot, decreasing = FALSE)]))
 
-p1.5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
+# Rename the column
+t_subject2 <- t_subject2 %>% rename(Review_type = Review_type_claimed)
+# Rename the column
+t_subject2 <- t_subject2 %>% rename(Subject = Human_animal_environment)
+
+p1.5 <- ggplot(t_subject2, aes(x = Subject,
                        y = percentage)) +
-  geom_col(aes(fill = Review_type_claimed,
-               color = "black"), 
-           alpha = 0.8,
+  geom_col(aes(fill = Review_type),
            width = 0.8,
            size = 0.2) +
   theme_light() +
@@ -505,8 +517,8 @@ p1.5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
                                 "systematic evidence map",
                                 "systematic review",
                                 "systematic review and meta-analysis")) +
-  geom_text(aes(fill = Review_type_claimed,
-                label = paste0(n), x = Human_animal_environment), 
+  geom_text(aes(fill = Review_type,
+                label = paste0(n), x = Subject), 
             position = position_stack(vjust = 0.5), 
             size = 2.2) + 
   theme(title = element_text(size = 10),
@@ -552,14 +564,20 @@ t_reviewtypes2 <- t_reviewtypes2 %>%
 t_reviewtypes2$Review_type_claimed <-
   factor(t_reviewtypes2$Review_type_claimed, levels = unique(t_reviewtypes2$Review_type_claimed[order(t_reviewtypes2$n_tot, decreasing = FALSE)]))
 
-p1.6 <- ggplot(t_reviewtypes2, aes(x = Review_type_claimed,
+# Convert Human_animal_environment to factor with specified levels
+t_reviewtypes2$Human_animal_environment <- factor(t_reviewtypes2$Human_animal_environment, 
+                                                  levels = c("Mixed",
+                                                             "Environment",
+                                                             "Animals",
+                                                             "Humans"))
+# Rename the column
+t_reviewtypes2 <- t_reviewtypes2 %>% rename(Subject = Human_animal_environment)
+# Rename the column
+t_reviewtypes2 <- t_reviewtypes2 %>% rename(Review_type = Review_type_claimed)
+
+p1.6 <- ggplot(t_reviewtypes2, aes(x = Review_type,
                                     y = percentage)) +
-  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
-                                                              "Environment", 
-                                                              "Animals", 
-                                                              "Humans")),
-               color = "black"), 
-           alpha = 0.5,
+  geom_col(aes(fill = Subject),
            width = 0.8,
            size = 0.2) +
   theme_light() +
@@ -579,15 +597,15 @@ p1.6 <- ggplot(t_reviewtypes2, aes(x = Review_type_claimed,
                               "Animals", 
                               "Environment",
                               "Mixed")) +
-  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+  geom_text(aes(fill = fct_relevel(Subject, c("Mixed",
                                                                "Environment", 
                                                                "Animals", 
                                                                "Humans")),
-                label = paste0(n), x = Review_type_claimed), 
+                label = paste0(n), x = Review_type), 
             position = position_stack(vjust = 0.5), 
             size = 2.2) + 
   geom_text(aes(label = paste("n =", sprintf("%.0f",n_tot)),
-                x = Review_type_claimed,
+                x = Review_type,
                 y =  max(tot_percentage)), 
             position = position_stack(vjust = 1.1), 
             size = 2.5,
@@ -623,12 +641,16 @@ t_sys_appr2 <-
 t_sys_appr2$Human_animal_environment <-
   factor(t_sys_appr2$Human_animal_environment, levels = unique(t_sys_appr2$Human_animal_environment[order(t_sys_appr2$n_tot, decreasing = FALSE)]))
 
+# Convert Human_animal_environment to factor with specified levels
+t_sys_appr2$Systematic_approach <- factor(t_sys_appr2$Systematic_approach, 
+                                                  levels = c("Yes", "No"))
+# Rename the column
+t_sys_appr2 <- t_sys_appr2 %>% rename(Subject = Human_animal_environment)
+
 p1.7 <- 
-  ggplot(t_sys_appr2, aes(x = Human_animal_environment,
+  ggplot(t_sys_appr2, aes(x = Subject,
                           y = percentage)) +
-  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
-               color = "black"), 
-           alpha = 0.5,
+  geom_col(aes(fill = Systematic_approach),
            width = 0.8,
            size = 0.2) +
   scale_fill_manual(values=c("#DE6449", "#588157"),
@@ -642,8 +664,8 @@ p1.7 <-
                      breaks = seq(0, 70, by = 10),
                      expand = c(0,1),
                      limits = c(0,70)) +
-  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
-                label = paste0(n), x = Human_animal_environment), 
+  geom_text(aes(fill = Systematic_approach,
+                label = paste0(n), x = Subject), 
             position = position_stack(vjust = 0.5), 
             size = 2.2) + 
   theme(title = element_text(size = 10),
@@ -677,12 +699,17 @@ t_sys_appr3 <-
 t_sys_appr3$Review_type_claimed <-
   factor(t_sys_appr3$Review_type_claimed, levels = unique(t_sys_appr3$Review_type_claimed[order(t_sys_appr3$n_tot, decreasing = FALSE)]))
 
+# Convert Human_animal_environment to factor with specified levels
+t_sys_appr3$Systematic_approach <- factor(t_sys_appr3$Systematic_approach, 
+                                          levels = c("Yes", "No"))
+# Rename the column
+t_sys_appr3 <- t_sys_appr3 %>% rename(Review_type = Review_type_claimed)
+
+
 p1.8 <- 
-  ggplot(t_sys_appr3, aes(x = Review_type_claimed,
+  ggplot(t_sys_appr3, aes(x = Review_type,
                           y = percentage)) +
-  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
-               color = "black"), 
-           alpha = 0.5,
+  geom_col(aes(fill = Systematic_approach),
            width = 0.8,
            size = 0.2) +
   scale_fill_manual(values=c("#DE6449", "#588157"),
@@ -696,8 +723,8 @@ p1.8 <-
                      breaks = seq(0, 35, by = 10),
                      expand = c(0,1),
                      limits = c(0,35)) +
-  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
-                label = paste0(n), x = Review_type_claimed), 
+  geom_text(aes(fill = Systematic_approach,
+                label = paste0(n), x = Review_type), 
             position = position_stack(vjust = 0.5), 
             size = 2.2) + 
   theme(title = element_text(size = 10),
@@ -735,14 +762,20 @@ t2_PFASfocus <- t2_PFASfocus %>%
     PFAS_focus == "No" ~ "POPs"
   ))
 
+# Convert Human_animal_environment to factor with specified levels
+t2_PFASfocus$PFAS_one_many <- factor(t2_PFASfocus$PFAS_one_many, 
+                                               levels = c("NS",
+                                                          "Multiple",
+                                                          "One"))
+# Rename the column
+t2_PFASfocus <- t2_PFASfocus %>% rename(Number_compounds = PFAS_one_many)
+# Rename the column
+t2_PFASfocus <- t2_PFASfocus %>% rename(Pollutant = PFAS_focus)
+
 p1.9 <- 
-  ggplot(t2_PFASfocus, aes(x = PFAS_focus,
+  ggplot(t2_PFASfocus, aes(x = Pollutant,
                            y = percentage)) +
-  geom_col(aes(fill = fct_relevel(PFAS_one_many, c("NS",
-                                                   "Multiple",
-                                                   "One")),
-               color = "black"), 
-           alpha = 0.5,
+  geom_col(aes(fill = Number_compounds),
            width = 0.8,
            size = 0.2) + 
   scale_fill_manual(values = cbp3, 
@@ -760,10 +793,8 @@ p1.9 <-
                      limits = c(0,70)) +
   theme_light() +
   coord_flip() +
-  geom_text(aes(fill = fct_relevel(PFAS_one_many, c("NS",
-                                                    "Multiple", 
-                                                    "One")),
-                label = paste0(n), x = PFAS_focus),
+  geom_text(aes(fill = Number_compounds,
+                label = paste0(n), x = Pollutant),
             position = position_stack(vjust = 0.5),
             size = 2.2) +
   theme(
@@ -800,12 +831,13 @@ t1$Human_animal_environment <- factor(t1$Human_animal_environment,
                                       levels = c("Mixed", "Environment", "Animals", "Humans"))
 # Rename the column
 t1 <- t1 %>% rename(Subject = Human_animal_environment)
+# Rename the column
+t1 <- t1 %>% rename(Number_compounds = PFAS_one_many)
 
-p1.10 <- ggplot(t1, aes(x = PFAS_one_many,
+p1.10 <- ggplot(t1, aes(x = Number_compounds,
                       y = percentage)) +
   coord_flip()  +
   geom_col(aes(fill = Subject),
-           alpha = 0.5,
            width = 0.8,
            size = 0.2) +
   #geom_text(aes(label = n), position = position_stack(vjust = 0.2)) +
@@ -845,7 +877,7 @@ p1.10 <- ggplot(t1, aes(x = PFAS_one_many,
                                                                "Environment",
                                                                "Animals",
                                                                "Humans")),
-                label = paste0(n), x = PFAS_one_many),
+                label = paste0(n), x = Number_compounds),
             position = position_stack(vjust = 0.5),
             size = 2.2) +
   labs(fill = "Review subject:")
@@ -874,18 +906,22 @@ t_PFAStype2 <-
 t_PFAStype2$PFAS_type <-
   factor(t_PFAStype2$PFAS_type, levels = PFAS_levels_order) #use order from the previous graph
 
+# Convert Human_animal_environment to factor with specified levels
+t_PFAStype2$Human_animal_environment <- factor(t_PFAStype2$Human_animal_environment, 
+                                          levels = c("Mixed",
+                                                     "Environment",
+                                                     "Animals",
+                                                     "Humans"))
+# Rename the column
+t_PFAStype2 <- t_PFAStype2 %>% rename(Subject = Human_animal_environment)
+
 
 p1.11 <-
   ggplot(t_PFAStype2,
          aes(x = PFAS_type,
              y = percentage)) +
   coord_flip()  +
-  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
-                                                              "Environment",
-                                                              "Animals",
-                                                              "Humans")),
-               color = "black"), 
-           alpha = 0.5,
+  geom_col(aes(fill = Subject),
            width = 0.8,
            size = 0.2) +
   theme_light() +
@@ -904,10 +940,7 @@ p1.11 <-
                      breaks = seq(0, 80, by = 10),
                      expand = c(0,1),
                      limits = c(0,80)) +
-  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
-                                                               "Environment",
-                                                               "Animals",
-                                                               "Humans")),
+  geom_text(aes(fill = Subject,
                 label = paste0(n), x = PFAS_type),
             position = position_stack(vjust = 0.5),
             size = 2.2) +
@@ -999,13 +1032,18 @@ qtable_long <- qtable_long %>%
 qtable_long$label <-
   factor(qtable_long$label, levels = unique(qtable_long$label[order(qtable_long$question, decreasing = FALSE)]))
 
+# Convert Human_animal_environment to factor with specified levels
+qtable_long$score_word <- factor(qtable_long$score_word, 
+                                      levels = c("NA", "Low",
+                                                 "Medium",
+                                                 "High"))
+# Rename the column
+qtable_long <- qtable_long %>% rename(Quality = score_word)
+
 q1 <-
   ggplot(data = qtable_long) +
   geom_bar(mapping = aes(x = label, 
-                         fill = fct_relevel(score_word, c("NA", "Low",
-                                                          "Medium",
-                                                          "High"))),
-           alpha = 0.8,
+                         fill = Quality),
            width = 0.8,
            size = 0.2, 
            position = "fill",

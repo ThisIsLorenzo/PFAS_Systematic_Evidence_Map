@@ -74,16 +74,22 @@ fluidPage(
                                 column(width = 12, 
                                        tags$p(style = "font-size: 20px; margin-bottom: 20px;",
                                               "Experience the fusion of accessibility and depth in our Shiny App, designed to empower users in their exploration and utilization of our systematic evidence map.")
+                                       ),
+                                column(width = 12,align = "center",
+                                       tags$img(src="Fig.1.png")
+                                       ),
+                                column(width = 12, align = "center",
+                                       tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
                                        )
                                 )
                               ),
-                     tabPanel(title = "Structure", verbatimTextOutput("structure"), icon = icon("uncharted"),
+                     tabPanel(title = "Structure", icon = icon("uncharted"),
                               fluidRow(
-                                column(width = 12, align = "center",
-                                       tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
-                                ),
-                                column(width = 12,align = "center",
-                                       tags$img(src="Fig.1.png")
+                                column(width = 12,
+                                       tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                              "Below is an overview of the structure and content of the database")
+                                       ),
+                                column(width=12, verbatimTextOutput("structure")
                                        )
                                 )
                               ),
@@ -133,7 +139,8 @@ fluidPage(
                                   )
                                 ),
                                 tabPanel("Appraisal", h4("table")),
-                                tabPanel("Bibliometrics", h4("table"))
+                                tabPanel("Bibliometrics", h4("table")),
+                                tabPanel("Whole database", h4("table"))
                               ),
                      )
               )),
@@ -152,7 +159,7 @@ fluidPage(
                                            column(width=6, plotlyOutput("histplot7")), 
                                            column(width=6, plotlyOutput("histplot6")),
                                            column(width=6, plotlyOutput("histplot8")),
-                                           column(width=6, align = "center",
+                                           column(width=6,
                                                   tags$p(style = "font-size: 20px; margin-bottom: 20px;",
                                                          "SR = systematic review, CrR = critical review, SR and MA = systematic review and meta-analysis, MA = meta-analysis, CoR = comprehensive review, ScR = scoping review, SEM = systematic evidence review"))
                                            )

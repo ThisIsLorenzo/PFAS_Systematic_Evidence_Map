@@ -14,7 +14,7 @@ function(input, output, session) {
         input$dataSelector5,
         input$dataSelector6,
         input$dataSelector7)
-  })
+    })
   
   
   re_relevant_sets <- reactive({
@@ -64,24 +64,24 @@ function(input, output, session) {
     
     # For Summary Output - Mapping
     output$summary1 <- renderPrint({
-      mdata %>% 
+      my_data$review %>% 
         skim()
     })
     
     output$summary1.1 <- renderPrint({
-      spdata %>% 
+      my_data$species %>% 
         skim()
     })
     
     # For Summary Output - Appraisal
     output$summary2 <- renderPrint({
-      qdata %>% 
+      my_data$AMSTAR2 %>% 
         skim()
     })
     
     # For Summary Output - Bibliometrics
     output$summary3 <- renderPrint({
-      bib_data %>% 
+      my_data$biblio %>% 
         skim()
     })
     
