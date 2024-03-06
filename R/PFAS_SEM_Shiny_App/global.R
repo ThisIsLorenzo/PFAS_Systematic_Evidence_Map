@@ -119,6 +119,9 @@ dim(mpidata) #1090 rows 36 columns
 #str(mpidata)
 #View(mpidata)
 
+#Merge main dataframe with species info dataframe
+mspdata <- left_join(mdata, spdata, by = "Study_ID")
+
 my_data <- list(review = mdata,
                 species = spdata,
                 AMSTAR2 = qdata,
@@ -149,25 +152,63 @@ for(set in my_data) {
 }
 vars_sets$Study_ID <- "review"
 
+
+# Make a list of variable available for MAPPING
+choices_mapping <- function() {
+  choices <- list(
+    "*No variable selected*" = "NULL",
+    "Review title" = "Paper_title",
+    "Journal name" = "Journal",
+    "Country of first author" = "Country_firstAuthor",
+    "Type of review" = "Review_type_claimed",
+    "Systematic approach" = "Systematic_approach",
+    "Protocol" = "Protocol",
+    "Meta-analysis" = "Meta_analysis",
+    "Review subject" = "Human_animal_environment",
+    "Type of environment" = "Environment_type",
+    "Reporting guidelines" = "Reporting_guideline",
+    "Conflict of interest statement" = "COI_statement",
+    "potential Conflict of interest" = "COI_present",
+    "Funding statement" = "Funding_statement",
+    "No-profit funding" = "No_profit_funding",
+    "For-profit funding" = "Industry_funding",
+    "Raw data availability" = "Raw_data",
+    "Analysis code availability" = "Analysis_code",
+    "DOI" = "DOI",
+    "PFAS type" = "PFAS_type",
+    "PFAS full name" = "PFAS_full_namee",
+    "Focus on PFAS?" = "PFAS_focus",
+    "How many PFAS?" = "PFAS_one_many",
+    "Species scientific name" = "Species_scientific_name",
+    "Species common name" = "Species_common_name",
+    "Classes scientific name" = "Class_scientific_name",
+    "How many species?" = "Species_one_many",
+    "Animal study type" = "Lab_domestic_wildlife_mixed"
+  )
+  return(choices)
+}
+
+
 # SUMMARY
 
 
 # Creating histograms
-
+# Time trends
 # histplot1
 
 review_trend <- mdata %>% 
   group_by(Review_type_claimed) %>% 
   count(Publication_year)
 
+# Rename the column
+review_trend <- review_trend %>% rename(Review_type = Review_type_claimed)
+
 p1.1 <- review_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
   geom_col(aes(
-    fill = Review_type_claimed,
-    color = "black"), 
-    alpha = 0.8,
+    fill = Review_type),
     width = 0.8,
     linewidth = 0.2) +
   scale_fill_manual(values = my_palette,
@@ -228,12 +269,15 @@ srma_trend <- mdata %>%
   group_by(Meta_analysis) %>%
   count(Publication_year)
 
+# Convert Human_animal_environment to factor with specified levels
+srma_trend$Meta_analysis <- factor(srma_trend$Meta_analysis, 
+                                      levels = c("Yes","No"))
+
 p1.2 <- srma_trend %>%
   ggplot(aes(x = Publication_year,
              y = n
   )) +
-  geom_col(aes(fill = fct_relevel(Meta_analysis, c("Yes","No")),
-               color = "black"), 
+  geom_col(aes(fill = Meta_analysis), 
            alpha = 0.8,
            width = 0.8,
            size = 0.2) +
@@ -412,6 +456,7 @@ p1.4 <- legacy_novel_trend %>%
                                         linetype = "dotted")) +
   labs(fill = "PFAS reviewed:")
 
+#Subjects
 # histplot5
 
 t_subject2 <- mdata %>%
@@ -481,6 +526,411 @@ p1.5 <- ggplot(t_subject2, aes(x = Human_animal_environment,
                                         linewidth  = 0.2, 
                                         linetype = "dotted")) +
   labs(fill = "Review type claimed:")
+
+# histplot6
+
+t_reviewtypes2 <- mdata %>%
+  filter(Review_type_claimed != "NA") %>% #filter out NA
+  count(Review_type_claimed, Human_animal_environment) %>%
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Review_type_claimed) %>% 
+  mutate(n_tot = sum(n)) %>% 
+  mutate(tot_percentage = sum(percentage))
+
+t_reviewtypes2 <- t_reviewtypes2 %>%
+  mutate(Review_type_claimed = case_when(
+    Review_type_claimed == "meta-analysis" ~ "MA",
+    Review_type_claimed == "systematic review" ~ "SR",
+    Review_type_claimed == "systematic evidence map" ~ "SEM",
+    Review_type_claimed == "systematic review and meta-analysis" ~ "SR and MA",
+    Review_type_claimed == "comprehensive review" ~ "CoR",
+    Review_type_claimed == "scoping review" ~ "ScR",
+    Review_type_claimed == "critical review" ~ "CrR",
+    TRUE ~ Review_type_claimed
+  ))
+
+t_reviewtypes2$Review_type_claimed <-
+  factor(t_reviewtypes2$Review_type_claimed, levels = unique(t_reviewtypes2$Review_type_claimed[order(t_reviewtypes2$n_tot, decreasing = FALSE)]))
+
+p1.6 <- ggplot(t_reviewtypes2, aes(x = Review_type_claimed,
+                                    y = percentage)) +
+  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                              "Environment", 
+                                                              "Animals", 
+                                                              "Humans")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  theme_light() +
+  coord_flip()+
+  scale_x_discrete(name = "Review type claimed") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 40, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,40)) +
+  scale_fill_manual(values=cbp2,
+                    breaks=c("Humans", 
+                             "Animals", 
+                             "Environment",
+                             "Mixed")) +
+  scale_color_manual(values=cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                               "Environment", 
+                                                               "Animals", 
+                                                               "Humans")),
+                label = paste0(n), x = Review_type_claimed), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  geom_text(aes(label = paste("n =", sprintf("%.0f",n_tot)),
+                x = Review_type_claimed,
+                y =  max(tot_percentage)), 
+            position = position_stack(vjust = 1.1), 
+            size = 2.5,
+            color = "black") +
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(fill = "Review subject:")
+
+# histplot7
+t_sys_appr2 <-
+  mdata %>%
+  filter(Systematic_approach != "NA") %>% 
+  count(Human_animal_environment, Systematic_approach) %>%
+  arrange(desc(n)) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Human_animal_environment) %>% 
+  mutate(n_tot = sum(n))
+
+t_sys_appr2$Human_animal_environment <-
+  factor(t_sys_appr2$Human_animal_environment, levels = unique(t_sys_appr2$Human_animal_environment[order(t_sys_appr2$n_tot, decreasing = FALSE)]))
+
+p1.7 <- 
+  ggplot(t_sys_appr2, aes(x = Human_animal_environment,
+                          y = percentage)) +
+  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  scale_fill_manual(values=c("#DE6449", "#588157"),
+                    breaks=c("No", "Yes")) +
+  scale_color_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+  theme_light() +
+  coord_flip() +
+  scale_x_discrete(name = "Systematic approach") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+                label = paste0(n), x = Human_animal_environment), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(fill = "Systematic method:")
+
+# histplot8
+t_sys_appr3 <-
+  mdata %>%
+  filter(Systematic_approach != "NA") %>% 
+  count(Review_type_claimed, Systematic_approach) %>%
+  arrange(desc(n)) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  group_by(Review_type_claimed) %>% 
+  mutate(n_tot = sum(n))
+
+t_sys_appr3$Review_type_claimed <-
+  factor(t_sys_appr3$Review_type_claimed, levels = unique(t_sys_appr3$Review_type_claimed[order(t_sys_appr3$n_tot, decreasing = FALSE)]))
+
+p1.8 <- 
+  ggplot(t_sys_appr3, aes(x = Review_type_claimed,
+                          y = percentage)) +
+  geom_col(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  scale_fill_manual(values=c("#DE6449", "#588157"),
+                    breaks=c("No", "Yes")) +
+  scale_color_manual(values=c("#DE6449", "#588157"),
+                     breaks=c("No", "Yes")) +
+  theme_light() +
+  coord_flip() +
+  scale_x_discrete(name = "Systematic approach") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 35, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,35)) +
+  geom_text(aes(fill = fct_relevel(Systematic_approach, c("Yes", "No")),
+                label = paste0(n), x = Review_type_claimed), 
+            position = position_stack(vjust = 0.5), 
+            size = 2.2) + 
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.15, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  labs(fill = "Systematic method:")
+
+# PFAS
+# histplot9
+t2_PFASfocus <-
+  mdata %>%
+  count(PFAS_focus, PFAS_one_many) %>%
+  arrange(desc(n)) %>% 
+  filter(PFAS_focus != "NA") %>%  #filter out NA
+  mutate(percentage = round( n / sum(n) * 100))
+
+t2_PFASfocus$PFAS_one_many <- ifelse(t2_PFASfocus$PFAS_one_many == 'Not specified', 'NS', t2_PFASfocus$PFAS_one_many) #changing 'not specified' values into 'NS'
+
+t2_PFASfocus <- t2_PFASfocus %>%
+  mutate(PFAS_focus = case_when(
+    PFAS_focus == "Yes" ~ "PFAS",
+    PFAS_focus == "No" ~ "POPs"
+  ))
+
+p1.9 <- 
+  ggplot(t2_PFASfocus, aes(x = PFAS_focus,
+                           y = percentage)) +
+  geom_col(aes(fill = fct_relevel(PFAS_one_many, c("NS",
+                                                   "Multiple",
+                                                   "One")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) + 
+  scale_fill_manual(values = cbp3, 
+                    breaks=c('One', 
+                             'Multiple',
+                             'NS')) +
+  scale_color_manual(values = cbp3,
+                     breaks=c('One', 
+                              'Multiple',
+                              'NS')) +
+  scale_x_discrete(name = "Review focus") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  theme_light() +
+  coord_flip() +
+  geom_text(aes(fill = fct_relevel(PFAS_one_many, c("NS",
+                                                    "Multiple", 
+                                                    "One")),
+                label = paste0(n), x = PFAS_focus),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  theme(
+    title = element_text(size = 10),
+    legend.position = "none",
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 8), 
+    legend.key.size = unit(0.2, "cm"),
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text = element_text(size = 8),
+    legend.background = element_rect(fill = alpha("white", 0.7)),
+    panel.grid.major = element_line(color = "grey", 
+                                    linewidth  = 0.2, 
+                                    linetype = "dashed"),
+    panel.grid.minor = element_line(color = "grey", 
+                                    linewidth  = 0.2, 
+                                    linetype = "dotted")
+  ) +
+  labs(fill = "PFAS reviewed:")
+
+#histplot10
+t1 <-
+  mdata %>%
+  count(Human_animal_environment, PFAS_one_many) %>% 
+  mutate(percentage = round( n / sum(n) * 100)) %>% 
+  mutate(PFAS_one_many = case_when(
+    PFAS_one_many == "Not specified" ~ "NS",
+    TRUE ~ PFAS_one_many
+  ))
+
+# Convert Human_animal_environment to factor with specified levels
+t1$Human_animal_environment <- factor(t1$Human_animal_environment, 
+                                      levels = c("Mixed", "Environment", "Animals", "Humans"))
+# Rename the column
+t1 <- t1 %>% rename(Subject = Human_animal_environment)
+
+p1.10 <- ggplot(t1, aes(x = PFAS_one_many,
+                      y = percentage)) +
+  coord_flip()  +
+  geom_col(aes(fill = Subject),
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  #geom_text(aes(label = n), position = position_stack(vjust = 0.2)) +
+  scale_fill_manual(values=cbp2,
+                    breaks=c("Humans", 
+                             "Animals",
+                             "Environment",
+                             "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks=c("Humans", 
+                              "Animals", 
+                              "Environment",
+                              "Mixed")) +
+  theme_light() +  
+  theme(title = element_text(size = 10),
+        legend.position = "none",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.2, "cm"),
+        legend.background = element_rect(fill = alpha("white", 0.7)),
+        axis.title.x = element_text(size = 9),
+        axis.title.y = element_text(size = 9),
+        axis.text = element_text(size = 8),
+        panel.grid.major = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dashed"),
+        panel.grid.minor = element_line(color = "grey", 
+                                        linewidth  = 0.2, 
+                                        linetype = "dotted")) +
+  ylab("Article count") +
+  scale_x_discrete(name = "PFAS reviewed") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 70, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,70)) +
+  geom_text(aes(fill = fct_relevel(Subject, c("Mixed",
+                                                               "Environment",
+                                                               "Animals",
+                                                               "Humans")),
+                label = paste0(n), x = PFAS_one_many),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  labs(fill = "Review subject:")
+
+# histplot11
+t_PFAStype <- ptidata %>%
+  filter(PFAS_type != "NA") %>% #filter out NA
+  count(PFAS_type) %>%
+  mutate(percent = (n / 175 * 100)) #109 is the number of SRs included in this review
+
+t_PFAStype$PFAS_type <-
+  factor(t_PFAStype$PFAS_type, levels = t_PFAStype$PFAS_type[order(t_PFAStype$percent, decreasing = FALSE)])
+
+PFAS_levels_order <-
+  t_PFAStype$PFAS_type[order(t_PFAStype$percent, decreasing = FALSE)] #save for another plot
+
+#str(mpidata)
+t_PFAStype2 <-
+  mpidata %>%
+  count(PFAS_type, Human_animal_environment) %>%
+  arrange(desc(n)) %>%
+  filter(PFAS_type != "NA") %>%  #filter out NA
+  mutate(percentage = ( n / 175 * 100))
+
+#t_PFAStype$PFAS_type <- factor(t_PFAStype$PFAS_type, levels = unique(t_PFAStype$PFAS_type[order(t_PFAStype$n, decreasing = FALSE)]))
+t_PFAStype2$PFAS_type <-
+  factor(t_PFAStype2$PFAS_type, levels = PFAS_levels_order) #use order from the previous graph
+
+
+p1.11 <-
+  ggplot(t_PFAStype2,
+         aes(x = PFAS_type,
+             y = percentage)) +
+  coord_flip()  +
+  geom_col(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                              "Environment",
+                                                              "Animals",
+                                                              "Humans")),
+               color = "black"), 
+           alpha = 0.5,
+           width = 0.8,
+           size = 0.2) +
+  theme_light() +
+  scale_fill_manual(values = cbp2,
+                    breaks = c("Humans",
+                               "Animals",
+                               "Environment",
+                               "Mixed")) +
+  scale_color_manual(values = cbp2,
+                     breaks = c("Humans", 
+                                "Animals", 
+                                "Environment",
+                                "Mixed")) +
+  scale_x_discrete(name = "PFAS types") +
+  scale_y_continuous(name = "Percentage of reviews (%)",
+                     breaks = seq(0, 80, by = 10),
+                     expand = c(0,1),
+                     limits = c(0,80)) +
+  geom_text(aes(fill = fct_relevel(Human_animal_environment, c("Mixed",
+                                                               "Environment",
+                                                               "Animals",
+                                                               "Humans")),
+                label = paste0(n), x = PFAS_type),
+            position = position_stack(vjust = 0.5),
+            size = 2.2) +
+  theme(
+    title = element_text(size = 10),
+    legend.position = "none",
+    legend.background = element_rect(fill = alpha("white", 0.7)),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 8),
+    legend.key.size = unit(0.2, "cm"),
+    axis.title.x = element_text(size = 9),
+    axis.title.y = element_text(size = 9),
+    axis.text.y = element_text(size = 7),
+    axis.text.x = element_text(size = 8),
+    panel.grid.major = element_line(color = "grey", 
+                                    linewidth  = 0.2, 
+                                    linetype = "dashed"),
+    panel.grid.minor = element_line(color = "grey", 
+                                    linewidth  = 0.2, 
+                                    linetype = "dotted")) +
+  labs(fill = "Review subject:")
+
+
 
 ## CRITICAL APPRAISAL - histplot6
 

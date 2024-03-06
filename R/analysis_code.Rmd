@@ -2257,6 +2257,7 @@ PFAS_types <- ggplot(t_PFAStype, aes(x = PFAS_type,
   coord_flip()+
   scale_y_continuous(name = "Number of reviews",
                      expand = c(0,1)) +
+  ggtitle(expression("a)")) +
   scale_fill_manual(values = c("#999999")) +
   # geom_text(aes(label = paste0(round((n/109)*100)), x = PFAS_type), 
   #           position = position_stack(vjust = 0.5), 
@@ -2271,6 +2272,57 @@ PFAS_types
 # ggsave(here("Figs/Suppl_Figs", "SFig.6.png"),
 #        width = 8,
 #        height = 6)
+
+# Filter out rows with 'systematic evidence map' in 'Review_type_claimed'
+mpidata_filtered <- mpidata[mpidata$Review_type_claimed != "systematic evidence map", ]
+
+legacy_novel <- mpidata_filtered[!duplicated(mpidata_filtered[, c("Study_ID", "Legacy_novel")]), ]
+
+legacy_novel <- legacy_novel %>%
+  drop_na(Legacy_novel) %>% 
+  drop_na(N_studies) %>%
+  group_by(Study_ID) %>%
+  summarise(Legacy_novel = ifelse(n_distinct(Legacy_novel) > 1, "legacy and novel", Legacy_novel[1])) %>% 
+  left_join(mpidata_filtered %>% select(Study_ID, N_studies), by = "Study_ID") %>%
+  ungroup()
+
+# Filter the data for 'legacy' and 'novel' values in 'Legacy_novel'
+legacy_novel_data <- subset(mpidata_filtered, Legacy_novel %in% c("legacy", "novel"))
+
+# Create a boxplot
+legacy_novel_p <- ggplot(legacy_novel, aes(x = Legacy_novel, y = N_studies)) +
+  geom_boxplot() +
+  labs(x = "Type of PFAS reviewed", y = "Primary studies", title = "b)") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 10),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10))
+
+PFAS_types+legacy_novel_p
+
+# ggsave(here("Figs/Suppl_Figs", "SFig.6.png"),
+#        width = 8,
+#        height = 6)
+
+# Calculate basic statistics for 'legacy' group
+legacy_stats <- summary(legacy_novel$N_studies[legacy_novel$Legacy_novel == "legacy"])
+
+# Calculate basic statistics for 'novel' group
+both_stats <- summary(legacy_novel$N_studies[legacy_novel$Legacy_novel == "legacy and novel"])
+
+stats_df <- data.frame(
+  Group = c("legacy", "legacy and novel"),
+  Min = c(legacy_stats[1], both_stats[1]),
+  Q1 = c(legacy_stats[2], both_stats[2]),
+  Median = c(legacy_stats[3], both_stats[3]),
+  Mean = c(legacy_stats[4], both_stats[4]),
+  Q3 = c(legacy_stats[5], both_stats[5]),
+  Max = c(legacy_stats[6], both_stats[6])
+)
+
+print(stats_df)
 ```
 
 ## Supplementary Figure 7

@@ -12,7 +12,8 @@ function(input, output, session) {
         input$dataSelector3,
         input$dataSelector4,
         input$dataSelector5,
-        input$dataSelector6)
+        input$dataSelector6,
+        input$dataSelector7)
   })
   
   
@@ -21,6 +22,7 @@ function(input, output, session) {
                             FUN = function(x) {
                               vars_sets[x][[1]]
                             })
+    
     relevant_sets[sapply(relevant_sets, is.null)] <- NULL
     unlist(unique(relevant_sets))
   })
@@ -28,21 +30,6 @@ function(input, output, session) {
   re_database <- reactive({
     current_dataframes <- my_data[re_relevant_sets()]
     database <- Reduce(dplyr::left_join, current_dataframes)
-    
-    # Select all columns dynamically
-    selected_columns <- colnames(database)
-    
-    # Render only selected columns except NULL values
-    selected_columns <- selected_columns[selected_columns != "NULL"]
-    
-    # Filter out columns selected from variables always present
-    selected_columns <- selected_columns[!selected_columns %in% always_vars]
-    
-    # Reorder columns so that 'always_vars' appear first
-    selected_columns <- c(always_vars, selected_columns)
-    
-    # Select data with selected columns
-    database <- database[, selected_columns]
     
     as.data.frame(database)
   })
@@ -73,7 +60,6 @@ function(input, output, session) {
                                columnDefs = list(list(className = 'dt-left', targets = '_all'))),
                 callback = JS('table.page.len(-1).draw();'))
     )
-    
     
     
     # For Summary Output - Mapping
@@ -107,7 +93,9 @@ function(input, output, session) {
         str()
     })
     
-    # PLOTS
+    # Plots
+    # MAPPING
+    # Timetrends
     output$histplot1 <- renderPlotly({
       p1.1
     })
@@ -124,11 +112,39 @@ function(input, output, session) {
       p1.4
     })
     
+    # Subjects
     output$histplot5 <- renderPlotly({
       p1.5
     })
     
     output$histplot6 <- renderPlotly({
+      p1.6
+    })
+    
+    output$histplot7 <- renderPlotly({
+      p1.7
+    })
+    
+    output$histplot8 <- renderPlotly({
+      p1.8
+    })
+    
+    # PFAS
+    output$histplot9 <- renderPlotly({
+      p1.9
+    })
+    
+    output$histplot10 <- renderPlotly({
+      p1.10
+    })
+    
+    output$histplot11 <- renderPlotly({
+      p1.11
+    })
+    
+    
+    #CRITICAL APPRAISAL
+    output$histplot12 <- renderPlotly({
       q1
     })
     
