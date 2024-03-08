@@ -1,12 +1,13 @@
 name: PFAS_SEM_Shiny_App
 title: PFAS_SEM_Shiny_App
-username: hi-this-is-lorenzo
+username:
 account: hi-this-is-lorenzo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10576048
-bundleId: 8310575
+bundleId: 8347389
 url: https://hi-this-is-lorenzo.shinyapps.io/PFAS_SEM_Shiny_App/
-version: 1
+when: 1709864042.07747
+lastSyncTime: 1709864042.07748
 asMultiple: FALSE
 asStatic: FALSE

@@ -8,6 +8,7 @@ library(DT)
 library(RColorBrewer)
 library(bibliometrix)
 library(circlize)
+library(cowplot)
 
 # load data and construct final database ----
 mdata <- read_csv(here("data","main.csv"), skip = 0)
@@ -1391,3 +1392,67 @@ q2.5 <-  df %>%
                                         linewidth  = 0.2, 
                                         linetype = "dotted")) +
   labs(color = "Funding source:")
+
+# BIBLIOMETRICS
+# World Map
+#save counts in a data frame
+firstcountrycounts <- 
+  bib_data %>%
+  group_by(AU1_CO) %>%
+  count() %>% 
+  filter(!is.na(AU1_CO))
+
+#load map data
+world_map <-
+  map_data("world") %>% 
+  filter(! long > 180) #remove countries with longitude >180 to make equal projection-like map without artifacts
+
+table(world_map$region) #note that United Kingdom is UK here
+
+# Format country names to match regions on the world map
+firstcountrycounts$region <- str_to_title(firstcountrycounts$AU1_CO)
+
+firstcountrycounts$region[firstcountrycounts$region == "United Kingdom"] <- "UK" #fix to "UK"
+firstcountrycounts$region[firstcountrycounts$region == "Usa"] <- "USA" #Fix "Usa" to "USA" 
+firstcountrycounts$region[firstcountrycounts$region == "Korea"] <- "South Korea" #Fix "Korea" to "North Korea" 
+
+#(firstcountrycounts$region) %in% world_map$region #check matching
+
+## colour all regions on the map:
+emptymap <- 
+  tibble(region = unique(world_map$region),
+         n = rep(0,length(unique(world_map$region)))) #create table with all counts as 0
+
+fullmap <- 
+  left_join(emptymap,
+            firstcountrycounts,
+            by = "region") #join with actual counts table
+
+fullmap$n <- 
+  fullmap$n.x + fullmap$n.y # make new column for fixed counts
+
+fullmap$n[is.na(fullmap$n)] <- 0 #change NA to 0 for regions with no counts
+
+# Optioal: save the plot as pdf
+# pdf(file="~/PhD/GitHub/PFAS_Systematic_Evidence_Map/Figs/Suppl_Figs/SFig.20.pdf",width = 6, height = 4, pointsize = 15, family = "Helvetica", fonts = c("Helvetica"))
+# par(mfrow=c(1,1), mar=c(0,2,0,2))
+
+wmap <- fullmap %>% 
+  ggplot(aes(fill = n,
+             map_id = region)) +
+  geom_map(map = world_map) +
+  expand_limits(x = world_map$long,
+                y = world_map$lat) +
+  coord_map("moll") +
+  theme_light() +
+  theme_map(line_size = 0.5) + 
+  theme(legend.position = "none",
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 8)) +
+  scale_fill_gradient(low = "#FEE08B",
+                      high = "#D53E4F",
+                      limits = c(1, 60),
+                      guide = guide_colorbar(direction = "vertical.")) +
+  guides(fill = guide_colourbar(barwidth = unit(8, units = "mm"),
+                                barheight = unit(30, units = "mm"))) +
+  labs(fill = "Number of reviews")

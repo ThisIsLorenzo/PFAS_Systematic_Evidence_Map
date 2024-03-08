@@ -46,7 +46,7 @@ pacman::p_load(tidyverse, # Includes ggplot2, dplyr, and tidyr. Used for data ma
                circlize, # For circular visualization of data
                bibtex, # For working with BibTeX files and references
                mapproj,
-               cowplot
+               cowplot # For using functions such as theme_map()
                )
 
 # Setting up personalized palettes.
