@@ -197,6 +197,12 @@ function(input, output, session) {
       print(q11_counts)
     })
     
+    output$summary2.11 <- renderTable({
+      mqdata_result
+    })
+    
+    
+    
     # For Summary Output - Bibliometrics
     output$summary3 <- renderPrint({
       my_data$biblio %>% 
@@ -287,9 +293,7 @@ function(input, output, session) {
     })
     
     # BIBLIOMETRICS
-    output$worldmap <- renderPlotly({
-      wmap
-    })
+    
     
     
   }, ignoreNULL = FALSE)

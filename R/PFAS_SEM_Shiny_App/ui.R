@@ -120,7 +120,7 @@ fluidPage(
                                              column(width = 6, verbatimTextOutput("summary2.8")),
                                              column(width = 6, verbatimTextOutput("summary2.9")),
                                              column(width = 6, verbatimTextOutput("summary2.10")),
-                                             column(width = 6, verbatimTextOutput("summary2.11"))
+                                             column(width = 6, tableOutput("summary2.11"))
                                              )
                                            ),
                                   tabPanel("Bibliometrics",
@@ -222,7 +222,9 @@ fluidPage(
                        ),
                        tabPanel(title = "Bibliometrics", icon = icon("connectdevelop"),
                                 tabsetPanel(
-                                  tabPanel(title = "Country collaborations", tags$img(src="Fig.8.pdf"))
+                                  tabPanel(title = "WorldMap - country productivity",
+                                           # plotlyOutput("worldmap")
+                                           )
                                 )
                        )
                 )
