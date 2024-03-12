@@ -15,7 +15,7 @@ fluidPage(
       /* Adjusting the background color of the tabPanel to cover the entire page */
       .tab-content {
         background-color: #f2f2f2;
-        min-height: calc(5000vh - 80px);
+        min-height: calc(5000vh - 100px);
       }
     '))
   ),
@@ -97,37 +97,45 @@ fluidPage(
                                 tabsetPanel(
                                   tabPanel("Mapping",
                                            fluidRow(
-                                             column(width = 6, verbatimTextOutput("summary0.3")),
-                                             column(width = 6, verbatimTextOutput("summary0.4")),
-                                             column(width = 6, verbatimTextOutput("summary0.5")),
-                                             column(width = 6, verbatimTextOutput("summary0.6")),
-                                             column(width = 6, verbatimTextOutput("summary0.7")),
-                                             column(width = 6, verbatimTextOutput("summary0.8")),
-                                             column(width = 6, verbatimTextOutput("summary1")),
-                                             column(width = 6, verbatimTextOutput("summary1.1"))
+                                             column(width = 6, DTOutput("summary0.3")),
+                                             column(width = 6, DTOutput("summary0.4")),
+                                             column(width = 6, DTOutput("summary0.5")),
+                                             column(width = 6, DTOutput("summary0.6")),
+                                             column(width = 6, DTOutput("summary0.7")),
+                                             column(width = 6, DTOutput("summary0.8")),
+                                             column(width = 6, DTOutput("summary0.9")),
+                                             column(width = 6, DTOutput("summary1")),
+                                             column(width = 6, DTOutput("summary1.1")),
+                                             column(width = 6, DTOutput("summary1.2")),
+                                             column(width = 6, DTOutput("summary1.3"))
                                              )
                                            ),
                                   tabPanel("Appraisal",
                                            fluidRow(
-                                             column(width = 6, verbatimTextOutput("summary2")),
-                                             column(width = 6, verbatimTextOutput("summary2.1")),
-                                             column(width = 6, verbatimTextOutput("summary2.2")),
-                                             column(width = 6, verbatimTextOutput("summary2.3")),
-                                             column(width = 6, verbatimTextOutput("summary2.4")),
-                                             column(width = 6, verbatimTextOutput("summary2.5")),
-                                             column(width = 6, verbatimTextOutput("summary2.6")),
-                                             column(width = 6, verbatimTextOutput("summary2.7")),
-                                             column(width = 6, verbatimTextOutput("summary2.8")),
-                                             column(width = 6, verbatimTextOutput("summary2.9")),
-                                             column(width = 6, verbatimTextOutput("summary2.10")),
-                                             column(width = 6, tableOutput("summary2.11"))
+                                             column(width = 6, DTOutput("summary2")),
+                                             column(width = 6, DTOutput("summary2.1")),
+                                             column(width = 6, DTOutput("summary2.2")),
+                                             column(width = 6, DTOutput("summary2.3")),
+                                             column(width = 6, DTOutput("summary2.4")),
+                                             column(width = 6, DTOutput("summary2.5")),
+                                             column(width = 6, DTOutput("summary2.6")),
+                                             column(width = 6, DTOutput("summary2.7")),
+                                             column(width = 6, DTOutput("summary2.8")),
+                                             column(width = 6, DTOutput("summary2.9")),
+                                             column(width = 6, DTOutput("summary2.10")),
+                                             column(width = 6, DTOutput("summary2.11")),
+                                             column(width = 6, DTOutput("summary2.12")),
+                                             column(width = 6, DTOutput("summary2.13")),
+                                             column(width = 6, DTOutput("summary2.14")),
+                                             column(width = 6, DTOutput("summary2.15")),
+                                             column(width = 6, DTOutput("summary2.16"))
                                              )
                                            ),
                                   tabPanel("Bibliometrics",
                                            fluidRow(
-                                             column(width = 6, verbatimTextOutput("summary0.1")),
-                                             column(width = 6, verbatimTextOutput("summary0.2")),
-                                             column(width = 6, verbatimTextOutput("summary3"))
+                                             column(width = 6, DTOutput("summary0.1")),
+                                             column(width = 6, DTOutput("summary0.2")),
+                                             column(width = 6, DTOutput("summary3"))
                                              )
                                            )
                                 )
@@ -135,44 +143,22 @@ fluidPage(
                        tabPanel(title = "Data", icon = icon("table"),
                                 tabsetPanel(
                                   tabPanel("Mapping",
-                                           sidebarPanel("Data selection",
-                                                        selectInput("dataSelector1",
-                                                                    label = "Select 1st variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector2",
-                                                                    label = "Select 2nd variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector3",
-                                                                    label = "Select 3rd variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector4",
-                                                                    label = "Select 4th variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector5",
-                                                                    label = "Select 5th variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector6",
-                                                                    label = "Select 6th variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        selectInput("dataSelector7",
-                                                                    label = "Select 7th variable of interest",
-                                                                    choices = choices_mapping(),
-                                                                    selected = "*No variable selected*"),
-                                                        width = 3
-                                           ),
                                            mainPanel(
-                                             dataTableOutput("gapminder_table")
+                                             DTOutput("mapping_table")
                                            )
                                   ),
-                                  tabPanel("Appraisal", h4("table")),
-                                  tabPanel("Bibliometrics", h4("table")),
-                                  tabPanel("Whole database", h4("table"))
+                                  tabPanel("Appraisal", 
+                                           mainPanel(
+                                             DTOutput("appraisal_table")
+                                           )),
+                                  tabPanel("Bibliometrics", 
+                                           mainPanel(
+                                             DTOutput("biblio_table")
+                                           )),
+                                  tabPanel("Whole database",
+                                           mainPanel(
+                                             DTOutput("whole_d_table")
+                                           ))
                                 ),
                        )
                 )),
@@ -221,10 +207,8 @@ fluidPage(
                                 )
                        ),
                        tabPanel(title = "Bibliometrics", icon = icon("connectdevelop"),
-                                tabsetPanel(
-                                  tabPanel(title = "WorldMap - country productivity",
-                                           # plotlyOutput("worldmap")
-                                           )
+                                fluidRow(
+                                  column(width=6, plotlyOutput("netmatrix"))
                                 )
                        )
                 )

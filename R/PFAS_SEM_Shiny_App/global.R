@@ -121,7 +121,7 @@ dim(mpidata) #1090 rows 36 columns
 #View(mpidata)
 
 #Merge main dataframe with species info dataframe
-mspdata <- left_join(mdata, spdata, by = "Study_ID")
+mpdata <- left_join(mdata, spdata, by = "Study_ID")
 
 my_data <- list(review = mdata,
                 species = spdata,
@@ -129,6 +129,10 @@ my_data <- list(review = mdata,
                 PFAS = ptidata,
                 biblio = bib_data,
                 biblio_all = bib_data_all_types)
+
+# Exclude 'bib_data' and 'bib_data_all_types' from my_data
+my_data_no_biblio <- my_data[!names(my_data) %in% c("biblio", "biblio_all")]
+
 
 # Removing weird symbols
 my_data$review$Paper_title <- str_replace_all(my_data$review$Paper_title, "â€”" , "—")
@@ -140,19 +144,6 @@ my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã©"
 my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã¡" , "á")
 my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã¤" , "ä")
 
-
-# generate a dictionary storing all variable - dataset pairs
-vars_sets <- list()
-j <- 1
-for(set in my_data) {
-  for(varname in names(set)[-1]) {
-    vars_sets[varname] <- names(my_data)[j]
-  }
-  
-  j <- j+1
-}
-
-vars_sets$Study_ID <- "review"
 
 # Make a list of variable available for MAPPING
 choices_mapping <- function() {
@@ -190,11 +181,6 @@ choices_mapping <- function() {
 }
 
 
-# SUMMARY
-
-mqdata <- merge(qdata, mdata[c("Study_ID", "Paper_title", "Author_year")], by = "Study_ID", all.x = TRUE)
-mqdata_result <- aggregate(. ~ Study_ID, data = mqdata, FUN = function(x) paste(unique(x), collapse = ", "))
-mqdata_result <- mqdata_result[c("Study_ID", "Paper_title", "Author_year", setdiff(names(mqdata_result), c("Study_ID", "Title", "Author")))]
 # <- apply(mqdata_result, 2, function(y) as.character(gsub(" =.*", "", y)))
 
 # Creating histograms
@@ -1396,3 +1382,25 @@ q2.5 <-  df %>%
                                         linewidth  = 0.2, 
                                         linetype = "dotted")) +
   labs(color = "Funding source:")
+
+
+# NetMatrix
+
+NetMatrix_country <- 
+  biblioNetwork(bib_data, analysis = "collaboration", network = "countries", sep = ";")
+
+NetMatrix_country_plot <- 
+  networkPlot(NetMatrix_country,
+              n = 50, 
+              cluster = "optimal",
+              Title = "Country collaborations",
+              type = "mds", 
+              size.cex = TRUE,
+              size = 10,
+              remove.multiple=FALSE, 
+              label.cex = TRUE,
+              label.color = "black",
+              labelsize = 3.5,
+              edgesize = 2,
+              halo = FALSE,
+              remove.isolates = TRUE)

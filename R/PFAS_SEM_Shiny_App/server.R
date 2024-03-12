@@ -1,214 +1,301 @@
 function(input, output, session) {
   
-  # variables always present
-  always_vars <- c("Author_year", "Paper_title", "Publication_year")
-  
-  re_selected_vars <- reactive({
-    # collect all selected variables
-    selected_vars <- 
-      c(always_vars,
-        input$dataSelector1,
-        input$dataSelector2,
-        input$dataSelector3,
-        input$dataSelector4,
-        input$dataSelector5,
-        input$dataSelector6,
-        input$dataSelector7)
-    })
-  
-  
-  re_relevant_sets <- reactive({
-    relevant_sets <- sapply(re_selected_vars(), USE.NAMES = F,
-                            FUN = function(x) {
-                              vars_sets[x][[1]]
-                            })
-    
-    relevant_sets[sapply(relevant_sets, is.null)] <- NULL
-    unlist(unique(relevant_sets))
+  mapping_database <- reactive({
+    m_database <- mdata
+    as.data.frame(m_database)
   })
-  
-  re_database <- reactive({
-    current_dataframes <- my_data[re_relevant_sets()]
-    database <- Reduce(dplyr::left_join, current_dataframes) %>%
-      select(re_selected_vars()[re_selected_vars() != "NULL"])
-    as.data.frame(database)
-  })
-  
   
   observeEvent(input$pltChange, {
     
     
-    output$gapminder_table <- renderDataTable(
+    output$mapping_table <- renderDT(
       
       # render table
-      datatable(re_database(),
-                filter = 'top',
-                rownames = FALSE,
-                extensions = "Buttons",
-                options = list(pageLength = 200,
-                               dom = "Bfrtip",
-                               autoWidth = TRUE,
-                               bAutoWidth = FALSE,
-                               scrollX = TRUE,
-                               buttons = list(
-                                 list(extend = 'copy', text = 'Copy'),
-                                 list(extend = 'csv', text = 'CSV'),
-                                 list(extend = 'excel', text = 'Excel'),
-                                 list(extend = 'pdf', text = 'PDF'),
-                                 list(extend = 'pageLength', text = 'Entries')
-                               ),
-                               columnDefs = list(list(className = 'dt-left', targets = '_all'))),
-                callback = JS('table.page.len(-1).draw();')
-                )
+      mapping_database(),
+      filter = 'top',
+      rownames = FALSE,
+      extensions = "Buttons",
+      options = list(
+        pageLength = 200,
+        dom = "Bfrtip",
+        scrollX = TRUE,
+        width = '200%',
+        autoWidth = FALSE,
+        buttons = list(
+          list(extend = 'copy', text = 'Copy'),
+          list(extend = 'csv', text = 'CSV'),
+          list(extend = 'excel', text = 'Excel'),
+          list(extend = 'pdf', text = 'PDF'),
+          list(extend = 'pageLength', text = 'Entries')
+        )
+      )
+    )
+  })
+  
+    appraisal_database <- reactive({
+      a_database <- qdata
+      as.data.frame(a_database)
+    })
+  
+    
+    observeEvent(input$pltChange, {
+      
+      
+      output$appraisal_table <- renderDT(
+        
+        # render table
+        appraisal_database(),
+        filter = 'top',
+        rownames = FALSE,
+        extensions = "Buttons",
+        options = list(pageLength = 200,
+                       dom = "Bfrtip",
+                       width = '100%',
+                       autoWidth = FALSE,
+                       buttons = list(
+                         list(extend = 'copy', text = 'Copy'),
+                         list(extend = 'csv', text = 'CSV'),
+                         list(extend = 'excel', text = 'Excel'),
+                         list(extend = 'pdf', text = 'PDF'),
+                         list(extend = 'pageLength', text = 'Entries')
+                       ),
+                       columnDefs = list(list(width = '50px', targets = '_all')))
+      )
+      
+    })
+    
+    biblio_database <- reactive({
+      b_database <- bib_data
+      as.data.frame(b_database)
+    })
+    
+    
+    observeEvent(input$pltChange, {
+      
+      
+      output$biblio_table <- renderDT(
+        
+        # render table
+        biblio_database(),
+        filter = 'top',
+        rownames = FALSE,
+        extensions = "Buttons",
+        options = list(pageLength = 200,
+                       dom = "Bfrtip",
+                       width = '100%',
+                       autoWidth = FALSE,
+                       buttons = list(
+                         list(extend = 'copy', text = 'Copy'),
+                         list(extend = 'csv', text = 'CSV'),
+                         list(extend = 'excel', text = 'Excel'),
+                         list(extend = 'pdf', text = 'PDF'),
+                         list(extend = 'pageLength', text = 'Entries')
+                       ))
+      )
+      
+    })
+    
+    whole_database <- reactive({
+      whole_database <- Reduce(function(x, y) left_join(x, y, by = "Study_ID"), my_data_no_biblio)
+      as.data.frame(whole_database)
+    })
+    
+    
+    observeEvent(input$pltChange, {
+      
+      
+      output$whole_d_table <- renderDT(
+        
+        # render table
+        whole_database(),
+        filter = 'top',
+        rownames = FALSE,
+        extensions = "Buttons",
+        options = list(pageLength = 200,
+                       dom = "Bfrtip",
+                       scrollX = TRUE,
+                       width = '100%',
+                       autoWidth = TRUE,
+                       buttons = list(
+                         list(extend = 'copy', text = 'Copy'),
+                         list(extend = 'csv', text = 'CSV'),
+                         list(extend = 'excel', text = 'Excel'),
+                         list(extend = 'pdf', text = 'PDF'),
+                         list(extend = 'pageLength', text = 'Entries')
+                       ))
       )
     
+      
     
     # For Summary Output - Mapping
-    output$summary0.1 <- renderPrint({
+    output$summary0.1 <- renderDT({
       journal_counts <- table(mdata$Journal)
       sorted_counts <- sort(journal_counts, decreasing = TRUE)
-      top_10_journals <- head(sorted_counts, 10)
-      cat("Top 10 Most Abundant Journals:\n\n")
-      print(top_10_journals)
-    })
+      data.frame(Journal = names(sorted_counts), Number_of_reviews = as.vector(sorted_counts))
+    }, rownames = FALSE)
     
-    output$summary0.2 <- renderPrint({
+    output$summary0.2 <- renderDT({
       country_counts <- table(mdata$Country_firstAuthor)
       sorted_counts2 <- sort(country_counts, decreasing = TRUE)
-      top_10_countries <- head(sorted_counts2, 10)
-      cat("Top 10 Country of first author:\n\n")
-      print(top_10_countries)
-    })
+      data.frame(Country_first_author = names(sorted_counts2), Number_of_reviews = as.vector(sorted_counts2))
+    }, rownames = FALSE)
     
-    output$summary0.3 <- renderPrint({
+    output$summary0.3 <- renderDT({
       review_counts <- table(mdata$Review_type_claimed)
       sorted_counts3 <- sort(review_counts, decreasing = TRUE)
-      top_10_review_types <- head(sorted_counts3, 10)
-      cat("Number of review types:\n\n")
-      print(top_10_review_types)
-    })
+      data.frame(Review_Type = names(sorted_counts3), Number_of_reviews = as.vector(sorted_counts3))
+    }, rownames = FALSE)
     
-    output$summary0.4 <- renderPrint({
+    output$summary0.4 <- renderDT({
       sa_counts <- table(mdata$Systematic_approach)
-      cat("Number of reviews with or without a systematic approach:\n\n")
-      print(sa_counts)
-    })
+      data.frame(Systematic_approach = names(sa_counts), Number_of_reviews = as.vector(sa_counts))
+    }, rownames = FALSE)
     
-    output$summary0.5 <- renderPrint({
+    output$summary0.5 <- renderDT({
       protocol_counts <- table(mdata$Protocol)
-      cat("Number of reviews with or without a research protocol:\n\n")
-      print(protocol_counts)
-    })
+      data.frame(Protocol = names(protocol_counts), Number_of_reviews = as.vector(protocol_counts))
+    }, rownames = FALSE)
     
-    output$summary0.6 <- renderPrint({
+    output$summary0.6 <- renderDT({
       ma_counts <- table(mdata$Meta_analysis)
-      cat("Number of reviews with or without a meta-analysis:\n\n")
-      print(ma_counts)
-    })
+      data.frame(Meta_analysis = names(ma_counts), Number_of_reviews = as.vector(ma_counts))
+    }, rownames = FALSE)
     
-    output$summary0.7 <- renderPrint({
+    output$summary0.7 <- renderDT({
       sub_counts <- table(mdata$Human_animal_environment)
-      cat("Number of reviews on humans, animals, or the environment:\n\n")
-      print(sub_counts)
-    })
+      data.frame(Subject = names(sub_counts), Number_of_reviews = as.vector(sub_counts))
+    }, rownames = FALSE)
     
-    output$summary0.8 <- renderPrint({
-      species_counts <- table(spdata$Species_scientific_name)
+    output$summary0.8 <- renderDT({
+      species_counts <- spdata[!is.na(spdata$Species_scientific_name), ]
+      species_counts <- table(species_counts$Species_scientific_name)
       sorted_counts4 <- sort(species_counts, decreasing = TRUE)
-      top_10_species <- head(sorted_counts4, 10)
-      cat("Top 10 Most reviewed species:\n\n")
-      print(top_10_species)
-    })
+      data.frame(Species = names(sorted_counts4), Number_of_reviews = as.vector(sorted_counts4))
+    }, rownames = FALSE)
     
-    output$summary1 <- renderPrint({
-      my_data$review %>% 
-        skim()
-    })
+    output$summary0.9 <- renderDT({
+      pfas_focus <- table(mdata$PFAS_focus)
+      data.frame(PFAS_focus = names(pfas_focus), Number_of_reviews = as.vector(pfas_focus))
+    }, rownames = FALSE)
     
-    output$summary1.1 <- renderPrint({
-      my_data$species %>% 
-        skim()
-    })
+    output$summary1 <- renderDT({
+      pfas_count <- table(mdata$PFAS_one_many)
+      data.frame(Compounds_reviewed = names(pfas_count), Number_of_reviews = as.vector(pfas_count))
+    }, rownames = FALSE)
+    
+    output$summary1.1 <- renderDT({
+      pecos_count <- table(mdata$Outcomes_PECOS)
+      data.frame("Reviews using a PECOs framework" = names(pecos_count), Number_of_reviews = as.vector(pecos_count))
+    }, rownames = FALSE)
+    
+    output$summary1.2 <- renderDT({
+      outcomes_counts <- table(mdata$Outcomes)
+      sorted_counts5 <- sort(outcomes_counts, decreasing = TRUE)
+      data.frame(Reviews_outcomes = names(sorted_counts5), Number_of_reviews = as.vector(sorted_counts5))
+    }, rownames = FALSE)
+    
+    output$summary1.3 <- renderDT({
+      outcomes_cat_counts <- table(mdata$Outcome_category)
+      sorted_counts6 <- sort(outcomes_cat_counts, decreasing = TRUE)
+      data.frame( Reviews_outcome_categories = names(sorted_counts6), Number_of_reviews = as.vector(sorted_counts6))
+    }, rownames = FALSE)
+    
+    
     
     # For Summary Output - Appraisal
-    output$summary2 <- renderPrint({
+    output$summary2 <- renderDT({
       q1_counts <- table(qdata$`Q1. Are the research questions and inclusion criteria for the review clearly delineated?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #1:\n\n")
-      print(q1_counts)
-    })
+      data.frame( Item_1 = names(q1_counts), Number_of_reviews = as.vector(q1_counts))
+    }, rownames = FALSE)
     
-    output$summary2.1 <- renderPrint({
+    output$summary2.1 <- renderDT({
       q2_counts <- table(qdata$`Q2. Did the report of the review contain an explicit statement that the review methods were established prior to the conduct of the review and did the report justify any significant deviations from the protocol?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #2:\n\n")
-      print(q2_counts)
-    })
+      data.frame( Item_2 = names(q2_counts), Number_of_reviews = as.vector(q2_counts))
+    }, rownames = FALSE)
     
-    output$summary2.2 <- renderPrint({
+    output$summary2.2 <- renderDT({
       q3_counts <- table(qdata$`Q3. Did the review authors explain their selection of the study designs for inclusion in the review?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #3:\n\n")
-      print(q3_counts)
-    })
+      data.frame( Item_3 = names(q3_counts), Number_of_reviews = as.vector(q3_counts))
+    }, rownames = FALSE)
     
-    output$summary2.3 <- renderPrint({
+    output$summary2.3 <- renderDT({
       q4_counts <- table(qdata$`Q4. Did the review authors use a comprehensive literature search strategy?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #4:\n\n")
-      print(q4_counts)
-    })
+      data.frame( Item_4 = names(q4_counts), Number_of_reviews = as.vector(q4_counts))
+    }, rownames = FALSE)
     
-    output$summary2.4 <- renderPrint({
+    output$summary2.4 <- renderDT({
       q5_counts <- table(qdata$`Q5. Did the review authors perform study selection in duplicate?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #5:\n\n")
-      print(q5_counts)
-    })
+      data.frame( Item_5 = names(q5_counts), Number_of_reviews = as.vector(q5_counts))
+    }, rownames = FALSE)
     
-    output$summary2.5 <- renderPrint({
+    output$summary2.5 <- renderDT({
       q6_counts <- table(qdata$`Q6. Did the review authors perform data extraction in duplicate?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #6:\n\n")
-      print(q6_counts)
-    })
+      data.frame( Item_6 = names(q6_counts), Number_of_reviews = as.vector(q6_counts))
+    }, rownames = FALSE)
     
-    output$summary2.6 <- renderPrint({
+    output$summary2.6 <- renderDT({
       q7_counts <- table(qdata$`Q7. Did the review authors provide a list of excluded studies and justify the exclusions?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #7:\n\n")
-      print(q7_counts)
-    })
+      data.frame( Item_7 = names(q7_counts), Number_of_reviews = as.vector(q7_counts))
+    }, rownames = FALSE)
     
-    output$summary2.7 <- renderPrint({
+    output$summary2.7 <- renderDT({
       q8_counts <- table(qdata$`Q8. Did the review authors describe the included studies in adequate detail?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #8:\n\n")
-      print(q8_counts)
-    })
+      data.frame( Item_8 = names(q8_counts), Number_of_reviews = as.vector(q8_counts))
+    }, rownames = FALSE)
     
-    output$summary2.8 <- renderPrint({
+    output$summary2.8 <- renderDT({
       q9_counts <- table(qdata$`Q9. Did the review authors use a satisfactory technique for assessing the risk of bias (RoB) in individual studies that were included in the review?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #9:\n\n")
-      print(q9_counts)
-    })
+      data.frame( Item_9 = names(q9_counts), Number_of_reviews = as.vector(q9_counts))
+    }, rownames = FALSE)
     
-    output$summary2.9 <- renderPrint({
+    output$summary2.9 <- renderDT({
       q10_counts <- table(qdata$`Q10. Did the review authors report on the sources of funding for the studies included in the review?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #10:\n\n")
-      print(q10_counts)
-    })
+      data.frame( Item_10 = names(q10_counts), Number_of_reviews = as.vector(q10_counts))
+    }, rownames = FALSE)
     
-    output$summary2.10 <- renderPrint({
+    output$summary2.10 <- renderDT({
       q11_counts <- table(qdata$`Q11. If meta-analysis was performed did the review authors use appropriate methods for statistical combination of results?`)
-      cat("Number of reviews with high, medium, or low score for appraisal question #11:\n\n")
-      print(q11_counts)
-    })
+      data.frame( Item_11 = names(q11_counts), Number_of_reviews = as.vector(q11_counts))
+    }, rownames = FALSE)
     
-    output$summary2.11 <- renderTable({
-      mqdata_result
-    })
+    output$summary2.11 <- renderDT({
+      q12_counts <- table(qdata$`Q12. If meta-analysis was performed, did the review authors assess the potential impact of RoB in individual studies on the results of the meta-analysis or other evidence synthesis?`)
+      data.frame( Item_12 = names(q12_counts), Number_of_reviews = as.vector(q12_counts))
+    }, rownames = FALSE)
+    output$summary2.12 <- renderDT({
+      q13_counts <- table(qdata$`Q13. Did the review authors account for RoB in individual studies when interpreting/ discussing the results of the review?`)
+      data.frame( Item_13 = names(q13_counts), Number_of_reviews = as.vector(q13_counts))
+    }, rownames = FALSE)
     
+    output$summary2.13 <- renderDT({
+      q14_counts <- table(qdata$`Q14. Did the review authors provide a satisfactory explanation for, and discussion of, any heterogeneity observed in the results of the review?`)
+      data.frame( Item_14 = names(q14_counts), Number_of_reviews = as.vector(q14_counts))
+    }, rownames = FALSE)
+    
+    output$summary2.14 <- renderDT({
+      q15_counts <- table(qdata$`Q15. If they performed quantitative synthesis did the review authors carry out an adequate investigation of publication bias (small study bias) and discuss its likely impact on the results of the review?`)
+      data.frame( Item_15 = names(q15_counts), Number_of_reviews = as.vector(q15_counts))
+    }, rownames = FALSE)
+    
+    output$summary2.15 <- renderDT({
+      q16_counts <- table(qdata$`Q16. Did the review authors report any potential sources of conflict of interest, including any funding they received for conducting the review?`)
+      data.frame( Item_5 = names(q16_counts), Number_of_reviews = as.vector(q16_counts))
+    }, rownames = FALSE)
     
     
     # For Summary Output - Bibliometrics
-    output$summary3 <- renderPrint({
-      my_data$biblio %>% 
-        skim()
-    })
     
+    output$summary3 <- renderDT({
+      results1 <- biblioAnalysis(bib_data)
+      Reviews_citations <- as.data.frame(results1[["MostCitedPapers"]])
+      colnames(Reviews_citations)[colnames(Reviews_citations) == "Paper         "] <- "Paper"
+      data.frame( Article = Reviews_citations$Paper,
+                  DOI = Reviews_citations$DOI,
+                  Citations = Reviews_citations$TC,
+                  Citation_per_year = Reviews_citations$TCperYear,
+                  N_citations = Reviews_citations$NTC
+                  )
+    }, rownames = FALSE)
     
     
     # For Structure output
@@ -220,6 +307,7 @@ function(input, output, session) {
     # Plots
     # MAPPING
     # Timetrends
+    
     output$histplot1 <- renderPlotly({
       p1.1
     })
@@ -294,7 +382,9 @@ function(input, output, session) {
     
     # BIBLIOMETRICS
     
-    
+    output$netmatrix <- renderPlotly({
+      NetMatrix_country_plot
+    })
     
   }, ignoreNULL = FALSE)
 }
