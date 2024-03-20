@@ -144,6 +144,16 @@ my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã©"
 my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã¡" , "á")
 my_data$review$Author_year <- str_replace_all(my_data$review$Author_year, "Ã¤" , "ä")
 
+mdata$Paper_title <- str_replace_all(mdata$Paper_title, "â€”" , "—")
+mdata$Paper_title <- str_replace_all(mdata$Paper_title, "â€\u0090" , "-")
+mdata$Paper_title <- str_replace_all(mdata$Paper_title, "â€™" , "'")
+mdata$Paper_title <- str_replace_all(mdata$Paper_title, "âˆ’" , "−")
+mdata$Author_year <- str_replace_all(mdata$Author_year, "Ã³" , "ó")
+mdata$Author_year <- str_replace_all(mdata$Author_year, "Ã©" , "é")
+mdata$Author_year <- str_replace_all(mdata$Author_year, "Ã¡" , "á")
+mdata$Author_year <- str_replace_all(mdata$Author_year, "Ã¤" , "ä")
+
+
 
 # Make a list of variable available for MAPPING
 choices_mapping <- function() {
@@ -1386,21 +1396,21 @@ q2.5 <-  df %>%
 
 # NetMatrix
 
-NetMatrix_country <- 
-  biblioNetwork(bib_data, analysis = "collaboration", network = "countries", sep = ";")
-
-NetMatrix_country_plot <- 
-  networkPlot(NetMatrix_country,
-              n = 50, 
-              cluster = "optimal",
-              Title = "Country collaborations",
-              type = "mds", 
-              size.cex = TRUE,
-              size = 10,
-              remove.multiple=FALSE, 
-              label.cex = TRUE,
-              label.color = "black",
-              labelsize = 3.5,
-              edgesize = 2,
-              halo = FALSE,
-              remove.isolates = TRUE)
+# NetMatrix_country <- 
+#   biblioNetwork(bib_data, analysis = "collaboration", network = "countries", sep = ";")
+# 
+# NetMatrix_country_plot <- 
+#   networkPlot(NetMatrix_country,
+#               n = 50, 
+#               cluster = "optimal",
+#               Title = "Country collaborations",
+#               type = "mds", 
+#               size.cex = TRUE,
+#               size = 10,
+#               remove.multiple=FALSE, 
+#               label.cex = TRUE,
+#               label.color = "black",
+#               labelsize = 3.5,
+#               edgesize = 2,
+#               halo = FALSE,
+#               remove.isolates = TRUE)

@@ -15,7 +15,7 @@ fluidPage(
       /* Adjusting the background color of the tabPanel to cover the entire page */
       .tab-content {
         background-color: #f2f2f2;
-        min-height: calc(5000vh - 100px);
+        min-height: calc(5000vh - 200px);
       }
     '))
   ),
@@ -145,8 +145,7 @@ fluidPage(
                                   tabPanel("Mapping",
                                            mainPanel(
                                              DTOutput("mapping_table")
-                                           )
-                                  ),
+                                           )),
                                   tabPanel("Appraisal", 
                                            mainPanel(
                                              DTOutput("appraisal_table")
@@ -158,7 +157,8 @@ fluidPage(
                                   tabPanel("Whole database",
                                            mainPanel(
                                              DTOutput("whole_d_table")
-                                           ))
+                                           )
+                                           )
                                 ),
                        )
                 )),

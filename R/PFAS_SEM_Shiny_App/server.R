@@ -1,7 +1,37 @@
 function(input, output, session) {
   
+  js <- "
+function(cell) {
+  var $cell = $(cell);
+  $cell.contents().wrapAll('<div class=\\\"content\\\"></div>');
+  var $content = $cell.find('.content');
+  $cell.append($('<button>Read more</button>'));
+  $btn = $cell.find('button');
+  $content.css({
+    height: '50px',
+    overflow: 'hidden'
+  });
+  $cell.data('isLess', true);
+  $btn.click(function () {
+    var isLess = $cell.data('isLess');
+    $content.css('height', isLess ? 'auto' : '50px');
+    $(this).text(isLess ? 'Read less' : 'Read more');
+    $cell.data('isLess', !isLess);
+  });
+}
+"
+
+custom_css <- "
+  .custom-row-height tr td {
+    height: 20px; /* Adjust height as needed */
+    padding: 5px; /* Optional: Adjust padding */
+  }
+"
+
+  
   mapping_database <- reactive({
-    m_database <- mdata
+    m_database <- my_data$review
+    
     as.data.frame(m_database)
   })
   
@@ -15,25 +45,23 @@ function(input, output, session) {
       filter = 'top',
       rownames = FALSE,
       extensions = "Buttons",
-      options = list(
-        pageLength = 200,
-        dom = "Bfrtip",
-        scrollX = TRUE,
-        width = '200%',
-        autoWidth = FALSE,
-        buttons = list(
-          list(extend = 'copy', text = 'Copy'),
-          list(extend = 'csv', text = 'CSV'),
-          list(extend = 'excel', text = 'Excel'),
-          list(extend = 'pdf', text = 'PDF'),
-          list(extend = 'pageLength', text = 'Entries')
-        )
+      options = list(pageLength = 10,
+                     dom = "Bfrtp",
+                     width = '100%',
+                     autoWidth = TRUE,
+                     buttons = list(
+                       list(extend = 'copy', text = 'Copy'),
+                       list(extend = 'csv', text = 'CSV'),
+                       list(extend = 'excel', text = 'Excel'),
+                       list(extend = 'pdf', text = 'PDF'),
+                       list(extend = 'pageLength', text = 'Entries')
+                       )
+                     )
       )
-    )
   })
   
     appraisal_database <- reactive({
-      a_database <- qdata
+      a_database <- my_data$AMSTAR2
       as.data.frame(a_database)
     })
   
@@ -48,24 +76,23 @@ function(input, output, session) {
         filter = 'top',
         rownames = FALSE,
         extensions = "Buttons",
-        options = list(pageLength = 200,
+        options = list(pageLength = 10,
                        dom = "Bfrtip",
                        width = '100%',
-                       autoWidth = FALSE,
+                       autoWidth = TRUE,
                        buttons = list(
                          list(extend = 'copy', text = 'Copy'),
                          list(extend = 'csv', text = 'CSV'),
                          list(extend = 'excel', text = 'Excel'),
                          list(extend = 'pdf', text = 'PDF'),
                          list(extend = 'pageLength', text = 'Entries')
-                       ),
-                       columnDefs = list(list(width = '50px', targets = '_all')))
+                       ))
       )
       
     })
     
     biblio_database <- reactive({
-      b_database <- bib_data
+      b_database <- my_data$biblio
       as.data.frame(b_database)
     })
     
@@ -80,10 +107,10 @@ function(input, output, session) {
         filter = 'top',
         rownames = FALSE,
         extensions = "Buttons",
-        options = list(pageLength = 200,
+        options = list(pageLength = 10,
                        dom = "Bfrtip",
                        width = '100%',
-                       autoWidth = FALSE,
+                       autoWidth = TRUE,
                        buttons = list(
                          list(extend = 'copy', text = 'Copy'),
                          list(extend = 'csv', text = 'CSV'),
@@ -111,9 +138,8 @@ function(input, output, session) {
         filter = 'top',
         rownames = FALSE,
         extensions = "Buttons",
-        options = list(pageLength = 200,
+        options = list(pageLength = 10,
                        dom = "Bfrtip",
-                       scrollX = TRUE,
                        width = '100%',
                        autoWidth = TRUE,
                        buttons = list(
@@ -185,7 +211,7 @@ function(input, output, session) {
     
     output$summary1.1 <- renderDT({
       pecos_count <- table(mdata$Outcomes_PECOS)
-      data.frame("Reviews using a PECOs framework" = names(pecos_count), Number_of_reviews = as.vector(pecos_count))
+      data.frame(Reviews_using_a_PECOs_framework = names(pecos_count), Number_of_reviews = as.vector(pecos_count))
     }, rownames = FALSE)
     
     output$summary1.2 <- renderDT({
