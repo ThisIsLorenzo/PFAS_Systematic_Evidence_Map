@@ -4380,7 +4380,7 @@ networkPlot_modified <-
     V(bsk.network)$frame.color = adjustcolor("black", alpha)
     V(bsk.network)$color <- adjustcolor(V(bsk.network)$color, 
         alpha)
-    V(bsk.network)$label.color <- "black"
+    V(bsk.network)$label.color <- adjustcolor("black", max(c(1,  alpha + 0.1)))
     V(bsk.network)$label.font = 2
     V(bsk.network)$label = LABEL
     if (isTRUE(halo) & cluster != "none") {
