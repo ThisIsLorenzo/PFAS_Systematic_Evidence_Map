@@ -4214,8 +4214,166 @@ NetMatrix_country_plot <-
 
 ```{r}
 # Modify networkPlot() function in Bibliometrix package.
-networkPlot_modified <- 
-  function (NetMatrix, normalize = NULL, n = NULL, degree = NULL, 
+### internal functions:
+# color palette
+colorlist <- function(){
+  c("#d3d3d3","#377EB8","#4DAF4A","#984EA3","#FF7F00","#A65628","#F781BF","#999999","#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854","#FFD92F"
+             ,"#B3B3B3","#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#B15928","#8DD3C7","#BEBADA"
+             ,"#FB8072","#80B1D3","#FDB462","#B3DE69","#D9D9D9","#BC80BD","#CCEBC5") ### SEE HERE - first color from this listed is used for connecting lines, so just change this one. In plots with communities the colors from this list are used to color communities?
+}
+### deleteIsolates
+delete.isolates <- function(graph, mode = 'all') {
+  isolates <- which(degree(graph, mode = mode) == 0) - 1
+  delete.vertices(graph, names(isolates))
+}
+### clusteringNetwork
+clusteringNetwork <- function(bsk.network, cluster) {
+  colorlist <- colorlist() 
+  #   c(
+  #   brewer.pal(9, 'Set1')[-6],
+  #   brewer.pal(8, 'Set2')[-7],
+  #   brewer.pal(12, 'Paired')[-11],
+  #   brewer.pal(12, 'Set3')[-c(2, 8, 12)]
+  # )
+  
+  switch(
+    cluster,
+    none = {
+      net_groups = list(membership = rep(1, vcount(bsk.network)))
+    },
+    optimal = {
+      net_groups <- cluster_optimal(bsk.network)
+    },
+    leiden = {
+      net_groups <- cluster_leiden(bsk.network, objective_function = "modularity",
+                                   n_iterations = 3, resolution_parameter = 0.75)
+    },
+    louvain = {
+      net_groups <- cluster_louvain(bsk.network)
+      #net_groups <- louvain(bsk.network)
+    },
+    fast_greedy = {
+      net_groups <- cluster_fast_greedy(bsk.network)
+    },
+    leading_eigen = {
+      net_groups <- cluster_leading_eigen(bsk.network)
+    },
+    spinglass = {
+      net_groups <- cluster_spinglass(bsk.network)
+    },
+    infomap = {
+      net_groups <- cluster_infomap(bsk.network)
+    },
+    edge_betweenness = {
+      net_groups <- cluster_edge_betweenness(bsk.network)
+    },
+    walktrap = {
+      net_groups <- cluster_walktrap(bsk.network)
+    },
+    
+    ## default statement
+    {
+      cat("\nUnknown cluster argument. Using default algorithm\n")
+      net_groups <- cluster_walktrap(bsk.network)
+    }
+  )
+  
+  V(bsk.network)$color <- colorlist[net_groups$membership]
+  
+  ### set egde intra-class colors
+  V(bsk.network)$community <- net_groups$membership
+  El <- as.data.frame(get.edgelist(bsk.network, names = F))
+  
+  colorlist <- colorlist()
+  #   c(
+  #   brewer.pal(9, 'Set1')[-6],
+  #   brewer.pal(8, 'Set2')[-7],
+  #   brewer.pal(12, 'Paired')[-11],
+  #   brewer.pal(12, 'Set3')[-c(2, 8, 12)]
+  # )
+  E(bsk.network)$color <- apply(El, 1, function(x) {
+    if (V(bsk.network)$community[x[1]] == V(bsk.network)$community[x[2]]) {
+      C <- colorlist[V(bsk.network)$community[x[1]]]
+    } else{
+      C <- 'gray70'
+    }
+    return(C)
+  })
+  E(bsk.network)$lty <- 1
+  E(bsk.network)$lty[E(bsk.network)$color == "gray70"] <- 5
+  ### end
+  
+  cl <- list()
+  cl$bsk.network <- bsk.network
+  cl$net_groups <- net_groups
+  return(cl)
+}
+### switchLayout
+switchLayout <- function(bsk.network, type, community.repulsion) {
+  if (community.repulsion>0){
+    community.repulsion = round(community.repulsion*100)
+    row <- get.edgelist(bsk.network)
+    membership <- V(bsk.network)$community
+    names(membership) <- V(bsk.network)$name
+    
+    if (is.null(E(bsk.network)$weight[1])){
+      E(bsk.network)$weight <-  apply(row,1,weight.community,membership,community.repulsion,1)
+    } else {
+      E(bsk.network)$weight <- E(bsk.network)$weight + apply(row,1,weight.community,membership,community.repulsion,1)
+      
+    }
+  }
+  
+  switch(
+    type,
+    auto = {
+      l <- layout.auto(bsk.network)
+    },
+    circle = {
+      l <- layout.circle(bsk.network)
+    },
+    star = {
+      l <- layout.star(bsk.network)
+    },
+    sphere = {
+      l <- layout.sphere(bsk.network)
+    },
+    mds = {
+      l <- layout.mds(bsk.network)
+    },
+    fruchterman = {
+      l <- layout.fruchterman.reingold(bsk.network)
+    },
+    kamada = {
+      l <- layout.kamada.kawai(bsk.network)
+    }
+  )
+  l <- layout.norm(l)
+  
+  layout_results <- list(l=l, bsk.network=bsk.network)
+  return(layout_results)
+}
+# Community repulsion
+weight.community=function(row,membership,weigth.within,weight.between){
+  if(as.numeric(membership[which(names(membership)==row[1])])==as.numeric(membership[which(names(membership)==row[2])])){
+    weight=weigth.within
+  }else{
+    weight=weight.between
+  }
+  return(weight)
+}
+# # louvain community detection
+# louvain <- function(g){
+#   cl <- 50 %>% 
+#     rerun(cluster_louvain(g)$membership) %>% 
+#     do.call(rbind, .) %>%
+#     data.frame() %>% 
+#     summarize_all(Mode)
+#   cl <- list(membership=as.numeric(cl), names=V(g)$name)
+#   return(cl)
+# }
+### Fixed main function:
+mynetwork <- function (NetMatrix, normalize = NULL, n = NULL, degree = NULL, 
     Title = "Plot", type = "auto", label = TRUE, labelsize = 1, 
     label.cex = FALSE, label.color = FALSE, label.n = NULL, halo = FALSE, 
     cluster = "walktrap", community.repulsion = 0.1, vos.path = NULL, 
@@ -4230,7 +4388,7 @@ networkPlot_modified <-
     net_groups <- list()
     if (!is.null(normalize)) {
         S <- normalizeSimilarity(NetMatrix, type = normalize)
-        bsk.S <- graph.adjacency(S, mode = "undirected", weighted = T)
+        bsk.S <- graph_from_adjacency_matrix(S, mode = "undirected", weighted = T)
     }
     if (isTRUE(size)) {
         size <- 20
@@ -4239,10 +4397,10 @@ networkPlot_modified <-
     if (alpha < 0 & alpha > 1) {
         alpha <- 0.5
     }
-    bsk.network <- graph.adjacency(NetMatrix, mode = "undirected", 
+    bsk.network <- graph_from_adjacency_matrix(NetMatrix, mode = "undirected", 
         weighted = weighted)
     V(bsk.network)$name <- colnames(NetMatrix)
-    deg <- degree(bsk.network, mode = "all")
+    deg <- igraph::degree(bsk.network, mode = "all")
     deg.dist <- data.frame(node = V(bsk.network)$name, degree = deg) %>% 
         arrange(desc(.data$degree)) %>% mutate(degree = .data$degree/max(.data$degree))
     V(bsk.network)$deg <- deg
@@ -4267,9 +4425,9 @@ networkPlot_modified <-
             cat("\ndegree argument is to high!\n\n")
             return()
         }
-        bsk.network <- delete.vertices(bsk.network, which(Vind))
+        bsk.network <- delete_vertices(bsk.network, which(Vind))
         if (!isTRUE(bsk.S)) {
-            bsk.S <- delete.vertices(bsk.S, which(Vind))
+            bsk.S <- delete_vertices(bsk.S, which(Vind))
         }
     }
     else if (!is.null(n)) {
@@ -4277,10 +4435,10 @@ networkPlot_modified <-
             n <- dim(NetMatrix)[1]
         }
         nodes <- names(sort(deg, decreasing = TRUE)[1:n])
-        bsk.network <- delete.vertices(bsk.network, which(!(V(bsk.network)$name %in% 
+        bsk.network <- delete_vertices(bsk.network, which(!(V(bsk.network)$name %in% 
             nodes)))
         if (!isTRUE(bsk.S)) {
-            bsk.S <- delete.vertices(bsk.S, which(!(V(bsk.S)$name %in% 
+            bsk.S <- delete_vertices(bsk.S, which(!(V(bsk.S)$name %in% 
                 nodes)))
         }
     }
@@ -4313,16 +4471,16 @@ networkPlot_modified <-
             E(bsk.network)$width <- edges/max(edges) * edgesize
         }
     }
-    bsk.network <- delete.edges(bsk.network, which(E(bsk.network)$num < 
+    bsk.network <- delete_edges(bsk.network, which(E(bsk.network)$num < 
         edges.min))
     if (!isTRUE(bsk.S)) {
-        bsk.S <- delete.edges(bsk.S, which(E(bsk.network)$num < 
+        bsk.S <- delete_edges(bsk.S, which(E(bsk.network)$num < 
             edges.min))
     }
     if (isTRUE(remove.isolates)) {
         bsk.network <- delete.isolates(bsk.network, mode = "all")
         if (!isTRUE(bsk.S)) {
-            bsk.S <- delete.vertices(bsk.S, which(V(bsk.S)$name %in% 
+            bsk.S <- delete_vertices(bsk.S, which(V(bsk.S)$name %in% 
                 setdiff(V(bsk.S)$name, V(bsk.network)$name)))
         }
     }
@@ -4377,10 +4535,11 @@ networkPlot_modified <-
     igraph::graph_attr(bsk.network, "main") <- Title
     E(bsk.network)$curved = curved
     V(bsk.network)$label.dist = 0.7
-    V(bsk.network)$frame.color = adjustcolor("black", alpha)
+    V(bsk.network)$frame.color = adjustcolor("red", alpha) #SEE HERE - manually change color of the border of the node points
     V(bsk.network)$color <- adjustcolor(V(bsk.network)$color, 
         alpha)
-    V(bsk.network)$label.color <- adjustcolor("black", max(c(1,  alpha + 0.1)))
+    V(bsk.network)$label.color <- adjustcolor("black", min(c(1,  
+        alpha + 0.1))) #SEE HERE - manually change color of the text labels (keywords)
     V(bsk.network)$label.font = 2
     V(bsk.network)$label = LABEL
     if (isTRUE(halo) & cluster != "none") {
@@ -4444,20 +4603,18 @@ NetMatrix_keywords <-
                 sep = ";")
 
 NetMatrix_keywords_plot <- 
-  networkPlot_modified(NetMatrix_keywords,
-              normalize = "association",
-              n = 20,
-              Title = "Keyword co-occurrences",
-              type = "fruchterman",
-              size.cex = TRUE,
-              size = 10,
+  mynetwork(NetMatrix_keywords,
+              normalize="association", n = 20,
+              Title = "Keyword co-occurrences", type = "fruchterman",
+              size.cex = TRUE, size = 10,
               remove.multiple = F,
               edgesize = 3, 
-              labelsize = 3,
+              labelsize = 2, 
               label.cex = TRUE,
               edges.min = 1,
-              label.n = 30,
-              alpha = 0.3) #adjust number and size of labels, as needed, etc.
+              label.n = 30, 
+              alpha = 1) #adjust number and size of labels, as needed, etc.
+
 # dev.off()
 
 #str(NetMatrix_keywords_plot)
@@ -4894,16 +5051,13 @@ NetMatrix_keywords2 <-
                 sep = ";")
 
 NetMatrix_keywords_plot2 <- 
-  networkPlot(NetMatrix_keywords2,
-              normalize = "association",
-              n = 20,
-              Title = "Keyword co-occurrences",
-              type = "fruchterman",
-              size.cex = TRUE,
-              size = 10,
+  mynetwork(NetMatrix_keywords2,
+               normalize="association", n = 20,
+              Title = "Keyword co-occurrences", type = "fruchterman",
+              size.cex = TRUE, size = 10,
               remove.multiple = F,
               edgesize = 3, 
-              labelsize = 3, 
+              labelsize = 2, 
               label.cex = TRUE,
               edges.min = 1,
               label.n = 30, 
