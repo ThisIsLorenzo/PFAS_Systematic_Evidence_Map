@@ -61,28 +61,110 @@ fluidPage(
                                   ),
                                   column(width = 12,  
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Dive into our database effortlessly, empowering you to browse, filter, and extract insights tailored to your interests.")
+                                                "Explore our database effortlessly, allowing you to easily browse, filter, and uncover insights tailored to your interests.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Navigate through our repository with intuitive controls, enabling you to pinpoint specific categories, such as reviews focusing on human studies, with just a few clicks. Whether you're seeking broad overviews or detailed analyses, our app streamlines your search process.")
+                                                "Navigate through our repository seamlessly with intuitive controls. With just a few clicks, you can pinpoint specific categories, such as reviews focusing on human studies. Whether you're looking for broad overviews or detailed analyses, our app simplifies your search process.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Beyond exploration, leverage our app's functionality to download the entirety of our database or selectively extract subsets that align with your research objectives. Unleash the power of visualization by generating dynamic graphs that illuminate patterns and trends within the data.")
+                                                "In addition to exploration, our app offers functionality to download the entire database or selectively extract subsets that match your research objectives. Dive into dynamic graphs that reveal patterns and trends within the data.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Experience the fusion of accessibility and depth in our Shiny App, designed to empower users in their exploration and utilization of our systematic evidence map.")
-                                  ),
-                                  column(width = 12,align = "center",
-                                         tags$img(src="Fig.1.png")
-                                  ),
-                                  column(width = 12, align = "center",
-                                         tags$a("Workflow illustrating the main research questions, objectives, data sources, and analysis approaches.")
+                                                "Experience the perfect blend of accessibility and depth in our Shiny App. Designed to empower users in exploring and utilizing our systematic evidence map, it's your go-to tool for comprehensive research.")
                                   )
                                 )
                        ),
+                       tabPanel(title = "Guide", icon = icon("info"),
+                                fluidRow(
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 34px; margin-bottom: 20px;",
+                                                "Navigating the Shiny App made easy:")
+                                  ),
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "1. Explore two main components: Dataset and Visualization")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Simply click on either option from the tab on the left to access their content seamlessly.")
+                                  ),
+                                  column(width = 12,align = "center",
+                                         tags$img(src="screenshot_2.png")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "2. Navigate Dataset's content")
+                                  ),
+                                  column(width = 12,align = "center",
+                                         tags$img(src="screenshot_4.png")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "About: Get acquainted with our website's purpose and features.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Guide: Navigate seamlessly with our user-friendly guide.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Structure: Dive into the raw structure of our dataset.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Summary Stats: Explore basic statistics covering mapping, appraisal, and bibliometrics.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Data: Access raw data for individual objectives and the entire database.")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "3. Navigate Visualization's content")
+                                  ),
+                                  column(width = 12,align = "center",
+                                         tags$img(src="screenshot_6.png")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Our visualization mirrors the map's objectives, with each objective further segmented into analytical groupings for easy comprehension.")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "")
+                                  ),
+                                  column(width = 12, align = "center",
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "4. Discover additional resources")
+                                  ),
+                                  column(width = 12,align = "center",
+                                         tags$img(src="screenshot_3.png")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "GitHub Repo: Direct access to our systematic evidence map's repository on GitHub. Here, you'll find all the raw data and files utilized in our analysis.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Living PFAS: Dive into comprehensive information about our projects on PFAS environmental pollutants. Supported by the National Health and Medical Research Council (NHMRC) Targeted Research Grant (APP1185002).")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "I-Deel Lab: Visit our lab's personal website to get acquainted with our team, research projects, academic publications, and exciting opportunities to collaborate. Don't miss out on our insightful blog posts!")
+                                  )
+                                )
+                                ),
                        tabPanel(title = "Structure", icon = icon("uncharted"),
                                 fluidRow(
                                   column(width = 12,
