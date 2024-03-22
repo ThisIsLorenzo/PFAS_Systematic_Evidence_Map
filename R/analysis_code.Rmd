@@ -5033,6 +5033,14 @@ title("B", font.main = 1, cex.main = 2.5)
 #dev.off()
 ```
 
+### Matrix
+The following chunck transform the circular plot in a matrix plot using ggplot2 and thus compatible with Shiny.
+
+```{r}
+
+```
+
+
 ##Supplementary Figure 28
 
 ```{r}
@@ -5069,7 +5077,7 @@ NetMatrix_keywords_plot2 <-
 #plot(res$map)
 ```
 
-##Supplementary Figure 29
+##Supplementary Figure 4 panel b
 
 ```{r}
 # Create a dataframe with the outcome counts and percentages

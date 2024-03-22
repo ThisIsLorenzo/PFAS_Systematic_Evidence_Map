@@ -225,6 +225,13 @@ fluidPage(
                        tabPanel(title = "Data", icon = icon("table"),
                                 tabsetPanel(
                                   tabPanel("Mapping",
+                                           fluidRow(
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                           icon("warning"),
+                                                           "Note: If the datatable isn't visible, you may need to toggle between maximizing and restoring the window size in your browser to display the table.")
+                                             ),
+                                           ),
                                            mainPanel(
                                              DTOutput("mapping_table")
                                            )),
@@ -290,7 +297,11 @@ fluidPage(
                        ),
                        tabPanel(title = "Bibliometrics", icon = icon("connectdevelop"),
                                 fluidRow(
-                                  column(width=6, plotlyOutput("netmatrix"))
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                icon("warning"),
+                                                "Work in progress...")
+                                  ),
                                 )
                        )
                 )
