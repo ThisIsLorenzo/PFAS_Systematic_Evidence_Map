@@ -45,35 +45,74 @@ fluidPage(
                 tabBox(id = "t1", width = 12,
                        tabPanel(title = "About", icon = icon("address-card"),
                                 fluidRow(
-                                  column(width = 12, align = "center",
-                                         tags$img(src="title.png")
-                                  ),
                                   column(width = 12, align = "center", 
                                          tags$p(style = "font-size: 40px; margin-bottom: 20px;",
                                                 "Welcome to our Shiny App!")
                                   ),
                                   column(width = 12, align = "center",
-                                         tags$img(src="shiny-logo.png", height = "90px", width = "160px")
+                                         tags$img(src="shiny-logo.png", height = "100px", width = "200px")
                                   ),
                                   column(width = 12, align = "center", 
                                          tags$p(style = "font-size: 24px; margin-bottom: 20px;",
-                                                "Your gateway to exploring our comprehensive systematic evidence map with ease and interactivity!")
+                                                "Your gateway to exploring our systematic evidence map with ease and interactivity!")
+                                  ),
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "This app is a browsable, interactive, and user-friendly version of the following project:")
+                                  ),
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 30px; margin-bottom: 20px;",
+                                                "A research synthesis of humans animals, and environmental compartments exposed to PFAS: A systematic evidence map and bibliometric analysis of secondary literature")
+                                  ),
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "Authors:")
+                                  ),
+                                  column(width = 12, align = "center", 
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "Lorenzo Ricolfi, Catharina Vendl, Jennifer Bräunig, Matthew D. Taylor, Daniel Hesselson, G. Gregory Neely, Malgorzata Lagisz, Shinichi Nakagawa")
+                                  ),
+                                  # column(width = 12, align = "center",
+                                  #        tags$img(src="title.png")
+                                  # ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "You can find the published research protocol at the following link: https://www.sciencedirect.com/science/article/pii/S0160412021005985")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "Note: we will add here the link to the article once it is published")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "What does this app do?")
                                   ),
                                   column(width = 12,  
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Explore our database effortlessly, allowing you to easily browse, filter, and uncover insights tailored to your interests.")
+                                                "⦿ Effortlessly explore our database with easy browsing, filtering, and tailored insights. Navigate seamlessly with intuitive controls.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Navigate through our repository seamlessly with intuitive controls. With just a few clicks, you can pinpoint specific categories, such as reviews focusing on human studies. Whether you're looking for broad overviews or detailed analyses, our app simplifies your search process.")
+                                                "⦿ Quickly pinpoint specific categories like human studies. Whether you need broad overviews or detailed analyses, our app streamlines your search.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "In addition to exploration, our app offers functionality to download the entire database or selectively extract subsets that match your research objectives. Dive into dynamic graphs that reveal patterns and trends within the data.")
+                                                "⦿ Download the entire database or select subsets matching your research goals.")
                                   ),
                                   column(width = 12, 
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Experience the perfect blend of accessibility and depth in our Shiny App. Designed to empower users in exploring and utilizing our systematic evidence map, it's your go-to tool for comprehensive research.")
+                                                "⦿ Dive into dynamic graphs revealing trends. Our Shiny App combines accessibility and depth, empowering users to explore our evidence map effectively for comprehensive research.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "What's next?")
+                                  ),
+                                  column(width = 12,  
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "Go to the Guide tab to learn how to navigate our app!")
+                                  ),
+                                  column(width = 12,align = "center",
+                                         tags$img(src="screenshot_1.png")
                                   )
                                 )
                        ),
@@ -81,7 +120,7 @@ fluidPage(
                                 fluidRow(
                                   column(width = 12, align = "center", 
                                          tags$p(style = "font-size: 34px; margin-bottom: 20px;",
-                                                "Navigating the Shiny App made easy:")
+                                                "Navigating the Shiny App made easy")
                                   ),
                                   column(width = 12, align = "center", 
                                          tags$p(style = "font-size: 26px; margin-bottom: 20px;",
@@ -104,6 +143,10 @@ fluidPage(
                                   ),
                                   column(width = 12,align = "center",
                                          tags$img(src="screenshot_4.png")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
+                                                "The Dataset component is divided into five sub-pages:")
                                   ),
                                   column(width = 12,
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
@@ -168,8 +211,12 @@ fluidPage(
                        tabPanel(title = "Structure", icon = icon("uncharted"),
                                 fluidRow(
                                   column(width = 12,
-                                         tags$p(style = "font-size: 20px; margin-bottom: 20px;",
-                                                "Below is an overview of the structure and content of the database")
+                                         tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                "Below is an overview of the raw structure and content of the database.")
+                                  ),
+                                  column(width = 12,
+                                         tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                "The database is organized into six objectives, each of which is a data table containing information extracted from the systematic review included in the systematic evidence map.")
                                   ),
                                   column(width=12, verbatimTextOutput("structure")
                                   )
@@ -179,45 +226,180 @@ fluidPage(
                                 tabsetPanel(
                                   tabPanel("Mapping",
                                            fluidRow(
-                                             column(width = 6, DTOutput("summary0.3")),
-                                             column(width = 6, DTOutput("summary0.4")),
-                                             column(width = 6, DTOutput("summary0.5")),
-                                             column(width = 6, DTOutput("summary0.6")),
-                                             column(width = 6, DTOutput("summary0.7")),
-                                             column(width = 6, DTOutput("summary0.8")),
-                                             column(width = 6, DTOutput("summary0.9")),
-                                             column(width = 6, DTOutput("summary1")),
-                                             column(width = 6, DTOutput("summary1.1")),
-                                             column(width = 6, DTOutput("summary1.2")),
-                                             column(width = 6, DTOutput("summary1.3"))
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "The tables below provide summarized data for particular variables associated with the mapping objective of the systematic evidence map.")
+                                             ),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Note: some of the table have many entries. Use the 'previous' and 'next' buttons to navigate them.")
+                                             ),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Type of review claimed and number of reviews:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.3")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews conducted with and without a systematic literature search approach:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.4")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews with or without a research protocol pre-registered a priori:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.5")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews with or without a quantitative synthesis:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.6")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews on the three main subjects and a mix of these:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.7")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews on various animal species:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.8")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews with or without a focus on PFAS and not on POPs in general:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.9")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews investigating one or multiple PFAS:")
+                                             ),
+                                             column(width = 12, DTOutput("summary1")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews using or not using a PECOs framwork:")
+                                             ),
+                                             column(width = 12, DTOutput("summary1.1")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews on various outcomes:")
+                                             ),
+                                             column(width = 12, DTOutput("summary1.2")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 22px; margin-bottom: 20px;",
+                                                           "Number of reviews on the main six outcome categories:")
+                                             ),
+                                             column(width = 12, DTOutput("summary1.3"))
                                              )
                                            ),
                                   tabPanel("Appraisal",
                                            fluidRow(
-                                             column(width = 6, DTOutput("summary2")),
-                                             column(width = 6, DTOutput("summary2.1")),
-                                             column(width = 6, DTOutput("summary2.2")),
-                                             column(width = 6, DTOutput("summary2.3")),
-                                             column(width = 6, DTOutput("summary2.4")),
-                                             column(width = 6, DTOutput("summary2.5")),
-                                             column(width = 6, DTOutput("summary2.6")),
-                                             column(width = 6, DTOutput("summary2.7")),
-                                             column(width = 6, DTOutput("summary2.8")),
-                                             column(width = 6, DTOutput("summary2.9")),
-                                             column(width = 6, DTOutput("summary2.10")),
-                                             column(width = 6, DTOutput("summary2.11")),
-                                             column(width = 6, DTOutput("summary2.12")),
-                                             column(width = 6, DTOutput("summary2.13")),
-                                             column(width = 6, DTOutput("summary2.14")),
-                                             column(width = 6, DTOutput("summary2.15")),
-                                             column(width = 6, DTOutput("summary2.16"))
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "The tables below provide summarized data for particular variables associated with the critical appraisal objective of the systematic evidence map.")
+                                             ),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 1: Are the research questions and inclusion criteria for the review clearly delineated?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 2: Did the report of the review contain an explicit statement that the review methods were established prior to the conduct of the review and did the report justify any significant deviations from the protocol?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.1")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 3: Did the review authors explain their selection of the study designs for inclusion in the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.2")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 4: Did the review authors use a comprehensive literature search strategy?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.3")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 5: Did the review authors perform study selection in duplicate?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.4")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 6: Did the review authors perform data extraction in duplicate?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.5")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 7: Did the review authors provide a list of excluded studies and justify the exclusions?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.6")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 8: Did the review authors describe the included studies in adequate detail?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.7")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 9: Did the review authors use a satisfactory technique for assessing the risk of bias (RoB) in individual studies that were included in the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.8")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 10: Did the review authors report on the sources of funding for the studies included in the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.9")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 11: If meta-analysis was performed did the review authors use appropriate methods for statistical combination of results?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.10")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 12: If meta-analysis was performed, did the review authors assess the potential impact of RoB in individual studies on the results of the meta-analysis or other evidence synthesis?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.11")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 13: Did the review authors account for RoB in individual studies when interpreting/ discussing the results of the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.12")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 14: Did the review authors provide a satisfactory explanation for, and discussion of, any heterogeneity observed in the results of the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.13")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 15: If they performed quantitative synthesis did the review authors carry out an adequate investigation of publication bias (small study bias) and discuss its likely impact on the results of the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.14")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "Item 16: Did the review authors report any potential sources of conflict of interest, including any funding they received for conducting the review?")
+                                             ),
+                                             column(width = 12, DTOutput("summary2.15"))
                                              )
                                            ),
                                   tabPanel("Bibliometrics",
                                            fluidRow(
-                                             column(width = 6, DTOutput("summary0.1")),
-                                             column(width = 6, DTOutput("summary0.2")),
-                                             column(width = 6, DTOutput("summary3"))
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 26px; margin-bottom: 20px;",
+                                                           "The tables below provide summarized data for particular variables associated with the bibliometrics objective of the systematic evidence map.")
+                                             ),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                           "Number of reviews and publishing journal:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.1")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                           "Number of reviews and country of the first author:")
+                                             ),
+                                             column(width = 12, DTOutput("summary0.2")),
+                                             column(width = 12,
+                                                    tags$p(style = "font-size: 24px; margin-bottom: 20px;",
+                                                           "Articles with the most total citations:")
+                                             ),
+                                             column(width = 12, DTOutput("summary3"))
                                              )
                                            )
                                 )
@@ -300,7 +482,7 @@ fluidPage(
                                   column(width = 12,
                                          tags$p(style = "font-size: 20px; margin-bottom: 20px;",
                                                 icon("warning"),
-                                                "Work in progress...")
+                                                "Work is currently in progress on this page. We apologize for any inconvenience, and we assure you that it will be available shortly. Thank you for your patience.")
                                   ),
                                 )
                        )

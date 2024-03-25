@@ -45,10 +45,11 @@ custom_css <- "
       filter = 'top',
       rownames = FALSE,
       extensions = "Buttons",
-      options = list(pageLength = 10,
+      options = list(pageLength = 5,
                      dom = "Bfrtp",
                      width = '100%',
                      autoWidth = TRUE,
+                     scrollX = TRUE,
                      buttons = list(
                        list(extend = 'copy', text = 'Copy'),
                        list(extend = 'csv', text = 'CSV'),
@@ -80,6 +81,7 @@ custom_css <- "
                        dom = "Bfrtip",
                        width = '100%',
                        autoWidth = TRUE,
+                       scrollX = TRUE,
                        buttons = list(
                          list(extend = 'copy', text = 'Copy'),
                          list(extend = 'csv', text = 'CSV'),
@@ -111,6 +113,7 @@ custom_css <- "
                        dom = "Bfrtip",
                        width = '100%',
                        autoWidth = TRUE,
+                       scrollX = TRUE,
                        buttons = list(
                          list(extend = 'copy', text = 'Copy'),
                          list(extend = 'csv', text = 'CSV'),
@@ -142,6 +145,7 @@ custom_css <- "
                        dom = "Bfrtip",
                        width = '100%',
                        autoWidth = TRUE,
+                       scrollX = TRUE,
                        buttons = list(
                          list(extend = 'copy', text = 'Copy'),
                          list(extend = 'csv', text = 'CSV'),
@@ -305,7 +309,7 @@ custom_css <- "
     
     output$summary2.15 <- renderDT({
       q16_counts <- table(qdata$`Q16. Did the review authors report any potential sources of conflict of interest, including any funding they received for conducting the review?`)
-      data.frame( Item_5 = names(q16_counts), Number_of_reviews = as.vector(q16_counts))
+      data.frame( Item_16 = names(q16_counts), Number_of_reviews = as.vector(q16_counts))
     }, rownames = FALSE)
     
     
@@ -315,11 +319,16 @@ custom_css <- "
       results1 <- biblioAnalysis(bib_data)
       Reviews_citations <- as.data.frame(results1[["MostCitedPapers"]])
       colnames(Reviews_citations)[colnames(Reviews_citations) == "Paper         "] <- "Paper"
+      # Change column name
+      Reviews_citations <- Reviews_citations %>%
+        rename(Citations_per_year = TCperYear)
+      # Round numbers in the Citations_per_year column
+      Reviews_citations$Citations_per_year <- round(Reviews_citations$Citations_per_year)
+      
       data.frame( Article = Reviews_citations$Paper,
                   DOI = Reviews_citations$DOI,
                   Citations = Reviews_citations$TC,
-                  Citation_per_year = Reviews_citations$TCperYear,
-                  N_citations = Reviews_citations$NTC
+                  Citations_per_year = Reviews_citations$Citations_per_year
                   )
     }, rownames = FALSE)
     
