@@ -5,9 +5,9 @@ account: hi-this-is-lorenzo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10576048
-bundleId: 8413218
+bundleId: 8413252
 url: https://hi-this-is-lorenzo.shinyapps.io/PFAS_SEM_Shiny_App/
-when: 1711334817.97464
-lastSyncTime: 1711334817.97466
+when: 1711335387.03646
+lastSyncTime: 1711335387.0365
 asMultiple: FALSE
 asStatic: FALSE

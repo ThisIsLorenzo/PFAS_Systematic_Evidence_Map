@@ -215,6 +215,7 @@ mqdata <- left_join(mdata, qdata, by = "Study_ID")
 
 alldata <- left_join(mspdata, ptidata, by = "Study_ID")
 dim(alldata)
+write.csv(alldata, here("data", "alldata.csv"))
 ```
 
 # DOIs strings
@@ -2026,9 +2027,9 @@ tt1 <- trend_overall %>%
 tt1
 
 #Optional: Save the plot as an image file
-ggsave(here("Figs/Suppl_Figs", "SFig.2.png"),
-       width = 8,
-       height = 6)
+# ggsave(here("Figs/Suppl_Figs", "SFig.2.png"),
+#        width = 8,
+#        height = 6)
 ```
 
 ## Supplementary Figure 3
