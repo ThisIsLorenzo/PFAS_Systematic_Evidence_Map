@@ -30,3 +30,11 @@ body {
   font-size: 3rem;
   font-weight: 700;
 }
+
+.container {
+  display: flex;
+}
+
+.container > div {
+  flex: 1;
+}
